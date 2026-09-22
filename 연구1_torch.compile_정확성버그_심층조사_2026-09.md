@@ -214,6 +214,20 @@ Inductor 스모크 75초에서 별칭 프로브가 6번 검출. 9월 21일에 �
 
 ---
 
+## 2.6 수정 진행 상황 (2026-09-22, 저장소 https://github.com/wwoosshh/AI-accelerator-compiler)
+
+버그별 추적 이슈를 저장소에 등록했고(#1 A, #2 B, #3 G, #4 F, #5 H1, #6 H2, #7 H3, #8 I, #9 D, #10 C), PyTorch main(dc0133e)을 클론해 수정을 시작했다. 패치와 검증 방법은 `fuzz/patches/README.md`.
+
+| 대상 | 수정 위치 | 내용 | 검증 |
+|---|---|---|---|
+| H1·H2·H3 | `torch/_inductor/fx_passes/reinplace.py` `can_inplace` | 입력에 되쓰는 `copy_`가 이 연산의 결과를 되쓰는 것이 아니고 결과가 그 뒤에도 관측되면 입력 버퍼에 reinplace 금지 | 재현 전부 통과, 새 회귀 테스트(패치 전 실패·후 통과), 기존 테스트 회귀 없음, 정상 패턴 추가 할당 없음 |
+| B | `torch/_functorch/_aot_autograd/input_output_analysis.py` `create_synthetic_base_metadata` | 병합된 입력의 출력 별칭은 원래 입력 기준 ViewMeta 를 버리고 출력 메타데이터로 `as_strided` 재생성 | 변형 7종·크래시 변형 통과, 새 회귀 테스트(패치 전 실패·후 통과) |
+| A | `aten/src/ATen/FunctionalInverses.cpp` `unfold_inverse` | `size <= step`이면 `as_strided_scatter`로 되쓰기 | C++ 컴파일 불가(MSVC 없음) → 공식만 Python 613 케이스로 검증 |
+| G, I, F, C | 미착수 | 조사 메모는 `fuzz/patches/README.md` | |
+| D | 불필요 | 나이틀리에서 이미 수정 | |
+
+---
+
 ## 3. 연구로 이어가기 위한 제언
 
 1. **오라클이 논문의 핵심**: 별칭 프로브(반환 텐서 간·입력 간 별칭 구조 비교), 입력 변이 write-back 비교, 부작용 비교, 정수값 정확 비교의 조합은 기존 퍼저에 없다. 이를 형식화(별칭 그래프의 동형성 검사)하면 기여가 분명해진다.

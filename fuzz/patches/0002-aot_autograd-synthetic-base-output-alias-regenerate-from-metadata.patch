@@ -1,0 +1,71 @@
+diff --git a/test/functorch/test_aotdispatch.py b/test/functorch/test_aotdispatch.py
+index da55598..e269185 100644
+--- a/test/functorch/test_aotdispatch.py
++++ b/test/functorch/test_aotdispatch.py
+@@ -3623,6 +3623,28 @@ def forward(self, primals_1):
+     return (as_strided_scatter, view_1)""",
+         )
+ 
++    def test_input_mutation_aliases_offset_input_output_alias(self):
++        # b is a view of a with a non-zero storage offset and a different shape.
++        # Views of b that are returned must be regenerated relative to b (the
++        # original input), not relative to the synthetic base: replaying b's
++        # ViewMeta sequence on the base returned a[0] instead of b[0] and
++        # asserted on a shape mismatch for b.view(-1).
++        def f(a, b):
++            a.add_(100)
++            return b[0], b.view(-1)
++
++        def inp_callable(req_grad):
++            base = torch.arange(24.0, requires_grad=req_grad).reshape(4, 6)
++            x = base.add(1)
++            return [base], [x, x[1:]]
++
++        self.verify_aot_autograd(
++            f, partial(inp_callable, req_grad=False), test_mutation=True
++        )
++        self.verify_aot_autograd(
++            f, partial(inp_callable, req_grad=True), test_mutation=True
++        )
++
+     def test_input_aliased_with_mutation_output_alias(self):
+         def f(a, b, c):
+             # a and c alias
+diff --git a/torch/_functorch/_aot_autograd/input_output_analysis.py b/torch/_functorch/_aot_autograd/input_output_analysis.py
+index 2af3eb1..8ec3565 100644
+--- a/torch/_functorch/_aot_autograd/input_output_analysis.py
++++ b/torch/_functorch/_aot_autograd/input_output_analysis.py
+@@ -247,6 +247,7 @@ def create_synthetic_base_metadata(
+     ]
+     existing_output_infos = []
+     for o in m.output_info:
++        new_view_meta_sequence = o.view_meta_sequence
+         if o.base_idx is None or o.output_type not in INPUT_ALIAS_TYPES:
+             # base_idx is not an input index for these, so synthetic bases
+             # leave it alone. See OutputAliasInfo.base_idx.
+@@ -267,6 +268,16 @@ def create_synthetic_base_metadata(
+                 if o.output_type == OutputType.is_input and input_merged
+                 else o.output_type
+             )
++            if input_merged:
++                # The ViewMeta sequence was recorded relative to the *original*
++                # (outer) input, e.g. `ta[0]` with `ta = t0[1:]`. base_idx now
++                # points at the synthetic base instead, and replaying the
++                # sequence on it would drop the outer input's storage offset /
++                # shape (returning `t0[0]`, or asserting on a shape mismatch).
++                # Drop the sequence so gen_alias_from_base regenerates the
++                # alias with as_strided from the output's own metadata, which
++                # is expressed relative to the shared storage.
++                new_view_meta_sequence = None
+         existing_output_infos.append(
+             OutputAliasInfo(
+                 output_type=new_output_type,
+@@ -276,7 +287,7 @@ def create_synthetic_base_metadata(
+                 base_idx=new_base_idx,  # type: ignore[arg-type]
+                 requires_grad=o.requires_grad,
+                 requires_grad_for_backward=o.requires_grad_for_backward,
+-                view_meta_sequence=o.view_meta_sequence,
++                view_meta_sequence=new_view_meta_sequence,
+             )
+         )
+ 
