@@ -238,7 +238,7 @@ AOT 그래프는 `copy = aten.copy(dst, alias(src))` 로 정확한 SSA 인데, I
 | B | `torch/_functorch/_aot_autograd/input_output_analysis.py` `create_synthetic_base_metadata` | 병합된 입력의 출력 별칭은 원래 입력 기준 ViewMeta 를 버리고 출력 메타데이터로 `as_strided` 재생성 | 변형 7종·크래시 변형 통과, 새 회귀 테스트(패치 전 실패·후 통과) |
 | F | `torch/_dynamo/variables/tensor.py` `call_method` | 자기 자신을 반환하는 무연산 결과는 같은 VariableTracker 로 유지 | 재현 9종 통과, 새 회귀 테스트(패치 전 IndexError·후 통과), Dynamo 표적 테스트 81 통과 |
 | I | `torch/_inductor/graph.py` `mark_buffer_mutated` | 별칭 버퍼의 소비자도 변이 전에 실체화 | 변형 8종·퍼저 사례 통과, 새 회귀 테스트 통과, Inductor 표적 테스트 51 통과 |
-| L | `torch/_inductor/fx_passes/post_grad.py` `remove_noop_ops` | 입력 저장소별 첫 `copy_` 변이 위치를 기록하고, 뷰가 아닌 noop(`copy`/`clone`)의 원본이 그런 입력을 별칭하며 사용자가 그 변이 뒤에 있으면 치환 금지 | 변형 54종·E2 사례 통과, 새 회귀 테스트(패치 전 실패·후 통과), Inductor 표적 테스트 91개에서 새 실패 없음(11개 실패는 패치 없이도 실패). 포크 브랜치 `fix/inductor-noop-copy-of-mutated-input`, 이슈·PR 은 승인 대기 |
+| L | `torch/_inductor/fx_passes/post_grad.py` `remove_noop_ops` | 입력 저장소별 첫 `copy_` 변이 위치를 기록하고, 뷰가 아닌 noop(`copy`/`clone`)의 원본이 그런 입력을 별칭하며 사용자가 그 변이 뒤에 있으면 치환 금지 | 변형 54종·E2 사례 통과, 새 회귀 테스트(패치 전 실패·후 통과), Inductor 표적 테스트 91개에서 새 실패 없음(11개 실패는 패치 없이도 실패). 업스트림 이슈 #198131, PR #198132 (EasyCLA 통과, CI 승인 대기) |
 | A | `aten/src/ATen/FunctionalInverses.cpp` `unfold_inverse` | `size <= step`이면 `as_strided_scatter`로 되쓰기 | 공식 Python 613 케이스 검증. C++ 컴파일 검증은 Docker(Linux) CPU 빌드로 시도했으나 12병렬 빌드 중 VM 이 멈추고 엔진이 복구되지 않아 **미완**(재실행 절차는 `fuzz/patches/README.md`) |
 | G | 원인 확정, 미수정 | 심볼릭 ViewMeta 폐기 + 폴백이 갱신 base 의 전치 stride 사용. 설계 결정 필요 | |
 | C, C2, J | 미수정 | C2(동적 형상 별칭 전용), J(Inductor+동적 형상: 입력에 대입한 뒤 flat reshape 별칭으로 `index_add_` 하면 연산이 통째로 사라짐, 생성 커널에 `src` 미사용)는 회귀 퍼징에서 새로 발견된 기존 버그(이슈 #11) | |

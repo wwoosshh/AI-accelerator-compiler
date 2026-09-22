@@ -1,6 +1,6 @@
 # 업스트림 제출 상태
 
-**2026-09-22 제출 완료**: H → 이슈 pytorch/pytorch#198094, PR #198096. B → 이슈 #198095, PR #198097. F → 이슈 #198100, PR #198103. I → 이슈 #198101, PR #198104. A → 이슈 #198102, PR #198105. 기존 이슈 #197893, #195451 에 연결 댓글. J 는 수정 브랜치가 없어 이슈만 준비됨(미제출). 상세는 `SUBMITTED.txt`.
+**2026-09-22 제출 완료**: H → 이슈 pytorch/pytorch#198094, PR #198096. B → 이슈 #198095, PR #198097. F → 이슈 #198100, PR #198103. I → 이슈 #198101, PR #198104. A → 이슈 #198102, PR #198105. 기존 이슈 #197893, #195451 에 연결 댓글. J 는 수정 브랜치가 없어 이슈만 준비됨(미제출). **L → 이슈 #198131, PR #198132 (2026-09-22 05:51 UTC, 사용자가 직접 실행; EasyCLA 통과, 워크플로 승인 대기, `release notes: inductor` 라벨 요청 댓글 게시).** 상세는 `SUBMITTED.txt`.
 
 
 포크 https://github.com/wwoosshh/pytorch 에 아래 5개 브랜치가 최신 main(6b5c7ad, 2026-09-22) 위에 커밋 1개씩으로 올라가 있습니다. 로컬 클론은 `C:\Users\s0105\src\pytorch`.
@@ -12,7 +12,7 @@
 | 3 | `fix/dynamo-noop-method-returns-self` | F | `PR_3_dynamo_noop_self.md` | `ISSUE_F_dynamo_noop_alias.md` |
 | 4 | `fix/inductor-realize-alias-consumers-before-mutation` | I | `PR_4_inductor_alias_consumers.md` | `ISSUE_I_inductor_dtype_view_order.md` |
 | 5 | `fix/functionalization-unfold-inverse` | A (C++, CI 컴파일 필요) | `PR_5_functionalization_unfold.md` | `ISSUE_A_unfold.md` |
-| 6 | `fix/inductor-noop-copy-of-mutated-input` (f01f746, main 00ec4ca 기반) | L: `dst[0:, :] = src[0:, :]; src.add_(1)` 이 갱신된 src 를 복사 (비교실험 E2 에서 발견, 패치 0006) | `PR_6_inductor_noop_copy_of_mutated_input.md` | `ISSUE_L_noop_copy_of_mutated_input.md` — **제출 전, 승인 필요** |
+| 6 | `fix/inductor-noop-copy-of-mutated-input` (f01f746, main 00ec4ca 기반) | L: `dst[0:, :] = src[0:, :]; src.add_(1)` 이 갱신된 src 를 복사 (비교실험 E2 에서 발견, 패치 0006) | `PR_6_inductor_noop_copy_of_mutated_input.md` → PR #198132 | `ISSUE_L_noop_copy_of_mutated_input.md` → 이슈 #198131 |
 | - | (미수정) | J | - | `ISSUE_J_inductor_dynamic_index_add.md` |
 
 `collect_env` 출력은 `../repro/collect_env_stable_2.14.0.txt`, `../repro/collect_env_nightly_2.15.0.dev20260921.txt`.

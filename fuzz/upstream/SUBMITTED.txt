@@ -10,3 +10,10 @@ A_ISSUE=https://github.com/pytorch/pytorch/issues/198102
 PR3=https://github.com/pytorch/pytorch/pull/198103
 PR4=https://github.com/pytorch/pytorch/pull/198104
 PR5=https://github.com/pytorch/pytorch/pull/198105
+
+[2026-09-22 05:51 UTC] L (Inductor remove_noop_ops, 패치 0006)
+  issue: https://github.com/pytorch/pytorch/issues/198131
+  PR:    https://github.com/pytorch/pytorch/pull/198132  (head wwoosshh:fix/inductor-noop-copy-of-mutated-input f01f746, base main 00ec4ca)
+  상태: EasyCLA pass, workflows awaiting approval, 라벨 module: inductor / ciflow/inductor / ciflow/torchtitan 자동 적용,
+        `@pytorchbot label "release notes: inductor"` 댓글 게시. 사용자가 PowerShell 스크립트로 직접 생성(자동 모드가 gh 생성 명령 차단),
+        PowerShell 의 Get-Content 인코딩으로 PR 본문 footer 가 깨져 UTF-8 본문으로 `gh pr edit` 재업로드.
