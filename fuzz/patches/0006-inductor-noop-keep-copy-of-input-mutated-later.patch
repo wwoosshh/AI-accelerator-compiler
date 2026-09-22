@@ -1,0 +1,96 @@
+From f01f746e6271e41378689cdb506d9498bfa2f75b Mon Sep 17 00:00:00 2001
+From: wwoosshh <s01055310644@gmail.com>
+Date: Tue, 22 Sep 2026 13:14:25 +0900
+Subject: [PATCH] [inductor] remove_noop_ops: keep a copy of an input that is
+ mutated before the copy's user runs
+
+`dst[0:, :] = src[0:, :]; src.add_(1)` copied the *updated* src into dst under
+torch.compile: remove_noop_ops replaced aten.copy(dst, alias(src)) by src, and
+src's functionalization write-back copy_ runs before dst's, so dst's write-back
+read the already-mutated src. Eager and aot_eager copy the old value.
+
+Record the earliest in-graph copy_ mutation of every input storage and skip the
+replacement of a non-view noop (aten.copy / aten.clone) whose source aliases such
+an input when one of the node's users is ordered after that mutation. View noops
+(alias, full slice, view) are unaffected, and copies whose users all run before
+the mutation are still removed, so the extra copy is only kept where correctness
+needs it.
+---
+ test/inductor/test_torchinductor.py    | 22 ++++++++++++++++++++++
+ torch/_inductor/fx_passes/post_grad.py | 20 ++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+
+diff --git a/test/inductor/test_torchinductor.py b/test/inductor/test_torchinductor.py
+index 1ae0a69..3b00e34 100644
+--- a/test/inductor/test_torchinductor.py
++++ b/test/inductor/test_torchinductor.py
+@@ -10960,6 +10960,28 @@ def forward(self, arg0_1: "Sym(s77)", arg1_1: "Sym(s27)", arg2_1: "Sym(s53)", ar
+ 
+     @config.patch({"triton.cudagraphs": True})
+     @dynamo_config.patch(automatic_dynamic_shapes=True)
++    def test_input_mutation_copy_of_input_mutated_later(self):
++        # `b[0:, :] = a[0:, :]; a.add_(1)` copied the *updated* a into b:
++        # remove_noop_ops replaced aten.copy(b, alias(a)) by a, and a's
++        # write-back copy_ precedes b's when a is the first graph input.
++        # (a sorts first under canonicalize_output_graph_node_order and is
++        # also the first tensor used, so it is the first input either way.)
++        def fn(a, b):
++            b[0:, :] = a[0:, :]
++            a.add_(1)
++            return a
++
++        for dynamic in (False, True):
++            torch._dynamo.reset()
++            a1 = torch.arange(12, dtype=torch.float32, device=self.device).view(3, 4)
++            b1 = torch.zeros(3, 4, device=self.device)
++            a2, b2 = a1.clone(), b1.clone()
++            correct = fn(a1, b1)
++            actual = torch.compile(fn, dynamic=dynamic)(a2, b2)
++            self.assertTrue(same(actual, correct))
++            self.assertTrue(same(b1, b2))
++            self.assertTrue(same(a1, a2))
++
+     def test_input_mutation1(self):
+         def fn(a):
+             b = a + 1
+diff --git a/torch/_inductor/fx_passes/post_grad.py b/torch/_inductor/fx_passes/post_grad.py
+index fdb8b4d..2efe224 100644
+--- a/torch/_inductor/fx_passes/post_grad.py
++++ b/torch/_inductor/fx_passes/post_grad.py
+@@ -1454,6 +1454,20 @@ def remove_noop_ops(graph: torch.fx.Graph):
+         if isinstance(out, torch.fx.Node):
+             output_storages.add(get_node_storage(out))
+ 
++    # Graph inputs that are mutated inside this graph (the functionalization epilogue writes
++    # them back with copy_). A non-view noop (aten.copy / aten.clone) whose source aliases such
++    # an input must keep its copy if any of its users runs after the mutation, otherwise that
++    # user observes the mutated input instead of the snapshot the copy represented, e.g.
++    #   dst[0:, :] = src[0:, :]; src.add_(1)
++    # lowered to `copy_(src, add); copy_(dst, src)` and copied the *updated* src into dst.
++    node_order = {n: i for i, n in enumerate(graph.nodes)}
++    first_mutation_loc: dict[int | None, int] = {}
++    for n in graph.nodes:
++        if n.target is torch.ops.aten.copy_.default and isinstance(n.args[0], torch.fx.Node):
++            st = get_node_storage(n.args[0])
++            if st is not None and st in input_storages:
++                first_mutation_loc[st] = min(first_mutation_loc.get(st, node_order[n]), node_order[n])
++
+     for node in graph.nodes:
+         if node.target in noop_registry:
+             cond, src_index = noop_registry[node.target]
+@@ -1495,6 +1509,12 @@ def remove_noop_ops(graph: torch.fx.Graph):
+             ):
+                 continue
+ 
++            # Keep a real copy of an input that is mutated before one of this node's users runs.
++            if not node_is_view and src_storage in first_mutation_loc:
++                mutation_loc = first_mutation_loc[src_storage]
++                if any(node_order.get(u, mutation_loc + 1) > mutation_loc for u in node.users):
++                    continue
++
+             is_valid, args, kwargs = get_fake_args_kwargs(node)
+             if not is_valid:
+                 continue
+-- 
+2.55.0.windows.5
+

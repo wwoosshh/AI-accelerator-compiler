@@ -1,0 +1,51 @@
+{
+ "id": 6,
+ "iter": 382,
+ "seed": 72000598,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "inplace_meta",
+  "view_expand",
+  "view_reshape",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe log differs: eager ['ok', 'ok', 'err:RuntimeError', 'ok', 'ok', 'ok', 'err:RuntimeError', 'ok'] vs compiled ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok']",
+  "probe.call0.out[2]: 72/72 elems differ at [0, 1, 2, 3, 4]: eager [3, -4, 3, -5, -7] vs compiled [3003, 2996, 3003, 2995, 2993]",
+  "probe.call1.out[2]: 72/72 elems differ at [0, 1, 2, 3, 4]: eager [-7, 1, -4, 1, 7] vs compiled [2993, 3001, 2996, 3001, 3007]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.transpose(1, 0)\n    v2 = v1.flip(1)\n    v3 = v2.unsqueeze(0).expand(3, 2, 2, 6)\n    v2.copy_(v1)\n    t1.unsqueeze_(1)\n    idx4 = torch.tensor([2], device=t0.device)\n    t0.index_fill_(2, idx4, 5)\n    v5 = v3[2, :, :, :]\n    v6 = v5.flatten()\n    return (v6, t0, v3, v6, lst, dct)\n"
+}

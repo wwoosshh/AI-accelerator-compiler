@@ -1,0 +1,44 @@
+{
+ "id": 27,
+ "iter": 2186,
+ "seed": 72002402,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "side_effect",
+  "view_reshape",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 11/24 elems differ at [6, 7, 8, 9, 10]: eager [-6, 1, -8, 2, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 11/24 elems differ at [6, 7, 8, 9, 10]: eager [-6, 1, -8, 2, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[4]: 11/24 elems differ at [6, 7, 8, 9, 10]: eager [-6, 1, -8, 2, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 11/24 elems differ at [6, 7, 8, 9, 10]: eager [-6, 1, -8, 2, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-4, 3, 7, -4, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-4, 3, 7, -4, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[4]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-4, 3, 7, -4, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-4, 3, 7, -4, 1] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.unfold(0, 1, 2)\n    v1.mul_(0)\n    v1.neg_()\n    v1.masked_fill_(v1 > 0, k)\n    v2 = v1.transpose(2, 1)\n    lst.append(int(v2.sum()))\n    t0.masked_fill_(t0 > -1, 1)\n    v3 = t1.view((24,))\n    v1.clamp_(-2, 3)\n    return (t1, v2, t0, t1, t1, lst, dct)\n"
+}

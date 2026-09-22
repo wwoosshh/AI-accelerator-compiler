@@ -1,0 +1,40 @@
+def fn(t0, t1, ta, k, lst, dct):
+    idx1 = torch.tensor([2], device=t0.device)
+    t0[idx1] = 2
+    t1.fill_(2)
+    t1[:, :, 2:5] = 0
+    idx2 = torch.tensor([2], device=t0.device)
+    t0.index_fill_(0, idx2, 2)
+    v3 = ta.t()
+    v4 = v3.reshape((24,))
+    return (v3, ta, v3, lst, dct)
+
+# dynamic=None aliased=('ta', 't0.transpose(0, 1)')
+
+AssertionError: incorrect out shape after application of ViewMeta sequence: (4, 6) (actual) vs (6, 4) (expected)
+Traceback (most recent call last):
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 752, in evaluate
+    C = run_world(prog, device, seed, backend, calls)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 658, in run_world
+    out = fn(*args)
+          ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1261, in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "<aliasfuzz>", line 1, in fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1289, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(synthetic_base_wrapper)", line 11, in _synthetic_base_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1189, in runtime_wrapper
+    result = _codegen_runtime_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(runtime_wrapper_orchestration)", line 20, in _runtime_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(output_alias_wrapper)", line 3, in _alias_fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\functional_utils.py", line 350, in gen_alias_from_base
+    raise AssertionError(
+AssertionError: incorrect out shape after application of ViewMeta sequence: (4, 6) (actual) vs (6, 4) (expected)

@@ -1,0 +1,43 @@
+{
+ "id": 13,
+ "iter": 848,
+ "seed": 72001064,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_slice",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe log differs: eager ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'] vs compiled ['ok', 'ok', 'ok', 'err:RuntimeError', 'ok', 'ok', 'ok', 'err:RuntimeError']",
+  "probe.call0.out[1]: 1/1 elems differ at [0]: eager [5994] vs compiled [1994]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997, 3997, 3997, 3997, 3997] vs compiled [-3, -3, -3, -3, -3]",
+  "probe.call1.out[1]: 1/1 elems differ at [0]: eager [5994] vs compiled [1994]",
+  "probe.call1.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997, 3997, 3997, 3997, 3997] vs compiled [-3, -3, -3, -3, -3]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0.fill_(-3)\n    t1.add_(-4)\n    v1 = t0.cumsum(0)\n    v2 = t0.unsqueeze(0)\n    v3 = v1[-3, 3:4]\n    t1[:, :, 1::2] = 1\n    v4 = t1.detach()\n    return (v4, v3, v2, v1, lst, dct)\n"
+}

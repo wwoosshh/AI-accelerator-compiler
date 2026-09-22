@@ -1,0 +1,12 @@
+== E1_nnsmith_pt2_20m
+INFO    fuzz   - Total 1515 testcases generated.
+INFO    fuzz   - Total 40 bugs found.
+INFO    fuzz   - Total 76 failed to make testcases.
+      2 bug-Symptom.EXCEPTION-Stage.EXECUTION
+     38 bug-Symptom.INCONSISTENCY-Stage.VERIFICATION
+== E1b_nnsmith_pt2_20m
+INFO    fuzz   - Total 1413 testcases generated.
+INFO    fuzz   - Total 36 bugs found.
+INFO    fuzz   - Total 76 failed to make testcases.
+      2 bug-Symptom.EXCEPTION-Stage.EXECUTION
+     34 bug-Symptom.INCONSISTENCY-Stage.VERIFICATION

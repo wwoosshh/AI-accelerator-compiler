@@ -1,0 +1,212 @@
+report dirs: 36
+  EXCEPTION/EXECUTION: 2
+  INCONSISTENCY/VERIFICATION: 34
+  log: Total -> 1413
+  log: Total -> 36
+  log: Total -> 76
+
+== inconsistency cases ==
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-0
+   ops: ['Input', 'Squeeze', 'Constant', 'Neg', 'Neg', 'Input', 'Sub', 'Min', 'Ceil', 'CastF64', 'Atan']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v10_0': 'float16', 'v5_0': 'float16', 'v0_0': 'float16', 'v7_0': 'float16', 'v3_0': 'float64'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-1
+   ops: ['Input', 'GELU', 'Input', 'Tan', 'Tan', 'ExpandLast4', 'Greater', 'Sub', 'Abs', 'Neg']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v8_0': 'float16', 'v6_0': 'float16', 'v2_0': 'float16', 'v0_0': 'bool', 'v5_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-10
+   ops: ['Input', 'Input', 'Add', 'Cos', 'GELU', 'Neg', 'Cos', 'ReduceMin', 'CastI32', 'Neg']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v0_0': 'float16', 'v9_0': 'float16', 'v2_0': 'float16', 'v8_0': 'int32'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-11
+   ops: ['Constant', 'Transpose', 'Input', 'Sin', 'Div', 'Reshape', 'Sin', 'Floor', 'ExpandLast3', 'Clip']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v1_0': 'float16', 'v5_0': 'float16', 'v8_0': 'float16', 'v3_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-12
+   ops: ['Constant', 'Abs', 'Input', 'Mul', 'TorchReduceSum', 'Softmax', 'Abs', 'Round', 'Softmax', 'Add']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v3_0': 'float16', 'v0_0': 'float16', 'v5_0': 'float16', 'v2_0': 'float16', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-13
+   ops: ['Input', 'Input', 'Constant', 'Where', 'Transpose', 'Sigmoid', 'Input', 'Mul', 'TrilinearInterp', 'Tan', 'TorchReduceSum', 'ConstPad']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v10_0': 'float16', 'v9_0': 'float16', 'v4_0': 'float16', 'v0_0': 'float16', 'v7_0': 'float16', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-14
+   ops: ['Input', 'ReduceMean', 'Input', 'Div', 'PTMatMul', 'Concat1', 'ArgMax', 'CastF32', 'Concat4', 'Tan']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v4_0': 'float16', 'v3_0': 'float16', 'v6_0': 'float16', 'v8_0': 'float16', 'v7_0': 'float16', 'v9_0': 'float32', 'v1_0': 'int64', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-15
+   ops: ['Input', 'Floor', 'LeakyReLU', 'Tan', 'Tan', 'TorchReduceSum', 'CastF64', 'CastF64', 'Round']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v5_0': 'float16', 'v0_0': 'float64', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-17
+   ops: ['Constant', 'Sin', 'Input', 'ConstPad', 'Add', 'Max', 'CastF64', 'Max', 'CastI32', 'Less']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v5_0': 'float16', 'v0_0': 'float16', 'v4_0': 'float16', 'v9_0': 'float64', 'v2_0': 'int32', 'v1_0': 'bool'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-18
+   ops: ['Input', 'Sin', 'Input', 'Max', 'Neg', 'Abs', 'BilinearInterp', 'Atan', 'CastI64', 'ExpandLast3']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v9_0': 'float16', 'v3_0': 'float16', 'v5_0': 'float16', 'v0_0': 'float16', 'v2_0': 'int64', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-19
+   ops: ['Constant', 'Constant', 'PTMatMul', 'Constant', 'CastF32', 'LeakyReLU', 'Input', 'Concat3', 'GELU', 'Round', 'ExpandLast4', 'ExpandLast4']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v6_0': 'float32', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-2
+   ops: ['Input', 'Abs', 'GELU', 'Sin', 'Sin', 'Neg', 'Sub', 'ReduceMean', 'ReduceMax']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v8_0': 'float16', 'v0_0': 'float16', 'v7_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-20
+   ops: ['Constant', 'ReduceMin', 'Constant', 'Ceil', 'PTMatMul', 'Abs', 'Input', 'Sub', 'Sin', 'ReduceMin', 'Greater']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v2_0': 'float16', 'v0_0': 'float16', 'v10_0': 'float16', 'v6_0': 'bool'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-21
+   ops: ['Input', 'Atan', 'Floor', 'Abs', 'Max', 'TrilinearInterp', 'Cos', 'CastI32', 'Greater']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v6_0': 'float16', 'v3_0': 'float16', 'v1_0': 'float16', 'v5_0': 'int32', 'v4_0': 'bool'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-22
+   ops: ['Constant', 'Cos', 'Input', 'Input', 'Where', 'Tril', 'ArgMin', 'Min', 'Triu', 'Greater', 'Or']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v4_0': 'float16', 'v2_0': 'bool', 'v9_0': 'int64', 'v7_0': 'float16', 'v10_0': 'bool'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-23
+   ops: ['Constant', 'Round', 'Input', 'Max', 'GELU', 'Transpose', 'CastI64', 'CastI64', 'Mul', 'ExpandLast3']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v6_0': 'int64'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-24
+   ops: ['Constant', 'ReLU', 'Input', 'Div', 'Input', 'Reshape', 'Input', 'Where', 'ReduceMin', 'Concat1', 'Tan', 'Add']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v8_0': 'float16', 'v5_0': 'float16', 'v2_0': 'bool', 'v6_0': 'float16', 'v11_0': 'float16', 'v0_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-25
+   ops: ['Constant', 'Constant', 'Max', 'Clip', 'Input', 'Add', 'Mul', 'LinearInterp', 'Round', 'ArgMin', 'TorchReduceSum']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v3_0': 'float16', 'v8_0': 'float16', 'v0_0': 'float16', 'v4_0': 'int64', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-26
+   ops: ['Input', 'CastF32', 'Div', 'Mul', 'Sub', 'Ceil', 'CastI32', 'ExpandLast2', 'Reshape']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v3_0': 'float32', 'v8_0': 'float32', 'v7_0': 'float32', 'v5_0': 'int32', 'v2_0': 'float32'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-27
+   ops: ['Input', 'Constant', 'Div', 'Constant', 'ArgMax', 'Concat4', 'Input', 'Concat2', 'Sub', 'Add', 'Floor', 'Sub']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v11_0': 'float16', 'v0_0': 'float16', 'v9_0': 'int64', 'v3_0': 'float16', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-28
+   ops: ['Input', 'Tan', 'ExpandLast2', 'Input', 'Mul', 'Round', 'ReduceMean', 'Cos', 'CastF64', 'LeakyReLU']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v0_0': 'float16', 'v2_0': 'float16', 'v9_0': 'float16', 'v4_0': 'float64'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-29
+   ops: ['Input', 'Input', 'Mul', 'ArgMin', 'ExpandLast4', 'Flatten', 'Neg', 'Cos', 'Slice', 'Reshape']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v5_0': 'float16', 'v0_0': 'int64', 'v4_0': 'float16', 'v9_0': 'float16', 'v8_0': 'float16', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-3
+   ops: ['Input', 'ReduceMean', 'Input', 'Cos', 'Input', 'Add', 'Div', 'Input', 'CastI64', 'ReduceMax', 'Sub', 'Round']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v5_0': 'float16', 'v8_0': 'float16', 'v3_0': 'float16', 'v0_0': 'int64', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-30
+   ops: ['Input', 'Cos', 'Atan', 'Atan', 'ArgMin', 'Transpose', 'Triu', 'Mul', 'LeakyReLU']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v4_0': 'float16', 'v6_0': 'int64', 'v0_0': 'int64', 'v3_0': 'int64', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-31
+   ops: ['Input', 'BilinearInterp', 'Input', 'Mul', 'Abs', 'Abs', 'ReLU', 'Flatten', 'PTMatMul', 'Round']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v5_0': 'float16', 'v0_0': 'float16', 'v9_0': 'float16', 'v8_0': 'float16', 'v1_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-32
+   ops: ['Input', 'Cos', 'Ceil', 'ReduceMin', 'Ceil', 'Min', 'Ceil', 'Transpose', 'Floor']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v8_0': 'float16', 'v7_0': 'float16', 'v3_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-33
+   ops: ['Input', 'Constant', 'Input', 'Concat3', 'TrilinearInterp', 'Sin', 'Cos', 'LeakyReLU', 'Flatten', 'Tan', 'Max']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v10_0': 'float16', 'v8_0': 'float16', 'v7_0': 'float16', 'v3_0': 'float16', 'v4_0': 'float16', 'v5_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-35
+   ops: ['Constant', 'Input', 'PTMatMul', 'Constant', 'Atan', 'Squeeze', 'Max', 'Squeeze', 'Max', 'Input', 'Sub', 'Sin']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v1_0': 'float16', 'v2_0': 'float16', 'v8_0': 'float16', 'v4_0': 'float16', 'v0_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-4
+   ops: ['Input', 'Tan', 'Input', 'ReduceMean', 'CastI64', 'Add', 'Sub', 'Floor', 'ReplicatePad', 'Add']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v4_0': 'float16', 'v9_0': 'int64', 'v0_0': 'float16', 'v8_0': 'float16', 'v2_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-5
+   ops: ['Input', 'GELU', 'Tan', 'Floor', 'ReLU', 'Max', 'Cos', 'CastBool', 'Div']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v7_0': 'float16', 'v4_0': 'float16', 'v5_0': 'bool', 'v3_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-6
+   ops: ['Input', 'Atan', 'Cos', 'LeakyReLU', 'Sigmoid', 'LeakyReLU', 'ArgMin', 'Tril', 'ReduceMax']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v0_0': 'float16', 'v6_0': 'float16', 'v8_0': 'float16', 'v7_0': 'int64', 'v5_0': 'int64'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-7
+   ops: ['Constant', 'Input', 'PTMatMul', 'Constant', 'Less', 'Input', 'Input', 'Concat4', 'Softmax', 'Flatten', 'GELU', 'Floor', 'Flatten']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v11_0': 'float16', 'v6_0': 'float16', 'v1_0': 'float16', 'v4_0': 'bool', 'v3_0': 'float16', 'v0_0': 'float16', 'v10_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-8
+   ops: ['Constant', 'Slice', 'Input', 'LeakyReLU', 'Concat2', 'TorchReduceSum', 'Cos', 'ExpandLast3', 'Slice', 'ExpandLast3']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v6_0': 'float16', 'v9_0': 'float16', 'v3_0': 'float16', 'v0_0': 'float16'}
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-9
+   ops: ['Input', 'Input', 'Add', 'Cos', 'MaxPool2d', 'Reshape', 'CastBool', 'Concat1', 'Neg', 'Round']
+   err: Traceback (most recent call last):
+   err: File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\nnsmith\backends\factory.py", line 243, in verify_results
+   err: assert_allclose(
+   dtypes: {'v9_0': 'float16', 'v3_0': 'float16', 'v5_0': 'float16', 'v0_0': 'bool', 'v6_0': 'float16'}

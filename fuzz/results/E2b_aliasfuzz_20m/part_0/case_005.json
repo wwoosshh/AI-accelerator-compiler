@@ -1,0 +1,47 @@
+{
+ "id": 5,
+ "iter": 331,
+ "seed": 72000547,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "setitem",
+  "view_reshape",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]",
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [2001, 2001, 2001, 2001, 2001]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10002, 10002, 10002, 10002, 10002] vs compiled [8002, 8002, 8002, 8002, 8002]",
+  "probe.call1.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10002, 10002, 10002, 10002, 10002] vs compiled [2002, 2002, 2002, 2002, 2002]",
+  "probe.call1.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10002, 10002, 10002, 10002, 10002] vs compiled [8002, 8002, 8002, 8002, 8002]",
+  "probe.call1.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10002, 10002, 10002, 10002, 10002] vs compiled [8002, 8002, 8002, 8002, 8002]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t1.fill_(k)\n    v1 = t1.permute(2, 1, 0)\n    v2 = v1.reshape((2, 2, 6))\n    v3 = v1.flatten()\n    idx4 = torch.tensor([0], device=v2.device)\n    v2.index_fill_(1, idx4, -5)\n    idx5 = torch.tensor([20, 15, 6], device=v3.device)\n    v3[idx5] = -3\n    v6 = v3[:]\n    v7 = v1.flatten()\n    return (v6, v3, v6, v6, lst, dct)\n"
+}

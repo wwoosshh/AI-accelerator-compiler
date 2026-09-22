@@ -12,7 +12,8 @@
 1. **버그는 나온다. 빨리 나온다.** 별칭·뷰·in-place 에 특화한 차등 퍼저를 만들어 torch 2.14.0 안정판에서 약 21,000개 프로그램(총 45분)을 돌린 결과, 불일치 사례 151건이 나왔고 이를 분류·최소화해 **나이틀리(2.15.0.dev20260921)에서도 재현되는 신규 조용한 오답 버그 7계열(A, B, G: AOTAutograd/functionalization, H1, H2, H3, I: Inductor)**, **안정판 2.14.0에만 있고 나이틀리에서는 이미 수정된 Inductor 버그 1건(D)**, **별칭 의미 차이 1건(C)**, **크래시형 Dynamo 버그 1군(F)**, **알려진 버그 1건(#197893) 재발견**을 얻었다. 첫 20초(aot_eager)와 75초(Inductor CUDA) 스모크 실행에서 이미 A와 #197893이 나왔다. 모두 2~4문장 재현이며 이슈 초안 9개가 `fuzz/repro/`에 있다.
 2. **AOTAutograd/functionalization 계열의 근본 원인을 특정했다.** A는 functionalization이 `unfold`의 역변환으로 미분 공식 `unfold_backward`를 써서 창 밖 원소를 0으로 덮어쓰는 것, B는 synthetic base 경로가 출력 뷰의 ViewMeta 시퀀스를 별칭 입력이 아닌 base에 재적용해 storage offset을 잃는 것(크래시 쌍둥이 동반), G는 동적 형상에서 변이된 입력의 출력 별칭이 전치된 stride로 재생성되는 것이다.
 3. **Inductor 계열은 모두 `aot_eager`에서 정상이라 스케줄러·패스 문제로 귀속된다.** H1은 무연산 `*_scatter(x, x.view)`와 `copy_`가 입력 별칭을 반환, H2는 `slice_scatter` 결과를 나중에 변이되는 입력 버퍼에 reinplace, H3는 `index_fill_` 뒤의 `clone()` 제거, I는 dtype 뷰 왕복과 중간 텐서 in-place가 결합되면 입력 변이 이후 값으로 재계산. D(`index_fill_` 변이가 죽은 버퍼에 스케줄)는 나이틀리에서 고쳐졌다.
-4. 이 영역은 **경쟁이 매우 치열**하다. 2026년 5월 이후 `module: correctness (silent)` 라벨 이슈가 365건이고, 소수 신고자(상위 4명이 84건)가 자동화 도구로 대량 신고 중이며, 이번 조사 중 하루(9월 21일)에만 10건 이상이 올라왔다. 연구로서의 차별점은 "버그 몇 개"가 아니라 **오라클과 생성기의 설계**(별칭 프로브, 정수값 정확 비교, UB 회피, 입력 변이 write-back 비교)와 **컴포넌트별 근본 원인 분석**에 두어야 한다.
+4. **비교실험으로 기여점을 실측했다.** 같은 20분·같은 GPU 에서 NNSmith 는 의미 버그 0건(보고 34건은 전부 수치 차이), aliasfuzz 는 값이 다른 오답 30건·고유 원인 6계열(신규 L 포함)을 찾았고, 오라클 절제에서는 출력값 비교만으로는 불일치의 30% 를 놓쳤다(2.7절).
+5. 이 영역은 **경쟁이 매우 치열**하다. 2026년 5월 이후 `module: correctness (silent)` 라벨 이슈가 365건이고, 소수 신고자(상위 4명이 84건)가 자동화 도구로 대량 신고 중이며, 이번 조사 중 하루(9월 21일)에만 10건 이상이 올라왔다. 연구로서의 차별점은 "버그 몇 개"가 아니라 **오라클과 생성기의 설계**(별칭 프로브, 정수값 정확 비교, UB 회피, 입력 변이 write-back 비교)와 **컴포넌트별 근본 원인 분석**에 두어야 한다.
 
 ---
 
@@ -206,6 +207,19 @@ v.unsqueeze_(2)      # IndexError: list index out of range  (symbolic_shapes.pro
 
 Inductor 스모크 75초에서 별칭 프로브가 6번 검출. 9월 21일에 이미 신고된 열린 이슈라 생성기에서 해당 상수를 제외했다. 별칭 프로브 오라클이 이 유형을 값 비교 없이 잡는다는 검증 사례.
 
+#### L. [Inductor] 입력 간 복사 뒤 원본을 in-place 변이하면 복사가 변이 후 값을 받음 — 신규, 조용한 오답 (2026-09-22 비교실험 E2 에서 발견)
+
+```python
+def fn(dst, src):
+    dst[0:, :] = src[0:, :]   # src 를 dst 에 복사
+    src.add_(1)               # 그 다음 src 를 변이
+    return src
+# eager   : dst == 변이 전 src
+# compiled: dst == 변이 후 src   (Inductor 만, 정적·동적 형상 모두, 2.14·나이틀리)
+```
+
+AOT 그래프는 `copy = aten.copy(dst, alias(src))` 로 정확한 SSA 인데, Inductor 의 `remove_noop_ops` 가 `alias` 와 `copy` 를 모두 `src` 입력 노드로 치환한다. src 의 functionalization 되쓰기 `copy_(src, add)` 가 dst 의 되쓰기 `copy_(dst, src)` 보다 앞에 놓이면 dst 는 변이된 src 를 읽는다. 조건은 "src 가 첫 그래프 입력"(Dynamo 는 첫 사용 순서로 입력을 올림) 이라 `dst[0:, :] = src` 처럼 dst 가 먼저 쓰이는 형태는 운 좋게 맞는다. 변이 연산은 `add_`·`mul_`·`index_fill_`(뷰 경유 포함) 무엇이든 되고, `dst.copy_(src[0:, :])` 처럼 복사가 noop 으로 지워지지 않는 형태는 정상이다. 재현 `fuzz/repro/repro_copy_then_view_indexfill.py`, `fuzz/repro/investigate_L.py`(54개 변형).
+
 ### 2.5 오탐과 그 처리
 
 - 대상과 부분적으로 겹치는 메모리를 읽는 in-place(`v1.sub_(t2.narrow(2,0,1))`, `v1`은 `t2`의 별칭): eager는 겹침 판정이 `TOO_HARD`면 검사 없이 순서 의존 결과를 내고 컴파일은 수학적 기대값을 낸다. PyTorch 계약상 UB이므로 생성기에서 배제.
@@ -224,12 +238,22 @@ Inductor 스모크 75초에서 별칭 프로브가 6번 검출. 9월 21일에 �
 | B | `torch/_functorch/_aot_autograd/input_output_analysis.py` `create_synthetic_base_metadata` | 병합된 입력의 출력 별칭은 원래 입력 기준 ViewMeta 를 버리고 출력 메타데이터로 `as_strided` 재생성 | 변형 7종·크래시 변형 통과, 새 회귀 테스트(패치 전 실패·후 통과) |
 | F | `torch/_dynamo/variables/tensor.py` `call_method` | 자기 자신을 반환하는 무연산 결과는 같은 VariableTracker 로 유지 | 재현 9종 통과, 새 회귀 테스트(패치 전 IndexError·후 통과), Dynamo 표적 테스트 81 통과 |
 | I | `torch/_inductor/graph.py` `mark_buffer_mutated` | 별칭 버퍼의 소비자도 변이 전에 실체화 | 변형 8종·퍼저 사례 통과, 새 회귀 테스트 통과, Inductor 표적 테스트 51 통과 |
+| L | `torch/_inductor/fx_passes/post_grad.py` `remove_noop_ops` | 입력 저장소별 첫 `copy_` 변이 위치를 기록하고, 뷰가 아닌 noop(`copy`/`clone`)의 원본이 그런 입력을 별칭하며 사용자가 그 변이 뒤에 있으면 치환 금지 | 변형 54종·E2 사례 통과, 새 회귀 테스트(패치 전 실패·후 통과), Inductor 표적 테스트 91개에서 새 실패 없음(11개 실패는 패치 없이도 실패). 포크 브랜치 `fix/inductor-noop-copy-of-mutated-input`, 이슈·PR 은 승인 대기 |
 | A | `aten/src/ATen/FunctionalInverses.cpp` `unfold_inverse` | `size <= step`이면 `as_strided_scatter`로 되쓰기 | 공식 Python 613 케이스 검증. C++ 컴파일 검증은 Docker(Linux) CPU 빌드로 시도했으나 12병렬 빌드 중 VM 이 멈추고 엔진이 복구되지 않아 **미완**(재실행 절차는 `fuzz/patches/README.md`) |
 | G | 원인 확정, 미수정 | 심볼릭 ViewMeta 폐기 + 폴백이 갱신 base 의 전치 stride 사용. 설계 결정 필요 | |
 | C, C2, J | 미수정 | C2(동적 형상 별칭 전용), J(Inductor+동적 형상: 입력에 대입한 뒤 flat reshape 별칭으로 `index_add_` 하면 연산이 통째로 사라짐, 생성 커널에 `src` 미사용)는 회귀 퍼징에서 새로 발견된 기존 버그(이슈 #11) | |
 | D | 불필요 | 나이틀리에서 이미 수정 | |
 
 **수정 효과의 실측 검증**: 패치를 적용한 나이틀리 빌드에 퍼저를 다시 돌렸다. aot_eager 6,342개 프로그램에서 B 계열 0건(수정 전 78건 중 15건), Inductor 1,525개에서 H·D 계열 0건(수정 전 60건 중 14건). 남은 불일치는 A(C++ 미적용)와 새 발견 J·C2 뿐이었다.
+
+## 2.7 비교실험 (2026-09-22): 기존 퍼저 대비 무엇을 더 잡나
+
+세부는 `fuzz/experiments/E1_E2_results.md`, `E3_oracle_ablation.md`.
+
+- **E3 오라클 절제** — 불일치 151건 중 반환값 비교로 잡히는 것은 105건(70%). 22건은 반환되지 않는 입력 텐서가 손상된 경우라 입력 상태 비교가, 24건은 값은 같고 별칭만 다른 경우라 별칭 프로브가 있어야 보인다. 2회차 호출만으로 잡힌 것은 없었다.
+- **E1/E2 같은 20분 예산, 같은 GPU 에서 동시 실행** — NNSmith(pt2 CUDA, 노드 8개 이하)는 1,413개 그래프에서 불일치 34건을 보고했지만 NNSmith 의 컴파일 경로로 재검증·분류하면 전부 수치 차이(정수 동률 8, fp16 32 ulp 이내 14, 불연속 연산 증폭 12)였고 29건은 입력을 1 ulp 만 흔들어도 허용오차를 넘는 불안정한 그래프였다. aliasfuzz 는 2,737개 프로그램에서 값이 다른 조용한 오답 30건(A 16, B 8, D 2, H2 2, H3 1, L 1 — 고유 원인 6계열)과 별칭 전용 4건을 찾았고, 그중 L 은 이 실험에서 처음 나온 계열로 원인 특정과 수정(패치 0006)까지 마쳤다.
+- 해석: 차이는 생성기(별칭·뷰·in-place 프로그램 공간)와 오라클(입력 상태·별칭 프로브·정수값 정확 비교)의 결합에서 온다. 연산자 그래프 퍼저는 설계상 이 공간을 탐색하지 않으며, 그 공간을 탐색하더라도 출력값 비교만으로는 30% 를 놓친다.
+- 부수 결과: aliasfuzz 1차 실행이 CUDA device-side assert 로 컨텍스트가 오염되어 8.7분에 사실상 멈춘 것을 계기로 생성기(같은 객체 별칭의 형상 동기화)와 하네스(오염 감지·재시작 드라이버 `run_budget.py`)를 보강했다.
 
 ---
 

@@ -1,0 +1,43 @@
+{
+ "id": 12,
+ "iter": 561,
+ "seed": 71000774,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "setitem",
+  "view_diagonal",
+  "view_reshape",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 11/24 elems differ at [3, 4, 6, 7, 11]: eager [-1, -6, -5, -7, -6] vs compiled [2, 2, 2, 2, 2]",
+  "call0.arg0: 11/24 elems differ at [3, 4, 6, 7, 11]: eager [-1, -6, -5, -7, -6] vs compiled [2, 2, 2, 2, 2]",
+  "call1.out[0]: 10/24 elems differ at [3, 4, 8, 9, 11]: eager [-1, -7, -7, -3, -4] vs compiled [2, 2, 2, 2, 2]",
+  "call1.arg0: 10/24 elems differ at [3, 4, 8, 9, 11]: eager [-1, -7, -7, -3, -4] vs compiled [2, 2, 2, 2, 2]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.diagonal()\n    v2 = t0[0:1:2, 1:2]\n    v3 = t0.unfold(1, 3, 10)\n    idx4 = torch.tensor([0], device=v3.device)\n    v3.index_fill_(1, idx4, 5)\n    v5 = v3[1, :, :]\n    t0[t0 > -1] = 2\n    v6 = v5.reshape((3,))\n    return (t0, t1, v1, lst, dct)\n"
+}

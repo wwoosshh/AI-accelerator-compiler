@@ -1,0 +1,41 @@
+def fn(t0, t1, t2, ta, k, lst, dct):
+    t2[:2:2, 3:6] += -1
+    t2.add_(2)
+    ta.fill_(k)
+    v1 = t0.permute(0, 1)
+    t1.add_(t1.flip(0))
+    v2 = t1[:, 1:-2:2]
+    v3 = t1.transpose(1, 0)
+    v4 = ta.unsqueeze(0).expand(3, 5, 4)
+    return (v2, v4, t2, lst, dct)
+
+# dynamic=None aliased=('ta', 't0[1:]')
+
+RuntimeError: The expanded size of the tensor (5) must match the existing size (6) at non-singleton dimension 1.  Target sizes: [3, 5, 4].  Tensor sizes: [1, 6, 4]
+ast):
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 763, in evaluate
+    C = run_world(prog, device, seed, backend, calls)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 669, in run_world
+    out = fn(*args)
+          ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1261, in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "<aliasfuzz>", line 1, in fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1289, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(synthetic_base_wrapper)", line 11, in _synthetic_base_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1189, in runtime_wrapper
+    result = _codegen_runtime_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(runtime_wrapper_orchestration)", line 20, in _runtime_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(output_alias_wrapper)", line 4, in _alias_fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\functional_utils.py", line 343, in gen_alias_from_base
+    out = _functionalization.apply_view_meta_sequence(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: The expanded size of the tensor (5) must match the existing size (6) at non-singleton dimension 1.  Target sizes: [3, 5, 4].  Tensor sizes: [1, 6, 4]

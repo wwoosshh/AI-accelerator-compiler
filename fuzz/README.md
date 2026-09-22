@@ -30,7 +30,13 @@ C:/Users/s0105/venvs/pt2bug/Scripts/python.exe aliasfuzz.py --minimize-file resu
 
 # 결과 자동 분류 (A unfold / B 별칭 입력 / C dtype 뷰 / 알려진 #197893 / 기타)
 C:/Users/s0105/venvs/pt2bug/Scripts/python.exe triage.py results/A_aot_cpu results/B_ind_cuda
+
+# CUDA 장기 실행은 드라이버로: eager 쪽 device-side assert 로 CUDA 컨텍스트가 오염되면 aliasfuzz.py 가 종료 코드 3 으로
+# 끝나고, 드라이버가 남은 예산으로 새 프로세스를 다음 시드로 다시 띄워(part_0, part_1, ...) 요약을 합친다
+C:/Users/s0105/venvs/pt2bug/Scripts/python.exe run_budget.py --minutes 20 --out results/E2b --seed 72 -- --backend inductor --device cuda --max-cases 1000
 ```
+
+`summary.json` 에는 `invalid` 사유 상위 10개(`invalid_reasons`)와 중단 여부(`aborted`)가 기록됩니다. 별칭 입력이 `ta = t0`(같은 객체)인 프로그램에서 in-place 메타데이터 연산은 두 이름의 형상을 함께 갱신합니다(`Gen.identity_twins`).
 
 Windows 에서는 `TORCHINDUCTOR_COMPILE_THREADS=1` 을 권장합니다.
 
@@ -54,4 +60,7 @@ Windows 에서는 `TORCHINDUCTOR_COMPILE_THREADS=1` 을 권장합니다.
 - `aliasfuzz.py` 퍼저 본체, `triage.py` 사례 분류
 - `repro/` 이슈 제출용 독립 재현 스크립트와 영문 이슈 초안(`ISSUE_DRAFT_*.md`)
 - `known_issues_silent_2026.tsv` 2026-05 이후 `module: correctness (silent)` 이슈 365건(중복 신고 방지용)
-- `results/` 실행 로그, 사례, 최소화 결과, `summary.json`
+- `results/` 실행 로그, 사례, 최소화 결과, `summary.json` (드라이버 실행은 `part_k/` 하위 + 합산 `summary.json`)
+- `run_budget.py` 예산 드라이버(CUDA 컨텍스트 오염 시 재시작), `experiments/` 비교실험(E1 NNSmith 대 E2 aliasfuzz, E3 오라클 절제)의 프로토콜·결과·분석 스크립트
+- `patches/` PyTorch 수정 패치 0001~0006 과 검증 기록, `upstream/` 영문 이슈·PR 본문과 제출 상태
+- `repro/repro_copy_then_view_indexfill.py`, `repro/investigate_L.py` 신규 계열 L(입력 간 복사 뒤 원본 변이, Inductor noop 패스) 재현

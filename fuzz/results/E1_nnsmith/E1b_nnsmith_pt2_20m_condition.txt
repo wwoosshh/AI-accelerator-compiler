@@ -1,0 +1,35 @@
+--- #0: unstable_graph | v7_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #1: unstable_graph | v2_0: compiled diff 1.344 | 1-ulp input perturbation diff 24.97 (fails NNSmith tol); v5_0: compiled diff 1.344 | 1-ulp input perturbation diff 24.98 (fails NNSmith tol)
+--- #10: unstable_graph | v9_0: compiled diff 0.003174 | 1-ulp input perturbation diff 0.01196 (fails NNSmith tol); v8_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #11: unstable_graph | v5_0: compiled diff 0.03442 | 1-ulp input perturbation diff 1.973 (fails NNSmith tol); v8_0: compiled diff 1 | 1-ulp input perturbation diff 8 (fails NNSmith tol)
+--- #12: unstable_graph | v0_0: compiled diff 0.004883 | 1-ulp input perturbation diff 0.006714 (fails NNSmith tol); v5_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol); v2_0: compiled diff 0.004883 | 1-ulp input perturbation diff 0.006714 (fails NNSmith tol)
+--- #13: unstable_graph | v2_0: compiled diff 243.8 | 1-ulp input perturbation diff 1096 (fails NNSmith tol)
+--- #14: unstable_graph | v2_0: compiled diff 287.5 | 1-ulp input perturbation diff 1365 (fails NNSmith tol)
+--- #15: unstable_graph | v0_0: compiled diff 15.67 | 1-ulp input perturbation diff 778.1 (fails NNSmith tol); v2_0: compiled diff 12 | 1-ulp input perturbation diff 391 (fails NNSmith tol)
+--- #17: unstable_graph | v2_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #18: unstable_graph | v2_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #19: unstable_graph | v2_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #2: unstable_graph | v0_0: compiled diff 0.001953 | 1-ulp input perturbation diff 0.01563 (fails NNSmith tol)
+--- #20: unstable_graph | v10_0: compiled diff 0.01503 | 1-ulp input perturbation diff 0.01563 (fails NNSmith tol)
+--- #21: unstable_graph | v4_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #22: stable_but_differs | v9_0: compiled diff 30 | 1-ulp input perturbation diff 0
+--- #23: stable_but_differs | v6_0: compiled diff 9 | 1-ulp input perturbation diff 0
+--- #24: unstable_graph | v0_0: compiled diff 0.25 | 1-ulp input perturbation diff 1096 (fails NNSmith tol)
+--- #25: unstable_graph | v4_0: compiled diff 25 | 1-ulp input perturbation diff 26 (fails NNSmith tol)
+--- #26: stable_but_differs | v7_0: compiled diff 1 | 1-ulp input perturbation diff 0; v5_0: compiled diff 1 | 1-ulp input perturbation diff 0
+--- #27: unstable_graph | v3_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #28: unstable_graph | v9_0: compiled diff 0.125 | 1-ulp input perturbation diff 194 (fails NNSmith tol); v4_0: compiled diff 0.9901 | 1-ulp input perturbation diff 1.007 (fails NNSmith tol)
+--- #29: unstable_graph | v9_0: compiled diff 0.01561 | 1-ulp input perturbation diff 0.1249 (fails NNSmith tol)
+--- #3: unstable_graph | v2_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #30: unstable_graph | v6_0: compiled diff 14 | 1-ulp input perturbation diff 10 (fails NNSmith tol); v0_0: compiled diff 13 | 1-ulp input perturbation diff 7 (fails NNSmith tol); v3_0: compiled diff 231 | 1-ulp input perturbation diff 153 (fails NNSmith tol)
+--- #31: unstable_graph | v1_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #32: unstable_graph | v7_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol); v3_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+--- #33: stable_but_differs | v7_0: compiled diff 0.001953 | 1-ulp input perturbation diff 0
+--- #35: unstable_graph | v0_0: compiled diff 0.007812 | 1-ulp input perturbation diff 0.06248 (fails NNSmith tol)
+--- #4: unstable_graph | v8_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol); v2_0: compiled diff 1.002 | 1-ulp input perturbation diff 1.008 (fails NNSmith tol)
+--- #5: unstable_graph | v4_0: compiled diff 3 | 1-ulp input perturbation diff 689 (fails NNSmith tol)
+--- #6: unstable_graph | v7_0: compiled diff 18 | 1-ulp input perturbation diff 18 (fails NNSmith tol)
+--- #7: stable_but_differs | v10_0: compiled diff 1 | 1-ulp input perturbation diff 0
+--- #8: unstable_graph | v9_0: compiled diff 0.003906 | 1-ulp input perturbation diff 0.01562 (fails NNSmith tol)
+--- #9: unstable_graph | v6_0: compiled diff 1 | 1-ulp input perturbation diff 1 (fails NNSmith tol)
+summary: {'unstable_graph': 29, 'stable_but_differs': 5, 'not_reproduced': 0, 'failed': 0}

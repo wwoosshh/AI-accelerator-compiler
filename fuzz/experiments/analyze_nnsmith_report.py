@@ -51,7 +51,7 @@ for d in by_sym.get("INCONSISTENCY/VERIFICATION", []):
             print("   err:", l[:200])
     try:
         oracle = pickle.load(open(os.path.join(d, "oracle.pkl"), "rb"))
-        inp, out = oracle.input, oracle.output
+        inp, out = (oracle["input"], oracle["output"]) if isinstance(oracle, dict) else (oracle.input, oracle.output)
         dts = {k: str(v.dtype) if hasattr(v, "dtype") else type(v).__name__ for k, v in {**inp, **out}.items()}
         print("   dtypes:", dts)
     except Exception as e:

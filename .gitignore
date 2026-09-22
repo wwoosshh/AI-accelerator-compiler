@@ -3,3 +3,5 @@ __pycache__/
 .venv/
 venvs/
 *.log.bak
+fuzz/results/*.stdout
+fuzz/results/**/*.stdout

@@ -1,0 +1,42 @@
+{
+ "id": 16,
+ "iter": 1034,
+ "seed": 72001250,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "setitem"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.view(-1)"
+ ],
+ "n_stmts": 3,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 23/24 elems differ at [0, 1, 2, 3, 4]: eager [5, -8, -5, 7, -7] vs compiled [-4, -4, -4, -4, -4]",
+  "call0.arg1: 23/24 elems differ at [0, 1, 2, 3, 4]: eager [5, -8, -5, 7, -7] vs compiled [-4, -4, -4, -4, -4]",
+  "call1.out[0]: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [-2, 8, -6, -3, -5] vs compiled [-4, -4, -4, -4, -4]",
+  "call1.arg1: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [-2, 8, -6, -3, -5] vs compiled [-4, -4, -4, -4, -4]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    t1.masked_fill_(t1 > -1, k)\n    t1[:, :, :] = t0[:, :, :]\n    ta[:] = -4\n    return (t1, t0, lst, dct)\n"
+}

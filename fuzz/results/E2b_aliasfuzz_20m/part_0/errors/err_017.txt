@@ -1,0 +1,46 @@
+def fn(t0, t1, ta, k, lst, dct):
+    v1 = t1.detach()
+    v2 = v1.select(1, 9)
+    v3 = t1.view(torch.int32)
+    t1.t_()
+    v4 = t0.clone()
+    t1[:, :] = -3
+    v3.add_(v3.flip(0))
+    v2.abs_()
+    return (v1, t0, t1, lst, dct)
+
+# dynamic=True aliased=('ta', 't0')
+
+BackendCompilerFailed: backend='inductor' raised:
+AssertionError: aot_autograd() does not yet handle input mutations on views with different dtypes.
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_inductor\compile_fx.py", line 3104, in _maybe_wrap_and_compile_fx_main
+    return _compile_fx_main(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_inductor\compile_fx.py", line 3309, in _compile_fx_main
+    return dynamo_common.aot_autograd(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\backends\common.py", line 150, in __call__
+    cg = aot_module_simplified(
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1249, in aot_module_simplified
+    aot_graph_capture = aot_stage1_graph_capture(aot_state, functional_call)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\graph_compile.py", line 216, in aot_stage1_graph_capture
+    pre_compile(
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 3877, in pre_compile
+    flat_fn, flat_args, flat_args_descs, fw_metadata = wrapper.pre_compile(
+                                                       ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1870, in pre_compile
+    ) = merge_view_inputs(
+        ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 2300, in merge_view_inputs
+    raise AssertionError(
+torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+AssertionError: aot_autograd() does not yet handle input mutations on views with different dtypes.
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

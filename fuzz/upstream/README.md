@@ -12,6 +12,7 @@
 | 3 | `fix/dynamo-noop-method-returns-self` | F | `PR_3_dynamo_noop_self.md` | `ISSUE_F_dynamo_noop_alias.md` |
 | 4 | `fix/inductor-realize-alias-consumers-before-mutation` | I | `PR_4_inductor_alias_consumers.md` | `ISSUE_I_inductor_dtype_view_order.md` |
 | 5 | `fix/functionalization-unfold-inverse` | A (C++, CI 컴파일 필요) | `PR_5_functionalization_unfold.md` | `ISSUE_A_unfold.md` |
+| 6 | `fix/inductor-noop-copy-of-mutated-input` (f01f746, main 00ec4ca 기반) | L: `dst[0:, :] = src[0:, :]; src.add_(1)` 이 갱신된 src 를 복사 (비교실험 E2 에서 발견, 패치 0006) | `PR_6_inductor_noop_copy_of_mutated_input.md` | `ISSUE_L_noop_copy_of_mutated_input.md` — **제출 전, 승인 필요** |
 | - | (미수정) | J | - | `ISSUE_J_inductor_dynamic_index_add.md` |
 
 `collect_env` 출력은 `../repro/collect_env_stable_2.14.0.txt`, `../repro/collect_env_nightly_2.15.0.dev20260921.txt`.

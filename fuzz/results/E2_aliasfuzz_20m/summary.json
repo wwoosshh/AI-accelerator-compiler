@@ -1,0 +1,15 @@
+{
+ "torch": "2.14.0+cu130",
+ "backend": "inductor",
+ "device": "cuda",
+ "iterations": 3332049,
+ "stats": {
+  "invalid": 3330825,
+  "compile_error": 24,
+  "value_diff": 18,
+  "alias_diff": 4,
+  "pass": 1178
+ },
+ "n_cases": 22,
+ "elapsed_s": 1200.00070810318
+}

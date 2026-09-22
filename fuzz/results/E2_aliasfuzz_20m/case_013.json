@@ -1,0 +1,49 @@
+{
+ "id": 13,
+ "iter": 575,
+ "seed": 71000788,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "side_effect",
+  "view_dtype"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 22/24 elems differ at [1, 2, 4, 5, 6]: eager [-2, 8, -4, 7, -7] vs compiled [4, 4, 4, 4, 4]",
+  "call1.out[0]: 21/24 elems differ at [0, 1, 2, 3, 4]: eager [7, -1, -4, -8, 3] vs compiled [4, 4, 4, 4, 4]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    dct['key1'] = t0\n    v2 = t0.view(torch.int32)\n    t1[t1 > 0] = -3\n    v3 = t0.detach()\n    v4 = torch.diagonal_scatter(v3, t0.diagonal())\n    idx5 = torch.tensor([1, 0], device=t1.device)\n    t1.index_fill_(0, idx5, -2)\n    v3.add_(-5)\n    t0.fill_(4)\n    return (v4, t0, t1, lst, dct)\n"
+}

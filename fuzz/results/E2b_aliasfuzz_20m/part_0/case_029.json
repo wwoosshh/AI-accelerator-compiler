@@ -1,0 +1,49 @@
+{
+ "id": 29,
+ "iter": 2375,
+ "seed": 72002591,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "inplace_meta",
+  "setitem",
+  "side_effect",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 13/24 elems differ at [4, 5, 6, 7, 10]: eager [-3, 4, -4, -4, 4] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 3/24 elems differ at [21, 22, 23]: eager [12, 1, -2] vs compiled [0, 0, 0]",
+  "call0.out[4]: 13/24 elems differ at [4, 5, 6, 7, 10]: eager [-3, 4, -4, -4, 4] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[6][0]: 3/24 elems differ at [21, 22, 23]: eager [12, 1, -2] vs compiled [0, 0, 0]",
+  "call0.arg0: 13/24 elems differ at [4, 5, 6, 7, 10]: eager [-3, 4, -4, -4, 4] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 3/24 elems differ at [21, 22, 23]: eager [12, 1, -2] vs compiled [0, 0, 0]",
+  "call0.arg3[0]: 3/24 elems differ at [21, 22, 23]: eager [12, 1, -2] vs compiled [0, 0, 0]",
+  "call1.out[2]: 15/24 elems differ at [4, 5, 6, 7, 8]: eager [1, -4, 3, 4, 2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 3/24 elems differ at [21, 22, 23]: eager [-15, 7, -2] vs compiled [0, 0, 0]",
+  "call1.out[4]: 15/24 elems differ at [4, 5, 6, 7, 8]: eager [1, -4, 3, 4, 2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[6][0]: 3/24 elems differ at [21, 22, 23]: eager [-15, 7, -2] vs compiled [0, 0, 0]",
+  "call1.arg0: 15/24 elems differ at [4, 5, 6, 7, 8]: eager [1, -4, 3, 4, 2] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0.unsqueeze_(2)\n    lst.append(t1)\n    v1 = t0.unfold(1, 4, 10)\n    t1[:-1] = t1[1:].clone()\n    v1.masked_fill_(v1 > 2, k)\n    t0.clamp_(-4, 4)\n    t1.add_(t1.flip(0))\n    v2 = t1.unfold(0, 7, 7)\n    v2.fill_(-3)\n    idx3 = torch.tensor([15, 6], device=t1.device)\n    t1.index_fill_(0, idx3, 0)\n    return (v2, v1, t0, t1, t0, v2, lst, dct)\n"
+}

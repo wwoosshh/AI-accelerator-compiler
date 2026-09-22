@@ -1,0 +1,47 @@
+{
+ "id": 14,
+ "iter": 655,
+ "seed": 71000868,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "setitem",
+  "view_select",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ],
+  [
+   "t2",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 2/2 elems differ at [0, 1]: eager [-5, -5] vs compiled [4, 4]",
+  "call1.out[1]: 2/2 elems differ at [0, 1]: eager [-5, -5] vs compiled [4, 4]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    t0[:, :] = -5\n    idx1 = torch.tensor([2], device=t0.device)\n    t0.index_fill_(0, idx1, 4)\n    v2 = ta.narrow(1, 1, 2)\n    v3 = v2[2:3:3, :]\n    v4 = t0[:, 2:-2:2]\n    return (t2, v3, t1, t1, lst, dct)\n"
+}

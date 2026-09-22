@@ -1,0 +1,158 @@
+## driver
+[run_budget] part 0: C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py --minutes 20.000 --seed 72 --out results/E2b_aliasfuzz_20m\part_0 --backend inductor --device cuda --max-cases 1000
+[run_budget] part 0 exited rc=0 aborted=None iterations=2737 stats={'invalid': 4, 'compile_error': 54, 'value_diff': 29, 'alias_diff': 5, 'pass': 2645} cases=34
+[run_budget] DONE restarts=0 iterations=2737 stats={'invalid': 4, 'compile_error': 54, 'value_diff': 29, 'alias_diff': 5, 'pass': 2645} cases=34 wall=1219s
+
+## per-part DONE / invalid reasons / minimization
+DONE iterations=2737 stats={'invalid': 4, 'compile_error': 54, 'value_diff': 29, 'alias_diff': 5, 'pass': 2645} cases=34 elapsed=1200s
+   invalid x3: RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 4
+   invalid x1: RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimensio
+minimizing case 1 (value_diff) ...
+  -> 2 stmts (from 10), status=alias_diff, checks=18, dynamic=None aliased=('ta', 't0[1:]')
+minimizing case 2 (value_diff) ...
+  -> 4 stmts (from 9), status=value_diff, checks=15, dynamic=None aliased=None
+minimizing case 3 (value_diff) ...
+  -> 5 stmts (from 9), status=value_diff, checks=23, dynamic=None aliased=None
+minimizing case 4 (value_diff) ...
+  -> 2 stmts (from 6), status=value_diff, checks=16, dynamic=None aliased=None
+minimizing case 8 (value_diff) ...
+  -> 3 stmts (from 7), status=value_diff, checks=20, dynamic=None aliased=None
+minimizing case 9 (value_diff) ...
+  -> 2 stmts (from 7), status=value_diff, checks=13, dynamic=None aliased=None
+
+## summary.json
+{'budget_minutes': 20.0, 'wall_elapsed_s': 1219.054925918579, 'fuzz_loop_elapsed_s': 1209.5993149280548, 'restarts': 0, 'iterations': 2737, 'stats': {'invalid': 4, 'compile_error': 54, 'value_diff': 29, 'alias_diff': 5, 'pass': 2645}, 'n_cases': 34, 'torch': '2.14.0+cu130'}
+
+## triage
+== results/E2b_aliasfuzz_20m/part_0 {'B_aliased_input': 8, 'A_unfold': 16, 'D_inductor_indexfill_mask': 2, 'other': 7, 'C_dtype_view_alias': 1}
+
+## oracle breakdown (E3 rules)
+family                       cases value(out)  input-state only  alias-probe only 2nd-call only
+A_unfold                        16         11                 5                 0             0
+B_aliased_input                  8          7                 0                 1             0
+C_dtype_view_alias               1          0                 0                 1             0
+D_inductor_indexfill_mask        2          2                 0                 0             0
+H2                               2          2                 0                 0             0
+H3                               1          1                 0                 0             0
+other                            4          1                 0                 3             0
+TOTAL                           34         24                 5                 5             0
+
+## OTHER cases
+===== results/E2b_aliasfuzz_20m/part_0\case_004.json value_diff dynamic= True aliased= None
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = torch.select_scatter(t0, t2.select(0, 6), 0, 6)
+    t0.copy_(t2)
+    v2 = torch.select_scatter(t2, v1.select(0, 1), 0, 1)
+    v3 = torch.maximum(t2, v1)
+    idx4 = torch.tensor([6, 22], device=v3.device)
+    v3[idx4] += -5
+    return (v2, v2, t1, v1, lst, dct)
+    call0.out[3]: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [-2.0, -8.0, 8.0, -2.0, 3.0] vs compiled [6.0, -2.0, 2.0, -1.0, 5.0]
+    call1.out[3]: 21/24 elems differ at [0, 1, 2, 3, 4]: eager [0.0, -5.0, -8.0, -8.0, 8.0] vs compiled [4.0, -2.0, -3.0, -5.0, 4.0]
+--- minimized:
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = torch.select_scatter(t0, t2.select(0, 6), 0, 6)
+    t0.copy_(t2)
+    return (v1, lst, dct)
+===== results/E2b_aliasfuzz_20m/part_0\case_005.json alias_diff dynamic= True aliased= None
+def fn(t0, t1, k, lst, dct):
+    t1.fill_(k)
+    v1 = t1.permute(2, 1, 0)
+    v2 = v1.reshape((2, 2, 6))
+    v3 = v1.flatten()
+    idx4 = torch.tensor([0], device=v2.device)
+    v2.index_fill_(1, idx4, -5)
+    idx5 = torch.tensor([20, 15, 6], device=v3.device)
+    v3[idx5] = -3
+    v6 = v3[:]
+    v7 = v1.flatten()
+    return (v6, v3, v6, v6, lst, dct)
+    probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]
+    probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [2001, 2001, 2001, 2001, 2001]
+    probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]
+    probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [10001, 10001, 10001, 10001, 10001] vs compiled [8001, 8001, 8001, 8001, 8001]
+===== results/E2b_aliasfuzz_20m/part_0\case_006.json alias_diff dynamic= None aliased= None
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t1.transpose(1, 0)
+    v2 = v1.flip(1)
+    v3 = v2.unsqueeze(0).expand(3, 2, 2, 6)
+    v2.copy_(v1)
+    t1.unsqueeze_(1)
+    idx4 = torch.tensor([2], device=t0.device)
+    t0.index_fill_(2, idx4, 5)
+    v5 = v3[2, :, :, :]
+    v6 = v5.flatten()
+    return (v6, t0, v3, v6, lst, dct)
+    probe log differs: eager ['ok', 'ok', 'err:RuntimeError', 'ok', 'ok', 'ok', 'err:RuntimeError', 'ok'] vs compiled ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok']
+    probe.call0.out[2]: 72/72 elems differ at [0, 1, 2, 3, 4]: eager [3, -4, 3, -5, -7] vs compiled [3003, 2996, 3003, 2995, 2993]
+    probe.call1.out[2]: 72/72 elems differ at [0, 1, 2, 3, 4]: eager [-7, 1, -4, 1, 7] vs compiled [2993, 3001, 2996, 3001, 3007]
+===== results/E2b_aliasfuzz_20m/part_0\case_008.json value_diff dynamic= True aliased= None
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2[-1, 1:3:2]
+    t1[:, :] = t2[:, :]
+    v1.zero_()
+    t0[:, :, :] = -3
+    v2 = t1.permute(0, 1)
+    v3 = t1 + t2
+    v4 = t2[...]
+    return (v1, v4, t1, t1, t2, v1, lst, dct)
+    call0.out[2]: 1/24 elems differ at [17]: eager [-8] vs compiled [0]
+    call0.out[3]: 1/24 elems differ at [17]: eager [-8] vs compiled [0]
+    call0.arg1: 1/24 elems differ at [17]: eager [-8] vs compiled [0]
+    call1.out[2]: 1/24 elems differ at [17]: eager [2] vs compiled [0]
+--- minimized:
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2[-1, 1:3:2]
+    t1[:, :] = t2[:, :]
+    v1.zero_()
+    return (v1, lst, dct)
+===== results/E2b_aliasfuzz_20m/part_0\case_013.json alias_diff dynamic= None aliased= None
+def fn(t0, t1, k, lst, dct):
+    t0.fill_(-3)
+    t1.add_(-4)
+    v1 = t0.cumsum(0)
+    v2 = t0.unsqueeze(0)
+    v3 = v1[-3, 3:4]
+    t1[:, :, 1::2] = 1
+    v4 = t1.detach()
+    return (v4, v3, v2, v1, lst, dct)
+    probe log differs: eager ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'] vs compiled ['ok', 'ok', 'ok', 'err:RuntimeError', 'ok', 'ok', 'ok', 'err:RuntimeError']
+    probe.call0.out[1]: 1/1 elems differ at [0]: eager [5994] vs compiled [1994]
+    probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997, 3997, 3997, 3997, 3997] vs compiled [-3, -3, -3, -3, -3]
+    probe.call1.out[1]: 1/1 elems differ at [0]: eager [5994] vs compiled [1994]
+===== results/E2b_aliasfuzz_20m/part_0\case_018.json value_diff dynamic= True aliased= None
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t0.clone()
+    idx2 = torch.tensor([3], device=t0.device)
+    t0[idx2] = k
+    idx3 = torch.tensor([5], device=v1.device)
+    v1.index_copy_(1, idx3, t0.narrow(1, 0, 1))
+    return (v1, v1, t1, lst, dct)
+    call0.out[0]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [6.0, -1.0, 8.0, 6.0, -8.0] vs compiled [-7.0, -7.0, -8.0, -2.0, -2.0]
+    call0.out[1]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [6.0, -1.0, 8.0, 6.0, -8.0] vs compiled [-7.0, -7.0, -8.0, -2.0, -2.0]
+    call1.out[0]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [-5.0, -6.0, -2.0, 1.0, -3.0] vs compiled [-2.0, -2.0, 0.0, -1.0, -1.0]
+    call1.out[1]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [-5.0, -6.0, -2.0, 1.0, -3.0] vs compiled [-2.0, -2.0, 0.0, -1.0, -1.0]
+===== results/E2b_aliasfuzz_20m/part_0\case_024.json value_diff dynamic= True aliased= None
+def fn(t0, t1, t2, k, lst, dct):
+    t2[t2 > 2] = 2
+    v1 = t0.unsqueeze(1)
+    t2.sub_(0)
+    v1.mul_(2)
+    v2 = torch.diagonal_scatter(t1, t0.diagonal())
+    t1.fill_(k)
+    v3 = v2.t()
+    return (v2, v3, lst, dct)
+    call0.out[0]: 23/24 elems differ at [0, 1, 2, 3, 4]: eager [-8.0, -1.0, 5.0, 5.0, -6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+    call0.out[1]: 23/24 elems differ at [0, 1, 2, 3, 4]: eager [-8.0, -1.0, -1.0, -4.0, 5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+    call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-2.0, -6.0, -1.0, -6.0, 0.0] vs compiled [1.0, 1.0, 1.0, 1.0, 1.0]
+    call1.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-2.0, 0.0, -6.0, -6.0, -1.0] vs compiled [1.0, 1.0, 1.0, 1.0, 1.0]
+
+## compile_error kinds
+     15 AssertionError: i
+      2 ValueError: Ca
+      2 RuntimeError: The expa
+      2 AssertionError: aot_autograd() does 
+      1 RuntimeError: shape '[N]' is i
+      1 RuntimeError: shape '[N, N]' is i
+      1 RuntimeError: setStorage: sizes [N, N, N], strides [N, N, N], storage offset N, a
+      1 RuntimeError: maximum size for te

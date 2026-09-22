@@ -1,0 +1,49 @@
+{
+ "id": 22,
+ "iter": 1218,
+ "seed": 71001431,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_alias",
+  "setitem",
+  "side_effect",
+  "view_dtype",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg2: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [-8, -6, 4, -8, 3] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg2: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [2, -5, -2, 2, 8] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t2.unfold(1, 2, 3)\n    idx2 = torch.tensor([23], device=t1.device)\n    t1[idx2] += 3\n    v3 = t0.view(torch.int32)\n    v4 = t0.unfold(0, 18, 4)\n    lst.append(v4.numel())\n    v5 = v1.reshape(v1.shape)\n    v6 = t2.view(torch.int32)\n    idx7 = torch.tensor([0], device=v5.device)\n    v5.index_fill_(1, idx7, 3)\n    return (ta, v4, t0, lst, dct)\n"
+}

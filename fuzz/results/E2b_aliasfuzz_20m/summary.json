@@ -1,0 +1,44 @@
+{
+ "budget_minutes": 20.0,
+ "wall_elapsed_s": 1219.054925918579,
+ "fuzz_loop_elapsed_s": 1209.5993149280548,
+ "restarts": 0,
+ "iterations": 2737,
+ "stats": {
+  "invalid": 4,
+  "compile_error": 54,
+  "value_diff": 29,
+  "alias_diff": 5,
+  "pass": 2645
+ },
+ "n_cases": 34,
+ "parts": [
+  {
+   "part": 0,
+   "dir": "results/E2b_aliasfuzz_20m\\part_0",
+   "seed": 72,
+   "returncode": 0,
+   "summary": {
+    "torch": "2.14.0+cu130",
+    "backend": "inductor",
+    "device": "cuda",
+    "iterations": 2737,
+    "stats": {
+     "invalid": 4,
+     "compile_error": 54,
+     "value_diff": 29,
+     "alias_diff": 5,
+     "pass": 2645
+    },
+    "n_cases": 34,
+    "elapsed_s": 1209.5993149280548,
+    "aborted": null,
+    "invalid_reasons": {
+     "RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 4": 3,
+     "RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimensio": 1
+    }
+   }
+  }
+ ],
+ "torch": "2.14.0+cu130"
+}

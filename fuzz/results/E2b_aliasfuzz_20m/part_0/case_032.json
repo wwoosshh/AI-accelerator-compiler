@@ -1,0 +1,53 @@
+{
+ "id": 32,
+ "iter": 2564,
+ "seed": 72002780,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "inplace_meta",
+  "view_reshape",
+  "view_select",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]",
+  "probe.call0.out[1]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call0.out[2]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]",
+  "probe.call0.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5000, 5000, 5000, 5000, 5000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5000, 5000, 5000, 5000, 5000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call0.arg2: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]",
+  "probe.call1.out[0]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]",
+  "probe.call1.out[1]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call1.out[2]: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]",
+  "probe.call1.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5000, 5000, 5000, 5000, 5000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call1.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5000, 5000, 5000, 5000, 5000] vs compiled [7000, 7000, 7000, 7000, 7000]",
+  "probe.call1.arg2: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [11000, 11000, 11000, 11000, 11000] vs compiled [9000, 9000, 9000, 9000, 9000]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1 + 2\n    t0.zero_()\n    v2 = v1.reshape((24,))\n    v3 = ta.select(0, 0)\n    v4 = v2[2:9:2]\n    v2.unsqueeze_(0)\n    return (ta, v3, ta, v4, t0, lst, dct)\n"
+}

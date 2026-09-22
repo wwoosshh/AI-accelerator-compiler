@@ -1,0 +1,47 @@
+{
+ "id": 9,
+ "iter": 542,
+ "seed": 72000758,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "view_dtype",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg2: 15/24 elems differ at [2, 3, 4, 5, 8]: eager [6, 4, 8, 0, -3] vs compiled [5, 5, 5, 5, 5]",
+  "call1.arg2: 14/24 elems differ at [2, 3, 4, 5, 8]: eager [13, 4, 0, 4, 4] vs compiled [5, 5, 5, 5, 5]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    t1.mul_(1)\n    v1 = t2.unfold(2, 2, 6)\n    v1.fill_(5)\n    t2.add_(5)\n    v2 = t1[:, 2:3:2, :]\n    v3 = v1.unfold(0, 1, 2)\n    v4 = t1.view(torch.int32)\n    return (t1, t1, v1, v1, t0, lst, dct)\n"
+}

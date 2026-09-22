@@ -1,0 +1,45 @@
+{
+ "id": 8,
+ "iter": 270,
+ "seed": 71000483,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 2/6 elems differ at [4, 5]: eager [14.0, 2.0] vs compiled [-6.0, -2.0]",
+  "call0.out[1]: 2/6 elems differ at [4, 5]: eager [14.0, 2.0] vs compiled [-6.0, -2.0]",
+  "call1.out[0]: 2/6 elems differ at [4, 5]: eager [0.0, 16.0] vs compiled [16.0, 12.0]",
+  "call1.out[1]: 2/6 elems differ at [4, 5]: eager [0.0, 16.0] vs compiled [16.0, 12.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = ta[0, 0:2, 1::2]\n    t0.add_(t0)\n    v2 = torch.select_scatter(ta, t1.select(2, 2), 2, 2)\n    v3 = v1.contiguous()\n    ta[-1] = v2[0]\n    return (v1, v1, v3, t1, t1, lst, dct)\n"
+}

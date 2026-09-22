@@ -1,0 +1,44 @@
+{
+ "id": 30,
+ "iter": 2494,
+ "seed": 72002710,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "view_reshape",
+  "view_select",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 4/4 elems differ at [0, 1, 2, 3]: eager [14, -14, -12, -12] vs compiled [0, -4, -14, -8]",
+  "call0.out[4]: 4/4 elems differ at [0, 1, 2, 3]: eager [14, -14, -12, -12] vs compiled [0, -4, -14, -8]",
+  "call1.out[0]: 4/4 elems differ at [0, 1, 2, 3]: eager [2, -6, 2, 14] vs compiled [26, 6, -8, 0]",
+  "call1.out[4]: 4/4 elems differ at [0, 1, 2, 3]: eager [2, -6, 2, 14] vs compiled [26, 6, -8, 0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t0.t()\n    v2 = t0.detach()\n    v1.add_(v1.flip(1))\n    v3 = t1[:]\n    ta.mul_(2)\n    v4 = ta.select(0, 1)\n    v5 = v2.reshape((24,))\n    return (v4, t1, t0, t1, v4, lst, dct)\n"
+}

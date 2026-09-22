@@ -135,6 +135,14 @@ class Gen:
             c = c[-4:]
         return self.rng.choice(c)
 
+    def identity_twins(self, v):
+        """v 와 같은 텐서 객체를 가리키는 다른 변수. 별칭 입력이 `ta = t0` 형태(뷰가 아니라 같은 객체)이면
+        transpose_ 같은 in-place 메타데이터 연산이 두 이름의 형상을 함께 바꾸므로 생성기도 같이 갱신해야 한다
+        (E2 1차 실행에서 이를 놓쳐 범위 밖 인덱스가 만들어졌고, CUDA 에서는 device-side assert 로 컨텍스트가 오염됐다)."""
+        if self.aliased_input and self.aliased_input[1] == 't0' and v.name in ('t0', 'ta'):
+            return [w for w in self.vars if w.name in ('t0', 'ta') and w is not v]
+        return []
+
     def other(self, v, diff_root=False):
         """같은 shape/dtype 의 다른 변수. diff_root=True 면 저장소 뿌리가 다른 것만 (in-place 피연산자용:
         대상과 부분적으로 겹치는 메모리를 읽으면서 쓰는 것은 PyTorch 계약상 정의되지 않은 동작이라 오탐이 됨)."""
@@ -537,6 +545,9 @@ class Gen:
             d = self.rng.choice(ones)
             code = '%s.squeeze_(%d)' % (t.name, d)
             t.shape = t.shape[:d] + t.shape[d + 1:]
+        for tw in self.identity_twins(t):
+            tw.shape = t.shape
+            tw.contiguous = t.contiguous
         self.emit(code, 'inplace_meta')
         return True
 
@@ -764,6 +775,17 @@ def evaluate(prog, device, backend, seed, calls):
     return 'pass', None
 
 
+def cuda_healthy():
+    """eager 쪽 device-side assert(예: 범위 밖 인덱스) 뒤에는 CUDA 컨텍스트가 회복 불가능하게 오염되어
+    이후 모든 프로그램이 'invalid' 로 집계된다(E2 1차 실행: 1228번째 이후 333만 회). 그 상태를 감지한다."""
+    try:
+        torch.cuda.synchronize()
+        (torch.ones(2, device='cuda') + 1).sum().item()
+        return True
+    except Exception:
+        return False
+
+
 def minimize(prog, device, backend, seed, calls, budget):
     cur = prog
     used = 0
@@ -960,6 +982,8 @@ def main():
     deadline = start + args.minutes * 60
     i = 0
     n_err_saved = 0
+    invalid_reasons = {}
+    aborted = None
     while time.time() < deadline:
         i += 1
         seed = args.seed * 1000003 + i
@@ -969,6 +993,17 @@ def main():
         t0 = time.time()
         st, info = evaluate(prog, args.device, args.backend, seed, args.calls)
         stats[st] += 1
+        if st == 'invalid':
+            key = str(info)[:100]
+            invalid_reasons[key] = invalid_reasons.get(key, 0) + 1
+            sticky = args.device == 'cuda' and any(w in str(info) for w in ('CUDA', 'device-side', 'Accelerator'))
+            if sticky and not cuda_healthy():
+                aborted = 'cuda_context_poisoned'
+                with open(os.path.join(args.out, 'errors', 'poisoned_iter_%d.txt' % i), 'w', encoding='utf-8') as f:
+                    f.write(prog.source() + '\n# dynamic=%r aliased=%r\n\n%s' % (prog.dynamic, prog.aliased_input, info))
+                P('ABORT iter=%d: CUDA context poisoned by an eager-side error; exiting with code 3 so run_budget.py '
+                  'can restart in a fresh process: %s' % (i, str(info)[:200]))
+                break
         if st == 'compile_error' and n_err_saved < 25:
             n_err_saved += 1
             with open(os.path.join(args.out, 'errors', 'err_%03d.txt' % n_err_saved), 'w', encoding='utf-8') as f:
@@ -993,12 +1028,15 @@ def main():
         if i % 25 == 0:
             P('progress iter=%d %s elapsed=%.0fs last=%.1fs' % (i, stats, time.time() - start, time.time() - t0))
     P('DONE iterations=%d stats=%s cases=%d elapsed=%.0fs' % (i, stats, len(cases), time.time() - start))
+    top_invalid = sorted(invalid_reasons.items(), key=lambda kv: -kv[1])[:10]
+    for k, v in top_invalid[:5]:
+        P('   invalid x%d: %s' % (v, k))
 
     order = sorted(cases, key=lambda c: (0 if c['status'] == 'value_diff' else 1, c['id']))
     seen = set()
     done = 0
     for c in order:
-        if done >= args.minimize:
+        if done >= args.minimize or aborted:
             break
         key = (c['status'], tuple(c['kinds']))
         if key in seen:
@@ -1020,9 +1058,12 @@ def main():
         done += 1
     with open(os.path.join(args.out, 'summary.json'), 'w', encoding='utf-8') as f:
         json.dump({'torch': torch.__version__, 'backend': args.backend, 'device': args.device, 'iterations': i,
-                   'stats': stats, 'n_cases': len(cases), 'elapsed_s': time.time() - start},
+                   'stats': stats, 'n_cases': len(cases), 'elapsed_s': time.time() - start,
+                   'aborted': aborted, 'invalid_reasons': dict(top_invalid)},
                   f, ensure_ascii=False, indent=1)
     P('summary written')
+    if aborted:
+        sys.exit(3)
 
 
 if __name__ == '__main__':

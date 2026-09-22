@@ -1,0 +1,44 @@
+{
+ "id": 4,
+ "iter": 128,
+ "seed": 72000344,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "inplace",
+  "scatter_fn",
+  "setitem"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[3]: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [-2.0, -8.0, 8.0, -2.0, 3.0] vs compiled [6.0, -2.0, 2.0, -1.0, 5.0]",
+  "call1.out[3]: 21/24 elems differ at [0, 1, 2, 3, 4]: eager [0.0, -5.0, -8.0, -8.0, 8.0] vs compiled [4.0, -2.0, -3.0, -5.0, 4.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = torch.select_scatter(t0, t2.select(0, 6), 0, 6)\n    t0.copy_(t2)\n    v2 = torch.select_scatter(t2, v1.select(0, 1), 0, 1)\n    v3 = torch.maximum(t2, v1)\n    idx4 = torch.tensor([6, 22], device=v3.device)\n    v3[idx4] += -5\n    return (v2, v2, t1, v1, lst, dct)\n"
+}

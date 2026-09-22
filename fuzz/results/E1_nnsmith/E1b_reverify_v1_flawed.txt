@@ -1,0 +1,104 @@
+inconsistency reports: 34
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-0: same device OK; original report not reproduced
+    ops=['Input', 'Squeeze', 'Constant', 'Neg', 'Neg', 'Input', 'Sub', 'Min', 'Ceil', 'CastF64', 'Atan']
+    out dtypes=['torch.float16', 'torch.float64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-1: same device OK; original report not reproduced
+    ops=['Input', 'GELU', 'Input', 'Tan', 'Tan', 'ExpandLast4', 'Greater', 'Sub', 'Abs', 'Neg']
+    out dtypes=['torch.bool', 'torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-10: same device OK; original report not reproduced
+    ops=['Input', 'Input', 'Add', 'Cos', 'GELU', 'Neg', 'Cos', 'ReduceMin', 'CastI32', 'Neg']
+    out dtypes=['torch.float16', 'torch.int32']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-11: same device OK; original report not reproduced
+    ops=['Constant', 'Transpose', 'Input', 'Sin', 'Div', 'Reshape', 'Sin', 'Floor', 'ExpandLast3', 'Clip']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-12: same device OK; original report not reproduced
+    ops=['Constant', 'Abs', 'Input', 'Mul', 'TorchReduceSum', 'Softmax', 'Abs', 'Round', 'Softmax', 'Add']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-13: same device OK; original report not reproduced
+    ops=['Input', 'Input', 'Constant', 'Where', 'Transpose', 'Sigmoid', 'Input', 'Mul', 'TrilinearInterp', 'Tan', 'TorchReduceSum', 'ConstPad']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-14: same device OK; original report not reproduced
+    ops=['Input', 'ReduceMean', 'Input', 'Div', 'PTMatMul', 'Concat1', 'ArgMax', 'CastF32', 'Concat4', 'Tan']
+    out dtypes=['torch.float16', 'torch.float32', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-15: same device OK; original report not reproduced
+    ops=['Input', 'Floor', 'LeakyReLU', 'Tan', 'Tan', 'TorchReduceSum', 'CastF64', 'CastF64', 'Round']
+    out dtypes=['torch.float16', 'torch.float64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-17: same device OK; original report not reproduced
+    ops=['Constant', 'Sin', 'Input', 'ConstPad', 'Add', 'Max', 'CastF64', 'Max', 'CastI32', 'Less']
+    out dtypes=['torch.bool', 'torch.float16', 'torch.float64', 'torch.int32']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-18: same device OK; original report not reproduced
+    ops=['Input', 'Sin', 'Input', 'Max', 'Neg', 'Abs', 'BilinearInterp', 'Atan', 'CastI64', 'ExpandLast3']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-19: same device OK; original report not reproduced
+    ops=['Constant', 'Constant', 'PTMatMul', 'Constant', 'CastF32', 'LeakyReLU', 'Input', 'Concat3', 'GELU', 'Round', 'ExpandLast4', 'ExpandLast4']
+    out dtypes=['torch.float16', 'torch.float32']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-2: same device OK; original report not reproduced
+    ops=['Input', 'Abs', 'GELU', 'Sin', 'Sin', 'Neg', 'Sub', 'ReduceMean', 'ReduceMax']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-20: same device OK; original report not reproduced
+    ops=['Constant', 'ReduceMin', 'Constant', 'Ceil', 'PTMatMul', 'Abs', 'Input', 'Sub', 'Sin', 'ReduceMin', 'Greater']
+    out dtypes=['torch.bool', 'torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-21: same device OK; original report not reproduced
+    ops=['Input', 'Atan', 'Floor', 'Abs', 'Max', 'TrilinearInterp', 'Cos', 'CastI32', 'Greater']
+    out dtypes=['torch.bool', 'torch.float16', 'torch.int32']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-22: same device OK; original report not reproduced
+    ops=['Constant', 'Cos', 'Input', 'Input', 'Where', 'Tril', 'ArgMin', 'Min', 'Triu', 'Greater', 'Or']
+    out dtypes=['torch.bool', 'torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-23: same device OK; original report not reproduced
+    ops=['Constant', 'Round', 'Input', 'Max', 'GELU', 'Transpose', 'CastI64', 'CastI64', 'Mul', 'ExpandLast3']
+    out dtypes=['torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-24: same device OK; original report not reproduced
+    ops=['Constant', 'ReLU', 'Input', 'Div', 'Input', 'Reshape', 'Input', 'Where', 'ReduceMin', 'Concat1', 'Tan', 'Add']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-25: same device OK; original report not reproduced
+    ops=['Constant', 'Constant', 'Max', 'Clip', 'Input', 'Add', 'Mul', 'LinearInterp', 'Round', 'ArgMin', 'TorchReduceSum']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-26: same device OK; original report not reproduced
+    ops=['Input', 'CastF32', 'Div', 'Mul', 'Sub', 'Ceil', 'CastI32', 'ExpandLast2', 'Reshape']
+    out dtypes=['torch.float32', 'torch.int32']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-27: same device OK; original report not reproduced
+    ops=['Input', 'Constant', 'Div', 'Constant', 'ArgMax', 'Concat4', 'Input', 'Concat2', 'Sub', 'Add', 'Floor', 'Sub']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-28: same device OK; original report not reproduced
+    ops=['Input', 'Tan', 'ExpandLast2', 'Input', 'Mul', 'Round', 'ReduceMean', 'Cos', 'CastF64', 'LeakyReLU']
+    out dtypes=['torch.float16', 'torch.float64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-29: same device OK; original report not reproduced
+    ops=['Input', 'Input', 'Mul', 'ArgMin', 'ExpandLast4', 'Flatten', 'Neg', 'Cos', 'Slice', 'Reshape']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-3: same device OK; original report not reproduced
+    ops=['Input', 'ReduceMean', 'Input', 'Cos', 'Input', 'Add', 'Div', 'Input', 'CastI64', 'ReduceMax', 'Sub', 'Round']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-30: same device OK; original report not reproduced
+    ops=['Input', 'Cos', 'Atan', 'Atan', 'ArgMin', 'Transpose', 'Triu', 'Mul', 'LeakyReLU']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-31: same device OK; original report not reproduced
+    ops=['Input', 'BilinearInterp', 'Input', 'Mul', 'Abs', 'Abs', 'ReLU', 'Flatten', 'PTMatMul', 'Round']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-32: same device OK; original report not reproduced
+    ops=['Input', 'Cos', 'Ceil', 'ReduceMin', 'Ceil', 'Min', 'Ceil', 'Transpose', 'Floor']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-33: same device OK; original report not reproduced
+    ops=['Input', 'Constant', 'Input', 'Concat3', 'TrilinearInterp', 'Sin', 'Cos', 'LeakyReLU', 'Flatten', 'Tan', 'Max']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-35: same device OK; original report not reproduced
+    ops=['Constant', 'Input', 'PTMatMul', 'Constant', 'Atan', 'Squeeze', 'Max', 'Squeeze', 'Max', 'Input', 'Sub', 'Sin']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-4: same device OK; original report not reproduced
+    ops=['Input', 'Tan', 'Input', 'ReduceMean', 'CastI64', 'Add', 'Sub', 'Floor', 'ReplicatePad', 'Add']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-5: same device OK; original report not reproduced
+    ops=['Input', 'GELU', 'Tan', 'Floor', 'ReLU', 'Max', 'Cos', 'CastBool', 'Div']
+    out dtypes=['torch.bool', 'torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-6: same device OK; original report not reproduced
+    ops=['Input', 'Atan', 'Cos', 'LeakyReLU', 'Sigmoid', 'LeakyReLU', 'ArgMin', 'Tril', 'ReduceMax']
+    out dtypes=['torch.float16', 'torch.int64']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-7: same device OK; original report not reproduced
+    ops=['Constant', 'Input', 'PTMatMul', 'Constant', 'Less', 'Input', 'Input', 'Concat4', 'Softmax', 'Flatten', 'GELU', 'Floor', 'Flatten']
+    out dtypes=['torch.bool', 'torch.float16']remark: czmao6brtw6g4mgujdtlkqdl3447dv56u75iuhf27ide22oxftvy.py:18:0: 30 instructions in function
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-8: same device OK; original report not reproduced
+    ops=['Constant', 'Slice', 'Input', 'LeakyReLU', 'Concat2', 'TorchReduceSum', 'Cos', 'ExpandLast3', 'Slice', 'ExpandLast3']
+    out dtypes=['torch.float16']
+--- bug-Symptom.INCONSISTENCY-Stage.VERIFICATION-9: same device OK; original report not reproduced
+    ops=['Input', 'Input', 'Add', 'Cos', 'MaxPool2d', 'Reshape', 'CastBool', 'Concat1', 'Neg', 'Round']
+    out dtypes=['torch.bool', 'torch.float16']
+summary: {'same_device_mismatch': 0, 'cross_device_only': 0, 'not_reproduced': 34, 'failed': 0}

@@ -1,0 +1,41 @@
+{
+ "id": 21,
+ "iter": 1204,
+ "seed": 71001417,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "noop_arith",
+  "view_select",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg1: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [-7, 3, 5, -5, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [8, -4, 2, 5, 7] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1[1:2, :, 1::2]\n    v2 = t1.select(2, 0)\n    v3 = t0[-1, :]\n    v4 = t1.unfold(1, 2, 3)\n    v5 = v4[:, :, 1:2, :]\n    v6 = v2.clone()\n    v7 = v3.sum(0, keepdim=False)\n    v8 = v4.contiguous()\n    v5.masked_fill_(v5 > -2, -4)\n    return (v5, v5, lst, dct)\n"
+}

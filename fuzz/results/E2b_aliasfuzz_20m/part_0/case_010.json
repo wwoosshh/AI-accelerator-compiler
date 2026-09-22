@@ -1,0 +1,49 @@
+{
+ "id": 10,
+ "iter": 544,
+ "seed": 72000760,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "side_effect",
+  "view_dtype",
+  "view_reshape",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 17/24 elems differ at [1, 2, 3, 5, 6]: eager [2, 4, -3, -3, 2] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg0: 17/24 elems differ at [1, 2, 3, 5, 6]: eager [2, 4, -3, -3, 2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [5, 4, -1, 7, 3] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [5, 4, -1, 7, 3] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t0[...]\n    v2 = t2.t()\n    lst.append(t1)\n    v3 = v1.unfold(1, 1, 4)\n    v4 = t2.view(torch.int32)\n    v5 = t1.reshape((6, 4))\n    v6 = t0.reshape((4, 6))\n    v4.add_(v4)\n    v3.fill_(2)\n    v7 = v4.contiguous()\n    return (t1, v7, v6, v2, t2, t1, lst, dct)\n"
+}

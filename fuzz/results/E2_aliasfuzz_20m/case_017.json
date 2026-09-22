@@ -1,0 +1,46 @@
+{
+ "id": 17,
+ "iter": 816,
+ "seed": 71001029,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "inplace_meta",
+  "noop_arith",
+  "view_slice",
+  "view_squeeze",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [992, 1007, 1001, 1004, 998] vs compiled [3992, 4007, 4001, 4004, 3998]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2992, 3007, 3001, 3004, 2998] vs compiled [3992, 4007, 4001, 4004, 3998]",
+  "probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2992, 3007, 3001, 3004, 2998] vs compiled [3992, 4007, 4001, 4004, 3998]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [998, 994, 1001, 1006, 994] vs compiled [3998, 3994, 4001, 4006, 3994]",
+  "probe.call1.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2998, 2994, 3001, 3006, 2994] vs compiled [3998, 3994, 4001, 4006, 3994]",
+  "probe.call1.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2998, 2994, 3001, 3006, 2994] vs compiled [3998, 3994, 4001, 4006, 3994]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1[2:-1:2, :]\n    v2 = v1.sum(0, keepdim=False)\n    v3 = v1.t()\n    t0.masked_fill_(t0 > 1, k)\n    v4 = v1.unsqueeze(1)\n    v5 = v4.transpose(2, 1)\n    v3.fill_(-2)\n    v5.transpose_(2, 1)\n    v6 = t1.unfold(0, 3, 2)\n    v7 = t1.clone()\n    return (v7, v2, t1, lst, dct)\n"
+}

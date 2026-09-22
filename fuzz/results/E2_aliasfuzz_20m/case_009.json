@@ -1,0 +1,47 @@
+{
+ "id": 9,
+ "iter": 386,
+ "seed": 71000599,
+ "status": "alias_diff",
+ "kinds": [
+  "inplace",
+  "noop_arith",
+  "view_reshape",
+  "view_slice",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2005.0, 2001.0, 2001.0, 1998.0, 2001.0] vs compiled [7005.0, 7001.0, 7001.0, 6998.0, 7001.0]",
+  "probe.call0.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5005.0, 5001.0, 5001.0, 4998.0, 5001.0] vs compiled [7005.0, 7001.0, 7001.0, 6998.0, 7001.0]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [5005.0, 5001.0, 5001.0, 4998.0, 5001.0] vs compiled [7005.0, 7001.0, 7001.0, 6998.0, 7001.0]",
+  "probe.call0.arg2: 23/23 elems differ at [0, 1, 2, 3, 4]: eager [5001.0, 5001.0, 4998.0, 5001.0, 4999.0] vs compiled [7001.0, 7001.0, 6998.0, 7001.0, 6999.0]",
+  "probe.call1.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [1993.0, 1998.0, 1998.0, 1998.0, 2001.0] vs compiled [6993.0, 6998.0, 6998.0, 6998.0, 7001.0]",
+  "probe.call1.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 4998.0, 4998.0, 4998.0, 5001.0] vs compiled [6993.0, 6998.0, 6998.0, 6998.0, 7001.0]",
+  "probe.call1.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 4998.0, 4998.0, 4998.0, 5001.0] vs compiled [6993.0, 6998.0, 6998.0, 6998.0, 7001.0]",
+  "probe.call1.arg2: 23/23 elems differ at [0, 1, 2, 3, 4]: eager [4998.0, 4998.0, 4998.0, 5001.0, 4998.0] vs compiled [6998.0, 6998.0, 6998.0, 7001.0, 6998.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1.unsqueeze(1)\n    t1.masked_fill_(t1 > 2, 0)\n    v2 = t1.transpose(1, 0)\n    v3 = v1[1, :, 4:-1:3]\n    v4 = t1.transpose(1, 0)\n    v5 = v2[3:6:3, 2:]\n    v6 = ta.flatten()\n    ta.clamp_(-2, 1)\n    v7 = t0.clone()\n    v3.masked_fill_(v3 > 2, 4)\n    return (v2, v7, v4, v4, t0, v2, lst, dct)\n"
+}

@@ -1,0 +1,43 @@
+def fn(t0, t1, t2, k, lst, dct):
+    t0.sub_(t2)
+    v1 = t2.view((24,))
+    v2 = t2.permute(1, 0)
+    v3 = v2[3, :]
+    v4 = t2.t()
+    v5 = v2.flatten()
+    v6 = t2[:, 2:3:3]
+    v4.masked_fill_(v4 > 0, 4)
+    return (v5, v1, v6, t0, v5, lst, dct)
+
+# dynamic=None aliased=None
+
+BackendCompilerFailed: backend='inductor' raised:
+ValueError: Cannot view a tensor with shape torch.Size([4, 6]) and strides (1, 4) as a tensor with shape (24,)!
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 2495, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1855, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3174, in _dispatch_impl
+    op_impl_out = op_impl(self, func, *args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_impls.py", line 267, in dispatch_to_op_implementations_dict
+    return op_implementations_dict[func](fake_mode, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_impls.py", line 1240, in _view_meta
+    torch._refs._reshape_view_helper(a, *shape, allow_copy=allow_copy),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_refs\__init__.py", line 4222, in _reshape_view_helper
+    return _reshape_view_helper_core_alg(a, shape, allow_copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_refs\__init__.py", line 4141, in _reshape_view_helper_core_alg
+    raise ValueError(msg)
+torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+ValueError: Cannot view a tensor with shape torch.Size([4, 6]) and strides (1, 4) as a tensor with shape (24,)!
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

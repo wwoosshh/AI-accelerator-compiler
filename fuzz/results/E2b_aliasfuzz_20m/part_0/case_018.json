@@ -1,0 +1,48 @@
+{
+ "id": 18,
+ "iter": 1249,
+ "seed": 72001465,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_arith",
+  "setitem"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [6.0, -1.0, 8.0, 6.0, -8.0] vs compiled [-7.0, -7.0, -8.0, -2.0, -2.0]",
+  "call0.out[1]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [6.0, -1.0, 8.0, 6.0, -8.0] vs compiled [-7.0, -7.0, -8.0, -2.0, -2.0]",
+  "call1.out[0]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [-5.0, -6.0, -2.0, 1.0, -3.0] vs compiled [-2.0, -2.0, 0.0, -1.0, -1.0]",
+  "call1.out[1]: 8/24 elems differ at [5, 11, 17, 18, 19]: eager [-5.0, -6.0, -2.0, 1.0, -3.0] vs compiled [-2.0, -2.0, 0.0, -1.0, -1.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t0.clone()\n    idx2 = torch.tensor([3], device=t0.device)\n    t0[idx2] = k\n    idx3 = torch.tensor([5], device=v1.device)\n    v1.index_copy_(1, idx3, t0.narrow(1, 0, 1))\n    return (v1, v1, t1, lst, dct)\n"
+}

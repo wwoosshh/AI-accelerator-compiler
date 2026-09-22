@@ -1,0 +1,50 @@
+{
+ "id": 2,
+ "iter": 86,
+ "seed": 71000299,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "setitem",
+  "view_dtype",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/48 elems differ at [0, 2, 4, 6, 8]: eager [6001, 6003, 6002, 6008, 6006] vs compiled [3001, 3003, 3002, 3008, 3006]",
+  "probe.call0.out[1]: 24/48 elems differ at [0, 2, 4, 6, 8]: eager [6001, 6003, 6002, 6008, 6006] vs compiled [3001, 3003, 3002, 3008, 3006]",
+  "probe.call0.out[2]: 40/40 elems differ at [0, 1, 2, 3, 4]: eager [12884901894001, 12884901894003, 12884901894002, 12884901894008, 12884901894006] vs compiled [3001, 3003, 3002, 3008, 3006]",
+  "probe.call1.out[0]: 24/48 elems differ at [0, 2, 4, 6, 8]: eager [6001, 5993, 5998, 6000, 5998] vs compiled [3001, 2993, 2998, 3000, 2998]",
+  "probe.call1.out[1]: 24/48 elems differ at [0, 2, 4, 6, 8]: eager [6001, 5993, 5998, 6000, 5998] vs compiled [3001, 2993, 2998, 3000, 2998]",
+  "probe.call1.out[2]: 40/40 elems differ at [0, 1, 2, 3, 4]: eager [12884901894001, 12880606926697, 12880606926702, 12884901894000, 12880606926702] vs compiled [3001, 2993, 2998, 3000, 2998]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t0.neg()\n    t0.add_(t0)\n    v2 = v1.view_as(v1)\n    v1.unsqueeze_(3)\n    t0[v2 > 1] = -4\n    v3 = v1.unfold(2, 5, 1)\n    v4 = v3.unsqueeze(1)\n    v5 = v2.view(torch.int32)\n    return (v5, v5, v4, lst, dct)\n"
+}
