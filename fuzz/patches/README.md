@@ -41,7 +41,18 @@ B, H1~H3, I 계열은 패치 적용 빌드의 재실행에서 나오지 않았�
 
 ## A 빌드 검증 (Docker)
 
-`docker_build_verify_A.sh` 가 `python:3.12-bookworm` 컨테이너에서 PyTorch main 을 얕게 클론해 0003 을 적용하고 CPU 전용(`USE_CUDA=0`, MKLDNN/분산/테스트 비활성, `MAX_JOBS=12`)으로 빌드한 뒤 `repro_unfold_zero.py`, `evidence_A_functionalize.py`, 공식 검증을 실행한다. 로그: `docker_build_A.log`. 결과는 이 절 아래에 기록.
+`docker_build_verify_A.sh` 가 `python:3.12-bookworm` 컨테이너에서 PyTorch main 을 얕게 클론해 0003 을 적용하고 CPU 전용(`USE_CUDA=0`, MKLDNN/분산/테스트 비활성)으로 빌드한 뒤 `repro_unfold_zero.py`, `evidence_A_functionalize.py`, 공식 검증을 실행한다.
+
+**2026-09-22 결과: 미완.** 패치 적용(`PATCH_APPLIED`)과 빌드 시작까지는 성공했으나 `MAX_JOBS=12` 로 15.5GB VM 에서 컴파일하던 중(1830 오브젝트 중 860 지점, `RegisterCPU_*.cpp` 대형 번역 단위) Docker Desktop 의 Linux VM 이 멈췄고, Docker Desktop 을 두 번 재시작해도 엔진(`docker-desktop` WSL 배포판)이 Stopped 상태로 복구되지 않았다. 재시도용 스크립트 `docker_build_verify_A_resume.sh` 는 `MAX_JOBS=6`, `--memory=13g` 로 조정되어 있고 클론이 남아 있으면 재사용한다.
+
+재실행 절차(Docker 가 정상일 때, 약 1~2시간):
+
+```bash
+MSYS_NO_PATHCONV=1 docker run -d --name pt-build-A2 --memory=13g -v "C:/Users/s0105/src/ptA:/work" -w /work python:3.12-bookworm bash /work/patches/docker_build_verify_A_resume.sh
+docker logs -f pt-build-A2     # BUILD_EXIT=0, IMPORT_OK, 이어서 repro 의 OK/MISMATCH 와 VERIFY_DONE 확인
+```
+
+대안: 포크에 브랜치를 올려 PyTorch CI 가 컴파일·테스트하게 하거나, Linux 머신에서 같은 스크립트를 실행.
 
 ## 적용·테스트 방법
 
