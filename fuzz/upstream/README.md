@@ -40,5 +40,7 @@ gh pr create --repo pytorch/pytorch --base main --head wwoosshh:fix/functionaliz
 ```
 
 3. 첫 PR 뒤 CLA 봇 링크에서 서명. Inductor 테스트 워크플로는 리뷰어가 `ciflow/inductor` 라벨을 붙여야 돌아가므로 댓글로 요청.
+   - **주의**: PyTorch 의 EasyCLA 는 커밋의 `Co-authored-by:` 트레일러에 적힌 사람도 CLA 서명자로 확인한다. GitHub 계정에 대응하지 않는 `Co-Authored-By: Claude ... <noreply@anthropic.com>` 같은 줄이 있으면 검사가 실패하므로 PyTorch 용 커밋에는 넣지 않는다(2026-09-22 에 5개 브랜치 모두 제거·강제 푸시하고 `/easycla` 재요청).
+   - `release notes:` 라벨은 `@pytorchbot label "release notes: inductor"` 같은 댓글로 누구나 요청 가능(AOTAutograd/functionalization 은 `release notes: composability`).
 
 4. 리뷰 반영은 같은 브랜치에 커밋 추가 후 `git push fork <branch>`. main 과 충돌 시 `git fetch origin main && git rebase origin/main && git push -f fork <branch>` (클론이 얕으므로 필요하면 `git fetch --unshallow origin` 먼저).
