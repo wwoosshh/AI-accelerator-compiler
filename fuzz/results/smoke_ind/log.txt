@@ -1,0 +1,41 @@
+torch 2.14.0+cu130 | backend inductor | device cuda | seed 1 | dtype mix | start 2026-09-22 09:26:04
+progress iter=25 {'invalid': 3, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 22} elapsed=14s last=0.3s
+progress iter=50 {'invalid': 7, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 42} elapsed=25s last=0.4s
+[iter 60] alias_diff seed=1000063 dynamic=None aliased=None kinds=aux,functional,index_inplace,noop_arith,setitem,view_squeeze
+       probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4, -2, -4, -1, 4] vs compiled [3004, 2998, 2996, 2999, 3004]
+       probe.call1.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-1, -6, -1, 4, 4] vs compiled [2999, 2994, 2999, 3004, 3004]
+progress iter=75 {'invalid': 10, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 1, 'pass': 63} elapsed=34s last=0.6s
+[iter 76] alias_diff seed=1000079 dynamic=True aliased=None kinds=aux,functional,index_inplace,noop_arith,scatter_fn,view_transpose
+       probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [993.0, 1000.0, 1001.0, 995.0, 998.0] vs compiled [5993.0, 6000.0, 6001.0, 5995.0, 5998.0]
+       probe.call0.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 5000.0, 5001.0, 4995.0, 4998.0] vs compiled [5993.0, 6000.0, 6001.0, 5995.0, 5998.0]
+       probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 5000.0, 5001.0, 4995.0, 4998.0] vs compiled [5993.0, 6000.0, 6001.0, 5995.0, 5998.0]
+       probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [994.0, 1008.0, 1006.0, 1006.0, 994.0] vs compiled [5994.0, 6008.0, 6006.0, 6006.0, 5994.0]
+[iter 89] alias_diff seed=1000092 dynamic=True aliased=('ta', 't0[1:]') kinds=aux,index_inplace,noop_arith,view_slice
+       probe.call0.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -7, 5, 8, -1] vs compiled [4993, 4993, 5005, 5008, 4999]
+       probe.call0.arg3: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [-7, -7, 5, 8, -1] vs compiled [4993, 4993, 5005, 5008, 4999]
+       probe.call1.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [7, 6, -4, 4, -7] vs compiled [5007, 5006, 4996, 5004, 4993]
+       probe.call1.arg3: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [7, 6, -4, 4, -7] vs compiled [5007, 5006, 4996, 5004, 4993]
+[iter 95] value_diff seed=1000098 dynamic=True aliased=('ta', 't0[1:]') kinds=aux,functional,index_inplace,inplace,setitem,view_unfold
+       call0.out[0]: 14/24 elems differ at [4, 5, 6, 8, 9]: eager [6, 1, 4, 7, 6] vs compiled [0, 0, 0, 0, 0]
+       call0.out[1]: 16/24 elems differ at [1, 2, 3, 4, 7]: eager [5, 7, 1, -5, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.arg0: 14/24 elems differ at [4, 5, 6, 8, 9]: eager [6, 1, 4, 7, 6] vs compiled [0, 0, 0, 0, 0]
+       call0.arg2: 16/24 elems differ at [1, 2, 3, 4, 7]: eager [5, 7, 1, -5, -2] vs compiled [0, 0, 0, 0, 0]
+progress iter=100 {'invalid': 12, 'compile_error': 1, 'value_diff': 1, 'alias_diff': 3, 'pass': 83} elapsed=47s last=0.1s
+[iter 111] alias_diff seed=1000114 dynamic=True aliased=None kinds=functional,setitem,view_reshape
+       probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [7, 8, 0, 2, 1] vs compiled [1007, 1008, 1000, 1002, 1001]
+       probe.call1.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4, -7, -4, 8, -1] vs compiled [1004, 993, 996, 1008, 999]
+[iter 117] alias_diff seed=1000120 dynamic=None aliased=('ta', 't0[1:]') kinds=noop_alias,noop_arith,scatter_fn,view_unfold
+       probe.call0.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-6, 7, -6, 3, -2] vs compiled [994, 1007, 994, 1003, 998]
+       probe.call1.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-5, -1, -7, 6, -5] vs compiled [995, 999, 993, 1006, 995]
+progress iter=125 {'invalid': 18, 'compile_error': 1, 'value_diff': 1, 'alias_diff': 5, 'pass': 100} elapsed=59s last=1.1s
+progress iter=150 {'invalid': 20, 'compile_error': 1, 'value_diff': 1, 'alias_diff': 5, 'pass': 123} elapsed=68s last=0.1s
+[iter 167] alias_diff seed=1000170 dynamic=None aliased=None kinds=noop_arith,setitem,side_effect,view_dtype,view_reshape,view_unfold
+       probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-2, 6, 2, 0, 5] vs compiled [998, 1006, 1002, 1000, 1005]
+       probe.call1.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [6, 0, -1, 6, 5] vs compiled [1006, 1000, 999, 1006, 1005]
+[iter 171] alias_diff seed=1000174 dynamic=None aliased=None kinds=functional,inplace,noop_arith,side_effect,view_dtype,view_slice,view_transpose
+       probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [12884901892001, 12884901892001, 12884901892001, 12884901891999, 12884901892001] vs compiled [1001, 1001, 1001, 999, 1001]
+       probe.call0.out[2]: 34/48 elems differ at [0, 2, 4, 6, 7]: eager [4001, 4001, 4001, 3999, 3000] vs compiled [3001, 3001, 3001, 2999, 2999]
+       probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [12884901892001, 12884901892000, 12884901891999, 12884901891999, 12884901892001] vs compiled [1001, 1000, 999, 999, 1001]
+       probe.call1.out[2]: 35/48 elems differ at [0, 2, 4, 5, 6]: eager [4001, 4000, 3999, 3000, 3999] vs compiled [3001, 3000, 2999, 2999, 2999]
+DONE iterations=172 stats={'invalid': 23, 'compile_error': 1, 'value_diff': 1, 'alias_diff': 7, 'pass': 140} cases=8 elapsed=75s
+summary written

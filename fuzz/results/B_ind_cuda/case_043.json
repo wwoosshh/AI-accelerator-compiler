@@ -1,0 +1,55 @@
+{
+ "id": 43,
+ "iter": 1987,
+ "seed": 21002050,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "side_effect",
+  "view_reshape",
+  "view_select",
+  "view_slice",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[3]['key5']: 1/1 elems differ at [0]: eager [-2] vs compiled [-6]",
+  "call0.arg6['key5']: 1/1 elems differ at [0]: eager [-2] vs compiled [-6]",
+  "call1.out[3]['key5']: 1/1 elems differ at [0]: eager [-1] vs compiled [5]",
+  "call1.arg6['key5']: 1/1 elems differ at [0]: eager [-1] vs compiled [5]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t0.reshape((24,))\n    v2 = v1.unsqueeze(0)\n    v3 = ta[1, 0:1, 4:5]\n    v4 = ta.transpose(0, 2)\n    v3.fill_(k)\n    dct['key5'] = v3\n    v6 = v2 * 2\n    v7 = v3.select(0, 0)\n    v7.fill_(k)\n    v8 = v3[:, :]\n    return (v2, v6, lst, dct)\n"
+}

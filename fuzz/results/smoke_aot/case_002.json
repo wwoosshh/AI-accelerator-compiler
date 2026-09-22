@@ -1,0 +1,26 @@
+{
+ "id": 2,
+ "iter": 174,
+ "seed": 1000177,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_expand",
+  "view_reshape",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 10,
+ "diffs": [
+  "call0.out[1]: 1/2 elems differ at [0]: eager [4.0] vs compiled [3.0]",
+  "call1.out[1]: 2/2 elems differ at [0, 1]: eager [3.0, 3.0] vs compiled [6.0, 6.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = ta.flatten()\n    v2 = t1.reshape(t1.shape)\n    t0.clamp_(0, 3)\n    t0.sub_(-3)\n    v3 = t0.transpose(2, 0)\n    v4 = ta[2::2, 2::3, :]\n    v5 = v4[:, :, :]\n    v1[-11] = 2\n    ta.sub_(0)\n    v6 = v4.unsqueeze(0).expand(2, 1, 1, 2)\n    return (ta, v4, t1, lst, dct)\n"
+}

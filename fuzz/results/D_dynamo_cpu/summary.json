@@ -1,0 +1,15 @@
+{
+ "torch": "2.14.0+cu130",
+ "backend": "eager",
+ "device": "cpu",
+ "iterations": 8951,
+ "stats": {
+  "invalid": 14,
+  "compile_error": 9,
+  "value_diff": 0,
+  "alias_diff": 0,
+  "pass": 8928
+ },
+ "n_cases": 0,
+ "elapsed_s": 480.0024914741516
+}

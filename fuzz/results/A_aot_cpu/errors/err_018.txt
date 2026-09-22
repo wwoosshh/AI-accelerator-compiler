@@ -1,0 +1,42 @@
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2.select(0, 4)
+    v2 = v1[3:4:3]
+    v1[v1 > -2] = 3
+    t2.unsqueeze_(0)
+    idx3 = torch.tensor([0], device=v1.device)
+    v1[idx3] += -3
+    v4 = t2.clone()
+    v5 = v2.unsqueeze(0).expand(2, 1)
+    v6 = v5.neg()
+    return (t0, v5, t0, lst, dct)
+
+# dynamic=True aliased=None
+
+RuntimeError: expand(torch.DoubleTensor{[1, 1, 6, 4]}, size=[2, 1]): the number of sizes provided (2) must be greater or equal to the number of dimensions in the tensor (4)
+ine 751, in evaluate
+    C = run_world(prog, device, seed, backend, calls)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 657, in run_world
+    out = fn(*args)
+          ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1261, in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "<aliasfuzz>", line 5, in fn
+  File "<aliasfuzz>", line 5, in torch_dynamo_resume_in_fn_at_5
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1289, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(synthetic_base_wrapper)", line 11, in _synthetic_base_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1189, in runtime_wrapper
+    result = _codegen_runtime_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(runtime_wrapper_orchestration)", line 20, in _runtime_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(output_alias_wrapper)", line 3, in _alias_fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\functional_utils.py", line 343, in gen_alias_from_base
+    out = _functionalization.apply_view_meta_sequence(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: expand(torch.DoubleTensor{[1, 1, 6, 4]}, size=[2, 1]): the number of sizes provided (2) must be greater or equal to the number of dimensions in the tensor (4)

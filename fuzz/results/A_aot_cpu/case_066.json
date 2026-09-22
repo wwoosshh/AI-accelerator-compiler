@@ -1,0 +1,51 @@
+{
+ "id": 66,
+ "iter": 7637,
+ "seed": 11007670,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_arith",
+  "scatter_fn",
+  "setitem",
+  "view_expand",
+  "view_reshape",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.view(-1)"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 9/24 elems differ at [14, 15, 16, 17, 19]: eager [8, -14, -2, 14, 12] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 9/24 elems differ at [14, 15, 16, 17, 18]: eager [2, -14, 16, 2, 10] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = ta.clone()\n    v2 = torch.slice_scatter(ta, t0[15:19:2], dim=0, start=15, end=19, step=2)\n    t2[t2 > -1] = -5\n    v3 = v1[:]\n    v4 = v1.unsqueeze(0).expand(3, 24)\n    v5 = v1.unfold(0, 13, 14)\n    v3.add_(t0)\n    v6 = t1.view((4, 3, 2))\n    v5[0] = k\n    return (v6, ta, v1, lst, dct)\n"
+}

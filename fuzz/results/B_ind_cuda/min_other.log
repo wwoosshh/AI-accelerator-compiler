@@ -1,0 +1,56 @@
+== results/B_ind_cuda/case_001.py | torch 2.14.0+cu130 | inductor/cuda | initial status: value_diff (9 stmts)
+remark: cqlbjdtpwurpkgsguwcbhitjzubcg4vsz2oxtbbe3cajlqa6fpj2.py:18:0: 21 instructions in function
+remark: cmzfvybuvdjg74qg5375fluskd6fof2733tchp7hyptlml3dtqoj.py:18:0: 18 instructions in function
+remark: ctetniqvsorraihfm6gz53lj66li7shxfd6d4vp4x4z3qi6l5tkn.py:18:0: 14 instructions in function
+remark: cgvflhl4oiurfnudbd5ciazvui6plffmokuxj7qa37voaeztq4cm.py:18:0: 14 instructions in function
+remark: c7fwuvjyjtvek7uyuc2xvecc4znkmlagwgdbry55lk5ntrbqrbur.py:18:0: 42 instructions in function
+remark: cejwznpe2rzhgywwjmrlawimdivl46w2trb32zkejhhhwjff6dvh.py:18:0: 18 instructions in function
+remark: c7um247phtik6dlcotx2qm7ybugabnkmz7u3lttgmzrgga5y63d2.py:18:0: 42 instructions in function
+remark: crnjzezmidmtwfh7jaqgyosliltxh6sh3m6ywe4rghyo2fw72z2d.py:18:0: 15 instructions in function
+remark: cxs5asbt77y5tevi3rl666uk7vl7ch6ndb3jty3sykmlivhd6hqh.py:18:0: 17 instructions in function
+remark: ceqzdz5beugj46yonutv3sk6hpk4537lktdeqtn4uht3fu7vxlof.py:18:0: 14 instructions in function
+remark: c2m3gcrezhg3psudnb5k3k46j5a74fivimqmzluoko33uetmrlep.py:18:0: 13 instructions in function
+remark: cjxb3kx7lj6vz63q2amk4a26byv5nfgtnmwxotgw5l4h67rhsrza.py:18:0: 15 instructions in function
+remark: cgufkiq4sbbl3nkx5cpdq7lje5y56ggdwidi5nh7yagmjpjgbmo2.py:18:0: 14 instructions in function
+remark: chepwoarn2245ljwsvj7vfncs2ggvqxrxioaubpkvmk33bvcw5tb.py:18:0: 14 instructions in function
+   -> 4 stmts, status=value_diff, checks=23, dynamic=None aliased=None  saved results/B_ind_cuda/case_001.min.py
+def fn(t0, t1, k, lst, dct):
+    t0[:, :, :] += 5
+    idx1 = torch.tensor([2], device=t0.device)
+    t0.index_fill_(2, idx1, -1)
+    t0[t0 > 0] = 2
+    return (t1, lst, dct)
+
+       call0.arg0: 3/24 elems differ at [2, 8, 20]: eager [-1, -1, -1] vs compiled [2, 2, 2]
+       call1.arg0: 4/24 elems differ at [2, 8, 14, 20]: eager [-1, -1, -1, -1] vs compiled [2, -3, 2, 2]
+== results/B_ind_cuda/case_006.py | torch 2.14.0+cu130 | inductor/cuda | initial status: value_diff (10 stmts)
+remark: cqi7qxrc5wi7ufupts6cierwqqqslhbckfakyzra5nnut62yzs3l.py:18:0: 23 instructions in function
+remark: cgnqzt65333yuyoksjnucuvn54pef6ps7jmkkagl5vli7qygthyp.py:18:0: 22 instructions in function
+remark: ct5xwvgc4hze3dgmzobcjoyztzkfmq4k5vahe25etbov4oeccri3.py:18:0: 17 instructions in function
+remark: c4h3uafgixub76l4nkdsffd4huvchhlnmcm42fhrs2xatj7sxdbu.py:18:0: 25 instructions in function
+remark: ckyrjg7vbeskgjyg74jrifncvebwlt5gacmf6u6hz7o6ubgdvoat.py:18:0: 19 instructions in function
+remark: ci6lmp34juoxi2vbqlticv2daqpuuq52teakn35y3fjz72va5rpa.py:18:0: 13 instructions in function
+remark: cbvoadyo4z4bzkpnex5xxwifo2xjghygycgtyejr5d5gxxavmjx2.py:18:0: 15 instructions in function
+remark: cbu3e4p2nesdplaz7f7ncml7itrdumlj5n3nzeuzu6q76iysgzf4.py:18:0: 17 instructions in function
+remark: cakqxzhkk4joru2yf56mvvp6rld3dxett4dcij6ys7i6h25nwj73.py:18:0: 17 instructions in function
+remark: c7qaxsokj3hattdfe4lvnz4paif2ev26jsetjwonidpas3ckuj5f.py:18:0: 28 instructions in function
+remark: cc2ngdwmihvkufathyofso7pmnyv5h3ptel2rzqzeyogwv54zdgp.py:18:0: 19 instructions in function
+remark: cp5x7sa4w3l3rl7bu64cemjiev52njnko53dkzdr72pqrfr2ulwe.py:18:0: 29 instructions in function
+remark: cz6j5xxqdzpu2pai7zfuq4x3cfl5e2vdp4ptdfoczg567m7d5rno.py:18:0: 28 instructions in function
+remark: ccklqcuntogyrgycnrkei6nuzs3m6gqs26entpug2cdpb2puy3po.py:18:0: 14 instructions in function
+remark: cyxqsqej6sindfoxiai323mb6o6segeclkdtxboaykhwawzfpygf.py:18:0: 29 instructions in function
+remark: c6p35xckp4y6cethhhlc4fc7tgu6cezm7my3qlnvs2gceaouwovg.py:18:0: 16 instructions in function
+remark: czirymm6g4thbejm6xll75t3hjlvkqrcrturmzdhqlkaus2rolkx.py:18:0: 13 instructions in function
+remark: c3kdhhjf2xxm6gs2iniuc4ee7vsc7by4xz5pfgedym6qf5ymkrgn.py:18:0: 15 instructions in function
+remark: cjhrcw2qe2fi7wrrfbuppyunswfniupju4hsu26payr6r7vwdabl.py:18:0: 17 instructions in function
+   -> 5 stmts, status=value_diff, checks=25, dynamic=None aliased=None  saved results/B_ind_cuda/case_006.min.py
+def fn(t0, t1, k, lst, dct):
+    t1.neg_()
+    v2 = t0.permute(0, 1, 2)
+    idx4 = torch.tensor([0, 1], device=t1.device)
+    t1.index_fill_(1, idx4, k)
+    t1[t1 > -2] = k
+    return (v2, lst, dct)
+
+       call0.arg1: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [-7.0, -4.0, -6.0, -6.0]
+       call1.arg1: 7/24 elems differ at [1, 2, 3, 6, 14]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [-8.0, -7.0, -5.0, -3.0, -5.0]

@@ -1,0 +1,19 @@
+== results/smoke_ind/case_008.py | torch 2.14.0+cu130 | inductor/cuda | initial status: alias_diff (10 stmts)
+remark: cmej2xbhht6f4pbflokl77kw3kiznqc67hiv6bvy4i4lhihy4ot5.py:18:0: 16 instructions in function
+remark: cb3chagpcupawklehnim37shufuekuozvqlopxfbci5keblohwpi.py:18:0: 19 instructions in function
+remark: curu7juhq6b2nfc7dg4tqwxcipeyzfr3ubitdsz3epddty5ejke4.py:18:0: 23 instructions in function
+remark: cj3xcmhc54wzjg6rk2eipozjjjaxv7w2yhuer7ujq4w773k7oelq.py:18:0: 16 instructions in function
+remark: cjcrozf7uor42ikytwiktg5wm5kfbbpbz2mka4espkweyj5qupk5.py:18:0: 21 instructions in function
+remark: cnm5gixdifnds6mqheo3dko33mxy5saoegrujts2mlxshtmfsygu.py:18:0: 21 instructions in function
+   -> 4 stmts, status=alias_diff, checks=28, dynamic=None aliased=None  saved results/smoke_ind/case_008.min.py
+def fn(t0, t1, k, lst, dct):
+    v1 = t0.clone()
+    v4 = v1.view(torch.int32)
+    v5 = v4.permute(0, 1)
+    v5.clamp_(-1, 1)
+    return (v1, v5, lst, dct)
+
+       probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8589934594999, 8589934594999, 8589934594999, 8589934595001, 8589934594999] vs compiled [999, 999, 999, 1001, 999]
+       probe.call0.out[1]: 38/48 elems differ at [0, 1, 2, 3, 4]: eager [2999, 2000, 2999, 2000, 2999] vs compiled [1999, 1999, 1999, 1999, 1999]
+       probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8589934594999, 8589934595000, 8589934595001, 8589934595001, 8589934594999] vs compiled [999, 1000, 1001, 1001, 999]
+       probe.call1.out[1]: 36/48 elems differ at [0, 1, 2, 4, 6]: eager [2999, 2000, 3000, 3001, 3001] vs compiled [1999, 1999, 2000, 2001, 2001]

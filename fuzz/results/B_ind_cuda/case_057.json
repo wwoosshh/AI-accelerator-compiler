@@ -1,0 +1,51 @@
+{
+ "id": 57,
+ "iter": 2596,
+ "seed": 21002659,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_arith"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 3,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [6003, 6003, 6003, 6003, 6003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3003, 3003, 3003, 3003, 3003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call0.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [6003, 6003, 6003, 6003, 6003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3003, 3003, 3003, 3003, 3003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [6003, 6003, 6003, 6003, 6003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call1.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3003, 3003, 3003, 3003, 3003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call1.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [6003, 6003, 6003, 6003, 6003] vs compiled [9003, 9003, 9003, 9003, 9003]",
+  "probe.call1.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3003, 3003, 3003, 3003, 3003] vs compiled [9003, 9003, 9003, 9003, 9003]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    idx1 = torch.tensor([1, 0, 3], device=t0.device)\n    t0.index_fill_(0, idx1, 3)\n    v2 = t0.clone()\n    return (v2, t2, t0, t2, v2, lst, dct)\n"
+}

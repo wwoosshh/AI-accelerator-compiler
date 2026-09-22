@@ -1,0 +1,48 @@
+{
+ "id": 26,
+ "iter": 1156,
+ "seed": 21001219,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "noop_alias",
+  "noop_arith",
+  "setitem",
+  "view_reshape",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8.0, 11.0, -2.0, 6.0, 9.0] vs compiled [3.0, 3.0, 3.0, 1.0, -3.0]",
+  "call1.out[2]: 22/24 elems differ at [0, 2, 3, 4, 5]: eager [-6.0, 8.0, -5.0, 3.0, 15.0] vs compiled [-5.0, -2.0, 0.0, 7.0, 4.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.clone()\n    v2 = torch.cat([t1, v1], 0)\n    t1[-4] = v1[2]\n    v3 = v2.reshape(v2.shape)\n    v4 = v2.permute(2, 1, 0)\n    v5 = v1.reshape((2, 12))\n    idx6 = torch.tensor([1, 0], device=v1.device)\n    v1.index_add_(2, idx6, t1.narrow(2, 0, 2))\n    return (v3, v2, v1, lst, dct)\n"
+}

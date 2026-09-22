@@ -1,0 +1,52 @@
+{
+ "id": 76,
+ "iter": 8061,
+ "seed": 11008094,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "view_select",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0"
+ ],
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[2]: 4/4 elems differ at [0, 1, 2, 3]: eager [39.0, 26.0, -4.0, -10.0] vs compiled [30.0, 16.0, 6.0, -4.0]",
+  "call0.arg0: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [2.0, 7.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg3: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [2.0, 7.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[2]: 4/4 elems differ at [0, 1, 2, 3]: eager [-24.0, 16.0, 1.0, -2.0] vs compiled [-36.0, 6.0, 12.0, 6.0]",
+  "call1.arg0: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [6.0, 6.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg3: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [6.0, 6.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = ta.unfold(1, 4, 6)\n    v1.add_(v1)\n    v2 = ta.permute(1, 0)\n    v3 = v2.flip(0)\n    v4 = v1.narrow(2, 1, 1)\n    v5 = t1.t()\n    v6 = v2.sum(0, keepdim=False)\n    v5.add_(0)\n    return (t2, t1, v6, v5, t1, t2, lst, dct)\n"
+}

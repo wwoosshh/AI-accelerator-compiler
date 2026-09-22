@@ -1,0 +1,44 @@
+{
+ "id": 33,
+ "iter": 1563,
+ "seed": 21001626,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "setitem",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 18/24 elems differ at [1, 2, 3, 4, 5]: eager [6, -5, -7, 1, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 18/24 elems differ at [1, 2, 3, 4, 5]: eager [6, -5, -7, 1, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 16/24 elems differ at [1, 2, 3, 4, 5]: eager [2, 7, -7, 4, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 16/24 elems differ at [1, 2, 3, 4, 5]: eager [2, 7, -7, 4, -7] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1.unfold(1, 1, 7)\n    v2 = v1[-3, :, :]\n    v2[1:, :] = v2[:-1, :].clone()\n    ta.mul_(0)\n    idx3 = torch.tensor([0], device=v2.device)\n    v2.index_fill_(1, idx3, -5)\n    v4 = t0.unfold(0, 2, 1)\n    ta[2] = 4\n    idx5 = torch.tensor([2, 0, 1], device=v1.device)\n    v1[idx5] += 5\n    return (t0, v4, t1, t0, lst, dct)\n"
+}

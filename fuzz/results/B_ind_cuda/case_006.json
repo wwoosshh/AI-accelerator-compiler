@@ -1,0 +1,48 @@
+{
+ "id": 6,
+ "iter": 283,
+ "seed": 21000346,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "inplace_meta",
+  "setitem",
+  "view_reshape",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, 8.0, 7.0, -6.0]",
+  "call0.out[1]: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, 8.0, 7.0, -6.0]",
+  "call0.out[2]: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, 8.0, 7.0, -6.0]",
+  "call0.out[3]: 4/24 elems differ at [9, 13, 15, 18]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, -6.0, 8.0, 7.0]",
+  "call0.out[4]: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, 8.0, 7.0, -6.0]",
+  "call0.arg0: 4/24 elems differ at [9, 13, 15, 18]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [5.0, -6.0, 8.0, 7.0]",
+  "call0.arg1: 4/24 elems differ at [3, 13, 14, 16]: eager [2.0, 2.0, 2.0, 2.0] vs compiled [-7.0, -4.0, -6.0, -6.0]",
+  "call1.arg1: 7/24 elems differ at [1, 2, 3, 6, 14]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [-8.0, -7.0, -5.0, -3.0, -5.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t1.neg_()\n    v1 = t0.reshape((4, 6))\n    v2 = t0.permute(0, 1, 2)\n    idx3 = torch.tensor([0, 3, 2], device=v1.device)\n    v1[idx3] += k\n    idx4 = torch.tensor([0, 1], device=t1.device)\n    t1.index_fill_(1, idx4, k)\n    t1[t1 > -2] = k\n    v2[t1 > -1] = k\n    t0.transpose_(1, 2)\n    return (v2, v2, v1, t0, v2, lst, dct)\n"
+}

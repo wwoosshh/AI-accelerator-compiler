@@ -1,0 +1,48 @@
+def fn(t0, t1, t2, k, lst, dct):
+    t0[t0 > -1] = 5
+    v1 = t2.unfold(0, 4, 3)
+    v2 = t2.permute(1, 2, 0)
+    v3 = v2.transpose(0, 1)
+    v3.masked_fill_(v3 > -1, 0)
+    v4 = t2.view(torch.int32)
+    v5 = v1.permute(0, 1, 3, 2)
+    return (v4, v1, v2, t1, lst, dct)
+
+# dynamic=None aliased=None
+
+BackendCompilerFailed: backend='aot_eager' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 12
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+orch._functionalize_sync(t.elem)  # type: ignore[attr-defined]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_compile.py", line 54, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\utils\_stats.py", line 29, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1707, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 2495, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1855, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+    r = func(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+torch._dynamo.exc.BackendCompilerFailed: backend='aot_eager' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 12
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

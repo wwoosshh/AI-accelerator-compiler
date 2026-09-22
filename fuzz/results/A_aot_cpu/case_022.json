@@ -1,0 +1,43 @@
+{
+ "id": 22,
+ "iter": 2434,
+ "seed": 11002467,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "view_select",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 1/2 elems differ at [1]: eager [4] vs compiled [0]",
+  "call0.out[1]: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[2]: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 1/2 elems differ at [1]: eager [5] vs compiled [0]",
+  "call1.out[1]: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, -7, -6, -4, 5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, -7, -6, -4, 5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, -7, -6, -4, 5] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.unfold(0, 1, 2)\n    v2 = t1.narrow(1, 11, 1)\n    v1.fill_(k)\n    v4 = v2.transpose(0, 1)\n    v5 = v2.abs()\n    return (v5, t1, t1, lst, dct)\n"
+}

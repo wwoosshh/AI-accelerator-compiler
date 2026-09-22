@@ -1,0 +1,42 @@
+{
+ "id": 37,
+ "iter": 1742,
+ "seed": 21001805,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "scatter_fn",
+  "setitem",
+  "side_effect",
+  "view_select",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[1]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-8.0, 6.0, 5.0, 0.0, 1.0] vs compiled [1.0, -2.0, -5.0, -1.0, -6.0]",
+  "call1.out[1]: 11/24 elems differ at [12, 13, 14, 16, 17]: eager [-4.0, 7.0, 5.0, 1.0, 1.0] vs compiled [8.0, -3.0, 4.0, -1.0, 2.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = torch.slice_scatter(t0, t1[2:3:1, :, :], dim=0, start=2, end=3, step=1)\n    v2 = v1.cumsum(1)\n    idx3 = torch.tensor([3], device=t0.device)\n    t0[idx3] = k\n    lst.append(t0)\n    v4 = t1[:, 1:, 0:2:3]\n    v4[3:4, 1:2, :] += 0\n    v5 = t0.narrow(0, 0, 2)\n    v6 = v2.cumsum(0)\n    return (v6, v1, t0, v5, t1, lst, dct)\n"
+}

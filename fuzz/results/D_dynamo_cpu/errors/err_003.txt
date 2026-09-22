@@ -1,0 +1,46 @@
+def fn(t0, t1, ta, k, lst, dct):
+    v1 = t0.reshape((6, 4))
+    v2 = t0.contiguous()
+    lst.append(v2)
+    v2.transpose_(0, 1)
+    t1.masked_fill_(v2 > -2, -4)
+    v3 = t1.flatten()
+    v4 = v1.unfold(1, 3, 2)
+    v1[:, 2:3:2] = t1[:, 2:3:2]
+    v1.masked_fill_(t1 > 1, 4)
+    idx5 = torch.tensor([0], device=t1.device)
+    t1.index_fill_(0, idx5, 3)
+    return (v2, t0, v2, lst, dct)
+
+# dynamic=True aliased=('ta', 't0')
+
+AssertionError: Guard failed on the same frame it was created. This is a bug - please create an issue.Guard fail reason: 0/0: t1.size()[1] == t0.size()[1]  # duck sizing added this equality because these variables had the same size 4 (to avoid this specialization, set torch.fx.experimental._config.use_duck_shape = False)
+
+vs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2649, in __call__
+    result = self._torchdynamo_orig_backend(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2333, in __call__
+    result = self._inner_convert(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 778, in __call__
+    result = _compile(
+             ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2116, in _compile
+    guarded_code, tracer_output = compile_inner(code, one_graph, hooks)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_utils_internal.py", line 114, in wrapper_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1701, in compile_inner
+    result = _compile_inner(code, one_graph, hooks)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1917, in _compile_inner
+    check_fn = dynamo_output.build_guards(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1013, in build_guards
+    return CheckFunctionManager(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 4717, in __init__
+    raise AssertionError(
+AssertionError: Guard failed on the same frame it was created. This is a bug - please create an issue.Guard fail reason: 0/0: t1.size()[1] == t0.size()[1]  # duck sizing added this equality because these variables had the same size 4 (to avoid this specialization, set torch.fx.experimental._config.use_duck_shape = False)
+

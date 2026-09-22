@@ -1,0 +1,43 @@
+{
+ "id": 61,
+ "iter": 7048,
+ "seed": 11007081,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "view_select",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[3]: 13/32 elems differ at [18, 19, 21, 22, 23]: eager [8, -1, -1, -1, -2] vs compiled [5, 0, 0, 0, 0]",
+  "call0.arg0: 10/24 elems differ at [13, 15, 16, 17, 18]: eager [8, -1, -1, -2, -3] vs compiled [5, 0, 0, 0, 5]",
+  "call1.out[3]: 16/32 elems differ at [16, 17, 18, 19, 20]: eager [-1, 5, 12, -4, 5] vs compiled [5, 0, 5, 0, 0]",
+  "call1.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, 12, 5, -4, -6] vs compiled [5, 5, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0.masked_fill_(t1 > 2, 5)\n    t0.copy_(t1)\n    v1 = t0.unfold(0, 2, 3)\n    v2 = torch.ops.aten.alias(t0)\n    idx3 = torch.tensor([1], device=v1.device)\n    v1.index_fill_(2, idx3, 4)\n    v4 = t0.select(1, 0)\n    v4.add_(5)\n    v5 = v2.unfold(1, 2, 1)\n    return (v1, v1, v1, v5, v1, lst, dct)\n"
+}

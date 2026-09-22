@@ -1,0 +1,49 @@
+{
+ "id": 31,
+ "iter": 1400,
+ "seed": 21001463,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 23/24 elems differ at [1, 2, 3, 4, 5]: eager [-3, 7, -4, -7, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 23/24 elems differ at [1, 2, 3, 4, 5]: eager [-3, 7, -4, -7, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 22/24 elems differ at [0, 1, 2, 4, 5]: eager [-8, 8, -7, 8, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 22/24 elems differ at [0, 1, 2, 4, 5]: eager [-8, 8, -7, 8, -1] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    ta.fill_(2)\n    v1 = t0[0:3:2, :]\n    v2 = torch.diagonal_scatter(ta, v1.diagonal())\n    v3 = v1.view_as(v1)\n    v4 = torch.slice_scatter(t2, t0[1:2:2, :], dim=0, start=1, end=2, step=2)\n    t2.zero_()\n    v5 = v2[:]\n    v4.add_(t2)\n    return (v1, t2, v4, v4, v1, lst, dct)\n"
+}

@@ -1,0 +1,51 @@
+{
+ "id": 46,
+ "iter": 2062,
+ "seed": 21002125,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "view_slice"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[1]: 2/24 elems differ at [1, 8]: eager [2002, 3002] vs compiled [3002, 2002]",
+  "probe.call0.arg0: 2/24 elems differ at [1, 8]: eager [2002, 3002] vs compiled [3002, 2002]",
+  "probe.call0.arg3: 2/23 elems differ at [0, 7]: eager [2002, 3002] vs compiled [3002, 2002]",
+  "probe.call1.out[1]: 2/24 elems differ at [1, 8]: eager [2002, 3002] vs compiled [3002, 2002]",
+  "probe.call1.arg0: 2/24 elems differ at [1, 8]: eager [2002, 3002] vs compiled [3002, 2002]",
+  "probe.call1.arg3: 2/23 elems differ at [0, 7]: eager [2002, 3002] vs compiled [3002, 2002]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    ta.add_(5)\n    t0.sub_(4)\n    t0.fill_(2)\n    v1 = ta[1:8]\n    idx2 = torch.tensor([12], device=t0.device)\n    t0.index_fill_(0, idx2, 1)\n    return (v1, t0, lst, dct)\n"
+}

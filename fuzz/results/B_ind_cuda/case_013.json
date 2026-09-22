@@ -1,0 +1,43 @@
+{
+ "id": 13,
+ "iter": 551,
+ "seed": 21000614,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "setitem",
+  "side_effect",
+  "view_slice",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[3]: 7/24 elems differ at [8, 9, 10, 12, 13]: eager [7.0, -5.0, -6.0, 2.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg1: 7/24 elems differ at [8, 9, 10, 12, 13]: eager [7.0, -5.0, -6.0, 2.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[3]: 7/24 elems differ at [9, 10, 11, 12, 13]: eager [-6.0, -7.0, -2.0, 5.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 7/24 elems differ at [9, 10, 11, 12, 13]: eager [-6.0, -7.0, -2.0, 5.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.unfold(0, 1, 2)\n    dct['key2'] = t0\n    v1.masked_fill_(v1 > -1, k)\n    v3 = t1[2:3, :]\n    v4 = v1.transpose(0, 1)\n    t0[1:2, 1:2, :5] = -1\n    v5 = v1 + 3\n    return (v4, t0, v3, t1, lst, dct)\n"
+}

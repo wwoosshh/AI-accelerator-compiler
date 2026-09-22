@@ -1,0 +1,46 @@
+{
+ "id": 10,
+ "iter": 509,
+ "seed": 21000572,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "setitem",
+  "view_reshape",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.arg1: 20/24 elems differ at [0, 1, 2, 3, 4]: eager [3.0, 5.0, -5.0, 4.0, -3.0] vs compiled [-4.0, -4.0, -8.0, 1.0, -6.0]",
+  "call1.arg1: 16/24 elems differ at [0, 1, 2, 3, 4]: eager [-2.0, -7.0, 2.0, 3.0, -3.0] vs compiled [-5.0, -10.0, -4.0, 0.0, -4.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t0.view((4, 6))\n    idx2 = torch.tensor([1], device=t0.device)\n    t0.index_fill_(0, idx2, -4)\n    v3 = t0.flatten()\n    t1.copy_(v3)\n    v4 = v3.unfold(0, 10, 10)\n    v1[t2 > 1] = -1\n    t2.sub_(v1)\n    v3[:] += -3\n    return (v4, t0, t0, v3, t0, v4, lst, dct)\n"
+}

@@ -1,0 +1,47 @@
+{
+ "id": 55,
+ "iter": 2404,
+ "seed": 21002467,
+ "status": "value_diff",
+ "kinds": [
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "side_effect",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[1]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [-5.0, 5.0, 3.0, -4.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.out[2]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [-5.0, 5.0, 3.0, -4.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.out[3]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [-5.0, 5.0, 3.0, -4.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg0: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [-5.0, 5.0, 3.0, -4.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[1]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [8.0, -5.0, -2.0, -2.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[2]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [8.0, -5.0, -2.0, -2.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[3]: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [8.0, -5.0, -2.0, -2.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg0: 8/24 elems differ at [2, 5, 8, 11, 14]: eager [8.0, -5.0, -2.0, -2.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.view_as(t0)\n    v2 = v1.unfold(2, 2, 3)\n    lst.append(t1)\n    v3 = torch.ops.aten.alias(v2)\n    v4 = v1.unsqueeze(0)\n    t0[1:, :, :] = t0[:-1, :, :].clone()\n    v5 = torch.select_scatter(v3, v2.select(1, 1), 1, 1)\n    v6 = v3.contiguous()\n    v3[:, :, :1, 1:2:3] = v5[:, :, :1, 1:2:3]\n    v7 = v4[...]\n    return (v5, t0, v7, v1, t1, lst, dct)\n"
+}

@@ -1,0 +1,39 @@
+{
+ "id": 54,
+ "iter": 2305,
+ "seed": 21002368,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 3,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 13/24 elems differ at [4, 6, 7, 8, 9]: eager [7, -3, -6, -4, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 13/24 elems differ at [4, 6, 7, 8, 9]: eager [7, -3, -6, -4, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg0: 13/24 elems differ at [4, 6, 7, 8, 9]: eager [7, -3, -6, -4, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [7, -3, -6, 1, 6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [7, -3, -6, 1, 6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [7, -3, -6, 1, 6] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.unfold(0, 4, 18)\n    v1.zero_()\n    v2 = t0[:]\n    return (v2, v1, t1, v2, t1, lst, dct)\n"
+}

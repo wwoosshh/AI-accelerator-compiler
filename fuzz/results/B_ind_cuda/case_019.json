@@ -1,0 +1,50 @@
+{
+ "id": 19,
+ "iter": 899,
+ "seed": 21000962,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "view_dtype",
+  "view_reshape"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 22/24 elems differ at [1, 2, 3, 4, 5]: eager [2, 1, 1, 5, 5] vs compiled [1, 5, -2, 1, 2]",
+  "call1.out[0]: 21/24 elems differ at [1, 3, 4, 5, 6]: eager [6, 3, 3, 3, -7] vs compiled [3, -7, -5, -6, -1]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    t0[1:, :] = t0[:-1, :].clone()\n    v1 = t0.flip(0)\n    v1.add_(t0)\n    v2 = ta.view_as(ta)\n    v1.abs_()\n    v3 = v2.flatten()\n    v4 = torch.select_scatter(v2, ta.select(0, 7), 0, 7)\n    v5 = v3.to(v3.dtype)\n    v6 = v5 + t1\n    v7 = v1.view(torch.int32)\n    return (v2, t1, t1, lst, dct)\n"
+}

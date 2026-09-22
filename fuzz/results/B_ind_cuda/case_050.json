@@ -1,0 +1,48 @@
+{
+ "id": 50,
+ "iter": 2198,
+ "seed": 21002261,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "setitem",
+  "view_slice",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ],
+  [
+   "t2",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.arg1: 12/24 elems differ at [11, 12, 13, 14, 15]: eager [3.0, 2.0, -2.0, -2.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 13/24 elems differ at [11, 12, 13, 14, 15]: eager [-4.0, 4.0, -5.0, 2.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t2[-3, :2:3]\n    v2 = t1.unfold(0, 11, 15)\n    v3 = ta[4::3, :]\n    v4 = v2[:, :]\n    ta[5] = 2\n    v5 = torch.roll(t1, 1, 0)\n    v6 = v5.unsqueeze(0)\n    idx7 = torch.tensor([0], device=v4.device)\n    v4[idx7] += 0\n    return (v5, t0, v3, lst, dct)\n"
+}

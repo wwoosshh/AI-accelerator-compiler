@@ -1,0 +1,31 @@
+{
+ "id": 4,
+ "iter": 192,
+ "seed": 1000195,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "side_effect",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "diffs": [
+  "call0.out[0]: 12/24 elems differ at [5, 6, 7, 13, 14]: eager [-12.0, -14.0, 0.0, 10.0, -7.0] vs compiled [-14.0, -16.0, -2.0, 13.0, -4.0]",
+  "call0.out[1]: 12/24 elems differ at [5, 6, 7, 13, 14]: eager [-12.0, -14.0, 0.0, 10.0, -7.0] vs compiled [-14.0, -16.0, -2.0, 13.0, -4.0]",
+  "call0.out[4]: 12/24 elems differ at [5, 6, 7, 13, 14]: eager [-12.0, -14.0, 0.0, 10.0, -7.0] vs compiled [-14.0, -16.0, -2.0, 13.0, -4.0]",
+  "call0.arg2: 12/24 elems differ at [5, 6, 7, 13, 14]: eager [-12.0, -14.0, 0.0, 10.0, -7.0] vs compiled [-14.0, -16.0, -2.0, 13.0, -4.0]",
+  "call1.out[0]: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [-10.0, -8.0, 13.0, 0.0, 4.0] vs compiled [-8.0, -6.0, 15.0, 6.0, 10.0]",
+  "call1.out[1]: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [-10.0, -8.0, 13.0, 0.0, 4.0] vs compiled [-8.0, -6.0, 15.0, 6.0, 10.0]",
+  "call1.out[4]: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [-10.0, -8.0, 13.0, 0.0, 4.0] vs compiled [-8.0, -6.0, 15.0, 6.0, 10.0]",
+  "call1.arg2: 18/24 elems differ at [1, 2, 3, 5, 6]: eager [-10.0, -8.0, 13.0, 0.0, 4.0] vs compiled [-8.0, -6.0, 15.0, 6.0, 10.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t2.view_as(t2)\n    v1.sub_(t2.narrow(2, 0, 1))\n    v2 = t2.unsqueeze(2)\n    lst.append(t0)\n    v3 = t0.cumsum(0)\n    v4 = torch.select_scatter(v1, t2.select(0, 0), 0, 0)\n    idx5 = torch.tensor([2, 1, 0], device=t2.device)\n    t2.index_add_(1, idx5, v4.narrow(1, 0, 3))\n    v3[1] = -1\n    return (v2, t2, t0, t1, v2, lst, dct)\n"
+}

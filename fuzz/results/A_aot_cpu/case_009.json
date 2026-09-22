@@ -1,0 +1,39 @@
+{
+ "id": 9,
+ "iter": 1352,
+ "seed": 11001385,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_reshape",
+  "view_select",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg1: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [1, 1, 1, 1, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [1, 1, 1, 1, 1] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t1[:5, :] = 1\n    v1 = t1.unfold(1, 2, 3)\n    v2 = v1[...]\n    v2.add_(v2)\n    v3 = v2.select(1, 0)\n    v4 = v2.flatten()\n    v5 = v1.to(v1.dtype)\n    return (v2, v3, t0, v2, lst, dct)\n"
+}

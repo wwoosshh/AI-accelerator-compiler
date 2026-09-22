@@ -1,0 +1,54 @@
+{
+ "id": 60,
+ "iter": 6881,
+ "seed": 11006914,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "setitem",
+  "view_slice",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 2/24 elems differ at [22, 23]: eager [-3.0, -4.0] vs compiled [0.0, 0.0]",
+  "call0.arg1: 2/24 elems differ at [22, 23]: eager [-3.0, -4.0] vs compiled [0.0, 0.0]",
+  "call1.out[0]: 2/24 elems differ at [22, 23]: eager [-2.0, -5.0] vs compiled [0.0, 0.0]",
+  "call1.arg1: 2/24 elems differ at [22, 23]: eager [-2.0, -5.0] vs compiled [0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t1.unsqueeze(0)\n    v2 = ta.unsqueeze(1)\n    v3 = t2 * 2\n    v4 = v1.unfold(2, 6, 6)\n    idx5 = torch.tensor([3, 2, 1], device=v3.device)\n    v3.index_copy_(0, idx5, t2.narrow(0, 0, 3))\n    v4.fill_(4)\n    v2[v2 > 0] = 2\n    v6 = v3[:, 4:-1]\n    t1[:2, :] = 1\n    return (t1, t2, v2, v4, lst, dct)\n"
+}

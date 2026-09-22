@@ -1,0 +1,25 @@
+{
+ "id": 8,
+ "iter": 171,
+ "seed": 1000174,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_arith",
+  "side_effect",
+  "view_dtype",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [12884901892001, 12884901892001, 12884901892001, 12884901891999, 12884901892001] vs compiled [1001, 1001, 1001, 999, 1001]",
+  "probe.call0.out[2]: 34/48 elems differ at [0, 2, 4, 6, 7]: eager [4001, 4001, 4001, 3999, 3000] vs compiled [3001, 3001, 3001, 2999, 2999]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [12884901892001, 12884901892000, 12884901891999, 12884901891999, 12884901892001] vs compiled [1001, 1000, 999, 999, 1001]",
+  "probe.call1.out[2]: 35/48 elems differ at [0, 2, 4, 5, 6]: eager [4001, 4000, 3999, 3000, 3999] vs compiled [3001, 3000, 2999, 2999, 2999]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.clone()\n    v1.mul_(t0.narrow(1, 0, 1))\n    dct['key2'] = t0\n    v3 = t1[1::3, :, :]\n    v4 = v1.view(torch.int32)\n    v5 = v4.permute(0, 1)\n    v6 = v3 - 2\n    v7 = v1.view(torch.int32)\n    v8 = v4.permute(1, 0)\n    v5.clamp_(-1, 1)\n    return (v1, v6, v5, t0, lst, dct)\n"
+}

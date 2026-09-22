@@ -1,0 +1,39 @@
+{
+ "id": 18,
+ "iter": 879,
+ "seed": 21000942,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "view_dtype",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 23/24 elems differ at [0, 1, 2, 4, 5]: eager [-3, -8, 7, -5, -8] vs compiled [2, 2, 2, 2, 2]",
+  "call1.out[1]: 23/24 elems differ at [0, 1, 2, 3, 4]: eager [-7, -5, -4, -2, -1] vs compiled [2, 2, 2, 2, 2]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = torch.ops.aten.alias(t1)\n    v2 = torch.diagonal_scatter(t1, v1.diagonal())\n    v3 = t0.unsqueeze(1)\n    t1.fill_(2)\n    v4 = v1.permute(0, 1)\n    v5 = v1.view(torch.int32)\n    v6 = torch.diagonal_scatter(v2, v1.diagonal())\n    return (v1, v2, v1, t0, lst, dct)\n"
+}

@@ -1,0 +1,38 @@
+{
+ "id": 77,
+ "iter": 8296,
+ "seed": 11008329,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "side_effect",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[3]: 12/24 elems differ at [1, 2, 3, 4, 8]: eager [-3, 5, -2, -3, 0] vs compiled [-2, -3, -3, 5, 5]",
+  "call1.out[3]: 8/24 elems differ at [1, 2, 3, 4, 14]: eager [-1, -2, 5, -1, -2] vs compiled [5, -1, -1, -2, 5]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0.add_(5)\n    v1 = t0.transpose(1, 0)\n    v2 = t0.transpose(1, 2)\n    lst.append(v2)\n    v3 = t0.reshape(t0.shape)\n    v2.masked_fill_(v2 > 2, 5)\n    v4 = v1.sum(1, keepdim=True)\n    return (v4, v4, v4, v3, t1, v4, lst, dct)\n"
+}

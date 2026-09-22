@@ -1,0 +1,49 @@
+{
+ "id": 43,
+ "iter": 4549,
+ "seed": 11004582,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_arith",
+  "setitem",
+  "view_reshape",
+  "view_slice"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]",
+  "probe.call0.out[1]: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]",
+  "probe.call0.arg0: 2/24 elems differ at [15, 21]: eager [3001, 6001] vs compiled [6001, 3001]",
+  "probe.call0.arg2: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]",
+  "probe.call1.out[0]: 2/23 elems differ at [14, 20]: eager [3002, 6002] vs compiled [6002, 3002]",
+  "probe.call1.out[1]: 2/23 elems differ at [14, 20]: eager [3002, 6002] vs compiled [6002, 3002]",
+  "probe.call1.arg0: 2/24 elems differ at [15, 21]: eager [3002, 6002] vs compiled [6002, 3002]",
+  "probe.call1.arg2: 2/23 elems differ at [14, 20]: eager [3002, 6002] vs compiled [6002, 3002]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = ta[15:21]\n    ta.abs_()\n    v2 = t0.reshape((1, 24))\n    idx3 = torch.tensor([0], device=v2.device)\n    v2.index_fill_(0, idx3, k)\n    v4 = v2.clone()\n    idx5 = torch.tensor([6], device=t0.device)\n    t0[idx5] += -3\n    return (ta, ta, v1, v4, t1, lst, dct)\n"
+}

@@ -1,0 +1,46 @@
+{
+ "id": 58,
+ "iter": 2606,
+ "seed": 21002669,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "setitem",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[1]: 6/24 elems differ at [1, 2, 4, 6, 7]: eager [-8.0, 3.0, 4.0, 6.0, -22.0] vs compiled [-6.0, 7.0, -4.0, 0.0, -8.0]",
+  "call0.out[2]: 2/24 elems differ at [4, 8]: eager [1.0, 1.0] vs compiled [-4.0, -6.0]",
+  "call0.arg0: 6/24 elems differ at [1, 2, 4, 6, 7]: eager [-8.0, 3.0, 4.0, 6.0, -22.0] vs compiled [-6.0, 7.0, -4.0, 0.0, -8.0]",
+  "call1.out[1]: 5/24 elems differ at [2, 3, 5, 6, 7]: eager [-5.0, -9.0, -9.0, -13.0, 36.0] vs compiled [-3.0, -6.0, -4.0, -7.0, 1.0]",
+  "call1.arg0: 5/24 elems differ at [2, 3, 5, 6, 7]: eager [-5.0, -9.0, -9.0, -13.0, 36.0] vs compiled [-3.0, -6.0, -4.0, -7.0, 1.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = torch.minimum(t2, t0)\n    idx2 = torch.tensor([4], device=t0.device)\n    t0.scatter_add_(0, (t2.abs() % 24).long(), t2)\n    t0[v1 > -1] = -4\n    v1[t0 > -1] = 1\n    idx3 = torch.tensor([0], device=t1.device)\n    t1.index_fill_(1, idx3, -2)\n    v4 = t1.unsqueeze(1)\n    return (v4, t0, v1, t1, lst, dct)\n"
+}

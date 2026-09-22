@@ -1,0 +1,45 @@
+{
+ "id": 69,
+ "iter": 7702,
+ "seed": 11007735,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "setitem",
+  "view_reshape",
+  "view_slice",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg0: 8/24 elems differ at [8, 17, 18, 19, 20]: eager [8, -8, -6, -3, 7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 8/24 elems differ at [8, 17, 18, 19, 20]: eager [-7, -5, 5, -7, 2] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t2.view((4, 6))\n    v2 = t2[15:22]\n    v3 = v1.transpose(1, 0)\n    v4 = v3[2:4:3, 2:3:3]\n    idx5 = torch.tensor([3, 2, 1], device=v1.device)\n    v1[idx5] = k\n    v6 = v3.sum(0, keepdim=False)\n    v7 = t0.unfold(0, 8, 9)\n    v8 = v4 * 2\n    v7[1:, :] = v7[:-1, :].clone()\n    return (t1, v7, v1, v4, t1, lst, dct)\n"
+}

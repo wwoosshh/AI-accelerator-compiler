@@ -1,0 +1,45 @@
+{
+ "id": 7,
+ "iter": 1193,
+ "seed": 11001226,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "noop_arith",
+  "view_reshape",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[1]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.out[2]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[1]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [7.0, 1.0, 5.0, 1.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[2]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [7.0, 1.0, 5.0, 1.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [7.0, 1.0, 5.0, 1.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0.fill_(2)\n    t0.mul_(2)\n    v1 = t0.clone()\n    v1.add_(t0)\n    v2 = t1.unfold(2, 2, 3)\n    idx3 = torch.tensor([0], device=v2.device)\n    v2.index_fill_(3, idx3, -4)\n    v4 = v1.reshape((6, 4))\n    v5 = v2.abs()\n    v6 = v4.view((2, 12))\n    return (v6, t1, t1, lst, dct)\n"
+}

@@ -1,0 +1,365 @@
+198057	2026-09-21	open	cuiliaomei-beep	[inductor][cpu] Vectorized `torch.remainder` / `%` returns NaN for an infinite divisor and 0 for large quotients; elements handled by the scalar tail are correct, so the result depends on the tensor length and on the CPU
+198033	2026-09-21	open	alepot55	[inductor] torch._foreach_add_([x], [x.flip(0)]) reads x while writing it: silent wrong results (CUDA and CPU)
+198031	2026-09-21	open	alepot55	[inductor] y = x.clone(); op(y, x) becomes op(x, x) for custom ops and user-defined Triton kernels that mutate x: silent wrong results
+198017	2026-09-21	open	ezyang	☂️ Forward-mode and higher-order AD return wrong derivatives
+197898	2026-09-21	open	Nicholas022400701	Multinomial.entropy() evaluates lgamma(total_count + 1) in the default dtype, and expand() drops _binomial so the expanded distribution has no entropy()
+197896	2026-09-21	open	cuiliaomei-beep	[dynamo] Mutations of a closure-captured list/dict are silently dropped when they happen in a method of a locally defined class instantiated inside the compiled function (`fullgraph=True`, no graph break)
+197895	2026-09-21	open	cuiliaomei-beep	[inductor] Floating-point floor division is off by one: `torch.compile` makes `1.0 // 0.1` return `10.0` (eager and Python: `9.0`)
+197894	2026-09-21	open	cuiliaomei-beep	[fx] Generated code for `operator.pow(-2, x)` is `-2 ** x`, which Python evaluates as `-(2 ** x)`: `GraphModule.forward` returns the wrong sign (`Interpreter` is correct); reachable from `torch.compile(dynamic=True)` via `(-1) ** x.shape[0]`
+197893	2026-09-21	open	cuiliaomei-beep	[inductor] `x + 0` / `x * 1` / `x / 1.0` as a graph output returns the input tensor itself (`out is x`), so an in-place update of the result silently corrupts the input
+197889	2026-09-21	open	cuiliaomei-beep	[pt2] Python float argument that changes between calls goes stale in the cached graph (residual of #194976): norm `eps`, `huber_loss` delta, SDPA `scale`, `interpolate(scale_factor=...)` keep an earlier value (`interpolate`: old output shape)
+197888	2026-09-21	open	cuiliaomei-beep	`adaptive_max_pool3d_backward` and `fractional_max_pool{2,3}d_backward` read a non-contiguous `indices` tensor as if it were contiguous: silently wrong gradients, reached from `torch.compile` with `channels_last_3d` inputs
+197887	2026-09-21	open	cuiliaomei-beep	[inductor] Autograd's "modified by an inplace operation" check is lost when a view of a graph input is saved for backward: `x @ w`, `bmm`, `einsum`, 3-D `F.linear` silently return wrong gradients after `x` is modified in place
+197867	2026-09-21	open	pkiers	Nested jacfwd returns incorrect higher derivatives through autograd.Function
+197860	2026-09-21	open	CaelusHu	[dynamo] torch.compile does not guard the code object of an inlined bound method
+197859	2026-09-21	open	CaelusHu	[dynamo] torch.compile misses nn.Module __dict__ shadowing and returns stale results
+197846	2026-09-21	open	sha7doww	aten.native_dropout: train=None is interpreted inconsistently across backends, AD modes, and compile/export paths
+197829	2026-09-20	closed	alepot55	[inductor] `x[1:] = x[:-1].clone()` compiles to a copy over overlapping memory: silent wrong results on CUDA and CPU
+197811	2026-09-20	open	CaelusHu	[dynamo] torch.compile silently reuses a graph when closures capture different Tensor method descriptors
+197795	2026-09-20	open	Ei9en	`torch._numpy.random.shuffle` can duplicate or drop rows for `torch.Tensor` with NumPy random stream
+197739	2026-09-19	open	maybeLee	[torch.compile] `torch.compile` returns incorrect argmin index for non-contiguous (transposed) tensor
+197715	2026-09-19	closed	MohammadSadeghSalehi	[MPS] Copy from MPS into a CPU float64 or complex128 tensor silently writes nothing (2.14 regression)
+197673	2026-09-19	open	jniimi	[CUDA] `torch.arange` silently leaves every element from index 2**32 onward as zero when N > 2**32
+197636	2026-09-19	open	jniimi	[MPS] `bmm` silently returns wrong results when the output exceeds 2**32 elements and an input is non-contiguous
+197586	2026-09-18	open	maybeLee	[torch.compile] `torch.angle` returns to return 0 instead of π when receiving complex(-0.0, 0.0)
+197582	2026-09-18	open	maybeLee	[torch.compile] torch.compile miscompiles advanced indexing assignment with duplicate indices computed from arange % 2
+197539	2026-09-18	open	MBUYt0n	[FX] optimization.fuse changes a reused Conv that is BatchNorm'd on only one path
+197520	2026-09-18	open	chiangchenghsin-hash	[XPU] torch.xpu.empty_cache() silently corrupts index_add_ results to all-NaN after a heavy kernel chain (Arc A-Series, Windows)
+197519	2026-09-18	open	Arindamsamanta2004	[inductor] FX-graph cache key ignores tensor pinned-ness
+197493	2026-09-18	open	ClemBazan	Inductor split-scan workspace sizing can be overrun by an undersized R0_BLOCK, causing silent memory corruption
+197489	2026-09-18	closed	laithsakka	Inductor] remove_noop_ops incorrectly removes clone with a different storage_offset
+197461	2026-09-17	open	QHarshil	adaptive_max_pool2d backward on CUDA computes the plane offset in int32
+197448	2026-09-17	open	maybeLee	[torch.compile] `expand` + `fill_` produces incorrect results
+197434	2026-09-17	open	maybeLee	[torch.compile] adaptive_max_pool2d returns incorrect result for transposed tensor when return_indices=True
+197431	2026-09-17	open	maybeLee	[torch.compile] as_strided produces incorrect outputs for out-of-bounds strided tensor
+197416	2026-09-17	open	kshitij12345	torch.compile: input-mutation write-back is not ordered by a user-written stream join (silent wrong results)
+197409	2026-09-17	open	QHarshil	max_unpool2d on CUDA narrows the index to int32 before the bounds check
+197408	2026-09-17	open	ruddyscent	[Inductor] dtype-view custom op followed by diagonal_scatter returns wrong values and aliases input
+197235	2026-09-16	open	imperatormk	[MPS] `var`/`std`/`var_mean` intermittently return wrong values on large reductions (macOS 27)
+197114	2026-09-15	closed	Tych0n	[MPS] Conv3d returns incorrect results in contiguous (NCDHW) memory format
+197110	2026-09-15	open	cuiliaomei-beep	[dynamo] `str(KeyError(...))` inside a traced region omits the quotes CPython adds (`"'k'"` in eager, `'k'` compiled)
+197101	2026-09-15	closed	cuiliaomei-beep	[dynamo] `random.seed()` inside a compiled function is ignored on the first (compiling) call — first call returns values from a different RNG state
+197095	2026-09-15	open	cuiliaomei-beep	[inductor] `F.interpolate` on a zero-size spatial dim returns uninitialised data (NaN) from an out-of-bounds read instead of raising; output size 0 is accepted silently
+197091	2026-09-15	open	cuiliaomei-beep	[inductor] `torch.ldexp` output dtype differs from eager in both directions (int/bool × half → float32; half × float32 → half)
+197089	2026-09-15	open	cuiliaomei-beep	[inductor][cpu] `torch.std`/`var` accumulate in float32: inf/NaN for 1e30-scale inputs, and **zero output with an all-zero gradient** for 1e-30-scale inputs (eager and float64 are correct)
+197088	2026-09-15	open	cuiliaomei-beep	[inductor][cudagraphs] `x.new_zeros(shape, device="cpu")` inside a compiled function returns a **CUDA** tensor when `triton.cudagraphs` is on (eager and default config return a CPU tensor)
+197085	2026-09-15	open	cuiliaomei-beep	[dynamo] random.shuffle / random.sample inside a compiled function return the same permutation on every call (eager advances the RNG)
+197084	2026-09-15	open	cuiliaomei-beep	[aot_autograd] wrong gradients for `torch.linalg.pinv` and `torch.linalg.matrix_sqrth` with complex input under torch.compile (aot_eager and inductor); eager, functorch and Dynamo-only are correct
+197079	2026-09-15	closed	ducha-aiki	[MPS] torch.rand and uniform_ return the exclusive upper bound for float16 and bfloat16
+197054	2026-09-15	closed	powerofaisinstudy-debug	autograd: [Bug] in-place mutation on view tensor via .data bypasses version check during torch.autograd.grad with retain_graph=True
+196949	2026-09-14	closed	himidlow-software	[MPS] reflection_pad1d backward returns wrong gradients when input length > 65536 and not a multiple of 65536
+196708	2026-09-11	open	ALinrunrun	torch.nested.narrow followed by unbind includes an unselected element
+196705	2026-09-11	open	ALinrunrun	torch.logcumsumexp loses a first-order JVP contribution
+196702	2026-09-11	open	ALinrunrun	torch.scatter_reduce with prod returns a zero JVP for a nonconstant polynomial
+196701	2026-09-11	open	ALinrunrun	torch.cumprod returns an incorrect nested JVP at a zero factor
+196699	2026-09-11	open	ALinrunrun	torch.nn.functional.batch_norm returns an incorrect second-order JVP
+196698	2026-09-11	open	ALinrunrun	torch.linalg.householder_product returns an incorrect nested JVP
+196697	2026-09-11	open	ALinrunrun	torch.linalg.slogdet returns zero instead of a nonzero second-order JVP
+196696	2026-09-11	open	ALinrunrun	torch.det returns an incorrect second derivative under nested JVP
+196695	2026-09-11	open	ALinrunrun	torch.linalg.solve loses a second-order term under nested forward AD
+196682	2026-09-11	open	ALinrunrun	torch.cholesky_inverse returns an incorrect JVP for a valid Cholesky factor
+196681	2026-09-11	open	laolvfan	[inductor] CPU 2D-tiled reduction stores a full-width vector in the tail block: heap overflow (SIGABRT) or silent wrong results
+196680	2026-09-11	closed	ALinrunrun	torch.ldexp drops the derivative contribution of a negative exponent
+196657	2026-09-10	open	annop-w	[Triton] Functionalization breaks repeated mutated tensor aliases
+196596	2026-09-10	open	christianaurichzm	[inductor] addmm decomposition propagates NaN when beta=0 or alpha=0
+196577	2026-09-10	open	miyorena	[TorchInductor] `decompose_addmm` drops non-default `alpha` and `beta`
+196468	2026-09-09	open	laolvfan	[inductor] Attention-shaped pattern rewrite ignores the softmax dim, silently computing attention over the last axis
+196467	2026-09-09	closed	laolvfan	[dynamo] torch.Tensor(t.size()) is traced as torch.Tensor(tuple), silently changing shape semantics under torch.compile
+196437	2026-09-09	open	PiesAvalon	[dynamo] dynamic=True reuses a stale random.Random value after shape specialization
+196322	2026-09-08	closed	fahmiaz411	Whisper large-v3 produces incorrect transcription on MPS but works on CPU
+196302	2026-09-08	open	gabrieldemarmiesse	`torch.accelerator.set_stream()` and `torch.accelerator.current_stream()` return wrong values when registering a backend_module
+196243	2026-09-07	open	pupeno	SequentialLR changes the schedule of nested composite schedulers
+196211	2026-09-07	open	sssssh1228	torch.compile produces incorrect results when calling iter() on a partially consumed reversed iterator
+196173	2026-09-06	open	sssssh1228	torch.compile produces incorrect results and loses object state mutations for control flow based on mutable object identity
+196165	2026-09-06	open	miyorena	[TorchInductor] `efficient_conv_bn_eval_graph_transform_inlined` miscompiles Conv-BN when convolution arguments are passed by keyword
+196164	2026-09-06	open	KitKyoD	Run-to-run bit divergence under GPU contention with use_deterministic_algorithms(True) (ROCm, gfx1101)
+196127	2026-09-05	open	jonasvq	torch.compile: isinstance() with a runtime_checkable Protocol constant-folds the result without guarding the attributes it reads
+196113	2026-09-05	closed	ifsheldon	[MPS] Incorrect complex batched underdetermined lstsq solutions in PyTorch 2.14
+196106	2026-09-05	open	elbourne12345	take_along_dim(..., dim=...) silently wraps out-of-bounds indices instead of raising
+196083	2026-09-05	open	tritsystem	Optimizer.state_dict()/load_state_dict() silently alias tensors instead of copying when used in-process (no torch.save/load round trip)
+196067	2026-09-04	closed	MikhailRubinchik	`lerp_` of two non-negative tensors produces negative output on MPS on 2.14
+195984	2026-09-04	open	Wanzy0209	SequentialLR with a Tensor view produces an unexpected learning-rate value
+195970	2026-09-04	open	ruddyscent	[dynamo][while_loop] constant-False cond_fn drops captured-tensor mutations
+195969	2026-09-04	open	huntrontrakkr	torch.compile: isinstance(x, ProtoA | ProtoB) silently returns False for runtime_checkable Protocols with non-method members
+195966	2026-09-04	open	ruddyscent	[inductor][while_loop] carried-input mutation validation is bypassed by auto-functionalization
+195910	2026-09-03	closed	songdc98	[MPS] scaled_dot_product_attention with is_causal=True leaks future tokens in float16/bfloat16
+195845	2026-09-03	open	eellison	[inductor] mix-order reduction: split column sum ignores xmask, wrong results when rows % XBLOCK != 0
+195823	2026-09-03	open	KyleMylonakisProtopia	[ROCm][Inductor] `as_strided` on a graph-input view reads back zeros when the rebased offset is negative
+195705	2026-09-02	open	mCardiac1	[_refs] alpha_dropout does not preserve input dtype for non-default dtypes (e.g. bfloat16/float16)
+195675	2026-09-02	open	laolvfan	torch.clamp with a bound unrepresentable in the tensor dtype: eager raises, torch.compile ignores the bound
+195674	2026-09-02	open	laolvfan	torch.compile evaluates subtraction on a bool tensor that eager deliberately rejects (1 - mask)
+195673	2026-09-02	open	laolvfan	torch.compile accepts rand_like on an integer tensor that eager rejects, and returns an all-zero tensor
+195665	2026-09-02	open	laolvfan	[inductor] torch.compile skips as_strided's storage-bounds check and reads out of bounds, returning non-reproducible memory
+195595	2026-09-01	closed	lebrunjl	MPS: scatter/index_put_ raises out-of-range negative index errors on large tensors in a mesh-processing pipeline (dual contouring + QEM decimation)
+195582	2026-09-01	open	laolvfan	[inductor] Silent wrong and non-reproducible results: BatchNorm2d followed by a shrinking F.pad
+195488	2026-08-31	open	bobrenjc93	[dynamo] autocast context manager is lowered without try/finally, so an exception leaks autocast state
+195483	2026-08-31	open	atalman	[Inductor] functorch_dp_cifar10 training accuracy has failed 100% on H100 since 2026-06-13 (all configs)
+195451	2026-08-31	open	ruddyscent	[Inductor] Direct generalized_scatter copy-back changes returned output aliasing
+195442	2026-08-31	closed	miyorena	[TorchInductor] `batch_aten_sub` miscompilation drops `alpha`
+195422	2026-08-31	closed	laolvfan	[inductor] torch.compile silently drops an in-place mutation of an input made through F.dropout's identity return
+195338	2026-08-30	open	egeboy35	torch.aminmax silently returns wrong values when out= tensors alias
+195337	2026-08-30	closed	egeboy35	torch.aminmax silently returns wrong values when out= tensors alias
+195327	2026-08-30	closed	ruddyscent	[inductor][while_loop] cond_fn-only mutation of a pre-mutated captured tensor is not replayed
+195214	2026-08-28	closed	PetrIvan	[inductor][CUDA][bf16] Fusion skips rounding before equality, producing zero tie counts
+195163	2026-08-28	open	scott-kirila	[MPS] bmm/baddbmm/addbmm silently wrong on M1/M2 when K >= 32767 (2-D paths already routed by #183535)
+195076	2026-08-28	open	qflen	[MPS] histogram counts near-edge out-of-range elements that CPU drops, and computes bin index -1
+195075	2026-08-28	open	qflen	[CPU] logit_backward and six activation backward kernels return a different gradient at NaN depending on tensor length
+195074	2026-08-28	closed	qflen	[MPS] scatter_add_, index_add_ and index_put_(accumulate=True) write to the wrong elements on a misaligned bool view
+195066	2026-08-27	open	Kanya-Mo	[cpu][Inductor] torch._int_mm silent failure on CPU when an input's size-1 dim has stride 0
+195007	2026-08-27	closed	saud5150	[torch.compile][Inductor] frexp returns a mantissa of 0 for float32 subnormals on CUDA
+194926	2026-08-26	open	niteya-shah	Gamma distribution broken on Intel GPUs
+194922	2026-08-26	closed	jk212h20	F.pad(mode="constant") with temporal-axis padding silently corrupts ~80% of elements for large 5D tensors on MPS
+194800	2026-08-25	closed	hanbaiGG	[CPU] _adaptive_avg_pool3d_backward reads past a smaller grad_output tensor
+194750	2026-08-25	closed	qedbot	Concurrent weights-only loads can skip sparse tensor validation
+194725	2026-08-25	open	AneeshGidda	`torch.isin` returns false positives on CPU when dtype promotion introduces duplicates
+194442	2026-08-22	closed	Bill-Dai1982	[MPS] torch.baddbmm with beta=0 propagates NaN from input, violating documented semantics
+194357	2026-08-21	closed	BUAA-Wander	[inductor] `Cauchy.icdf(0)`/`icdf(1)` returns the opposite sign under `torch.compile` on fp16/bf16
+194345	2026-08-21	open	BUAA-Wander	[inductor][cuda] `torch.remainder` / `torch.fmod` wrong results under `torch.compile` on CUDA for large |a/b| ratios
+194344	2026-08-21	open	lastowl	Testing: Add/Extend dtype-converting copy to CPU test 
+194329	2026-08-21	open	markc-614	[Inductor][aot_autograd][autocast][dynamic_shape] torch.compile with dynamic=True produces incorrect values for fallback ops (e.g., sum) under autocast due to tracing/runtime autocast state mismatch
+194281	2026-08-20	closed	ZejiaZheng	[inductor] comprehensive_padding silently returns wrong and nondeterministic results for a Conv3d decoder at misaligned spatial strides
+194167	2026-08-20	open	thomasbarrett	varlen_attn with a paged KV cache returns incorrect results when split-KV is used
+194062	2026-08-19	open	robertomeroni	[inductor] [silent incorrectness] torch.full ignores dtype when fill_value is symbolic
+194004	2026-08-18	open	vidushi8	[Pytorch][ROCm 7.14] Qwen3 MoE TP+EP training produces extremely large(nan) gradient norms
+193938	2026-08-18	closed	BUAA-Wander	[inductor][cuda] `align_random_eager=True` makes compiled `torch.randn` / `randn_like` return uniform(0,1) values instead of standard normal
+193893	2026-08-18	open	Verma-Rajat	SDPA cuDNN backend silently corrupts greedy generation on B200 (sm_100) for models with num_key_value_heads < 8
+193802	2026-08-17	open	mattteochen	Block scaled 1x128 triton backend generates wrong results
+193784	2026-08-17	open	egeboy35	Windows source builds silently compute wrong results in parallel_for kernels: FindOpenMP links both vcomp140 and libomp140 into torch_cpu
+193760	2026-08-17	open	BUAA-Wander	[inductor][cuda] `view(torch.bool).copy_(y.view(torch.bool)).view(torch.float32)` silently corrupts data under `torch.compile`
+193757	2026-08-17	open	BUAA-Wander	[inductor][cpu] torch.compile silently accepts `binary_cross_entropy` targets outside `[0, 1]` that eager rejects
+193755	2026-08-17	open	krrishapatel	torch.remainder gives a zero result the sign of the dividend, not the divisor as documented
+193754	2026-08-17	open	krrishapatel	floor_divide on float16/bfloat16 depends on tensor length, and the vectorized result can exceed the quotient
+193753	2026-08-17	open	krrishapatel	torch.fmod and torch.remainder return NaN on the vectorized path where the scalar path is correct (the fmod half of #77742)
+193751	2026-08-17	closed	BUAA-Wander	[inductor] Fused reduction + argmax/argmin mis-indexes `channels_last` inputs (logical index not preserved), CPU and CUDA
+193704	2026-08-16	closed	josharmour	[ROCm] `nn.Embedding(sparse=True)` backward computes ~10^5x incorrect gradient magnitude on ROCm (gfx1201 / RDNA4)
+193682	2026-08-15	open	shashvat-singham	LinearLR with total_iters=0 applies start_factor permanently instead of acting as a no-op
+193671	2026-08-15	open	yinjiew	Silent wrong gradients: nn.RReLU under non-reentrant checkpointing saves uninitialized noise
+193661	2026-08-15	closed	BUAA-Wander	[inductor] Wrong argmax after fused trailing-dim reduction on non-contiguous inputs (incl. non-unit-stride reduction window) — generic reduction fusion ignores input strides, CPU and CUDA
+193487	2026-08-14	open	haishuo	MPS: allocator-state-dependent silently wrong matmul results (10-30% of scale) on 2.7-2.13.0; masked (not root-fixed) by #187441
+193431	2026-08-13	closed	atalman	[vllm] [torch nightly 2.14 regression][KV offload] test_mamba_cpu_offload_boundary: CPU-offloaded generation diverges from cold
+193061	2026-08-11	closed	Lakonik	`torch.compile` silently computes wrong gradients for chained modulated LayerNorms with a shared scale/shift parameter (regression 2.9.1 → 2.10.0 due to mix_order_reduction)
+193057	2026-08-11	closed	dhruvaron	MPS ignores storage offset of zero-dimensional CPU tensor views in mixed-device arithmetic
+192985	2026-08-11	open	rbregier	Dynamo silently drops custom `jvp` of `autograd.Function` under `torch.func.jvp`, producing wrong tangents
+192934	2026-08-11	open	ogrisel	`F.linear` on a 3D input silently returns corrupted results with the MPS device on Apple M1 (Virtual)
+192906	2026-08-11	open	aperson30	reuse_hash_fn leaves a subscripted capture pinned to the traced index
+192905	2026-08-11	open	aperson30	Nested nested_compile_region silently reuses a body specialized on the inner region's guards
+192872	2026-08-11	open	aperson30	dynamo: mutation to a LOAD_BUILD_CLASS-created class's sourceless attribute is lost across a graph break
+192812	2026-08-10	open	robertomeroni	torch.multinomial selects zero-probability indices on CPU for float16, so exponential_ underflows to exactly 0 in the double to half cast
+192810	2026-08-10	closed	atalman	[vllm] [torch nightly 2.14 regression][Distributed] test_sharded_state_loader[2-True]: sharded_state reload returns different generations (tp=2, LoRA)
+192639	2026-08-09	open	HussainNizamani	`dispatch_functionalize` hides forward-mode tangents from `unpack_dual` (Python FunctionalTensor path)
+192635	2026-08-09	open	O1range	torch.compile peak-memory reordering changes native_dropout RNG order
+192629	2026-08-09	open	robertmaxton42	`torch.func.functionalize` hides forward-mode tangents from `unpack_dual`
+192577	2026-08-08	closed	JohnMachado11	[MPS] multinomial(p, 1) intermittently returns zero-probability indices — exponential_() emits exact -0.0, Gumbel fast path turns it into a NaN that argmax selects
+192540	2026-08-07	closed	shadow-orange41	Differentiating the forward-mode (JVP) rule of `linalg.det` / `slogdet` / `linalg.solve` silently returns a wrong second derivative
+192521	2026-08-07	closed	shadow-orange41	`torch.func` second-order AD through `linalg.det` returns NaN or silently wrong values when the input has clustered singular values, while eager autograd is correct
+192510	2026-08-07	open	kundaMwiza	[inductor][aot_autograd] user defined triton kernels view output buffer storages are not preserved
+192507	2026-08-07	closed	robertomeroni	[MPS] torch.hypot overflows and returns NaN for inf inputs, unlike CPU
+192483	2026-08-07	open	MaierOli2010	torch.linalg.eigh silently returns non-orthonormal eigenvectors for batched complex64 CUDA inputs depending on call history and batch size
+192295	2026-08-06	open	ALinrunrun	torch.special.ndtr flushes lower-tail float64 values to zero
+192226	2026-08-05	closed	KyleMylonakisProtopia	BUG: Out of Bounds Reads with offset/strided views on compiled kernels
+192219	2026-08-05	closed	KyleMylonakisProtopia	BUG: Inductor `as_strided` silently reads out of bounds
+192158	2026-08-05	closed	haborite	[XPU] Fused SDPA intermittently produces non-finite output in XPU wheels
+191965	2026-08-03	open	4ktLuffy	embedding_bag(include_last_offset=True): sum, mean and max implement three different semantics on CPU
+191937	2026-08-03	closed	atbolsh	SDPA EFFICIENT_ATTENTION returns wrong output for broadcasted (stride-0) k/v when kv length % 32 == 1 (bf16 + attn_mask, CUDA; MATH correct on identical tensors)
+191929	2026-08-03	closed	4ktLuffy	[MPS] Binary ops with a 0-dim CPU float tensor ignore storage_offset, silently using the wrong value
+191858	2026-08-02	closed	RohitRathore1	[symm_mem] NVSHMEM backend's barrier(), put_signal() and wait_signal() are silent no-ops - callers synchronize on nothing
+191821	2026-08-01	closed	zou3519	[nested compile region] silently incorrect result on global mutation
+191763	2026-07-31	closed	myfykris	Fused SGD on CPU silently skips vectorized fp16 and bf16 parameter updates in certain circumstances
+191618	2026-07-30	closed	RohitRathore1	[symm_mem] check_channel() multiplies by world_size instead of dividing, allowing out-of-bounds signal writes which silently corrupts peer tensor data on main
+191571	2026-07-30	closed	isayev	`torch.compile` silently returns stale zeros when a size-1 `scatter_add_` is gathered from in the same graph (read-before-write in a fused Triton kernel)
+191495	2026-07-29	closed	IlyasMoutawwakil	`float_tensor / python_scalar` on CUDA is not correctly rounded (reciprocal-multiply), diverging from CPU and from `tensor / tensor`
+191449	2026-07-29	open	xyt66665000	Incorrect compiled output when calling .resize_() on a view/alias
+191433	2026-07-29	open	yuygfgg	[Inductor][Triton][CUDA][sm_120] BF16 autocast fusion of embeddings, Linear, and RMSNorm silently produces wrong results
+191308	2026-07-28	open	lackjava-creator	[Inductor][CPU] torch.compile changes int8 batched matmul output dtype to int64
+191193	2026-07-27	closed	xyt66665000	[Inductor] uniform_ on a non-contiguous view returns invalid values
+191089	2026-07-25	open	hiahu329	[Inductor] Conv2d numerical divergence with shape padding on PyTorch 2.10 and 2.12
+191038	2026-07-24	closed	edwardlong-ctrl	[Inductor][MPS] torch.compile changes torch.expm1(-0.0) to +0.0
+191014	2026-07-24	closed	roberto-laudani	torch.onnx.export (TorchScript exporter) gives wrong results for right shift on signed integers
+190973	2026-07-24	open	drisspg	[Inductor][SM100] ptxas VIMNMX3 fusion drops the negated integer-abs operand
+190946	2026-07-23	closed	christopherhesse	cumsum appears non-deterministic under torch.compile even when use_deterministic_algorithms is enabled
+190855	2026-07-23	open	shadow-orange41	[inductor] Wrong Hessian: `torch.compile(torch.func.hessian(f))` miscompiles the derivative of `torch.trace` — a constant is added to every Hessian entry
+190828	2026-07-22	closed	leaked32	[ROCm] torch.nn.functional.rms_norm backward produces abnormally large BF16 RMSNorm weight gradients
+190781	2026-07-22	open	thorhojhus	torch.nanquantile returns incorrect CUDA results for negative-sign NaNs
+190764	2026-07-22	closed	lackjava-creator	Equivalent int32 graphs disagree under static CPU Inductor: factorized and PolyJuice max endpoints pass, expanded intermediate fails
+190763	2026-07-22	closed	lackjava-creator	[Superseded] CPU Inductor int32 add/sum mismatch
+190758	2026-07-22	open	HussainNizamani	Memory-budget partitioner recomputes RNG ops with fresh randomness in backward, silently corrupting gradients at any activation_memory_budget < 1.0
+190755	2026-07-22	closed	guilhermeleobas	Some Dynamo descriptors (`tp_descr_get_impl`) are missing a `descr_check` equivalent
+190746	2026-07-22	open	bogatyy	[DTensor] loss_parallel() gives identity gradients to any log_softmax not consumed by cross_entropy
+190740	2026-07-22	closed	bogatyy	[MPS] nextafter returns zero instead of the smallest bfloat16 subnormal when stepping away from zero
+190717	2026-07-21	open	haifeng-jin	[BUG] dropout gradient mask mismatch when memory budget is low
+190584	2026-07-20	closed	guilhermeleobas	BuiltinVariable.call_next diverges from CPython builtin_next semantics
+190517	2026-07-20	closed	wdziurdz	[inductor] Missing barrier on same-kernel global buffer read-back (RAW) causes accuracy failure
+190491	2026-07-19	closed	jhavukainen	[MPS] layer_norm forward kernel variance computation causes divergence from CPU reference
+190484	2026-07-19	closed	autoreleasepool	Withdrawn
+190476	2026-07-19	closed	asharahmed	[MPS] `torch.nextafter` is a no-op for bfloat16
+190449	2026-07-19	closed	bogatyy	_scaled_mm: scale_result silently ignored on fp8 output path (CUDA, torch 2.10 / nightly / main)
+190064	2026-07-15	closed	bogatyy	[MPS] adaptive_max_pool2d returns wrong values, indices, and even wrong output shape for non-divisible geometry
+190063	2026-07-15	closed	bogatyy	embedding_bag CPU dense backward scales gradients by the wrong frequency for mixed-count indices
+190061	2026-07-15	open	bogatyy	[MPS] embedding_bag(scale_grad_by_freq=True) silently ignores the flag
+190060	2026-07-15	open	bogatyy	[MPS] embedding_bag(include_last_offset=True) ignores the terminal offset
+190056	2026-07-15	closed	bogatyy	[MPS] Multilayer LSTM backward ignores dropout, silently corrupting training gradients
+190056	2026-07-15	closed	bogatyy	[MPS] Multilayer LSTM backward ignores dropout, silently corrupting training gradients
+190054	2026-07-15	closed	bogatyy	[MPS] LayerNorm with fp32 weight/bias and fp16/bf16 input reinterprets the affine params; backward aborts
+189971	2026-07-15	open	bogatyy	[MPS] embedding_bag accepts index == num_embeddings and reads one row past the weight table
+189961	2026-07-15	closed	bogatyy	[MPS] MPS-to-CPU copy_ between equal-strided non-dense views copies wrong elements and writes outside the destination view
+189960	2026-07-15	closed	bogatyy	[MPS] torch.cat silently corrupts output and writes out of bounds when the output exceeds 2^31 elements
+189895	2026-07-14	closed	cynricfu	[inductor] Silent wrong results: constant_pad_nd fused into a split reduction drops the pad's boundary select (corrupts flash-attn cu_seqlens)
+189849	2026-07-14	closed	menglcai	Flash SDPA wrong output for head_dim=512 on gfx1151 (ROCm 7.15 regression)
+189804	2026-07-14	closed	XYZboom	Inductor vectorized GELU kernel produces tiny negative value (~-1.65e-7) where eager produces -0.0, causing sign() mismatch
+189799	2026-07-14	open	XYZboom	Inductor systematically mishandles negative zero (-0.0) sign across multiple operations (add, elu, sqrt+rsqrt fusion)
+189690	2026-07-13	open	rbrthogan	[MPS] `non_blocking` CPU-to-MPS copy can read released source storage and silently corrupt data
+189581	2026-07-10	closed	LotanGutman	[Bug] nn.RMSNorm produces wildly incorrect normalization constants for bfloat16 tensors with small variances
+189567	2026-07-10	open	turboderp	torch.ldexp produces wrong results / illegal memory access when it's the first kernel on a CUDA device
+189563	2026-07-10	closed	bogatyy	[MPS] Dtype-converting MPS-to-CPU copy can silently overwrite source tensor
+189518	2026-07-10	closed	David-Wu1119	Inductor's pointless_cumsum_replacement drops cumsum's explicit dtype argument
+189495	2026-07-09	closed	bogatyy	[MPS] F.linear with bias silently returns wrong results when 3D batch dim exceeds 2^16 (65536)
+189401	2026-07-09	closed	XAheli	[inductor] Unrolled sum reduction produces wrong results for non-contiguous (transposed) inputs after `unsqueeze+expand`
+189375	2026-07-09	closed	hameerabbasi	`F.linear` broken for some inputs on RX9070/gfx1201
+189225	2026-07-08	closed	Hejiyu98	torch.onnx.export(dynamo=True) exports nn.GRU with wrong linear_before_reset=0
+189134	2026-07-07	closed	FujishigeTemma	[MPS] `linalg.solve` returns wrong results when B is broadcast against a batched A
+188912	2026-07-03	closed	huydhn	vit_base_patch16_siglip_256 amp training accuracy regression on H100 (2.13.0)
+188900	2026-07-03	open	mtsokol	`sparse.mul`: broadcasting a size-1 dimension of the sparse operand silently drops data
+188890	2026-07-03	open	embe-pw	Non-deterministic gradients when using torch.compile and PyTorch >= 2.12
+188878	2026-07-03	closed	drisspg	[FlexAttention] FLASH backend silently wrong: wrapped gather index misclassified as lane-uniform in vectorized score_mod groups
+188792	2026-07-02	open	keunhong	CPU float unary ops can silently return low-precision results: MKL VML first-call kernel dispatch race
+188756	2026-07-01	closed	KitPan	[MPS] index_select / F.embedding silently return all-zero rows when the source tensor exceeds 2**31 elements (fixed on main, still broken in release/2.13)
+188545	2026-06-30	closed	xyt66665000	[PT2] Output mismatch between eager and torch.compile for torch.special.bessel_y0 with +inf input on CUDA
+188541	2026-06-30	open	xyt66665000	[Inductor][CUDA] F.logsigmoid flushes negative float32 subnormal outputs to +0.0, changing sign-sensitive behavior
+188492	2026-06-29	closed	frgossen	swin_base_patch4_window7_224 fails inductor accuracy (bf16 inference, H100) after Triton 3.8 pin bump
+188438	2026-06-29	closed	oscarkey	MPS nn.Linear output different from cpu when bias=True on github macos-26
+188432	2026-06-29	closed	Blooming-Tree	torch.compile produces inconsistent outputs for Multi-Query Attention model with manually implemented attention
+188430	2026-06-29	closed	Blooming-Tree	torch.compile produces large absolute errors for model with LSTM, MultiheadAttention, and torch.reciprocal
+188425	2026-06-29	closed	Blooming-Tree	torch.compile produces drastically incorrect outputs for model with symbolic dimensions and random operations
+188375	2026-06-28	open	Robertboy18	CPU LayerNorm normalized_shape=(1,) gives nonzero weight.grad although output is independent of weight
+188372	2026-06-28	closed	Robertboy18	CPU LayerNorm normalized_shape=(1,) gives nonzero weight.grad although output is independent of weight
+188344	2026-06-27	closed	Sunt-ing	avg_pool2d backward returns wrong input gradients on CUDA for channels_last inputs when padding > 0
+188335	2026-06-27	closed	wahlinski	[MPS] Grouped/depthwise Conv2d gives incorrect results for batch_size > 1 (fp32 only; correct at batch_size=1)
+188322	2026-06-27	closed	drisspg	FlexAttention FLASH ignores sparse BlockMask metadata when mask_mod is trivial
+188261	2026-06-26	open	weishi-deng	[inductor][XPU] PR #184366 causes AMP fp16 training accuracy regression on XPU
+188152	2026-06-25	closed	atalman	[vllm] [2.13 regression] block-scaled fp8 MoE numerical mismatch (Kernels MoE / FusedMoE) - assert_close fails after #187484 compile revert
+188128	2026-06-25	open	lucyleeow	`asarray` does not work for boolean dtype when using buffer protocol
+188084	2026-06-24	closed	nikitakuklev	[BUG] Inductor reinplaces `index_put` on expanded view and silently corrupts gradients
+188074	2026-06-24	closed	Blooming-Tree	torch.compile produces inconsistent outputs for stateful SNN model with custom LIF neurons
+188048	2026-06-24	closed	xyt66665000	[Inductor][CUDA] torch.div(rounding_mode="floor") mismatches eager for infinite inputs
+187947	2026-06-23	closed	wdziurdz	Inductor mm template uses CUDA TF32 flag on XPU, diverging from eager
+187935	2026-06-23	closed	xyt66665000	[Inductor][CUDA] torch.signbit loses negative zero sign for float64 inputs
+187806	2026-06-21	open	nkapreTT	F.gelu(approximate='none'): 1+erf catastrophic cancellation — up to 57% relative error in fp32 around x≈−5, zeros the negative tail
+187761	2026-06-20	closed	xyt66665000	[CPU] Uninitialized memory returned for NaN inputs in Chebyshev and Shifted Chebyshev polynomials
+187759	2026-06-20	open	OE-GOD	torch.linalg.svdvals swallows NaN (returns finite values), disagreeing with torch.linalg.svd; matrix_rank then reports full rank for a NaN matrix
+187721	2026-06-19	closed	xyt66665000	[Inductor] Silent correctness : F.kl_div reduction over -0.0 yields different signbits in Eager vs Compiled
+187715	2026-06-19	closed	sanbuphy	`torch.compile(mode='reduce-overhead')` silently degrades training on ROCm — `cudagraph_trees` has no HIP guard
+187521	2026-06-16	closed	jhavukainen	[MPS] baddbmm incorrectly propagates NaN when beta == 0
+187460	2026-06-16	closed	OE-GOD	torch.ldexp backward returns zero gradient w.r.t. mantissa for negative integer exponents
+187449	2026-06-16	closed	whitephilomel	`torch.compile` vs eager DDP logits-sum divergence with ResNet50 + AdamW lr=0.01 on two-node NCCL
+187448	2026-06-16	closed	whitephilomel	`torch.compile` vs eager DDP grad/logits divergence with ResNet50 + AdamW lr=0.01, warmup cosine schedule, grad accumulation, and DDP bucket views
+187447	2026-06-16	closed	whitephilomel	`torch.compile` vs eager DDP parameter-fingerprint divergence with ResNet50 + Adam lr=0.1, grad accumulation, grad clipping, and 1MB buckets
+187446	2026-06-16	closed	whitephilomel	`torch.compile` vs eager DDP grad/parameter divergence with ResNet50 + Adam lr=0.05, batch=1, sqrt LR scaling and step scheduler
+187445	2026-06-16	closed	whitephilomel	`torch.compile` vs eager DDP loss/grad/logits divergence with ResNet34 + SGD lr=0.1, batch=2, TF32 allowed, and 1MB buckets
+187429	2026-06-16	open	gdrosa	torch.where silently casts out-of-range Python float to +/-Inf in fp16 (inconsistent with full_like / full / fill_, which raise)
+187411	2026-06-16	closed	xyt66665000	[BUG] torch.linalg.lstsq(driver='gelsy') returns incorrect rank due to memory state dependency
+187340	2026-06-15	open	xyt66665000	[torch.compile][Inductor][CUDA] torch.nextafter is incorrectly compiled as no-op for non-contiguous float16 tensors
+187338	2026-06-15	open	Thrsu	torch.gcd returns an incorrect negative result when one input contains the minimum value of torch.int8 (-128)
+187336	2026-06-15	closed	xyt66665000	[Inductor] torch.compile loses signbit in torch.special.log_ndtr, causing discrepancies in sign-sensitive ops (e.g., copysign, atan2)
+187332	2026-06-15	closed	xyt66665000	[PT2] Output mismatch between eager mode and torch.compile for torch.special.i0 with inf inputs on CUDA
+187319	2026-06-15	open	efsotr	torch.compile FX graph does not distinguish custom ops with the same name but different mutates_args
+187296	2026-06-15	open	ALinrunrun	torch.heaviside returns 0 for NaN input instead of propagating NaN
+187295	2026-06-15	open	ALinrunrun	torch.sign returns 0 for NaN inputs instead of propagating NaN
+187284	2026-06-14	closed	shadow-orange41	`torch.compile` with `inductor` backend silently drops forward-mode AD tangents (returns `None`)
+187280	2026-06-14	closed	talib79g-cmyk	MPS backend produces corrupted output in SDXL image generation on macOS 27 beta; CPU output is correct (primitive ops match CPU)
+187268	2026-06-14	closed	0515wlx	`register_post_accumulate_grad_hook` naming/documentation conflicts with `register_hook`, leading to semantic misinterpretation of hook argument and silent training bugs
+187227	2026-06-13	open	bin123apple	[SDPA] Fix 32-bit offset overflow in mem-efficient attention forward with attn_bias
+187180	2026-06-12	open	gdrosa	torch.nn.functional.softplus returns +Inf for finite float16 input when beta is very small
+187117	2026-06-12	closed	lsmeng	[MPS] Binary ops with a CPU 0-dim view operand ignore storage_offset — silently read element 0
+187064	2026-06-11	closed	Jack-Bismi	HIP backend: F.interpolate produces artifacts on non-aligned memory
+187027	2026-06-11	closed	QWeiheng	flip after repeat_interleave generates negative (out-of-bounds) index under dynamic shapes
+187018	2026-06-11	closed	QWeiheng	abs on uint8 silently miscompiled via std::abs integer promotion
+186850	2026-06-09	closed	jianweif	Inductor: `unsqueeze` lowering loses source-tensor strides when source has non-standard layout — produces fused Triton kernel that  reads OOB
+186824	2026-06-09	open	OE-GOD	torch.distributions.Cauchy.icdf(0) returns large finite value with wrong sign in float32; Gumbel.icdf(0/1) also finite instead of ±inf
+186775	2026-06-09	closed	Neronjust2017	Flex Attention produces NaN with `torch.compile(flex_attention, dynamic=True)` and batch-dependent mask closures
+186671	2026-06-09	closed	guilhermeleobas	[dynamo] set subclass overriding __iter__ gives wrong result for set comparison under torch.compile
+186640	2026-06-08	closed	OE-GOD	torch.special.polygamma(n>=1, x) returns finite garbage instead of +inf at negative-integer poles
+186577	2026-06-08	closed	wuyii8941	`torch.compile` produces wrong results when `F.layer_norm` is fused with `reciprocal`/`rsqrt` epilogue
+186572	2026-06-07	open	sanketpurandare	[Inductor] Checkpointed reductions can choose different configs between forward and recompute
+186556	2026-06-07	closed	the-Shallow	torch.ldexp returns incorrect gradient w.r.t. mantissa for negative exponents
+186365	2026-06-05	closed	CaoSY	`torch._grouped_mm` in a loop returns inconsistent results after BF16 broadcast division
+186278	2026-06-04	closed	Isalia20	[MPS] GeLU leads to NaNs on certain BF16 inputs
+186256	2026-06-04	closed	f-dangel	`native_batch_norm` silently produces incorrect 3rd+ order derivatives in training mode with `create_graph=True`
+186241	2026-06-04	closed	kiya00	TMA descriptor loads use stale `xoffset` in mix-order reduction loop
+186229	2026-06-04	closed	cuttle-agent	C10_WARP_SIZE breaks softmax/multinomial on RDNA 3.5 GPUs (gfx1151, warp_size=32)
+186164	2026-06-04	closed	Gasoonjia	AOTInductor miscompiles int64 aten.floor_divide when the DIVISOR is a tensor.
+186029	2026-06-03	closed	rookieLiu2018	[inductor] count_nonzero over bincount output returns wrong values under torch.compile
+185806	2026-06-01	closed	pjh4993	[Inductor][AOTI] codegen_symbol uses float reciprocal for integer dim recovery, silently corrupts dynamic batches when 1/K is not exactly representable in IEEE-754
+185702	2026-05-30	closed	xyt66665000	[Inductor] CPU backend produces incorrect numerical outputs when combining tensor slices and torch.stack
+185696	2026-05-30	open	xyt66665000	[Inductor] torch.atan2 yields incorrect result for x=0.0 with float16 on CUDA (loses signed zero)
+185663	2026-05-29	closed	jhavukainen	[MPS] Col2Im.metal silent uint32 overflow in corrupts large outputs on MPS
+185610	2026-05-29	closed	xyt66665000	[Inductor] Correctness discrepancy in torch.minimum with signed zeros (-0.0 vs 0.0) on CUDA (bfloat16)
+185605	2026-05-29	closed	xyt66665000	[Inductor][CUDA][bf16] torch.add with a 0-dim float64 scalar returns nonzero where eager returns zero
+185596	2026-05-29	closed	xyt66665000	[Inductor] Correctness mismatch in torch.cumulative_trapezoid with bfloat16
+185589	2026-05-29	open	lijunqiang123	[inductor] Severe numerical inconsistency: diag_embed + erf + normalize(p=-1) under torch.compile(dynamic=True) — max diff up to 565,248
+185587	2026-05-29	open	lijunqiang123	[inductor] Numerical inconsistency: polygamma + cumulative_trapezoid under torch.compile(dynamic=True) produces wrong results after Conv2d + GroupNorm
+185517	2026-05-28	closed	xyt66665000	[Inductor][CPU][bf16] Gradient mismatch in F.margin_ranking_loss backward with bfloat16 tensors and float scalar
+185509	2026-05-28	closed	xyt66665000	[inductor] Silent incorrect gradients with interpolate, conv2d, max_pool2d and torch.where
+185495	2026-05-28	closed	xyt66665000	[Bug] F.grid_sample backward pass on CUDA returns accumulated gradients due to uninitialized grad_input memory
+185484	2026-05-28	closed	xyt66665000	[Inductor] Forward output mismatch between Eager and Inductor for F.softshrink with bfloat16 and float scalar
+185480	2026-05-28	open	xyt66665000	[Inductor][CUDA][bf16] `F.celu` returns `+0.0` where eager returns a negative bf16 subnormal
+185472	2026-05-28	closed	wuyii8941	[Inductor] `F.hardtanh` compiled backward silently drops gradient at bf16 boundary values
+185470	2026-05-28	open	wuyii8941	[Inductor] `F.threshold` bf16 miscompilation: scalar threshold not cast to tensor dtype
+185464	2026-05-28	closed	wuyii8941	torch.compile produces wrong results for F.multilabel_margin_loss when target contains -1
+185449	2026-05-27	closed	ad8e	Flash attention backend type not stored in inductor cache, causes silent usage of wrong backend
+185382	2026-05-27	closed	wuyii8941	`torch.compile`: Inductor silently produces wrong results for `addcdiv_`/`addcmul_` when `.item()` graph break occurs in a loop
+185337	2026-05-27	closed	rookieLiu2018	[inductor] CPU codegen does not preserve explicit float32 to float16 to float32 cast semantics
+185248	2026-05-26	open	jasminetrail	`torch.compile` silently accepts negative standard deviations in `torch.normal` that eager mode rejects
+185246	2026-05-26	open	jasminetrail	torch.compile silently accepts invalid Bernoulli probabilities that eager mode rejects
+185098	2026-05-25	closed	mz-wang	torch.save silently truncates files at INT_MAX bytes when the output path contains non-ASCII characters
+185074	2026-05-24	closed	wjabbour	[RFC] torch.compile + CUDA graph capture: Inductor JIT has no capture-state awareness, causes CPU→GPU copy error on first call
+184893	2026-05-22	closed	Flamefire	[Inductor] argmin/min returns incorrect indices for boolean tensors
+184826	2026-05-21	closed	GMNGeoffrey	ROCm `F.layer_norm` silently produces wrong output for `M >= 2^23, C%4!=0`
+184574	2026-05-20	closed	JamesDLance	`torch.clamp` / `torch.clamp_min` / `torch.clamp_max` return gradient 1.0 at boundary points where `F.relu6` and `F.hardtanh` return 0.0 for the same mathematical function
+184528	2026-05-20	closed	vmoens	`torch._higher_order_ops.scan` computes incorrect gradients for closed-over parameters
+184431	2026-05-19	open	atalman	[vllm] [2.12 regression][multimodal] Qwen2-Audio text-then-audio_embeds: prompt_embeds vs raw-text outputs diverge under --enforce-eager
+184415	2026-05-19	closed	wuyii8941	[Inductor] `torch._foreach_sub` silently ignores `alpha` under `torch.compile`
+184405	2026-05-19	closed	rookieLiu2018	`torch.compile(..., backend="inductor")` returns stale float32 for dtype=None factory op after torch.set_default_dtype(torch.float64)
+184379	2026-05-19	closed	xxcisxxc	[MPS] torch.conj(x).imag returns un-conjugated imag on conjugate view (CPU correct)
+184247	2026-05-18	closed	jjvraw	[Inductor] Incorrect epilogue fusion for user-defined Triton kernels when output has layout-changing ops (`.T.contiguous()`)
+184113	2026-05-17	closed	Birch-san	[dynamo][autograd.Function] torch.compile catastrophically changes grad output of in-place autograd matmul
+184036	2026-05-16	open	gdrosa	torch.nn.PairwiseDistance returns +Inf for moderately large p (overflow in fp32, no log-space rewrite)
+184031	2026-05-16	open	gdrosa	torch.nn.functional.gumbel_softmax returns NaN when tau=0 (division by zero)
+183986	2026-05-16	closed	wuyii8941	`torch.compile` silently produces wrong results for `index_add`/`index_copy`/`index_fill`/`index_put` on expanded (stride-0) tensors
+183901	2026-05-15	open	ALinrunrun	torch.compile produces int32-overflowed results for int64 arange multiplication on CUDA
+183898	2026-05-15	closed	ALinrunrun	torch.compile produces wrong gradient for slice_scatter backward on CUDA
+183894	2026-05-15	closed	ALinrunrun	torch.compile returns wrong argmin after in-place sin_ followed by transpose
+183885	2026-05-15	closed	fenghuibao	[MPS] torch.argsort(dim=0) returns incorrect indices for large tensors
+183861	2026-05-15	closed	bozhou2021	LayerNorm/RMSNorm's gamma beta backward kernel produced wrong results on AMD RDNA GPUs
+183825	2026-05-15	closed	jhavukainen	[MPS] layer_norm_backward silently returns incorrect, nondeterministic parameter gradients
+183769	2026-05-14	closed	ALinrunrun	torch.compile skips out-of-range check for torch.select and returns invalid values
+183768	2026-05-14	open	ALinrunrun	torch.compile returns inf for torch.acosh on large finite float32 inputs while eager returns finite values
+183767	2026-05-14	closed	ALinrunrun	torch.compile returns inf for torch.asinh on large finite float32 inputs while eager returns finite values
+183765	2026-05-14	closed	ALinrunrun	torch.compile overflows torch.cosh near float32 boundary while eager returns finite values
+183763	2026-05-14	closed	ALinrunrun	torch.compile overflows torch.sinh near float32 boundary while eager returns finite values
+183761	2026-05-14	closed	ALinrunrun	torch.compile produces different fp16 results for where + full_like + cast + add pattern
+183631	2026-05-13	closed	TheoCoombes	[MPS] invalid `.fill_()` on offset view of 1D BoolTensor
+183608	2026-05-13	closed	ALinrunrun	torch.compile skips out-of-range negative index check in F.embedding
+183607	2026-05-13	open	ALinrunrun	torch.compile changes fp16 overflow behavior for cast-to-float16 multiplication
+183606	2026-05-13	closed	ALinrunrun	torch.compile changes signed-zero behavior for torch.frac on -0.0
+183605	2026-05-13	closed	ALinrunrun	torch.compile changes fp16 NaN behavior for var + rsqrt normalization
+183602	2026-05-13	closed	ALinrunrun	torch.compile produces wrong gradient for diagonal_scatter backward
+183601	2026-05-13	closed	ALinrunrun	torch.compile Inductor produces wrong output for InstanceNorm2d + normalize + hardswish chain
+183575	2026-05-13	closed	tugsbayasgalan	Inductor bad kernel generaiton on lerp_
+183523	2026-05-13	closed	tinywisdom	ONNX export mismatch for `F.interpolate(size=(1, 1), mode="bilinear", align_corners=False)`
+183419	2026-05-12	closed	gaborv	[MPS] torch.isfinite() on non-contiguous 2D slice corrupts adjacent memory
+183249	2026-05-11	open	wuyii8941	`torch.compile` produces wrong results for `fractional_max_pool2d` when `_random_samples` is not provided
+183121	2026-05-10	closed	ALinrunrun	torch.compile returns wrong shape for torch.norm(dim=-1) when reduced dimension has size 1
+183120	2026-05-10	open	ALinrunrun	torch.compile Inductor produces wrong output for BatchNorm2d + ELU + GroupNorm + log clamp chain
+183082	2026-05-10	closed	rookieLiu2018	Inductor CPU returns wrong argmax after sin_() and transpose
+182965	2026-05-08	closed	rookieLiu2018	`torch.compile` silently returns a result for `torch.linalg.cholesky` on non-positive-definite input
+182960	2026-05-08	open	fnrizzi	`torch.cuda.ExternalStream(0, device=...)` silently returns a fresh pooled stream instead of wrapping handle `0x0`
+182952	2026-05-08	closed	dietervdb-meteo	hipBLASLt path ignores backward fp16_alt_impl for Half GEMMs, causing FTZ in backward and silent training divergence on gfx90a
+182822	2026-05-07	closed	malfet	[MPS] bitwise_{and,or,xor} on bool ignores storage_offset of 0-d operand
+182765	2026-05-07	closed	wuyii8941	`torch.compile` silently produces all-zero `x.grad` for `diagonal_scatter(...).sum().backward()`
+182726	2026-05-06	closed	PaulLockett	[MPS] 2.10.0 regression: Qwen2.5-VL / ColQwen2.5 produces NaN query embeddings on 7/8 batched queries (works on 2.9.0)
+182446	2026-05-05	closed	whysocscs	Missing bounds check in round_size() causes zero-size block and double allocation
+182343	2026-05-04	closed	leimao	Torch Inductor SearchSorted SliceView Bug
+182318	2026-05-04	open	aorenste	Dynamo codegen leaks torch function enabled state via _EnableTorchFunction destructor
+182317	2026-05-04	closed	aorenste	Dynamo leaks TorchFunctionMode onto stack across graph breaks
+182282	2026-05-04	closed	cakedev0	[XPU] Bad precision for float64 matvec with XPU backend
+182225	2026-05-02	closed	rookieLiu2018	torch.compile mismatch for bfloat16 RoPE-style computation involving rotate_half and broadcasted sin/cos

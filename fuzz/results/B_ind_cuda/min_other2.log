@@ -1,0 +1,45 @@
+== results/B_ind_cuda/case_030.py | torch 2.14.0+cu130 | inductor/cuda | initial status: value_diff (9 stmts)
+remark: c7bujm7ho6paztxbn7du3bpfmr23nuhquzvpurxfv26k4z3twot7.py:18:0: 17 instructions in function
+remark: c46bavjgq32sqdkdapvvg7cxaeykczjrtuy43rdn2j6hsfw5m5nm.py:18:0: 15 instructions in function
+remark: cukuj6urvyplkfrmcuonpaekbagljdwc5tl3nw7lhttrdwjmjafy.py:18:0: 20 instructions in function
+remark: clnwew4hx3mjpywdafnuesuhh7ouj6xbnfny6nuni3bpt7jpr5kc.py:18:0: 20 instructions in function
+remark: cmaizqbyvjpm2l3vx7v3ev2g6d24w6eamzjrern2wklhfdotmlaf.py:18:0: 17 instructions in function
+remark: cm4lkkos6priul3dycdg6qwwuqfoqyugcr57cyaoz7noo67kfasb.py:18:0: 15 instructions in function
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break from `Tensor.item()`, consider setting:
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] or:
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] to include these operations in the captured graph.
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break: from user code at:
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]   File "<aliasfuzz>", line 11, in fn
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:56:02.263000 25752 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+   -> 6 stmts, status=value_diff, checks=17, dynamic=None aliased=None  saved results/B_ind_cuda/case_030.min.py
+def fn(t0, t1, k, lst, dct):
+    v1 = t0.unsqueeze(2)
+    v2 = t0.view(torch.int32)
+    v3 = v2 * 2
+    v3.sub_(-4)
+    v1[:, 2:5, :] = 2
+    v6 = v3.view(torch.int64)
+    return (v6, lst, dct)
+
+       call0.out[0]: 12/24 elems differ at [2, 3, 4, 8, 9]: eager [12884901880, 17179869202, 17179869202, 17179869198, 17179869190] vs compiled [17179869192, 17179869192, 17179869192, 17179869192, 17179869192]
+       call1.out[0]: 10/24 elems differ at [2, 3, 8, 9, 10]: eager [12884901884, 12884901876, 8589934594, 12884901886, 8589934592] vs compiled [17179869192, 17179869192, 17179869192, 17179869192, 17179869192]
+== results/B_ind_cuda/case_035.py | torch 2.14.0+cu130 | inductor/cuda | initial status: alias_diff (10 stmts)
+remark: c6jeo75c2oz6gchruaexiu6jmra2hum2kjymdfjf6pzsr7ixdckr.py:18:0: 16 instructions in function
+remark: cijvflyxxupejelj2vu7ef42fibravwh65542tiabsgn64ojhnfy.py:18:0: 23 instructions in function
+remark: cfiskeyuzxe4jdv672c52qjrdhym7kysfkmtvowrycjmf5ru44vn.py:18:0: 14 instructions in function
+remark: ci4usqwap6u2gxxmdl5ol5j6yx2m5jtkxhltyjs45ztpfvjmjmsz.py:18:0: 12 instructions in function
+remark: cen3gizp2uv44jgc742qvv2cvmmbhsh2uh4y54rkhtoigdo5qnms.py:18:0: 12 instructions in function
+   -> 4 stmts, status=alias_diff, checks=21, dynamic=None aliased=None  saved results/B_ind_cuda/case_035.min.py
+def fn(t0, t1, k, lst, dct):
+    v1 = t1.neg()
+    idx3 = torch.tensor([2], device=t1.device)
+    t1.index_fill_(1, idx3, 2)
+    v1.copy_(t1)
+    return (v1, lst, dct)
+
+       probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-5, 7, 2, -1, -4] vs compiled [995, 1007, 1002, 999, 996]
+       probe.call1.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-3, 4, 2, 3, 6] vs compiled [997, 1004, 1002, 1003, 1006]

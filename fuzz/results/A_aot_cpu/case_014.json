@@ -1,0 +1,51 @@
+{
+ "id": 14,
+ "iter": 1822,
+ "seed": 11001855,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "scatter_fn",
+  "view_dtype",
+  "view_expand",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg1: 4/24 elems differ at [10, 11, 22, 23]: eager [6, 7, 1, -8] vs compiled [0, 0, 0, 0]",
+  "call1.arg1: 4/24 elems differ at [10, 11, 22, 23]: eager [7, -4, -2, 1] vs compiled [0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.unfold(1, 10, 10)\n    v2 = torch.select_scatter(t2, t1.select(1, 4), 1, 4)\n    v3 = v2.unsqueeze(0).expand(2, 2, 12)\n    v4 = v1.view_as(v1)\n    v4.fill_(5)\n    v5 = t1.t()\n    v6 = t1.view(torch.int32)\n    v5.transpose_(0, 1)\n    v7 = torch.select_scatter(v4, v1.select(1, 0), 1, 0)\n    idx8 = torch.tensor([0], device=v4.device)\n    v4.index_add_(0, idx8, v7.narrow(0, 0, 1))\n    return (v2, v2, t2, lst, dct)\n"
+}

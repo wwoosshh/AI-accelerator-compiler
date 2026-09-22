@@ -1,0 +1,15 @@
+torch 2.14.0+cu130 | backend eager | device cpu | seed 1 | dtype mix | start 2026-09-22 09:25:04
+progress iter=25 {'invalid': 3, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 22} elapsed=2s last=0.0s
+progress iter=50 {'invalid': 7, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 42} elapsed=3s last=0.0s
+progress iter=75 {'invalid': 10, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 64} elapsed=4s last=0.0s
+progress iter=100 {'invalid': 12, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 87} elapsed=6s last=0.0s
+progress iter=125 {'invalid': 18, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 106} elapsed=7s last=0.2s
+progress iter=150 {'invalid': 20, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 129} elapsed=8s last=0.1s
+progress iter=175 {'invalid': 23, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 151} elapsed=9s last=0.1s
+progress iter=200 {'invalid': 26, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 173} elapsed=10s last=0.1s
+progress iter=225 {'invalid': 29, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 195} elapsed=11s last=0.1s
+progress iter=250 {'invalid': 32, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 217} elapsed=12s last=0.0s
+progress iter=275 {'invalid': 34, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 240} elapsed=13s last=0.0s
+progress iter=300 {'invalid': 36, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 263} elapsed=15s last=0.3s
+DONE iterations=308 stats={'invalid': 36, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 271} cases=0 elapsed=15s
+summary written

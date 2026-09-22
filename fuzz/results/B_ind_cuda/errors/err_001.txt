@@ -1,0 +1,52 @@
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2.permute(0, 2, 1)
+    v2 = t1.t()
+    v3 = t2.neg()
+    v4 = t2.view(torch.int32)
+    idx5 = torch.tensor([6, 0, 10], device=v2.device)
+    v2.index_fill_(0, idx5, 4)
+    v3.sub_(t2.narrow(0, 0, 1))
+    v6 = v3.reshape((24,))
+    v7 = v1.unfold(1, 1, 2)
+    idx8 = torch.tensor([2, 1, 0], device=v7.device)
+    v7.index_fill_(2, idx8, 2)
+    return (t0, v4, v1, t2, t0, lst, dct)
+
+# dynamic=None aliased=None
+
+BackendCompilerFailed: backend='inductor' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 3
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+ torch._functionalize_sync(t.elem)  # type: ignore[attr-defined]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_compile.py", line 54, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\utils\_stats.py", line 29, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1707, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 2495, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1855, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+    r = func(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 3
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

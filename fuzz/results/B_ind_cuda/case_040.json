@@ -1,0 +1,52 @@
+{
+ "id": 40,
+ "iter": 1790,
+ "seed": 21001853,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "side_effect",
+  "view_reshape",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[3]['key8']: 12/24 elems differ at [1, 3, 6, 7, 11]: eager [-12.0, -4.0, -7.0, -4.0, -7.0] vs compiled [-7.0, -6.0, -10.0, -10.0, -5.0]",
+  "call0.arg6['key8']: 12/24 elems differ at [1, 3, 6, 7, 11]: eager [-12.0, -4.0, -7.0, -4.0, -7.0] vs compiled [-7.0, -6.0, -10.0, -10.0, -5.0]",
+  "call1.out[3]['key8']: 13/24 elems differ at [1, 2, 5, 6, 7]: eager [-7.0, -4.0, -9.0, -9.0, -4.0] vs compiled [-9.0, -7.0, -4.0, -4.0, -9.0]",
+  "call1.arg6['key8']: 13/24 elems differ at [1, 2, 5, 6, 7]: eager [-7.0, -4.0, -9.0, -9.0, -4.0] vs compiled [-9.0, -7.0, -4.0, -4.0, -9.0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t0.permute(1, 0)\n    ta.masked_fill_(ta > -2, -2)\n    v2 = ta.view_as(ta)\n    v3 = v2[3, 2:-2]\n    v2.add_(v2.flip(1))\n    v4 = v2.reshape((24,))\n    v5 = v4[10:12]\n    v6 = torch.select_scatter(v5, v3.select(0, 0), 0, 0)\n    v7 = v3 + 3\n    dct['key8'] = v4\n    return (v1, v6, lst, dct)\n"
+}

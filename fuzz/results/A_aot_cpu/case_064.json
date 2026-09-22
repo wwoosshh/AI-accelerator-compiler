@@ -1,0 +1,51 @@
+{
+ "id": 64,
+ "iter": 7556,
+ "seed": 11007589,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "view_dtype",
+  "view_select",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 6/12 elems differ at [0, 1, 2, 3, 4]: eager [-3, 7, -7, 4, -3] vs compiled [-7, 5, 0, -7, -8]",
+  "call1.out[1]: 5/12 elems differ at [0, 1, 2, 3, 5]: eager [-8, 6, 3, -3, 4] vs compiled [7, -7, 0, 0, -3]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    t0.mul_(1)\n    v1 = t2.view(torch.int32)\n    v2 = ta.select(1, 1)\n    v3 = v2.permute(0, 1)\n    v4 = ta.unsqueeze(3)\n    return (ta, v3, ta, lst, dct)\n"
+}

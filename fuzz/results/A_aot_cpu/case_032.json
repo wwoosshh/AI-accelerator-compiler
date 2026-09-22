@@ -1,0 +1,45 @@
+{
+ "id": 32,
+ "iter": 3348,
+ "seed": 11003381,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "side_effect",
+  "view_reshape",
+  "view_slice",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 8/24 elems differ at [7, 8, 9, 10, 13]: eager [3.0, 4.0, 6.0, 4.0, 4.0] vs compiled [4.0, 5.0, 4.0, 1.0, 3.0]",
+  "call0.out[5]: 8/24 elems differ at [7, 8, 9, 10, 13]: eager [3.0, 4.0, 6.0, 4.0, 4.0] vs compiled [4.0, 5.0, 4.0, 1.0, 3.0]",
+  "call1.out[0]: 6/24 elems differ at [6, 9, 11, 12, 15]: eager [6.0, 1.0, 5.0, 4.0, 4.0] vs compiled [4.0, 4.0, 8.0, 6.0, 1.0]",
+  "call1.out[5]: 6/24 elems differ at [6, 9, 11, 12, 15]: eager [6.0, 1.0, 5.0, 4.0, 4.0] vs compiled [4.0, 4.0, 8.0, 6.0, 1.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1.view((24,))\n    t0.masked_fill_(t0 > 0, 4)\n    v2 = ta.unsqueeze(1)\n    v3 = v2.abs()\n    v2.copy_(v3)\n    v4 = v3[:, :, -2, 3]\n    v5 = v3.flatten()\n    lst.append(v5)\n    v6 = v3.sum(0, keepdim=False)\n    return (v2, v5, v3, v1, t0, v2, lst, dct)\n"
+}

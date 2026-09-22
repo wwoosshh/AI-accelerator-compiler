@@ -1,0 +1,47 @@
+{
+ "id": 12,
+ "iter": 1475,
+ "seed": 11001508,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "setitem",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg1: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [-5, -6, -8, -7, 4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [-7, 6, 4, -6, 8] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t0.unsqueeze(0)\n    v2 = t1.unfold(1, 4, 5)\n    v1[v1 > 0] = 4\n    t0[:, 0:3:2, 3:] += 0\n    idx3 = torch.tensor([1], device=v2.device)\n    v2.index_fill_(0, idx3, 5)\n    idx4 = torch.tensor([1, 0, 3], device=t2.device)\n    t2.index_fill_(2, idx4, 0)\n    t2[:-1, :, :] = t2[1:, :, :].clone()\n    return (t2, t2, v1, t0, lst, dct)\n"
+}

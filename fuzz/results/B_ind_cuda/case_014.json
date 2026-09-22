@@ -1,0 +1,40 @@
+{
+ "id": 14,
+ "iter": 600,
+ "seed": 21000663,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "noop_alias",
+  "view_expand"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 5005.0, 5006.0, 5004.0, 5003.0] vs compiled [8993.0, 9005.0, 9006.0, 9004.0, 9003.0]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4993.0, 5005.0, 5006.0, 5004.0, 5003.0] vs compiled [8993.0, 9005.0, 9006.0, 9004.0, 9003.0]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3993.0, 4005.0, 4006.0, 4004.0, 4003.0] vs compiled [8993.0, 9005.0, 9006.0, 9004.0, 9003.0]",
+  "probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3993.0, 4005.0, 4006.0, 4004.0, 4003.0] vs compiled [8993.0, 9005.0, 9006.0, 9004.0, 9003.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = torch.ops.aten.alias(t1)\n    v2 = torch.roll(t0, 2, 1)\n    v3 = t1 - k\n    v4 = v2.unsqueeze(0).expand(3, 2, 2, 6)\n    v5 = v1 + -5\n    v6 = t0.reshape(t0.shape)\n    return (v5, v3, v3, t1, v5, lst, dct)\n"
+}

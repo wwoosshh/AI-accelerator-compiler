@@ -1,0 +1,55 @@
+{
+ "id": 44,
+ "iter": 2039,
+ "seed": 21002102,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "noop_arith",
+  "side_effect",
+  "view_reshape"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2995.0, 2992.0, 3000.0, 2992.0, 3007.0] vs compiled [6995.0, 6992.0, 7000.0, 6992.0, 7007.0]",
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2995.0, 2992.0, 3000.0, 2992.0, 3007.0] vs compiled [6995.0, 6992.0, 7000.0, 6992.0, 7007.0]",
+  "probe.call0.out[4]['key1']: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3995.0, 3992.0, 4000.0, 3992.0, 4007.0] vs compiled [6995.0, 6992.0, 7000.0, 6992.0, 7007.0]",
+  "probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3995.0, 3992.0, 4000.0, 3992.0, 4007.0] vs compiled [6995.0, 6992.0, 7000.0, 6992.0, 7007.0]",
+  "probe.call0.arg5['key1']: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3995.0, 3992.0, 4000.0, 3992.0, 4007.0] vs compiled [6995.0, 6992.0, 7000.0, 6992.0, 7007.0]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2996.0, 3005.0, 3007.0, 2993.0, 3006.0] vs compiled [6996.0, 7005.0, 7007.0, 6993.0, 7006.0]",
+  "probe.call1.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2996.0, 3005.0, 3007.0, 2993.0, 3006.0] vs compiled [6996.0, 7005.0, 7007.0, 6993.0, 7006.0]",
+  "probe.call1.out[4]['key1']: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3996.0, 4005.0, 4007.0, 3993.0, 4006.0] vs compiled [6996.0, 7005.0, 7007.0, 6993.0, 7006.0]",
+  "probe.call1.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3996.0, 4005.0, 4007.0, 3993.0, 4006.0] vs compiled [6996.0, 7005.0, 7007.0, 6993.0, 7006.0]",
+  "probe.call1.arg5['key1']: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3996.0, 4005.0, 4007.0, 3993.0, 4006.0] vs compiled [6996.0, 7005.0, 7007.0, 6993.0, 7006.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    dct['key1'] = t1\n    v2 = t2.view((2, 2, 6))\n    v2.mul_(0)\n    t0.add_(-1)\n    idx3 = torch.tensor([2, 1], device=t1.device)\n    t1.index_fill_(0, idx3, -5)\n    v4 = t1.clone()\n    v5 = v2.clamp(0, 3)\n    return (v4, v4, t0, lst, dct)\n"
+}

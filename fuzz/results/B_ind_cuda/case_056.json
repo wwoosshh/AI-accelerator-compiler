@@ -1,0 +1,37 @@
+{
+ "id": 56,
+ "iter": 2485,
+ "seed": 21002548,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "view_reshape",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 4,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2008, 2001, 1996, 1996, 1992] vs compiled [5008, 5001, 4996, 4996, 4992]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3008, 3001, 2996, 2996, 2992] vs compiled [5008, 5001, 4996, 4996, 4992]",
+  "probe.call0.arg1: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3008, 3001, 2996, 2996, 2992] vs compiled [5008, 5001, 4996, 4996, 4992]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.view((3, 8))\n    v2 = t0[0:2:3, :]\n    v3 = v2.transpose(1, 0)\n    v4 = t1 - k\n    return (t0, v4, t1, v3, lst, dct)\n"
+}

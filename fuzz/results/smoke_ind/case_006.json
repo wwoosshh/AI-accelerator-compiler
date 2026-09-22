@@ -1,0 +1,23 @@
+{
+ "id": 6,
+ "iter": 117,
+ "seed": 1000120,
+ "status": "alias_diff",
+ "kinds": [
+  "noop_alias",
+  "noop_arith",
+  "scatter_fn",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 4,
+ "diffs": [
+  "probe.call0.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-6, 7, -6, 3, -2] vs compiled [994, 1007, 994, 1003, 998]",
+  "probe.call1.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-5, -1, -7, 6, -5] vs compiled [995, 999, 993, 1006, 995]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t2[:]\n    v2 = t2 + 0\n    v3 = v2.unfold(1, 3, 2)\n    v4 = torch.diagonal_scatter(t1, t0.diagonal())\n    return (v2, t0, v4, t0, lst, dct)\n"
+}

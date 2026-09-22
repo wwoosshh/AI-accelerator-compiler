@@ -1,0 +1,42 @@
+{
+ "id": 22,
+ "iter": 920,
+ "seed": 21000983,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "scatter_fn",
+  "view_select"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.view(-1)"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "probe.call0.out[0]: 6/6 elems differ at [0, 1, 2, 3, 4]: eager [3997.0, 4003.0, 3997.0, 3992.0, 4002.0] vs compiled [5997.0, 6003.0, 5997.0, 5992.0, 6002.0]",
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [1997.0, 1997.0, 2008.0, 1996.0, 2003.0] vs compiled [5997.0, 4997.0, 5008.0, 4996.0, 6003.0]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997.0, 2997.0, 3008.0, 2996.0, 4003.0] vs compiled [5997.0, 4997.0, 5008.0, 4996.0, 6003.0]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997.0, 2997.0, 3008.0, 2996.0, 4003.0] vs compiled [5997.0, 4997.0, 5008.0, 4996.0, 6003.0]",
+  "probe.call0.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997.0, 2997.0, 3008.0, 2996.0, 4003.0] vs compiled [5997.0, 4997.0, 5008.0, 4996.0, 6003.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t0.select(1, 0)\n    v2 = ta + k\n    v3 = t0.neg()\n    v4 = torch.select_scatter(t0, v3.select(0, 4), 0, 4)\n    v5 = torch.cat([v2, ta], 0)\n    t1.copy_(v2)\n    return (v1, v2, t0, lst, dct)\n"
+}

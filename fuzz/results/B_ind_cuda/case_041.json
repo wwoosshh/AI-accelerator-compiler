@@ -1,0 +1,51 @@
+{
+ "id": 41,
+ "iter": 1795,
+ "seed": 21001858,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_dtype",
+  "view_reshape",
+  "view_transpose"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8997, 9002, 9007, 9001, 9006] vs compiled [12997, 13002, 13007, 13001, 13006]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8997, 9002, 9007, 9001, 9006] vs compiled [12997, 13002, 13007, 13001, 13006]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [3997, 4002, 4007, 4001, 4006] vs compiled [12997, 13002, 13007, 13001, 13006]",
+  "probe.call0.out[4]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8997, 9002, 9007, 9001, 9006] vs compiled [12997, 13002, 13007, 13001, 13006]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [8997, 9002, 9007, 9001, 9006] vs compiled [12997, 13002, 13007, 13001, 13006]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    t2[:-1, :] = t2[1:, :].clone()\n    v1 = t0 + k\n    v2 = t2[...]\n    t2.add_(k)\n    v3 = v2.view(torch.int32)\n    v4 = t0.view((3, 8))\n    v2[-2] = -2\n    v5 = v2.permute(1, 0)\n    return (t0, v5, t0, v1, t0, lst, dct)\n"
+}

@@ -1,0 +1,987 @@
+torch 2.14.0+cu130 | backend aot_eager | device cpu | seed 11 | dtype mix | start 2026-09-22 09:31:42
+progress iter=25 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 25} elapsed=3s last=0.1s
+progress iter=50 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 50} elapsed=6s last=0.1s
+progress iter=75 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 75} elapsed=8s last=0.1s
+[iter 76] value_diff seed=11000109 dynamic=None aliased=None kinds=aux,inplace_meta,setitem,view_select,view_slice,view_transpose,view_unfold
+       call0.out[0]: 2/4 elems differ at [1, 3]: eager [-3.0, -6.0] vs compiled [0.0, 0.0]
+       call0.out[3]: 2/4 elems differ at [1, 3]: eager [-3.0, -6.0] vs compiled [0.0, 0.0]
+       call0.arg1: 11/24 elems differ at [7, 8, 9, 10, 11]: eager [8.0, -3.0, -3.0, 5.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[0]: 2/4 elems differ at [1, 3]: eager [-7.0, -4.0] vs compiled [0.0, 0.0]
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break from `Tensor.item()`, consider setting:
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] or:
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] to include these operations in the captured graph.
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break: from user code at:
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]   File "<aliasfuzz>", line 7, in fn
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:31:51.455000 25556 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+progress iter=100 {'invalid': 0, 'compile_error': 0, 'value_diff': 1, 'alias_diff': 0, 'pass': 99} elapsed=11s last=0.0s
+[iter 116] value_diff seed=11000149 dynamic=True aliased=None kinds=aux,functional,index_inplace,inplace,scatter_fn,view_slice,view_unfold
+       call0.out[3]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [1, 4, -1, 6, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [1, 4, -1, 6, -3] vs compiled [0, 0, 0, 0, 0]
+       call1.out[3]: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [-2, -8, 1, -8, 7] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [-2, -8, 1, -8, 7] vs compiled [0, 0, 0, 0, 0]
+progress iter=125 {'invalid': 0, 'compile_error': 0, 'value_diff': 2, 'alias_diff': 0, 'pass': 123} elapsed=14s last=0.4s
+progress iter=150 {'invalid': 0, 'compile_error': 1, 'value_diff': 2, 'alias_diff': 0, 'pass': 147} elapsed=16s last=0.0s
+progress iter=175 {'invalid': 1, 'compile_error': 1, 'value_diff': 2, 'alias_diff': 0, 'pass': 171} elapsed=18s last=0.1s
+progress iter=200 {'invalid': 1, 'compile_error': 1, 'value_diff': 2, 'alias_diff': 0, 'pass': 196} elapsed=20s last=0.2s
+[iter 201] value_diff seed=11000234 dynamic=None aliased=('ta', 't0[1:]') kinds=functional,inplace,noop_alias,setitem,view_dtype,view_select,view_slice
+       call0.out[1]: 2/3 elems differ at [0, 2]: eager [-20, -17] vs compiled [-7, -20]
+       call1.out[1]: 3/3 elems differ at [0, 1, 2]: eager [-7, -18, -19] vs compiled [-13, -7, -18]
+progress iter=225 {'invalid': 2, 'compile_error': 4, 'value_diff': 3, 'alias_diff': 0, 'pass': 216} elapsed=23s last=0.1s
+progress iter=250 {'invalid': 2, 'compile_error': 5, 'value_diff': 3, 'alias_diff': 0, 'pass': 240} elapsed=25s last=0.2s
+progress iter=275 {'invalid': 3, 'compile_error': 5, 'value_diff': 3, 'alias_diff': 0, 'pass': 264} elapsed=28s last=0.1s
+progress iter=300 {'invalid': 3, 'compile_error': 7, 'value_diff': 3, 'alias_diff': 0, 'pass': 287} elapsed=31s last=0.9s
+progress iter=325 {'invalid': 3, 'compile_error': 7, 'value_diff': 3, 'alias_diff': 0, 'pass': 312} elapsed=33s last=0.0s
+progress iter=350 {'invalid': 3, 'compile_error': 9, 'value_diff': 3, 'alias_diff': 0, 'pass': 335} elapsed=36s last=0.1s
+[iter 362] value_diff seed=11000395 dynamic=None aliased=None kinds=aux,index_inplace,setitem,view_slice,view_transpose,view_unfold
+       call0.out[2]: 9/24 elems differ at [3, 4, 9, 10, 11]: eager [8.0, 8.0, 7.0, -7.0, -6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 9/24 elems differ at [3, 4, 9, 10, 11]: eager [8.0, 8.0, 7.0, -7.0, -6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[2]: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [2.0, -1.0, -6.0, -5.0, -8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg1: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [2.0, -1.0, -6.0, -5.0, -8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=375 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 359} elapsed=38s last=0.1s
+progress iter=400 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 384} elapsed=42s last=0.3s
+progress iter=425 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 409} elapsed=44s last=0.1s
+progress iter=450 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 434} elapsed=46s last=0.0s
+progress iter=475 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 459} elapsed=48s last=0.1s
+progress iter=500 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 484} elapsed=51s last=0.1s
+progress iter=525 {'invalid': 3, 'compile_error': 9, 'value_diff': 4, 'alias_diff': 0, 'pass': 509} elapsed=53s last=0.0s
+progress iter=550 {'invalid': 3, 'compile_error': 10, 'value_diff': 4, 'alias_diff': 0, 'pass': 533} elapsed=56s last=0.0s
+progress iter=575 {'invalid': 3, 'compile_error': 10, 'value_diff': 4, 'alias_diff': 0, 'pass': 558} elapsed=58s last=0.1s
+progress iter=600 {'invalid': 3, 'compile_error': 11, 'value_diff': 4, 'alias_diff': 0, 'pass': 582} elapsed=61s last=0.1s
+progress iter=625 {'invalid': 3, 'compile_error': 11, 'value_diff': 4, 'alias_diff': 0, 'pass': 607} elapsed=63s last=0.0s
+progress iter=650 {'invalid': 3, 'compile_error': 11, 'value_diff': 4, 'alias_diff': 0, 'pass': 632} elapsed=67s last=0.2s
+progress iter=675 {'invalid': 3, 'compile_error': 12, 'value_diff': 4, 'alias_diff': 0, 'pass': 656} elapsed=70s last=0.1s
+progress iter=700 {'invalid': 3, 'compile_error': 13, 'value_diff': 4, 'alias_diff': 0, 'pass': 680} elapsed=72s last=0.1s
+progress iter=725 {'invalid': 3, 'compile_error': 13, 'value_diff': 4, 'alias_diff': 0, 'pass': 705} elapsed=74s last=0.1s
+[iter 739] value_diff seed=11000772 dynamic=None aliased=None kinds=aux,functional,index_inplace,setitem,view_dtype,view_select,view_slice,view_unfold
+       call0.out[1]: 4/12 elems differ at [2, 6, 10, 11]: eager [4, 1, -6, -1] vs compiled [0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [4, 1, -6, 4, -4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 4/12 elems differ at [2, 6, 10, 11]: eager [1, 8, -3, -1] vs compiled [0, 0, 0, 0]
+       call1.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [1, 8, -3, -7, 7] vs compiled [0, 0, 0, 0, 0]
+progress iter=750 {'invalid': 4, 'compile_error': 14, 'value_diff': 5, 'alias_diff': 0, 'pass': 727} elapsed=77s last=0.1s
+progress iter=775 {'invalid': 4, 'compile_error': 15, 'value_diff': 5, 'alias_diff': 0, 'pass': 751} elapsed=80s last=0.0s
+[iter 799] value_diff seed=11000832 dynamic=True aliased=('ta', 't0.transpose(0, 1)') kinds=aux,index_inplace,noop_alias,scatter_fn,side_effect
+       call0.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4, 6, 3, -5, 1] vs compiled [2, 1, 0, 6, -14]
+       call1.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [6, 2, 6, -6, 2] vs compiled [-10, 7, 4, 3, 6]
+progress iter=800 {'invalid': 4, 'compile_error': 15, 'value_diff': 6, 'alias_diff': 0, 'pass': 775} elapsed=83s last=0.1s
+progress iter=825 {'invalid': 4, 'compile_error': 16, 'value_diff': 6, 'alias_diff': 0, 'pass': 799} elapsed=86s last=0.8s
+progress iter=850 {'invalid': 4, 'compile_error': 16, 'value_diff': 6, 'alias_diff': 0, 'pass': 824} elapsed=89s last=0.0s
+progress iter=875 {'invalid': 4, 'compile_error': 16, 'value_diff': 6, 'alias_diff': 0, 'pass': 849} elapsed=91s last=0.1s
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0] Error while creating guard:
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0] Name: ''
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Source: shape_env
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Create Function: SHAPE_ENV
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Guard Types: None
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Code List: None
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Object Weakref: None
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     Guarded Class Weakref: None
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0] Traceback (most recent call last):
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     return self.create_fn(builder, self)
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:33:13.787000 25556 Lib\site-packages\torch\_guards.py:376] [1/0] IndexError: list index out of range
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0] Created at:
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]     tracer = InstructionTranslator(
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]     output=OutputGraph(
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]     self.init_ambient_guards()
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:33:13.790000 25556 Lib\site-packages\torch\_guards.py:378] [1/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=900 {'invalid': 4, 'compile_error': 17, 'value_diff': 6, 'alias_diff': 0, 'pass': 873} elapsed=94s last=0.1s
+progress iter=925 {'invalid': 4, 'compile_error': 18, 'value_diff': 6, 'alias_diff': 0, 'pass': 897} elapsed=96s last=0.2s
+progress iter=950 {'invalid': 4, 'compile_error': 18, 'value_diff': 6, 'alias_diff': 0, 'pass': 922} elapsed=99s last=0.1s
+progress iter=975 {'invalid': 4, 'compile_error': 18, 'value_diff': 6, 'alias_diff': 0, 'pass': 947} elapsed=102s last=0.0s
+progress iter=1000 {'invalid': 4, 'compile_error': 18, 'value_diff': 6, 'alias_diff': 0, 'pass': 972} elapsed=104s last=0.0s
+progress iter=1025 {'invalid': 4, 'compile_error': 19, 'value_diff': 6, 'alias_diff': 0, 'pass': 996} elapsed=106s last=0.1s
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] failed while attempting to run meta for aten.view.dtype
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] Traceback (most recent call last):
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     r = func(*args, **kwargs)
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]         ^^^^^^^^^^^^^^^^^^^^^
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     return self._op(*args, **kwargs)
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:33:30.417000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 12
+progress iter=1050 {'invalid': 4, 'compile_error': 21, 'value_diff': 6, 'alias_diff': 0, 'pass': 1019} elapsed=109s last=0.1s
+progress iter=1075 {'invalid': 4, 'compile_error': 23, 'value_diff': 6, 'alias_diff': 0, 'pass': 1042} elapsed=112s last=0.0s
+progress iter=1100 {'invalid': 4, 'compile_error': 23, 'value_diff': 6, 'alias_diff': 0, 'pass': 1067} elapsed=114s last=0.2s
+progress iter=1125 {'invalid': 4, 'compile_error': 23, 'value_diff': 6, 'alias_diff': 0, 'pass': 1092} elapsed=117s last=0.1s
+progress iter=1150 {'invalid': 4, 'compile_error': 23, 'value_diff': 6, 'alias_diff': 0, 'pass': 1117} elapsed=119s last=0.0s
+progress iter=1175 {'invalid': 4, 'compile_error': 23, 'value_diff': 6, 'alias_diff': 0, 'pass': 1142} elapsed=122s last=0.0s
+[iter 1193] value_diff seed=11001226 dynamic=None aliased=None kinds=aux,functional,index_inplace,inplace,noop_arith,view_reshape,view_unfold
+       call0.out[1]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[1]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [7.0, 1.0, 5.0, 1.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=1200 {'invalid': 5, 'compile_error': 23, 'value_diff': 7, 'alias_diff': 0, 'pass': 1165} elapsed=124s last=0.1s
+progress iter=1225 {'invalid': 5, 'compile_error': 25, 'value_diff': 7, 'alias_diff': 0, 'pass': 1188} elapsed=126s last=0.1s
+progress iter=1250 {'invalid': 5, 'compile_error': 27, 'value_diff': 7, 'alias_diff': 0, 'pass': 1211} elapsed=128s last=0.1s
+[iter 1261] value_diff seed=11001294 dynamic=True aliased=None kinds=aux,functional,index_inplace,inplace,view_dtype,view_reshape,view_transpose,view_unfold
+       call0.out[0]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -3, -1, 3, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -3, -1, 3, 1] vs compiled [0, 0, 0, 0, 0]
+       call1.out[0]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, -5, 3, -3, -7] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, -5, 3, -3, -7] vs compiled [0, 0, 0, 0, 0]
+progress iter=1275 {'invalid': 5, 'compile_error': 27, 'value_diff': 8, 'alias_diff': 0, 'pass': 1235} elapsed=130s last=0.1s
+progress iter=1300 {'invalid': 5, 'compile_error': 27, 'value_diff': 8, 'alias_diff': 0, 'pass': 1260} elapsed=134s last=0.1s
+progress iter=1325 {'invalid': 5, 'compile_error': 27, 'value_diff': 8, 'alias_diff': 0, 'pass': 1285} elapsed=135s last=0.1s
+progress iter=1350 {'invalid': 5, 'compile_error': 27, 'value_diff': 8, 'alias_diff': 0, 'pass': 1310} elapsed=138s last=0.1s
+[iter 1352] value_diff seed=11001385 dynamic=None aliased=None kinds=inplace,noop_alias,setitem,view_reshape,view_select,view_unfold
+       call0.arg1: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [1, 1, 1, 1, 1] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [1, 1, 1, 1, 1] vs compiled [0, 0, 0, 0, 0]
+progress iter=1375 {'invalid': 6, 'compile_error': 27, 'value_diff': 9, 'alias_diff': 0, 'pass': 1333} elapsed=140s last=0.0s
+progress iter=1400 {'invalid': 6, 'compile_error': 27, 'value_diff': 9, 'alias_diff': 0, 'pass': 1358} elapsed=143s last=0.2s
+[iter 1403] value_diff seed=11001436 dynamic=True aliased=None kinds=aux,index_inplace,inplace,view_squeeze,view_transpose,view_unfold
+       call0.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4.0, 4.0, 4.0, 4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4.0, 4.0, 4.0, 4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4.0, 4.0, 4.0, 4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4.0, 4.0, 4.0, 4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+[iter 1414] value_diff seed=11001447 dynamic=None aliased=('ta', 't0') kinds=aux,index_inplace,inplace,view_reshape,view_select,view_unfold
+       call0.arg0: 10/24 elems differ at [14, 15, 16, 17, 18]: eager [-6.0, 7.0, 2.0, 5.0, 5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg2: 10/24 elems differ at [14, 15, 16, 17, 18]: eager [-6.0, 7.0, 2.0, 5.0, 5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg0: 10/24 elems differ at [14, 15, 16, 17, 18]: eager [-6.0, -4.0, -6.0, 2.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg2: 10/24 elems differ at [14, 15, 16, 17, 18]: eager [-6.0, -4.0, -6.0, 2.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=1425 {'invalid': 6, 'compile_error': 28, 'value_diff': 11, 'alias_diff': 0, 'pass': 1380} elapsed=145s last=0.2s
+progress iter=1450 {'invalid': 7, 'compile_error': 28, 'value_diff': 11, 'alias_diff': 0, 'pass': 1404} elapsed=148s last=0.1s
+[iter 1475] value_diff seed=11001508 dynamic=True aliased=None kinds=aux,index_inplace,setitem,view_squeeze,view_unfold
+       call0.arg1: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [-5, -6, -8, -7, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [-7, 6, 4, -6, 8] vs compiled [0, 0, 0, 0, 0]
+progress iter=1475 {'invalid': 7, 'compile_error': 28, 'value_diff': 12, 'alias_diff': 0, 'pass': 1428} elapsed=151s last=0.3s
+[iter 1487] value_diff seed=11001520 dynamic=None aliased=None kinds=functional,setitem,view_slice,view_squeeze,view_transpose,view_unfold
+       call0.arg1: 6/24 elems differ at [3, 7, 11, 15, 19]: eager [-1, -1, -2, 1, 1] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 6/24 elems differ at [3, 7, 11, 15, 19]: eager [4, -7, -3, 1, 1] vs compiled [0, 0, 0, 0, 0]
+progress iter=1500 {'invalid': 7, 'compile_error': 29, 'value_diff': 13, 'alias_diff': 0, 'pass': 1451} elapsed=154s last=0.1s
+progress iter=1525 {'invalid': 7, 'compile_error': 30, 'value_diff': 13, 'alias_diff': 0, 'pass': 1475} elapsed=156s last=0.1s
+progress iter=1550 {'invalid': 7, 'compile_error': 30, 'value_diff': 13, 'alias_diff': 0, 'pass': 1500} elapsed=160s last=0.0s
+progress iter=1575 {'invalid': 7, 'compile_error': 31, 'value_diff': 13, 'alias_diff': 0, 'pass': 1524} elapsed=162s last=0.1s
+progress iter=1600 {'invalid': 7, 'compile_error': 31, 'value_diff': 13, 'alias_diff': 0, 'pass': 1549} elapsed=165s last=0.1s
+progress iter=1625 {'invalid': 7, 'compile_error': 31, 'value_diff': 13, 'alias_diff': 0, 'pass': 1574} elapsed=167s last=0.1s
+progress iter=1650 {'invalid': 7, 'compile_error': 31, 'value_diff': 13, 'alias_diff': 0, 'pass': 1599} elapsed=170s last=0.1s
+progress iter=1675 {'invalid': 7, 'compile_error': 31, 'value_diff': 13, 'alias_diff': 0, 'pass': 1624} elapsed=174s last=0.1s
+progress iter=1700 {'invalid': 7, 'compile_error': 33, 'value_diff': 13, 'alias_diff': 0, 'pass': 1647} elapsed=176s last=0.0s
+progress iter=1725 {'invalid': 7, 'compile_error': 34, 'value_diff': 13, 'alias_diff': 0, 'pass': 1671} elapsed=178s last=0.1s
+progress iter=1750 {'invalid': 7, 'compile_error': 34, 'value_diff': 13, 'alias_diff': 0, 'pass': 1696} elapsed=180s last=0.0s
+progress iter=1775 {'invalid': 8, 'compile_error': 34, 'value_diff': 13, 'alias_diff': 0, 'pass': 1720} elapsed=184s last=0.3s
+progress iter=1800 {'invalid': 8, 'compile_error': 35, 'value_diff': 13, 'alias_diff': 0, 'pass': 1744} elapsed=186s last=0.2s
+[iter 1822] value_diff seed=11001855 dynamic=None aliased=None kinds=aux,index_inplace,inplace,inplace_meta,noop_alias,scatter_fn,view_dtype,view_expand,view_transpose,view_unfold
+       call0.arg1: 4/24 elems differ at [10, 11, 22, 23]: eager [6, 7, 1, -8] vs compiled [0, 0, 0, 0]
+       call1.arg1: 4/24 elems differ at [10, 11, 22, 23]: eager [7, -4, -2, 1] vs compiled [0, 0, 0, 0]
+progress iter=1825 {'invalid': 8, 'compile_error': 36, 'value_diff': 14, 'alias_diff': 0, 'pass': 1767} elapsed=188s last=0.1s
+progress iter=1850 {'invalid': 8, 'compile_error': 37, 'value_diff': 14, 'alias_diff': 0, 'pass': 1791} elapsed=191s last=0.0s
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] failed while attempting to run meta for aten.set_.source_Storage
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] Traceback (most recent call last):
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]     r = func(*args, **kwargs)
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]         ^^^^^^^^^^^^^^^^^^^^^
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]     return self._op(*args, **kwargs)
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:34:53.176000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] RuntimeError: Expected !size_bytes_is_heap_allocated_ to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+progress iter=1875 {'invalid': 8, 'compile_error': 40, 'value_diff': 14, 'alias_diff': 0, 'pass': 1813} elapsed=194s last=0.1s
+[iter 1884] alias_diff seed=11001917 dynamic=None aliased=('ta', 't0[1:]') kinds=aux,index_inplace,inplace,setitem,view_dtype,view_reshape,view_select,view_transpose
+       probe.call0.out[0]: 6/12 elems differ at [0, 1, 2, 3, 4]: eager [3000, 3000, 3000, 3000, 3000] vs compiled [1000, 1000, 1000, 1000, 1000]
+       probe.call0.out[1]: 6/18 elems differ at [6, 7, 8, 9, 10]: eager [3000, 3000, 3000, 3000, 3000] vs compiled [2000, 2000, 2000, 2000, 2000]
+       probe.call0.arg0: 12/24 elems differ at [0, 1, 2, 3, 4]: eager [0, 0, 0, 0, 0] vs compiled [1000, 1000, 1000, 1000, 1000]
+       probe.call0.arg3: 6/18 elems differ at [6, 7, 8, 9, 10]: eager [3000, 3000, 3000, 3000, 3000] vs compiled [2000, 2000, 2000, 2000, 2000]
+progress iter=1900 {'invalid': 8, 'compile_error': 41, 'value_diff': 14, 'alias_diff': 1, 'pass': 1836} elapsed=196s last=0.1s
+progress iter=1925 {'invalid': 8, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1860} elapsed=199s last=0.3s
+progress iter=1950 {'invalid': 8, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1885} elapsed=202s last=0.1s
+progress iter=1975 {'invalid': 9, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1909} elapsed=205s last=0.1s
+progress iter=2000 {'invalid': 9, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1934} elapsed=208s last=0.1s
+progress iter=2025 {'invalid': 9, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1959} elapsed=212s last=0.0s
+progress iter=2050 {'invalid': 10, 'compile_error': 42, 'value_diff': 14, 'alias_diff': 1, 'pass': 1983} elapsed=214s last=0.0s
+progress iter=2075 {'invalid': 10, 'compile_error': 44, 'value_diff': 14, 'alias_diff': 1, 'pass': 2006} elapsed=217s last=1.0s
+[iter 2099] value_diff seed=11002132 dynamic=True aliased=None kinds=aux,functional,inplace,setitem,view_reshape,view_slice,view_unfold
+       call0.out[1]: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [3, 1, -2, 1, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [3, 1, -2, 1, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 13/24 elems differ at [4, 5, 6, 9, 11]: eager [-4, -7, -10, -8, -4] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 13/24 elems differ at [4, 5, 6, 9, 11]: eager [-4, -7, -10, -8, -4] vs compiled [0, 0, 0, 0, 0]
+progress iter=2100 {'invalid': 10, 'compile_error': 44, 'value_diff': 15, 'alias_diff': 1, 'pass': 2030} elapsed=220s last=0.0s
+[iter 2104] value_diff seed=11002137 dynamic=None aliased=None kinds=functional,inplace,scatter_fn,setitem,view_slice,view_transpose,view_unfold
+       call0.arg1: 8/24 elems differ at [4, 5, 6, 7, 16]: eager [3.0, 2.0, -2.0, 3.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg1: 8/24 elems differ at [4, 5, 6, 7, 16]: eager [5.0, 5.0, 8.0, -1.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=2125 {'invalid': 10, 'compile_error': 44, 'value_diff': 16, 'alias_diff': 1, 'pass': 2054} elapsed=222s last=0.1s
+progress iter=2150 {'invalid': 10, 'compile_error': 44, 'value_diff': 16, 'alias_diff': 1, 'pass': 2079} elapsed=224s last=0.0s
+progress iter=2175 {'invalid': 10, 'compile_error': 45, 'value_diff': 16, 'alias_diff': 1, 'pass': 2103} elapsed=226s last=0.0s
+progress iter=2200 {'invalid': 10, 'compile_error': 45, 'value_diff': 16, 'alias_diff': 1, 'pass': 2128} elapsed=229s last=0.0s
+[iter 2204] value_diff seed=11002237 dynamic=True aliased=None kinds=aux,index_inplace,inplace,view_reshape,view_transpose,view_unfold
+       call0.out[1]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-7, 2, -8, 5, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-7, 2, -8, 5, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [2, -7, 8, 5, -1] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [2, -7, 8, 5, -1] vs compiled [0, 0, 0, 0, 0]
+progress iter=2225 {'invalid': 11, 'compile_error': 46, 'value_diff': 17, 'alias_diff': 1, 'pass': 2150} elapsed=232s last=0.1s
+[iter 2229] value_diff seed=11002262 dynamic=True aliased=None kinds=aux,index_inplace,inplace,view_expand,view_slice,view_squeeze,view_transpose,view_unfold
+       call0.out[1]: 33/72 elems differ at [1, 3, 5, 7, 9]: eager [-7.0, -15.0, 10.0, 9.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg2: 11/24 elems differ at [1, 3, 5, 7, 9]: eager [-7.0, -15.0, 10.0, 9.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[1]: 33/72 elems differ at [1, 3, 5, 7, 9]: eager [-10.0, -15.0, 8.0, 1.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg2: 11/24 elems differ at [1, 3, 5, 7, 9]: eager [-10.0, -15.0, 8.0, 1.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=2250 {'invalid': 11, 'compile_error': 47, 'value_diff': 18, 'alias_diff': 1, 'pass': 2173} elapsed=234s last=0.1s
+progress iter=2275 {'invalid': 11, 'compile_error': 50, 'value_diff': 18, 'alias_diff': 1, 'pass': 2195} elapsed=236s last=0.2s
+progress iter=2300 {'invalid': 11, 'compile_error': 50, 'value_diff': 18, 'alias_diff': 1, 'pass': 2220} elapsed=239s last=0.1s
+[iter 2305] value_diff seed=11002338 dynamic=True aliased=('ta', 't0[1:]') kinds=inplace,view_reshape,view_slice,view_squeeze,view_transpose
+       call0.out[1]: 11/17 elems differ at [0, 2, 4, 6, 7]: eager [-3.0, -2.0, -3.0, -2.0, -3.0] vs compiled [-1.0, -3.0, -2.0, -3.0, -2.0]
+       call1.out[1]: 10/17 elems differ at [0, 2, 3, 4, 6]: eager [-3.0, -2.0, -3.0, -2.0, -3.0] vs compiled [-2.0, -3.0, -2.0, -3.0, -2.0]
+progress iter=2325 {'invalid': 11, 'compile_error': 50, 'value_diff': 19, 'alias_diff': 1, 'pass': 2244} elapsed=242s last=0.2s
+progress iter=2350 {'invalid': 11, 'compile_error': 50, 'value_diff': 19, 'alias_diff': 1, 'pass': 2269} elapsed=245s last=0.1s
+[iter 2368] value_diff seed=11002401 dynamic=True aliased=('ta', 't0.view(-1)') kinds=aux,setitem,side_effect,view_dtype,view_slice,view_unfold
+       call0.out[3][0]: 12/24 elems differ at [5, 7, 9, 10, 11]: eager [-4, -3, 8, 2, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.arg0: 12/24 elems differ at [5, 7, 9, 10, 11]: eager [-4, -3, 8, 2, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.arg3: 12/24 elems differ at [5, 7, 9, 10, 11]: eager [-4, -3, 8, 2, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.arg5[0]: 12/24 elems differ at [5, 7, 9, 10, 11]: eager [-4, -3, 8, 2, -8] vs compiled [0, 0, 0, 0, 0]
+progress iter=2375 {'invalid': 11, 'compile_error': 50, 'value_diff': 20, 'alias_diff': 1, 'pass': 2293} elapsed=247s last=0.1s
+progress iter=2400 {'invalid': 11, 'compile_error': 50, 'value_diff': 20, 'alias_diff': 1, 'pass': 2318} elapsed=249s last=0.0s
+progress iter=2425 {'invalid': 11, 'compile_error': 50, 'value_diff': 20, 'alias_diff': 1, 'pass': 2343} elapsed=252s last=0.1s
+[iter 2434] value_diff seed=11002467 dynamic=None aliased=None kinds=functional,inplace,view_select,view_transpose,view_unfold
+       call0.out[0]: 1/2 elems differ at [1]: eager [4] vs compiled [0]
+       call0.out[1]: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [3, -5, 8, 4, -6] vs compiled [0, 0, 0, 0, 0]
+progress iter=2450 {'invalid': 11, 'compile_error': 51, 'value_diff': 21, 'alias_diff': 1, 'pass': 2366} elapsed=255s last=0.0s
+progress iter=2475 {'invalid': 11, 'compile_error': 52, 'value_diff': 21, 'alias_diff': 1, 'pass': 2390} elapsed=258s last=0.1s
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] failed while attempting to run meta for aten.set_.source_Storage
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] Traceback (most recent call last):
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]     r = func(*args, **kwargs)
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]         ^^^^^^^^^^^^^^^^^^^^^
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]     return self._op(*args, **kwargs)
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:36:00.755000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [1/0] RuntimeError: Expected !size_bytes_is_heap_allocated_ to be true, but got false.  (Could this error message be improved?  If so, please report an enhancement request to PyTorch.)
+[iter 2499] value_diff seed=11002532 dynamic=True aliased=('ta', 't0') kinds=aux,functional,index_inplace,scatter_fn,setitem,view_reshape,view_select,view_unfold
+       call0.out[1]: 9/24 elems differ at [7, 8, 9, 11, 19]: eager [3.0, 6.0, 5.0, -8.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 9/24 elems differ at [7, 8, 9, 11, 19]: eager [3.0, 6.0, 5.0, -8.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 9/24 elems differ at [7, 8, 9, 11, 19]: eager [3.0, 6.0, 5.0, -8.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[1]: 9/24 elems differ at [7, 9, 10, 11, 19]: eager [-7.0, -1.0, -4.0, 8.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=2500 {'invalid': 11, 'compile_error': 53, 'value_diff': 22, 'alias_diff': 1, 'pass': 2413} elapsed=260s last=0.1s
+progress iter=2525 {'invalid': 11, 'compile_error': 53, 'value_diff': 22, 'alias_diff': 1, 'pass': 2438} elapsed=263s last=0.2s
+[iter 2528] value_diff seed=11002561 dynamic=True aliased=('ta', 't0') kinds=aux,functional,index_inplace,inplace_meta,setitem,side_effect,view_unfold
+       call0.out[3]['key3']: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-3, -3, -6, -3, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-3, -3, -6, -3, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.arg6['key3']: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-3, -3, -6, -3, -3] vs compiled [0, 0, 0, 0, 0]
+       call1.out[3]['key3']: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-3, -3, -3, -3, -2] vs compiled [0, 0, 0, 0, 0]
+progress iter=2550 {'invalid': 11, 'compile_error': 53, 'value_diff': 23, 'alias_diff': 1, 'pass': 2462} elapsed=265s last=0.1s
+[iter 2575] value_diff seed=11002608 dynamic=None aliased=('ta', 't0[1:]') kinds=aux,index_inplace,view_diagonal
+       call0.out[1]: 4/4 elems differ at [0, 1, 2, 3]: eager [-5.0, 0.0, 3.0, 2.0] vs compiled [-7.0, -5.0, -5.0, -5.0]
+       call1.out[1]: 4/4 elems differ at [0, 1, 2, 3]: eager [-5.0, 8.0, 3.0, -7.0] vs compiled [5.0, -5.0, 1.0, -3.0]
+progress iter=2575 {'invalid': 11, 'compile_error': 54, 'value_diff': 24, 'alias_diff': 1, 'pass': 2485} elapsed=268s last=0.0s
+progress iter=2600 {'invalid': 11, 'compile_error': 55, 'value_diff': 24, 'alias_diff': 1, 'pass': 2509} elapsed=271s last=0.0s
+progress iter=2625 {'invalid': 11, 'compile_error': 55, 'value_diff': 24, 'alias_diff': 1, 'pass': 2534} elapsed=273s last=0.1s
+progress iter=2650 {'invalid': 11, 'compile_error': 55, 'value_diff': 24, 'alias_diff': 1, 'pass': 2559} elapsed=276s last=0.2s
+progress iter=2675 {'invalid': 11, 'compile_error': 55, 'value_diff': 24, 'alias_diff': 1, 'pass': 2584} elapsed=279s last=0.0s
+progress iter=2700 {'invalid': 11, 'compile_error': 56, 'value_diff': 24, 'alias_diff': 1, 'pass': 2608} elapsed=281s last=0.0s
+progress iter=2725 {'invalid': 11, 'compile_error': 56, 'value_diff': 24, 'alias_diff': 1, 'pass': 2633} elapsed=285s last=0.1s
+progress iter=2750 {'invalid': 11, 'compile_error': 57, 'value_diff': 24, 'alias_diff': 1, 'pass': 2657} elapsed=288s last=0.0s
+progress iter=2775 {'invalid': 11, 'compile_error': 59, 'value_diff': 24, 'alias_diff': 1, 'pass': 2680} elapsed=290s last=0.2s
+[iter 2788] value_diff seed=11002821 dynamic=None aliased=('ta', 't0[1:]') kinds=functional,inplace,noop_alias,view_reshape,view_select,view_transpose
+       call0.out[1]: 6/8 elems differ at [0, 1, 3, 4, 6]: eager [-2.0, -5.0, 8.0, 2.0, -4.0] vs compiled [2.0, -3.0, -7.0, 3.0, 2.0]
+       call1.out[1]: 3/8 elems differ at [0, 2, 7]: eager [5.0, 2.0, -2.0] vs compiled [0.0, -1.0, 2.0]
+[iter 2789] value_diff seed=11002822 dynamic=True aliased=None kinds=functional,inplace,noop_alias,setitem,side_effect,view_slice,view_unfold
+       call0.out[0]: 2/2 elems differ at [0, 1]: eager [8, 8] vs compiled [0, 0]
+       call0.out[1]: 19/24 elems differ at [1, 2, 3, 4, 5]: eager [-1, 7, 8, 1, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 19/24 elems differ at [1, 2, 3, 4, 5]: eager [-1, 7, 8, 1, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.out[5]['key7']: 10/12 elems differ at [1, 2, 3, 4, 5]: eager [-3, 4, 16, 2, 2] vs compiled [0, 0, 0, 0, 0]
+progress iter=2800 {'invalid': 11, 'compile_error': 60, 'value_diff': 26, 'alias_diff': 1, 'pass': 2702} elapsed=292s last=0.1s
+progress iter=2825 {'invalid': 11, 'compile_error': 60, 'value_diff': 26, 'alias_diff': 1, 'pass': 2727} elapsed=295s last=0.1s
+[iter 2843] value_diff seed=11002876 dynamic=True aliased=('ta', 't0[1:]') kinds=aux,index_inplace,noop_alias,view_reshape,view_unfold
+       call0.out[1]: 22/24 elems differ at [1, 2, 3, 4, 6]: eager [5.0, -6.0, -7.0, -2.0, 5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg2: 22/24 elems differ at [1, 2, 3, 4, 6]: eager [5.0, -6.0, -7.0, -2.0, 5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[1]: 23/24 elems differ at [1, 2, 3, 4, 5]: eager [4.0, 8.0, -7.0, -6.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg2: 23/24 elems differ at [1, 2, 3, 4, 5]: eager [4.0, 8.0, -7.0, -6.0, -5.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=2850 {'invalid': 11, 'compile_error': 60, 'value_diff': 27, 'alias_diff': 1, 'pass': 2751} elapsed=297s last=0.1s
+progress iter=2875 {'invalid': 11, 'compile_error': 60, 'value_diff': 27, 'alias_diff': 1, 'pass': 2776} elapsed=301s last=0.1s
+progress iter=2900 {'invalid': 12, 'compile_error': 60, 'value_diff': 27, 'alias_diff': 1, 'pass': 2800} elapsed=303s last=0.0s
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:36:46.279000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=2925 {'invalid': 13, 'compile_error': 61, 'value_diff': 27, 'alias_diff': 1, 'pass': 2823} elapsed=306s last=0.3s
+progress iter=2950 {'invalid': 13, 'compile_error': 61, 'value_diff': 27, 'alias_diff': 1, 'pass': 2848} elapsed=308s last=0.1s
+[iter 2974] value_diff seed=11003007 dynamic=None aliased=None kinds=aux,index_inplace,setitem,view_reshape,view_slice,view_unfold
+       call0.arg0: 3/24 elems differ at [7, 15, 23]: eager [1, 1, 1] vs compiled [0, 0, 0]
+       call1.arg0: 3/24 elems differ at [7, 15, 23]: eager [2, 2, 2] vs compiled [0, 0, 0]
+progress iter=2975 {'invalid': 13, 'compile_error': 61, 'value_diff': 28, 'alias_diff': 1, 'pass': 2872} elapsed=310s last=0.1s
+progress iter=3000 {'invalid': 13, 'compile_error': 62, 'value_diff': 28, 'alias_diff': 1, 'pass': 2896} elapsed=312s last=0.1s
+progress iter=3025 {'invalid': 13, 'compile_error': 62, 'value_diff': 28, 'alias_diff': 1, 'pass': 2921} elapsed=316s last=0.1s
+progress iter=3050 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 2945} elapsed=318s last=0.0s
+progress iter=3075 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 2970} elapsed=321s last=0.0s
+progress iter=3100 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 2995} elapsed=323s last=0.2s
+progress iter=3125 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 3020} elapsed=325s last=0.0s
+progress iter=3150 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 3045} elapsed=328s last=0.1s
+progress iter=3175 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 3070} elapsed=330s last=0.1s
+progress iter=3200 {'invalid': 13, 'compile_error': 63, 'value_diff': 28, 'alias_diff': 1, 'pass': 3095} elapsed=334s last=0.1s
+[iter 3215] value_diff seed=11003248 dynamic=True aliased=('ta', 't0.view(-1)') kinds=aux,index_inplace,inplace,setitem,side_effect,view_squeeze,view_unfold
+       call0.out[0]: 10/24 elems differ at [6, 7, 8, 9, 10]: eager [4, -13, 3, -2, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.out[4]: 10/24 elems differ at [6, 7, 8, 9, 10]: eager [4, -13, 3, -2, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg0: 10/24 elems differ at [6, 7, 8, 9, 10]: eager [4, -13, 3, -2, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg2: 10/24 elems differ at [6, 7, 8, 9, 10]: eager [4, -13, 3, -2, 1] vs compiled [0, 0, 0, 0, 0]
+progress iter=3225 {'invalid': 13, 'compile_error': 63, 'value_diff': 29, 'alias_diff': 1, 'pass': 3119} elapsed=336s last=0.1s
+progress iter=3250 {'invalid': 13, 'compile_error': 63, 'value_diff': 29, 'alias_diff': 1, 'pass': 3144} elapsed=340s last=0.1s
+progress iter=3275 {'invalid': 13, 'compile_error': 63, 'value_diff': 29, 'alias_diff': 1, 'pass': 3169} elapsed=341s last=0.0s
+progress iter=3300 {'invalid': 13, 'compile_error': 63, 'value_diff': 29, 'alias_diff': 1, 'pass': 3194} elapsed=344s last=0.1s
+progress iter=3325 {'invalid': 13, 'compile_error': 63, 'value_diff': 29, 'alias_diff': 1, 'pass': 3219} elapsed=349s last=0.1s
+[iter 3336] value_diff seed=11003369 dynamic=None aliased=None kinds=aux,index_inplace,inplace,side_effect,view_unfold
+       call0.out[3]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-10, 3, -5, 4, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.out[5][0]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-10, 3, -5, 4, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-10, 3, -5, 4, -8] vs compiled [0, 0, 0, 0, 0]
+       call0.arg3[0]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-10, 3, -5, 4, -8] vs compiled [0, 0, 0, 0, 0]
+[iter 3348] value_diff seed=11003381 dynamic=None aliased=('ta', 't0.transpose(0, 1)') kinds=functional,inplace,side_effect,view_reshape,view_slice,view_squeeze
+       call0.out[0]: 8/24 elems differ at [7, 8, 9, 10, 13]: eager [3.0, 4.0, 6.0, 4.0, 4.0] vs compiled [4.0, 5.0, 4.0, 1.0, 3.0]
+       call0.out[5]: 8/24 elems differ at [7, 8, 9, 10, 13]: eager [3.0, 4.0, 6.0, 4.0, 4.0] vs compiled [4.0, 5.0, 4.0, 1.0, 3.0]
+       call1.out[0]: 6/24 elems differ at [6, 9, 11, 12, 15]: eager [6.0, 1.0, 5.0, 4.0, 4.0] vs compiled [4.0, 4.0, 8.0, 6.0, 1.0]
+       call1.out[5]: 6/24 elems differ at [6, 9, 11, 12, 15]: eager [6.0, 1.0, 5.0, 4.0, 4.0] vs compiled [4.0, 4.0, 8.0, 6.0, 1.0]
+progress iter=3350 {'invalid': 13, 'compile_error': 64, 'value_diff': 31, 'alias_diff': 1, 'pass': 3241} elapsed=352s last=0.0s
+progress iter=3375 {'invalid': 13, 'compile_error': 64, 'value_diff': 31, 'alias_diff': 1, 'pass': 3266} elapsed=354s last=0.1s
+[iter 3388] value_diff seed=11003421 dynamic=None aliased=None kinds=inplace,side_effect,view_slice,view_transpose,view_unfold
+       call0.out[0]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-8, 5, 8, -6, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 3/3 elems differ at [0, 1, 2]: eager [-2, -1, -6] vs compiled [0, 0, 0]
+       call0.out[4]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-8, 5, 8, -6, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.out[5]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-8, 5, 8, -6, -2] vs compiled [0, 0, 0, 0, 0]
+progress iter=3400 {'invalid': 13, 'compile_error': 64, 'value_diff': 32, 'alias_diff': 1, 'pass': 3290} elapsed=356s last=0.2s
+progress iter=3425 {'invalid': 13, 'compile_error': 64, 'value_diff': 32, 'alias_diff': 1, 'pass': 3315} elapsed=358s last=0.0s
+progress iter=3450 {'invalid': 13, 'compile_error': 64, 'value_diff': 32, 'alias_diff': 1, 'pass': 3340} elapsed=360s last=0.1s
+progress iter=3475 {'invalid': 13, 'compile_error': 64, 'value_diff': 32, 'alias_diff': 1, 'pass': 3365} elapsed=363s last=0.1s
+progress iter=3500 {'invalid': 14, 'compile_error': 65, 'value_diff': 32, 'alias_diff': 1, 'pass': 3388} elapsed=365s last=0.2s
+[iter 3523] value_diff seed=11003556 dynamic=None aliased=('ta', 't0.transpose(0, 1)') kinds=noop_alias,setitem,view_reshape,view_transpose,view_unfold
+       call0.out[2]: 10/24 elems differ at [2, 3, 6, 7, 11]: eager [-3, 2, 4, -2, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.arg0: 10/24 elems differ at [2, 3, 6, 7, 11]: eager [-3, 2, 4, -2, -2] vs compiled [0, 0, 0, 0, 0]
+       call0.arg2: 10/24 elems differ at [4, 5, 6, 7, 12]: eager [-3, -6, 2, 1, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[2]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [1, 8, 2, -1, 7] vs compiled [0, 0, 0, 0, 0]
+progress iter=3525 {'invalid': 14, 'compile_error': 66, 'value_diff': 33, 'alias_diff': 1, 'pass': 3411} elapsed=367s last=0.1s
+progress iter=3550 {'invalid': 14, 'compile_error': 67, 'value_diff': 33, 'alias_diff': 1, 'pass': 3435} elapsed=370s last=0.1s
+progress iter=3575 {'invalid': 14, 'compile_error': 68, 'value_diff': 33, 'alias_diff': 1, 'pass': 3459} elapsed=373s last=0.0s
+progress iter=3600 {'invalid': 14, 'compile_error': 69, 'value_diff': 33, 'alias_diff': 1, 'pass': 3483} elapsed=375s last=0.0s
+progress iter=3625 {'invalid': 14, 'compile_error': 70, 'value_diff': 33, 'alias_diff': 1, 'pass': 3507} elapsed=378s last=0.2s
+[iter 3649] value_diff seed=11003682 dynamic=True aliased=None kinds=aux,functional,index_inplace,inplace,inplace_meta,view_transpose,view_unfold
+       call0.arg2: 3/24 elems differ at [10, 17, 22]: eager [8.0, 6.0, 7.0] vs compiled [0.0, 0.0, 0.0]
+       call1.arg2: 2/24 elems differ at [11, 16]: eager [-1.0, -5.0] vs compiled [0.0, 0.0]
+progress iter=3650 {'invalid': 14, 'compile_error': 72, 'value_diff': 34, 'alias_diff': 1, 'pass': 3529} elapsed=381s last=0.0s
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:38:03.693000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:38:03.694000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=3675 {'invalid': 14, 'compile_error': 74, 'value_diff': 34, 'alias_diff': 1, 'pass': 3552} elapsed=383s last=0.1s
+progress iter=3700 {'invalid': 14, 'compile_error': 74, 'value_diff': 34, 'alias_diff': 1, 'pass': 3577} elapsed=387s last=0.0s
+progress iter=3725 {'invalid': 15, 'compile_error': 74, 'value_diff': 34, 'alias_diff': 1, 'pass': 3601} elapsed=389s last=0.1s
+progress iter=3750 {'invalid': 15, 'compile_error': 74, 'value_diff': 34, 'alias_diff': 1, 'pass': 3626} elapsed=391s last=0.0s
+progress iter=3775 {'invalid': 15, 'compile_error': 74, 'value_diff': 34, 'alias_diff': 1, 'pass': 3651} elapsed=394s last=0.3s
+progress iter=3800 {'invalid': 15, 'compile_error': 75, 'value_diff': 34, 'alias_diff': 1, 'pass': 3675} elapsed=397s last=0.1s
+progress iter=3825 {'invalid': 15, 'compile_error': 75, 'value_diff': 34, 'alias_diff': 1, 'pass': 3700} elapsed=399s last=0.2s
+progress iter=3850 {'invalid': 15, 'compile_error': 75, 'value_diff': 34, 'alias_diff': 1, 'pass': 3725} elapsed=401s last=0.0s
+progress iter=3875 {'invalid': 15, 'compile_error': 76, 'value_diff': 34, 'alias_diff': 1, 'pass': 3749} elapsed=403s last=0.1s
+[iter 3878] value_diff seed=11003911 dynamic=True aliased=None kinds=aux,index_inplace,inplace,side_effect,view_reshape,view_select,view_slice,view_transpose,view_unfold
+       call0.out[1]: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [-2, 1, -3, 6, 5] vs compiled [0, 0, 0, 0, 0]
+       call0.arg2: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-2, 1, -3, 6, 5] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [-8, -4, -3, -4, -2] vs compiled [0, 0, 0, 0, 0]
+       call1.arg2: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-8, -4, -3, -4, -2] vs compiled [0, 0, 0, 0, 0]
+progress iter=3900 {'invalid': 15, 'compile_error': 76, 'value_diff': 35, 'alias_diff': 1, 'pass': 3773} elapsed=407s last=0.1s
+[iter 3917] value_diff seed=11003950 dynamic=None aliased=None kinds=inplace,noop_alias,setitem,view_slice,view_unfold
+       call0.out[3]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[3]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-2.0, -2.0, -2.0, -2.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=3925 {'invalid': 15, 'compile_error': 76, 'value_diff': 36, 'alias_diff': 1, 'pass': 3797} elapsed=410s last=0.1s
+progress iter=3950 {'invalid': 15, 'compile_error': 77, 'value_diff': 36, 'alias_diff': 1, 'pass': 3821} elapsed=412s last=0.1s
+progress iter=3975 {'invalid': 15, 'compile_error': 77, 'value_diff': 36, 'alias_diff': 1, 'pass': 3846} elapsed=414s last=0.0s
+[iter 3994] value_diff seed=11004027 dynamic=None aliased=None kinds=functional,inplace,noop_alias,setitem,view_squeeze,view_unfold
+       call0.arg0: 8/24 elems differ at [2, 3, 8, 9, 14]: eager [7.0, -6.0, 1.0, 4.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg0: 8/24 elems differ at [2, 3, 8, 9, 14]: eager [6.0, 7.0, 8.0, -2.0, 1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=4000 {'invalid': 15, 'compile_error': 77, 'value_diff': 37, 'alias_diff': 1, 'pass': 3870} elapsed=416s last=0.1s
+[iter 4021] value_diff seed=11004054 dynamic=True aliased=None kinds=aux,inplace,noop_alias,setitem,view_reshape,view_slice,view_unfold
+       call0.out[2]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [1, -4, 4, 4, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [1, -4, 4, 4, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[2]: 7/24 elems differ at [16, 17, 18, 20, 21]: eager [1, 4, 1, -1, -4] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 7/24 elems differ at [16, 17, 18, 20, 21]: eager [1, 4, 1, -1, -4] vs compiled [0, 0, 0, 0, 0]
+progress iter=4025 {'invalid': 15, 'compile_error': 77, 'value_diff': 38, 'alias_diff': 1, 'pass': 3894} elapsed=419s last=0.2s
+[iter 4040] value_diff seed=11004073 dynamic=None aliased=None kinds=aux,index_inplace,inplace,inplace_meta,noop_alias,setitem,side_effect,view_select,view_unfold
+       call0.out[2]: 7/24 elems differ at [16, 17, 18, 19, 21]: eager [-2.0, -7.0, -5.0, -4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg0: 7/24 elems differ at [16, 17, 18, 19, 21]: eager [-2.0, -7.0, -5.0, -4.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[2]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [6.0, -5.0, 2.0, -8.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg0: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [6.0, -5.0, 2.0, -8.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=4050 {'invalid': 15, 'compile_error': 78, 'value_diff': 39, 'alias_diff': 1, 'pass': 3917} elapsed=421s last=0.1s
+progress iter=4075 {'invalid': 15, 'compile_error': 78, 'value_diff': 39, 'alias_diff': 1, 'pass': 3942} elapsed=423s last=0.1s
+progress iter=4100 {'invalid': 15, 'compile_error': 78, 'value_diff': 39, 'alias_diff': 1, 'pass': 3967} elapsed=428s last=1.9s
+progress iter=4125 {'invalid': 15, 'compile_error': 78, 'value_diff': 39, 'alias_diff': 1, 'pass': 3992} elapsed=430s last=0.1s
+[iter 4140] value_diff seed=11004173 dynamic=True aliased=None kinds=inplace,noop_alias,view_reshape,view_slice,view_unfold
+       call0.out[0]: 2/11 elems differ at [9, 10]: eager [-5.0, 5.0] vs compiled [0.0, 0.0]
+       call0.out[1]: 4/24 elems differ at [20, 21, 22, 23]: eager [-5.0, 3.0, 5.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0]
+       call0.out[4]: 4/24 elems differ at [20, 21, 22, 23]: eager [-5.0, 3.0, 5.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 4/24 elems differ at [20, 21, 22, 23]: eager [-5.0, 3.0, 5.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0]
+progress iter=4150 {'invalid': 15, 'compile_error': 78, 'value_diff': 40, 'alias_diff': 1, 'pass': 4016} elapsed=432s last=0.2s
+progress iter=4175 {'invalid': 15, 'compile_error': 78, 'value_diff': 40, 'alias_diff': 1, 'pass': 4041} elapsed=435s last=0.1s
+progress iter=4200 {'invalid': 15, 'compile_error': 79, 'value_diff': 40, 'alias_diff': 1, 'pass': 4065} elapsed=437s last=0.1s
+progress iter=4225 {'invalid': 15, 'compile_error': 79, 'value_diff': 40, 'alias_diff': 1, 'pass': 4090} elapsed=439s last=0.1s
+progress iter=4250 {'invalid': 15, 'compile_error': 79, 'value_diff': 40, 'alias_diff': 1, 'pass': 4115} elapsed=441s last=0.1s
+[iter 4258] value_diff seed=11004291 dynamic=None aliased=None kinds=aux,index_inplace,inplace,view_slice,view_unfold
+       call0.arg0: 4/24 elems differ at [20, 21, 22, 23]: eager [-4, -7, -5, -4] vs compiled [0, 0, 0, 0]
+       call1.arg0: 4/24 elems differ at [20, 21, 22, 23]: eager [-8, -4, -4, -5] vs compiled [0, 0, 0, 0]
+progress iter=4275 {'invalid': 15, 'compile_error': 80, 'value_diff': 41, 'alias_diff': 1, 'pass': 4138} elapsed=443s last=0.1s
+progress iter=4300 {'invalid': 15, 'compile_error': 80, 'value_diff': 41, 'alias_diff': 1, 'pass': 4163} elapsed=446s last=0.0s
+progress iter=4325 {'invalid': 15, 'compile_error': 80, 'value_diff': 41, 'alias_diff': 1, 'pass': 4188} elapsed=449s last=0.0s
+progress iter=4350 {'invalid': 15, 'compile_error': 80, 'value_diff': 41, 'alias_diff': 1, 'pass': 4213} elapsed=451s last=0.2s
+progress iter=4375 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4237} elapsed=454s last=0.1s
+progress iter=4400 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4262} elapsed=456s last=0.1s
+progress iter=4425 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4287} elapsed=459s last=0.1s
+progress iter=4450 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4312} elapsed=461s last=0.1s
+progress iter=4475 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4337} elapsed=462s last=0.0s
+progress iter=4500 {'invalid': 15, 'compile_error': 81, 'value_diff': 41, 'alias_diff': 1, 'pass': 4362} elapsed=465s last=0.2s
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] failed while attempting to run meta for aten.view.dtype
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] Traceback (most recent call last):
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     r = func(*args, **kwargs)
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]         ^^^^^^^^^^^^^^^^^^^^^
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     return self._op(*args, **kwargs)
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:39:28.256000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 3
+progress iter=4525 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 1, 'pass': 4385} elapsed=468s last=0.1s
+[iter 4549] alias_diff seed=11004582 dynamic=True aliased=('ta', 't0[1:]') kinds=aux,index_inplace,inplace,noop_arith,setitem,view_reshape,view_slice
+       probe.call0.out[0]: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]
+       probe.call0.out[1]: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]
+       probe.call0.arg0: 2/24 elems differ at [15, 21]: eager [3001, 6001] vs compiled [6001, 3001]
+       probe.call0.arg2: 2/23 elems differ at [14, 20]: eager [3001, 6001] vs compiled [6001, 3001]
+progress iter=4550 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 2, 'pass': 4409} elapsed=472s last=0.1s
+progress iter=4575 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 2, 'pass': 4434} elapsed=474s last=0.1s
+progress iter=4600 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 2, 'pass': 4459} elapsed=476s last=0.2s
+progress iter=4625 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 2, 'pass': 4484} elapsed=479s last=0.1s
+progress iter=4650 {'invalid': 15, 'compile_error': 83, 'value_diff': 41, 'alias_diff': 2, 'pass': 4509} elapsed=481s last=0.0s
+progress iter=4675 {'invalid': 15, 'compile_error': 84, 'value_diff': 41, 'alias_diff': 2, 'pass': 4533} elapsed=483s last=0.1s
+progress iter=4700 {'invalid': 15, 'compile_error': 84, 'value_diff': 41, 'alias_diff': 2, 'pass': 4558} elapsed=485s last=0.1s
+[iter 4725] value_diff seed=11004758 dynamic=None aliased=None kinds=aux,functional,index_inplace,inplace,inplace_meta,view_reshape,view_unfold
+       call0.out[1]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [8.0, -1.0, 5.0, -5.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [8.0, -1.0, 5.0, -5.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [8.0, -1.0, 5.0, -5.0, 4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[1]: 7/24 elems differ at [16, 18, 19, 20, 21]: eager [7.0, 8.0, -3.0, 7.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=4725 {'invalid': 15, 'compile_error': 84, 'value_diff': 42, 'alias_diff': 2, 'pass': 4582} elapsed=488s last=0.1s
+progress iter=4750 {'invalid': 15, 'compile_error': 85, 'value_diff': 42, 'alias_diff': 2, 'pass': 4606} elapsed=491s last=0.1s
+[iter 4762] value_diff seed=11004795 dynamic=None aliased=('ta', 't0.transpose(0, 1)') kinds=aux,index_inplace,inplace,noop_alias,setitem,view_slice,view_squeeze
+       call0.out[1]: 12/24 elems differ at [1, 4, 7, 8, 9]: eager [3, 3, 3, 0, 0] vs compiled [0, 0, 0, 3, 3]
+       call1.out[1]: 12/24 elems differ at [1, 4, 7, 8, 9]: eager [3, 3, 3, 0, 0] vs compiled [0, 0, 0, 3, 3]
+progress iter=4775 {'invalid': 15, 'compile_error': 85, 'value_diff': 43, 'alias_diff': 2, 'pass': 4630} elapsed=495s last=0.0s
+progress iter=4800 {'invalid': 15, 'compile_error': 86, 'value_diff': 43, 'alias_diff': 2, 'pass': 4654} elapsed=498s last=0.1s
+progress iter=4825 {'invalid': 15, 'compile_error': 87, 'value_diff': 43, 'alias_diff': 2, 'pass': 4678} elapsed=501s last=0.2s
+[iter 4829] value_diff seed=11004862 dynamic=None aliased=('ta', 't0[1:]') kinds=functional,inplace,setitem,view_reshape,view_select
+       call0.out[1]: 11/12 elems differ at [0, 1, 3, 4, 5]: eager [4, 4, 4, 4, 4] vs compiled [-5, -1, 5, -8, -5]
+       call1.out[1]: 10/12 elems differ at [1, 2, 3, 4, 5]: eager [4, 4, 4, 4, 4] vs compiled [0, -7, -2, -7, 0]
+progress iter=4850 {'invalid': 15, 'compile_error': 87, 'value_diff': 44, 'alias_diff': 2, 'pass': 4702} elapsed=503s last=0.2s
+progress iter=4875 {'invalid': 15, 'compile_error': 87, 'value_diff': 44, 'alias_diff': 2, 'pass': 4727} elapsed=506s last=0.1s
+progress iter=4900 {'invalid': 15, 'compile_error': 88, 'value_diff': 44, 'alias_diff': 2, 'pass': 4751} elapsed=508s last=0.1s
+[iter 4916] value_diff seed=11004949 dynamic=True aliased=('ta', 't0') kinds=functional,inplace,noop_alias,view_slice,view_unfold
+       call0.out[0]: 4/24 elems differ at [5, 11, 17, 23]: eager [-5, -7, -6, -6] vs compiled [0, 0, 0, 0]
+       call0.out[4]: 4/24 elems differ at [5, 11, 17, 23]: eager [-5, -7, -6, -6] vs compiled [0, 0, 0, 0]
+       call0.arg0: 4/24 elems differ at [5, 11, 17, 23]: eager [-5, -7, -6, -6] vs compiled [0, 0, 0, 0]
+       call0.arg2: 4/24 elems differ at [5, 11, 17, 23]: eager [-5, -7, -6, -6] vs compiled [0, 0, 0, 0]
+progress iter=4925 {'invalid': 15, 'compile_error': 88, 'value_diff': 45, 'alias_diff': 2, 'pass': 4775} elapsed=510s last=0.0s
+progress iter=4950 {'invalid': 15, 'compile_error': 88, 'value_diff': 45, 'alias_diff': 2, 'pass': 4800} elapsed=512s last=0.2s
+progress iter=4975 {'invalid': 15, 'compile_error': 88, 'value_diff': 45, 'alias_diff': 2, 'pass': 4825} elapsed=515s last=0.1s
+progress iter=5000 {'invalid': 15, 'compile_error': 89, 'value_diff': 45, 'alias_diff': 2, 'pass': 4849} elapsed=519s last=0.1s
+progress iter=5025 {'invalid': 15, 'compile_error': 89, 'value_diff': 45, 'alias_diff': 2, 'pass': 4874} elapsed=521s last=0.0s
+progress iter=5050 {'invalid': 15, 'compile_error': 91, 'value_diff': 45, 'alias_diff': 2, 'pass': 4897} elapsed=522s last=0.1s
+[iter 5064] value_diff seed=11005097 dynamic=None aliased=('ta', 't0') kinds=aux,functional,index_inplace,inplace,view_reshape,view_unfold
+       call0.arg2: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [1.0, 5.0, -2.0, -6.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg2: 10/24 elems differ at [5, 9, 10, 11, 15]: eager [-3.0, -7.0, -2.0, 4.0, 3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=5075 {'invalid': 15, 'compile_error': 91, 'value_diff': 46, 'alias_diff': 2, 'pass': 4921} elapsed=524s last=0.0s
+progress iter=5100 {'invalid': 15, 'compile_error': 91, 'value_diff': 46, 'alias_diff': 2, 'pass': 4946} elapsed=526s last=0.0s
+progress iter=5125 {'invalid': 15, 'compile_error': 91, 'value_diff': 46, 'alias_diff': 2, 'pass': 4971} elapsed=529s last=0.2s
+progress iter=5150 {'invalid': 15, 'compile_error': 91, 'value_diff': 46, 'alias_diff': 2, 'pass': 4996} elapsed=531s last=0.1s
+progress iter=5175 {'invalid': 15, 'compile_error': 91, 'value_diff': 46, 'alias_diff': 2, 'pass': 5021} elapsed=534s last=0.2s
+progress iter=5200 {'invalid': 15, 'compile_error': 92, 'value_diff': 46, 'alias_diff': 2, 'pass': 5045} elapsed=535s last=0.1s
+progress iter=5225 {'invalid': 15, 'compile_error': 93, 'value_diff': 46, 'alias_diff': 2, 'pass': 5069} elapsed=538s last=0.0s
+progress iter=5250 {'invalid': 15, 'compile_error': 93, 'value_diff': 46, 'alias_diff': 2, 'pass': 5094} elapsed=542s last=0.0s
+[iter 5260] value_diff seed=11005293 dynamic=None aliased=None kinds=aux,functional,noop_alias,setitem,side_effect,view_reshape,view_unfold
+       call0.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [2, -7, 8, 1, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [2, -7, 8, 1, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [2, -7, 8, 1, -3] vs compiled [0, 0, 0, 0, 0]
+       call0.out[4]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [2, -7, 8, 1, -3] vs compiled [0, 0, 0, 0, 0]
+progress iter=5275 {'invalid': 15, 'compile_error': 93, 'value_diff': 47, 'alias_diff': 2, 'pass': 5118} elapsed=544s last=0.1s
+[iter 5293] value_diff seed=11005326 dynamic=True aliased=None kinds=aux,index_inplace,view_dtype,view_reshape,view_unfold
+       call0.arg0: 6/24 elems differ at [9, 10, 11, 21, 22]: eager [-7, 1, 1, 1, 2] vs compiled [0, 0, 0, 0, 0]
+       call1.arg0: 4/24 elems differ at [10, 21, 22, 23]: eager [3, -6, 5, 1] vs compiled [0, 0, 0, 0]
+progress iter=5300 {'invalid': 15, 'compile_error': 94, 'value_diff': 48, 'alias_diff': 2, 'pass': 5141} elapsed=546s last=0.1s
+progress iter=5325 {'invalid': 15, 'compile_error': 94, 'value_diff': 48, 'alias_diff': 2, 'pass': 5166} elapsed=548s last=0.1s
+progress iter=5350 {'invalid': 15, 'compile_error': 94, 'value_diff': 48, 'alias_diff': 2, 'pass': 5191} elapsed=550s last=0.1s
+progress iter=5375 {'invalid': 15, 'compile_error': 96, 'value_diff': 48, 'alias_diff': 2, 'pass': 5214} elapsed=552s last=0.1s
+progress iter=5400 {'invalid': 15, 'compile_error': 96, 'value_diff': 48, 'alias_diff': 2, 'pass': 5239} elapsed=554s last=0.1s
+progress iter=5425 {'invalid': 15, 'compile_error': 96, 'value_diff': 48, 'alias_diff': 2, 'pass': 5264} elapsed=556s last=0.0s
+progress iter=5450 {'invalid': 15, 'compile_error': 98, 'value_diff': 48, 'alias_diff': 2, 'pass': 5287} elapsed=558s last=0.2s
+progress iter=5475 {'invalid': 15, 'compile_error': 98, 'value_diff': 48, 'alias_diff': 2, 'pass': 5312} elapsed=560s last=0.1s
+progress iter=5500 {'invalid': 15, 'compile_error': 99, 'value_diff': 48, 'alias_diff': 2, 'pass': 5336} elapsed=562s last=0.1s
+progress iter=5525 {'invalid': 15, 'compile_error': 99, 'value_diff': 48, 'alias_diff': 2, 'pass': 5361} elapsed=564s last=0.1s
+progress iter=5550 {'invalid': 15, 'compile_error': 99, 'value_diff': 48, 'alias_diff': 2, 'pass': 5386} elapsed=569s last=0.1s
+progress iter=5575 {'invalid': 15, 'compile_error': 99, 'value_diff': 48, 'alias_diff': 2, 'pass': 5411} elapsed=571s last=0.0s
+progress iter=5600 {'invalid': 15, 'compile_error': 101, 'value_diff': 48, 'alias_diff': 2, 'pass': 5434} elapsed=573s last=0.1s
+progress iter=5625 {'invalid': 15, 'compile_error': 101, 'value_diff': 48, 'alias_diff': 2, 'pass': 5459} elapsed=575s last=0.1s
+progress iter=5650 {'invalid': 15, 'compile_error': 101, 'value_diff': 48, 'alias_diff': 2, 'pass': 5484} elapsed=577s last=0.1s
+progress iter=5675 {'invalid': 15, 'compile_error': 101, 'value_diff': 48, 'alias_diff': 2, 'pass': 5509} elapsed=580s last=0.2s
+progress iter=5700 {'invalid': 15, 'compile_error': 101, 'value_diff': 48, 'alias_diff': 2, 'pass': 5534} elapsed=582s last=0.1s
+progress iter=5725 {'invalid': 15, 'compile_error': 103, 'value_diff': 48, 'alias_diff': 2, 'pass': 5557} elapsed=585s last=0.1s
+progress iter=5750 {'invalid': 15, 'compile_error': 104, 'value_diff': 48, 'alias_diff': 2, 'pass': 5581} elapsed=587s last=0.0s
+progress iter=5775 {'invalid': 15, 'compile_error': 106, 'value_diff': 48, 'alias_diff': 2, 'pass': 5604} elapsed=590s last=0.1s
+[iter 5785] value_diff seed=11005818 dynamic=None aliased=None kinds=aux,index_inplace,inplace,view_reshape,view_transpose,view_unfold
+       call0.out[0]: 10/24 elems differ at [3, 4, 5, 11, 15]: eager [-5.0, -5.0, 1.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[1]: 10/24 elems differ at [3, 4, 5, 11, 15]: eager [-5.0, -5.0, 1.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg0: 10/24 elems differ at [3, 4, 5, 11, 15]: eager [-5.0, -5.0, 1.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[0]: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [-11.0, -9.0, -1.0, -9.0, -9.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+[iter 5797] value_diff seed=11005830 dynamic=True aliased=None kinds=aux,functional,index_inplace,inplace,inplace_meta,noop_alias,view_squeeze,view_unfold
+       call0.out[0]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-6, 4, 4, -12, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.out[3]: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [-6, 4, 4, -12, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[0]: 11/24 elems differ at [1, 3, 5, 7, 9]: eager [-2, 4, 4, -10, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[3]: 11/24 elems differ at [1, 3, 5, 7, 9]: eager [-2, 4, 4, -10, 4] vs compiled [0, 0, 0, 0, 0]
+progress iter=5800 {'invalid': 15, 'compile_error': 106, 'value_diff': 50, 'alias_diff': 2, 'pass': 5627} elapsed=591s last=0.0s
+progress iter=5825 {'invalid': 15, 'compile_error': 106, 'value_diff': 50, 'alias_diff': 2, 'pass': 5652} elapsed=596s last=0.1s
+progress iter=5850 {'invalid': 15, 'compile_error': 107, 'value_diff': 50, 'alias_diff': 2, 'pass': 5676} elapsed=599s last=0.0s
+progress iter=5875 {'invalid': 15, 'compile_error': 107, 'value_diff': 50, 'alias_diff': 2, 'pass': 5701} elapsed=601s last=0.1s
+progress iter=5900 {'invalid': 15, 'compile_error': 109, 'value_diff': 50, 'alias_diff': 2, 'pass': 5724} elapsed=603s last=0.1s
+progress iter=5925 {'invalid': 15, 'compile_error': 109, 'value_diff': 50, 'alias_diff': 2, 'pass': 5749} elapsed=606s last=0.1s
+progress iter=5950 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5773} elapsed=609s last=0.0s
+progress iter=5975 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5798} elapsed=611s last=0.0s
+progress iter=6000 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5823} elapsed=614s last=0.2s
+progress iter=6025 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5848} elapsed=617s last=0.1s
+progress iter=6050 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5873} elapsed=621s last=0.1s
+progress iter=6075 {'invalid': 15, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5898} elapsed=624s last=0.0s
+progress iter=6100 {'invalid': 16, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5922} elapsed=626s last=0.2s
+progress iter=6125 {'invalid': 16, 'compile_error': 110, 'value_diff': 50, 'alias_diff': 2, 'pass': 5947} elapsed=628s last=0.0s
+progress iter=6150 {'invalid': 16, 'compile_error': 112, 'value_diff': 50, 'alias_diff': 2, 'pass': 5970} elapsed=631s last=0.1s
+progress iter=6175 {'invalid': 16, 'compile_error': 112, 'value_diff': 50, 'alias_diff': 2, 'pass': 5995} elapsed=632s last=0.0s
+progress iter=6200 {'invalid': 16, 'compile_error': 112, 'value_diff': 50, 'alias_diff': 2, 'pass': 6020} elapsed=635s last=0.1s
+progress iter=6225 {'invalid': 16, 'compile_error': 112, 'value_diff': 50, 'alias_diff': 2, 'pass': 6045} elapsed=637s last=0.0s
+[iter 6231] value_diff seed=11006264 dynamic=None aliased=('ta', 't0.transpose(0, 1)') kinds=aux,index_inplace,inplace,noop_alias,side_effect,view_dtype,view_select,view_slice
+       call0.out[1]: 2/4 elems differ at [1, 2]: eager [1, 5] vs compiled [5, 1]
+       call1.out[1]: 2/4 elems differ at [1, 2]: eager [1, 11] vs compiled [11, 1]
+progress iter=6250 {'invalid': 16, 'compile_error': 113, 'value_diff': 51, 'alias_diff': 2, 'pass': 6068} elapsed=639s last=0.1s
+progress iter=6275 {'invalid': 16, 'compile_error': 113, 'value_diff': 51, 'alias_diff': 2, 'pass': 6093} elapsed=641s last=0.0s
+[iter 6280] value_diff seed=11006313 dynamic=None aliased=('ta', 't0[1:]') kinds=functional,noop_alias,noop_arith,scatter_fn,setitem,view_slice,view_squeeze,view_transpose
+       call0.out[2]: 3/3 elems differ at [0, 1, 2]: eager [5, -2, 4] vs compiled [-4, 3, -3]
+       call1.out[2]: 3/3 elems differ at [0, 1, 2]: eager [4, -5, 1] vs compiled [2, 5, 3]
+progress iter=6300 {'invalid': 16, 'compile_error': 113, 'value_diff': 52, 'alias_diff': 2, 'pass': 6117} elapsed=643s last=0.1s
+progress iter=6325 {'invalid': 16, 'compile_error': 113, 'value_diff': 52, 'alias_diff': 2, 'pass': 6142} elapsed=646s last=0.1s
+progress iter=6350 {'invalid': 17, 'compile_error': 114, 'value_diff': 52, 'alias_diff': 2, 'pass': 6165} elapsed=650s last=0.0s
+progress iter=6375 {'invalid': 17, 'compile_error': 114, 'value_diff': 52, 'alias_diff': 2, 'pass': 6190} elapsed=652s last=0.0s
+progress iter=6400 {'invalid': 17, 'compile_error': 115, 'value_diff': 52, 'alias_diff': 2, 'pass': 6214} elapsed=655s last=0.0s
+progress iter=6425 {'invalid': 17, 'compile_error': 115, 'value_diff': 52, 'alias_diff': 2, 'pass': 6239} elapsed=657s last=0.0s
+progress iter=6450 {'invalid': 17, 'compile_error': 116, 'value_diff': 52, 'alias_diff': 2, 'pass': 6263} elapsed=659s last=0.0s
+[iter 6461] value_diff seed=11006494 dynamic=None aliased=None kinds=aux,index_inplace,inplace,noop_alias,view_transpose,view_unfold
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-6, 5, 7, -5, -7] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [3, -6, 4, 4, 5] vs compiled [0, 0, 0, 0, 0]
+progress iter=6475 {'invalid': 17, 'compile_error': 117, 'value_diff': 53, 'alias_diff': 2, 'pass': 6286} elapsed=662s last=0.2s
+[iter 6487] value_diff seed=11006520 dynamic=True aliased=('ta', 't0[1:]') kinds=inplace,setitem,view_slice
+       call0.out[2]: 1/1 elems differ at [0]: eager [-3] vs compiled [7]
+       call0.out[3]: 1/1 elems differ at [0]: eager [-3] vs compiled [7]
+       call1.out[2]: 1/1 elems differ at [0]: eager [2] vs compiled [-7]
+       call1.out[3]: 1/1 elems differ at [0]: eager [2] vs compiled [-7]
+progress iter=6500 {'invalid': 17, 'compile_error': 117, 'value_diff': 54, 'alias_diff': 2, 'pass': 6310} elapsed=664s last=0.1s
+[iter 6522] value_diff seed=11006555 dynamic=None aliased=None kinds=inplace,setitem,view_reshape,view_select,view_slice,view_unfold
+       call0.out[0]: 14/24 elems differ at [10, 11, 12, 13, 14]: eager [-5, -1, -5, 4, 3] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 14/24 elems differ at [10, 11, 12, 13, 14]: eager [-5, -1, -5, 4, 3] vs compiled [0, 0, 0, 0, 0]
+       call0.arg0: 14/24 elems differ at [10, 11, 12, 13, 14]: eager [-5, -1, -5, 4, 3] vs compiled [0, 0, 0, 0, 0]
+       call1.out[0]: 13/24 elems differ at [10, 11, 12, 13, 14]: eager [-5, 3, -5, -5, -12] vs compiled [0, 0, 0, 0, 0]
+progress iter=6525 {'invalid': 17, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6334} elapsed=666s last=0.0s
+progress iter=6550 {'invalid': 17, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6359} elapsed=668s last=0.1s
+progress iter=6575 {'invalid': 17, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6384} elapsed=670s last=0.1s
+progress iter=6600 {'invalid': 17, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6409} elapsed=673s last=0.1s
+progress iter=6625 {'invalid': 18, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6433} elapsed=675s last=0.2s
+progress iter=6650 {'invalid': 18, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6458} elapsed=681s last=0.0s
+progress iter=6675 {'invalid': 18, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6483} elapsed=683s last=0.1s
+progress iter=6700 {'invalid': 18, 'compile_error': 117, 'value_diff': 55, 'alias_diff': 2, 'pass': 6508} elapsed=685s last=0.1s
+[iter 6718] value_diff seed=11006751 dynamic=True aliased=('ta', 't0[1:]') kinds=functional,inplace,noop_alias,setitem,side_effect,view_slice,view_squeeze,view_unfold
+       call0.out[5][1]: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg1: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg5[1]: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[5][1]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-5.0, -1.0, 2.0, -6.0, -1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=6725 {'invalid': 19, 'compile_error': 117, 'value_diff': 56, 'alias_diff': 2, 'pass': 6531} elapsed=688s last=0.4s
+progress iter=6750 {'invalid': 19, 'compile_error': 118, 'value_diff': 56, 'alias_diff': 2, 'pass': 6555} elapsed=690s last=0.1s
+progress iter=6775 {'invalid': 19, 'compile_error': 118, 'value_diff': 56, 'alias_diff': 2, 'pass': 6580} elapsed=692s last=0.1s
+progress iter=6800 {'invalid': 19, 'compile_error': 118, 'value_diff': 56, 'alias_diff': 2, 'pass': 6605} elapsed=695s last=0.0s
+[iter 6812] value_diff seed=11006845 dynamic=True aliased=('ta', 't0[1:]') kinds=inplace,noop_alias,view_slice,view_transpose
+       call0.out[2]: 1/1 elems differ at [0]: eager [5] vs compiled [10]
+       call1.out[2]: 1/1 elems differ at [0]: eager [5] vs compiled [8]
+progress iter=6825 {'invalid': 19, 'compile_error': 118, 'value_diff': 57, 'alias_diff': 2, 'pass': 6629} elapsed=697s last=0.1s
+progress iter=6850 {'invalid': 19, 'compile_error': 118, 'value_diff': 57, 'alias_diff': 2, 'pass': 6654} elapsed=700s last=0.1s
+progress iter=6875 {'invalid': 19, 'compile_error': 118, 'value_diff': 57, 'alias_diff': 2, 'pass': 6679} elapsed=702s last=0.0s
+[iter 6881] value_diff seed=11006914 dynamic=None aliased=('ta', 't0') kinds=aux,functional,index_inplace,inplace,setitem,view_slice,view_squeeze,view_unfold
+       call0.out[0]: 2/24 elems differ at [22, 23]: eager [-3.0, -4.0] vs compiled [0.0, 0.0]
+       call0.arg1: 2/24 elems differ at [22, 23]: eager [-3.0, -4.0] vs compiled [0.0, 0.0]
+       call1.out[0]: 2/24 elems differ at [22, 23]: eager [-2.0, -5.0] vs compiled [0.0, 0.0]
+       call1.arg1: 2/24 elems differ at [22, 23]: eager [-2.0, -5.0] vs compiled [0.0, 0.0]
+progress iter=6900 {'invalid': 19, 'compile_error': 118, 'value_diff': 58, 'alias_diff': 2, 'pass': 6703} elapsed=704s last=0.1s
+progress iter=6925 {'invalid': 19, 'compile_error': 118, 'value_diff': 58, 'alias_diff': 2, 'pass': 6728} elapsed=706s last=0.2s
+progress iter=6950 {'invalid': 19, 'compile_error': 121, 'value_diff': 58, 'alias_diff': 2, 'pass': 6750} elapsed=711s last=0.0s
+progress iter=6975 {'invalid': 19, 'compile_error': 121, 'value_diff': 58, 'alias_diff': 2, 'pass': 6775} elapsed=713s last=0.0s
+progress iter=7000 {'invalid': 19, 'compile_error': 122, 'value_diff': 58, 'alias_diff': 2, 'pass': 6799} elapsed=715s last=0.0s
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:43:40.126000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:43:40.127000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=7025 {'invalid': 19, 'compile_error': 123, 'value_diff': 58, 'alias_diff': 2, 'pass': 6823} elapsed=718s last=0.1s
+[iter 7048] value_diff seed=11007081 dynamic=None aliased=None kinds=aux,index_inplace,inplace,noop_alias,view_select,view_unfold
+       call0.out[3]: 13/32 elems differ at [18, 19, 21, 22, 23]: eager [8, -1, -1, -1, -2] vs compiled [5, 0, 0, 0, 0]
+       call0.arg0: 10/24 elems differ at [13, 15, 16, 17, 18]: eager [8, -1, -1, -2, -3] vs compiled [5, 0, 0, 0, 5]
+       call1.out[3]: 16/32 elems differ at [16, 17, 18, 19, 20]: eager [-1, 5, 12, -4, 5] vs compiled [5, 0, 5, 0, 0]
+       call1.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, 12, 5, -4, -6] vs compiled [5, 5, 0, 0, 0]
+progress iter=7050 {'invalid': 19, 'compile_error': 123, 'value_diff': 59, 'alias_diff': 2, 'pass': 6847} elapsed=721s last=0.0s
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] failed while attempting to run meta for aten.view.dtype
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] Traceback (most recent call last):
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3208, in _dispatch_impl
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     r = func(*args, **kwargs)
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]         ^^^^^^^^^^^^^^^^^^^^^
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_ops.py", line 916, in __call__
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]     return self._op(*args, **kwargs)
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:43:44.038000 25556 Lib\site-packages\torch\_subclasses\fake_tensor.py:3212] [0/0] RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 3
+progress iter=7075 {'invalid': 19, 'compile_error': 125, 'value_diff': 59, 'alias_diff': 2, 'pass': 6870} elapsed=723s last=0.1s
+progress iter=7100 {'invalid': 20, 'compile_error': 126, 'value_diff': 59, 'alias_diff': 2, 'pass': 6893} elapsed=726s last=0.3s
+progress iter=7125 {'invalid': 20, 'compile_error': 126, 'value_diff': 59, 'alias_diff': 2, 'pass': 6918} elapsed=728s last=0.0s
+progress iter=7150 {'invalid': 20, 'compile_error': 126, 'value_diff': 59, 'alias_diff': 2, 'pass': 6943} elapsed=730s last=0.0s
+progress iter=7175 {'invalid': 20, 'compile_error': 127, 'value_diff': 59, 'alias_diff': 2, 'pass': 6967} elapsed=732s last=0.2s
+[iter 7189] value_diff seed=11007222 dynamic=None aliased=None kinds=aux,index_inplace,inplace,noop_alias,view_reshape,view_squeeze,view_unfold
+       call0.arg0: 6/24 elems differ at [5, 7, 9, 11, 17]: eager [-8, -2, -6, -8, -2] vs compiled [0, 0, 0, 0, 0]
+       call1.arg0: 6/24 elems differ at [5, 7, 9, 11, 17]: eager [-6, 5, -2, -5, -8] vs compiled [0, 0, 0, 0, 0]
+progress iter=7200 {'invalid': 20, 'compile_error': 129, 'value_diff': 60, 'alias_diff': 2, 'pass': 6989} elapsed=734s last=0.1s
+progress iter=7225 {'invalid': 20, 'compile_error': 129, 'value_diff': 60, 'alias_diff': 2, 'pass': 7014} elapsed=737s last=0.1s
+progress iter=7250 {'invalid': 20, 'compile_error': 130, 'value_diff': 60, 'alias_diff': 2, 'pass': 7038} elapsed=740s last=0.2s
+progress iter=7275 {'invalid': 20, 'compile_error': 130, 'value_diff': 60, 'alias_diff': 2, 'pass': 7063} elapsed=745s last=0.1s
+progress iter=7300 {'invalid': 20, 'compile_error': 132, 'value_diff': 60, 'alias_diff': 2, 'pass': 7086} elapsed=747s last=0.1s
+progress iter=7325 {'invalid': 20, 'compile_error': 132, 'value_diff': 60, 'alias_diff': 2, 'pass': 7111} elapsed=749s last=0.0s
+[iter 7344] value_diff seed=11007377 dynamic=None aliased=None kinds=functional,inplace,noop_alias,setitem,side_effect,view_reshape,view_slice,view_unfold
+       call0.out[0]: 3/3 elems differ at [0, 1, 2]: eager [7.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0]
+       call0.out[1]: 6/24 elems differ at [18, 19, 20, 21, 22]: eager [4.0, 7.0, 4.0, 5.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 3/3 elems differ at [0, 1, 2]: eager [7.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0]
+       call0.out[4][0]: 6/24 elems differ at [18, 19, 20, 21, 22]: eager [4.0, 7.0, 4.0, 5.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=7350 {'invalid': 20, 'compile_error': 132, 'value_diff': 61, 'alias_diff': 2, 'pass': 7135} elapsed=752s last=0.1s
+progress iter=7375 {'invalid': 20, 'compile_error': 133, 'value_diff': 61, 'alias_diff': 2, 'pass': 7159} elapsed=754s last=0.1s
+progress iter=7400 {'invalid': 20, 'compile_error': 134, 'value_diff': 61, 'alias_diff': 2, 'pass': 7183} elapsed=757s last=0.0s
+progress iter=7425 {'invalid': 20, 'compile_error': 135, 'value_diff': 61, 'alias_diff': 2, 'pass': 7207} elapsed=760s last=0.2s
+progress iter=7450 {'invalid': 20, 'compile_error': 136, 'value_diff': 61, 'alias_diff': 2, 'pass': 7231} elapsed=762s last=0.1s
+progress iter=7475 {'invalid': 20, 'compile_error': 136, 'value_diff': 61, 'alias_diff': 2, 'pass': 7256} elapsed=765s last=0.2s
+progress iter=7500 {'invalid': 20, 'compile_error': 137, 'value_diff': 61, 'alias_diff': 2, 'pass': 7280} elapsed=767s last=0.0s
+progress iter=7525 {'invalid': 20, 'compile_error': 137, 'value_diff': 61, 'alias_diff': 2, 'pass': 7305} elapsed=769s last=0.2s
+progress iter=7550 {'invalid': 20, 'compile_error': 137, 'value_diff': 61, 'alias_diff': 2, 'pass': 7330} elapsed=771s last=0.1s
+[iter 7556] value_diff seed=11007589 dynamic=True aliased=('ta', 't0.transpose(0, 1)') kinds=inplace,view_dtype,view_select,view_squeeze,view_transpose
+       call0.out[1]: 6/12 elems differ at [0, 1, 2, 3, 4]: eager [-3, 7, -7, 4, -3] vs compiled [-7, 5, 0, -7, -8]
+       call1.out[1]: 5/12 elems differ at [0, 1, 2, 3, 5]: eager [-8, 6, 3, -3, 4] vs compiled [7, -7, 0, 0, -3]
+progress iter=7575 {'invalid': 20, 'compile_error': 137, 'value_diff': 62, 'alias_diff': 2, 'pass': 7354} elapsed=774s last=0.1s
+progress iter=7600 {'invalid': 20, 'compile_error': 137, 'value_diff': 62, 'alias_diff': 2, 'pass': 7379} elapsed=779s last=0.0s
+[iter 7624] value_diff seed=11007657 dynamic=None aliased=None kinds=functional,inplace,view_reshape,view_slice,view_unfold
+       call0.out[0]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4, -1, 4, 7, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4, -1, 4, 7, 4] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4, -1, 4, 7, 4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[0]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4, 4, 4, 4, 4] vs compiled [0, 0, 0, 0, 0]
+progress iter=7625 {'invalid': 20, 'compile_error': 137, 'value_diff': 63, 'alias_diff': 2, 'pass': 7403} elapsed=781s last=0.1s
+[iter 7637] value_diff seed=11007670 dynamic=None aliased=('ta', 't0.view(-1)') kinds=inplace,noop_arith,scatter_fn,setitem,view_expand,view_reshape,view_slice,view_unfold
+       call0.out[2]: 9/24 elems differ at [14, 15, 16, 17, 19]: eager [8, -14, -2, 14, 12] vs compiled [0, 0, 0, 0, 0]
+       call1.out[2]: 9/24 elems differ at [14, 15, 16, 17, 18]: eager [2, -14, 16, 2, 10] vs compiled [0, 0, 0, 0, 0]
+progress iter=7650 {'invalid': 20, 'compile_error': 137, 'value_diff': 64, 'alias_diff': 2, 'pass': 7427} elapsed=783s last=0.0s
+progress iter=7675 {'invalid': 20, 'compile_error': 137, 'value_diff': 64, 'alias_diff': 2, 'pass': 7452} elapsed=786s last=0.3s
+[iter 7681] value_diff seed=11007714 dynamic=None aliased=None kinds=aux,functional,index_inplace,inplace,inplace_meta,view_slice,view_unfold
+       call0.out[0]: 12/24 elems differ at [4, 5, 6, 7, 12]: eager [-7.0, -7.0, -2.0, -7.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 12/24 elems differ at [4, 5, 6, 7, 12]: eager [-7.0, -7.0, -2.0, -7.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[0]: 11/24 elems differ at [4, 5, 6, 7, 12]: eager [-2.0, -6.0, -3.0, 1.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[2]: 11/24 elems differ at [4, 5, 6, 7, 12]: eager [-2.0, -6.0, -3.0, 1.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+[iter 7689] value_diff seed=11007722 dynamic=True aliased=('ta', 't0.transpose(0, 1)') kinds=functional,inplace,inplace_meta,setitem,view_unfold
+       call0.out[1]: 17/24 elems differ at [1, 3, 5, 6, 7]: eager [4, 8, -3, -1, -5] vs compiled [0, 0, 0, 0, 0]
+       call0.arg2: 17/24 elems differ at [1, 3, 5, 6, 7]: eager [4, 8, -3, -1, -5] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 17/24 elems differ at [1, 2, 3, 5, 6]: eager [4, -5, -1, 5, -3] vs compiled [0, 0, 0, 0, 0]
+       call1.arg2: 17/24 elems differ at [1, 2, 3, 5, 6]: eager [4, -5, -1, 5, -3] vs compiled [0, 0, 0, 0, 0]
+progress iter=7700 {'invalid': 20, 'compile_error': 138, 'value_diff': 66, 'alias_diff': 2, 'pass': 7474} elapsed=789s last=0.0s
+[iter 7702] value_diff seed=11007735 dynamic=None aliased=None kinds=aux,functional,setitem,view_reshape,view_slice,view_transpose,view_unfold
+       call0.arg0: 8/24 elems differ at [8, 17, 18, 19, 20]: eager [8, -8, -6, -3, 7] vs compiled [0, 0, 0, 0, 0]
+       call1.arg0: 8/24 elems differ at [8, 17, 18, 19, 20]: eager [-7, -5, 5, -7, 2] vs compiled [0, 0, 0, 0, 0]
+progress iter=7725 {'invalid': 20, 'compile_error': 139, 'value_diff': 67, 'alias_diff': 2, 'pass': 7497} elapsed=791s last=0.2s
+progress iter=7750 {'invalid': 20, 'compile_error': 139, 'value_diff': 67, 'alias_diff': 2, 'pass': 7522} elapsed=795s last=0.1s
+progress iter=7775 {'invalid': 20, 'compile_error': 139, 'value_diff': 67, 'alias_diff': 2, 'pass': 7547} elapsed=797s last=0.0s
+[iter 7788] value_diff seed=11007821 dynamic=None aliased=None kinds=functional,inplace,noop_alias,setitem,view_dtype,view_transpose,view_unfold
+       call0.out[1]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [-4, 6, -5, -8, -4] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 15/48 elems differ at [32, 33, 34, 36, 37]: eager [-4, -1, 6, -5, -1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [-4, 6, -5, -8, -4] vs compiled [0, 0, 0, 0, 0]
+       call1.out[1]: 7/24 elems differ at [16, 17, 18, 20, 21]: eager [-4, -5, -1, -4, -4] vs compiled [0, 0, 0, 0, 0]
+progress iter=7800 {'invalid': 20, 'compile_error': 140, 'value_diff': 68, 'alias_diff': 2, 'pass': 7570} elapsed=799s last=0.0s
+[iter 7816] value_diff seed=11007849 dynamic=None aliased=None kinds=aux,functional,index_inplace,view_slice,view_unfold
+       call0.out[0]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [6, 7, 1, 7, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.out[2]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [6, 7, 1, 7, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.out[3]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [6, 7, 1, 7, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [6, 7, 1, 7, 1] vs compiled [0, 0, 0, 0, 0]
+progress iter=7825 {'invalid': 20, 'compile_error': 141, 'value_diff': 69, 'alias_diff': 2, 'pass': 7593} elapsed=801s last=0.1s
+progress iter=7850 {'invalid': 20, 'compile_error': 141, 'value_diff': 69, 'alias_diff': 2, 'pass': 7618} elapsed=803s last=0.1s
+progress iter=7875 {'invalid': 21, 'compile_error': 141, 'value_diff': 69, 'alias_diff': 2, 'pass': 7642} elapsed=805s last=0.1s
+progress iter=7900 {'invalid': 21, 'compile_error': 141, 'value_diff': 69, 'alias_diff': 2, 'pass': 7667} elapsed=807s last=0.0s
+progress iter=7925 {'invalid': 21, 'compile_error': 141, 'value_diff': 69, 'alias_diff': 2, 'pass': 7692} elapsed=809s last=0.1s
+progress iter=7950 {'invalid': 21, 'compile_error': 142, 'value_diff': 69, 'alias_diff': 2, 'pass': 7716} elapsed=815s last=0.0s
+[iter 7971] value_diff seed=11008004 dynamic=None aliased=None kinds=functional,noop_alias,setitem,view_transpose,view_unfold
+       call0.out[0]: 4/24 elems differ at [16, 18, 20, 23]: eager [3.0, 1.0, 6.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0]
+       call0.out[2]: 7/24 elems differ at [16, 17, 18, 19, 20]: eager [3.0, -4.0, 1.0, -5.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.out[3]: 4/24 elems differ at [16, 18, 20, 23]: eager [3.0, 1.0, 6.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0]
+       call0.arg0: 7/24 elems differ at [16, 17, 18, 19, 20]: eager [3.0, -4.0, 1.0, -5.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+progress iter=7975 {'invalid': 21, 'compile_error': 142, 'value_diff': 70, 'alias_diff': 2, 'pass': 7740} elapsed=817s last=0.0s
+[iter 7980] value_diff seed=11008013 dynamic=True aliased=('ta', 't0[1:]') kinds=inplace,setitem,view_slice,view_squeeze,view_unfold
+       call0.out[1]: 14/23 elems differ at [4, 5, 6, 7, 8]: eager [9, -6, 5, 9, 5] vs compiled [2, 2, 2, 2, 2]
+       call0.arg0: 14/24 elems differ at [5, 6, 7, 8, 9]: eager [9, -6, 5, 9, 5] vs compiled [2, 2, 2, 2, 2]
+       call0.arg2: 14/23 elems differ at [4, 5, 6, 7, 8]: eager [9, -6, 5, 9, 5] vs compiled [2, 2, 2, 2, 2]
+       call1.out[1]: 14/23 elems differ at [4, 5, 6, 7, 8]: eager [5, 5, -6, 9, -1] vs compiled [2, 2, 2, 2, 2]
+[iter 7981] value_diff seed=11008014 dynamic=True aliased=None kinds=functional,setitem,view_select,view_transpose,view_unfold
+       call0.arg0: 9/24 elems differ at [15, 16, 17, 18, 19]: eager [3, -5, -4, -8, 5] vs compiled [0, 0, 0, 0, 0]
+       call1.arg0: 7/24 elems differ at [16, 17, 18, 19, 20]: eager [-1, -4, 7, 4, 2] vs compiled [0, 0, 0, 0, 0]
+[iter 7993] value_diff seed=11008026 dynamic=None aliased=None kinds=setitem,view_reshape,view_unfold
+       call0.out[2]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [2, 1, -7, 5, 6] vs compiled [0, 0, 0, 0, 0]
+       call0.out[3]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [2, 1, -7, 5, 6] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [2, 1, -7, 5, 6] vs compiled [0, 0, 0, 0, 0]
+       call1.out[2]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-8, -4, -1, -8, -3] vs compiled [0, 0, 0, 0, 0]
+progress iter=8000 {'invalid': 21, 'compile_error': 143, 'value_diff': 73, 'alias_diff': 2, 'pass': 7761} elapsed=819s last=0.2s
+progress iter=8025 {'invalid': 21, 'compile_error': 143, 'value_diff': 73, 'alias_diff': 2, 'pass': 7786} elapsed=822s last=0.0s
+progress iter=8050 {'invalid': 21, 'compile_error': 143, 'value_diff': 73, 'alias_diff': 2, 'pass': 7811} elapsed=825s last=0.0s
+[iter 8061] value_diff seed=11008094 dynamic=None aliased=('ta', 't0') kinds=functional,inplace,view_select,view_transpose,view_unfold
+       call0.out[2]: 4/4 elems differ at [0, 1, 2, 3]: eager [39.0, 26.0, -4.0, -10.0] vs compiled [30.0, 16.0, 6.0, -4.0]
+       call0.arg0: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [2.0, 7.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call0.arg3: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [2.0, 7.0, 4.0, 6.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[2]: 4/4 elems differ at [0, 1, 2, 3]: eager [-24.0, 16.0, 1.0, -2.0] vs compiled [-36.0, 6.0, 12.0, 6.0]
+progress iter=8075 {'invalid': 21, 'compile_error': 143, 'value_diff': 74, 'alias_diff': 2, 'pass': 7835} elapsed=827s last=0.1s
+progress iter=8100 {'invalid': 21, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7859} elapsed=829s last=0.2s
+progress iter=8125 {'invalid': 22, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7883} elapsed=831s last=0.0s
+progress iter=8150 {'invalid': 23, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7907} elapsed=834s last=0.2s
+progress iter=8175 {'invalid': 23, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7932} elapsed=836s last=0.1s
+progress iter=8200 {'invalid': 23, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7957} elapsed=838s last=0.1s
+progress iter=8225 {'invalid': 23, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 7982} elapsed=841s last=0.3s
+progress iter=8250 {'invalid': 23, 'compile_error': 144, 'value_diff': 74, 'alias_diff': 2, 'pass': 8007} elapsed=844s last=0.2s
+progress iter=8275 {'invalid': 23, 'compile_error': 145, 'value_diff': 74, 'alias_diff': 2, 'pass': 8031} elapsed=846s last=0.0s
+[iter 8296] value_diff seed=11008329 dynamic=True aliased=None kinds=functional,inplace,noop_alias,side_effect,view_transpose
+       call0.out[3]: 12/24 elems differ at [1, 2, 3, 4, 8]: eager [-3, 5, -2, -3, 0] vs compiled [-2, -3, -3, 5, 5]
+       call1.out[3]: 8/24 elems differ at [1, 2, 3, 4, 14]: eager [-1, -2, 5, -1, -2] vs compiled [5, -1, -1, -2, 5]
+progress iter=8300 {'invalid': 23, 'compile_error': 145, 'value_diff': 75, 'alias_diff': 2, 'pass': 8055} elapsed=852s last=0.1s
+progress iter=8325 {'invalid': 23, 'compile_error': 145, 'value_diff': 75, 'alias_diff': 2, 'pass': 8080} elapsed=854s last=0.1s
+progress iter=8350 {'invalid': 23, 'compile_error': 145, 'value_diff': 75, 'alias_diff': 2, 'pass': 8105} elapsed=856s last=0.1s
+progress iter=8375 {'invalid': 23, 'compile_error': 147, 'value_diff': 75, 'alias_diff': 2, 'pass': 8128} elapsed=859s last=0.0s
+progress iter=8400 {'invalid': 24, 'compile_error': 147, 'value_diff': 75, 'alias_diff': 2, 'pass': 8152} elapsed=861s last=0.1s
+progress iter=8425 {'invalid': 24, 'compile_error': 147, 'value_diff': 75, 'alias_diff': 2, 'pass': 8177} elapsed=863s last=0.1s
+progress iter=8450 {'invalid': 24, 'compile_error': 147, 'value_diff': 75, 'alias_diff': 2, 'pass': 8202} elapsed=866s last=0.1s
+progress iter=8475 {'invalid': 24, 'compile_error': 148, 'value_diff': 75, 'alias_diff': 2, 'pass': 8226} elapsed=868s last=0.1s
+progress iter=8500 {'invalid': 24, 'compile_error': 148, 'value_diff': 75, 'alias_diff': 2, 'pass': 8251} elapsed=871s last=0.3s
+[iter 8510] value_diff seed=11008543 dynamic=None aliased=None kinds=inplace,noop_alias,setitem,view_diagonal,view_slice,view_transpose,view_unfold
+       call0.out[0]: 1/3 elems differ at [1]: eager [2] vs compiled [0]
+       call0.out[1]: 1/3 elems differ at [1]: eager [2] vs compiled [0]
+       call0.out[2]: 1/3 elems differ at [1]: eager [2] vs compiled [0]
+       call0.arg1: 8/24 elems differ at [4, 5, 6, 11, 16]: eager [7, -2, -4, -3, 2] vs compiled [0, 0, 0, 0, 0]
+progress iter=8525 {'invalid': 24, 'compile_error': 148, 'value_diff': 76, 'alias_diff': 2, 'pass': 8275} elapsed=874s last=0.1s
+progress iter=8550 {'invalid': 24, 'compile_error': 148, 'value_diff': 76, 'alias_diff': 2, 'pass': 8300} elapsed=876s last=0.1s
+progress iter=8575 {'invalid': 25, 'compile_error': 148, 'value_diff': 76, 'alias_diff': 2, 'pass': 8324} elapsed=878s last=0.0s
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:46:20.934000 25556 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:46:20.935000 25556 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=8600 {'invalid': 25, 'compile_error': 149, 'value_diff': 76, 'alias_diff': 2, 'pass': 8348} elapsed=880s last=0.1s
+progress iter=8625 {'invalid': 25, 'compile_error': 149, 'value_diff': 76, 'alias_diff': 2, 'pass': 8373} elapsed=882s last=0.1s
+progress iter=8650 {'invalid': 25, 'compile_error': 150, 'value_diff': 76, 'alias_diff': 2, 'pass': 8397} elapsed=884s last=0.1s
+progress iter=8675 {'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8421} elapsed=890s last=0.0s
+progress iter=8700 {'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8446} elapsed=893s last=0.2s
+progress iter=8725 {'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8471} elapsed=895s last=0.1s
+progress iter=8750 {'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8496} elapsed=898s last=0.1s
+progress iter=8775 {'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8521} elapsed=900s last=0.1s
+DONE iterations=8779 stats={'invalid': 25, 'compile_error': 151, 'value_diff': 76, 'alias_diff': 2, 'pass': 8525} cases=78 elapsed=900s
+minimizing case 1 (value_diff) ...
+  -> 5 stmts (from 9), status=value_diff, checks=17, dynamic=None aliased=None
+def fn(t0, t1, k, lst, dct):
+    v2 = t1.select(2, 2)
+    v3 = t1.unfold(1, 1, 2)
+    v6 = v3.transpose(3, 1)
+    idx7 = torch.tensor([1], device=v6.device)
+    v6[idx7] += 3
+    return (v2, lst, dct)
+
+       call0.out[0]: 2/4 elems differ at [1, 3]: eager [-3.0, -6.0] vs compiled [0.0, 0.0]
+       call0.arg1: 11/24 elems differ at [7, 8, 9, 10, 11]: eager [8.0, -3.0, -3.0, 5.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.out[0]: 2/4 elems differ at [1, 3]: eager [-7.0, -4.0] vs compiled [0.0, 0.0]
+       call1.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-4.0, 6.0, -7.0, -6.0, -1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+minimizing case 2 (value_diff) ...
+  -> 4 stmts (from 8), status=value_diff, checks=22, dynamic=None aliased=None
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2[20:22]
+    v2 = t1.unfold(0, 1, 2)
+    idx5 = torch.tensor([0], device=v2.device)
+    v2.index_fill_(3, idx5, -4)
+    return (v1, lst, dct)
+
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [1, 4, -1, 6, -3] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [-2, -8, 1, -8, 7] vs compiled [0, 0, 0, 0, 0]
+minimizing case 3 (value_diff) ...
+  -> 2 stmts (from 10), status=value_diff, checks=23, dynamic=None aliased=('ta', 't0[1:]')
+def fn(t0, t1, ta, k, lst, dct):
+    t0[:-1] = t0[1:].clone()
+    v4 = ta[6:9]
+    return (v4, lst, dct)
+
+       call0.out[0]: 2/3 elems differ at [0, 2]: eager [8, 5] vs compiled [-5, 8]
+       call1.out[0]: 3/3 elems differ at [0, 1, 2]: eager [-7, 4, 5] vs compiled [-1, -7, 4]
+minimizing case 4 (value_diff) ...
+  -> 3 stmts (from 8), status=value_diff, checks=18, dynamic=None aliased=None
+def fn(t0, t1, k, lst, dct):
+    v2 = t1.unfold(1, 3, 5)
+    idx5 = torch.tensor([0, 2, 1], device=v2.device)
+    v2.index_fill_(2, idx5, k)
+    return (v2, lst, dct)
+
+       call0.arg1: 9/24 elems differ at [3, 4, 9, 10, 11]: eager [8.0, 8.0, 7.0, -7.0, -6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg1: 12/24 elems differ at [3, 4, 5, 9, 10]: eager [2.0, -1.0, -6.0, -5.0, -8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+minimizing case 5 (value_diff) ...
+  -> 3 stmts (from 9), status=value_diff, checks=18, dynamic=None aliased=None
+def fn(t0, t1, k, lst, dct):
+    v4 = t1.unfold(2, 1, 2)
+    idx6 = torch.tensor([1, 0], device=v4.device)
+    v4.index_fill_(1, idx6, 0)
+    return (t0, lst, dct)
+
+       call0.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [4, 1, -6, 4, -4] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 12/24 elems differ at [1, 3, 5, 7, 9]: eager [1, 8, -3, -7, 7] vs compiled [0, 0, 0, 0, 0]
+minimizing case 6 (value_diff) ...
+  -> 4 stmts (from 6), status=value_diff, checks=17, dynamic=None aliased=('ta', 't0.transpose(0, 1)')
+def fn(t0, t1, ta, k, lst, dct):
+    v1 = t0[:]
+    v2 = ta.detach()
+    v4 = torch.select_scatter(t0, v2.select(1, 0), 1, 0)
+    v1.scatter_add_(1, (v4.abs() % 2).long(), v4)
+    return (v2, lst, dct)
+
+       call0.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4, 6, 3, -5, 1] vs compiled [2, 1, 0, 6, -14]
+       call1.out[0]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [6, 2, 6, -6, 2] vs compiled [-10, 7, 4, 3, 6]
+minimizing case 7 (value_diff) ...
+  -> 6 stmts (from 10), status=value_diff, checks=18, dynamic=None aliased=None
+def fn(t0, t1, k, lst, dct):
+    v1 = t0.clone()
+    v2 = t1.unfold(2, 2, 3)
+    idx3 = torch.tensor([0], device=v2.device)
+    v2.index_fill_(3, idx3, -4)
+    v4 = v1.reshape((6, 4))
+    v6 = v4.view((2, 12))
+    return (v6, lst, dct)
+
+       call0.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [4.0, 3.0, -5.0, -3.0, -3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+       call1.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [7.0, 1.0, 5.0, 1.0, 8.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]
+minimizing case 8 (value_diff) ...
+  -> 2 stmts (from 10), status=value_diff, checks=15, dynamic=None aliased=None
+def fn(t0, t1, t2, k, lst, dct):
+    v3 = t1.unfold(0, 1, 2)
+    v3.add_(k)
+    return (t1, lst, dct)
+
+       call0.out[0]: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -3, -1, 3, 1] vs compiled [0, 0, 0, 0, 0]
+       call0.arg1: 11/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -3, -1, 3, 1] vs compiled [0, 0, 0, 0, 0]
+       call1.out[0]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, -5, 3, -3, -7] vs compiled [0, 0, 0, 0, 0]
+       call1.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-1, -5, 3, -3, -7] vs compiled [0, 0, 0, 0, 0]
+summary written

@@ -1,0 +1,51 @@
+{
+ "id": 70,
+ "iter": 7788,
+ "seed": 11007821,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_dtype",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [-4, 6, -5, -8, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[2]: 15/48 elems differ at [32, 33, 34, 36, 37]: eager [-4, -1, 6, -5, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 8/24 elems differ at [16, 17, 18, 19, 20]: eager [-4, 6, -5, -8, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[1]: 7/24 elems differ at [16, 17, 18, 20, 21]: eager [-4, -5, -1, -4, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 14/48 elems differ at [32, 33, 34, 35, 36]: eager [-4, -1, -5, -1, -1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 7/24 elems differ at [16, 17, 18, 20, 21]: eager [-4, -5, -1, -4, -4] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.to(t1.dtype)\n    t1[-1] = -4\n    v2 = t1.transpose(0, 1)\n    v3 = v1.to(v1.dtype)\n    v4 = v3.unfold(0, 4, 4)\n    v4.masked_fill_(v4 > 1, k)\n    v5 = v3.view(torch.int32)\n    v6 = v4 * 0\n    v7 = v2.permute(1, 0)\n    return (t0, v7, v5, v4, t0, lst, dct)\n"
+}

@@ -1,0 +1,54 @@
+{
+ "id": 58,
+ "iter": 6718,
+ "seed": 11006751,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "side_effect",
+  "view_slice",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[5][1]: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg1: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg5[1]: 11/24 elems differ at [6, 7, 8, 9, 11]: eager [-4.0, 2.0, 8.0, 5.0, 2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[5][1]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-5.0, -1.0, 2.0, -6.0, -1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-5.0, -1.0, 2.0, -6.0, -1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg5[1]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [-5.0, -1.0, 2.0, -6.0, -1.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    t0.add_(t2.narrow(0, 0, 1))\n    v1 = t1.unfold(1, 1, 2)\n    v2 = t2.sum(0, keepdim=False)\n    lst.append(t2)\n    v1[1] = -5\n    lst.append(t1)\n    v3 = ta[5:21]\n    v4 = v2.view_as(v2)\n    v5 = v1.squeeze(3)\n    return (v5, v2, t0, t0, v5, lst, dct)\n"
+}

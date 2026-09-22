@@ -1,0 +1,46 @@
+{
+ "id": 1,
+ "iter": 26,
+ "seed": 21000089,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_slice"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 3/24 elems differ at [2, 8, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call0.out[2]: 3/24 elems differ at [2, 8, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call0.out[3]: 3/24 elems differ at [2, 8, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call0.arg0: 3/24 elems differ at [2, 8, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call1.out[1]: 3/24 elems differ at [2, 14, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call1.out[2]: 3/24 elems differ at [2, 14, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call1.out[3]: 3/24 elems differ at [2, 14, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]",
+  "call1.arg0: 3/24 elems differ at [2, 14, 20]: eager [-1, -1, -1] vs compiled [3, 3, 3]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t1.neg_()\n    t0[:, :, :] += 5\n    idx1 = torch.tensor([2], device=t0.device)\n    t0.index_fill_(2, idx1, -1)\n    t0[t0 > 0] = 2\n    v2 = t0[...]\n    t0.add_(t0)\n    v2.clamp_(-1, 3)\n    v3 = t1[1:2:3, :]\n    return (t1, v2, t0, t0, t1, lst, dct)\n"
+}

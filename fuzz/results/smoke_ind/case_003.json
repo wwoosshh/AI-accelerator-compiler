@@ -1,0 +1,25 @@
+{
+ "id": 3,
+ "iter": 89,
+ "seed": 1000092,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_arith",
+  "view_slice"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 4,
+ "diffs": [
+  "probe.call0.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-7, -7, 5, 8, -1] vs compiled [4993, 4993, 5005, 5008, 4999]",
+  "probe.call0.arg3: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [-7, -7, 5, 8, -1] vs compiled [4993, 4993, 5005, 5008, 4999]",
+  "probe.call1.arg0: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [7, 6, -4, 4, -7] vs compiled [5007, 5006, 4996, 5004, 4993]",
+  "probe.call1.arg3: 12/12 elems differ at [0, 1, 2, 3, 4]: eager [7, 6, -4, 4, -7] vs compiled [5007, 5006, 4996, 5004, 4993]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = ta[:, :]\n    idx2 = torch.tensor([5], device=ta.device)\n    ta.index_fill_(1, idx2, -1)\n    v3 = v1 + 0\n    return (t2, v3, v3, t2, t2, lst, dct)\n"
+}

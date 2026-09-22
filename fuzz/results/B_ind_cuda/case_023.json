@@ -1,0 +1,41 @@
+{
+ "id": 23,
+ "iter": 1006,
+ "seed": 21001069,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "noop_alias",
+  "view_slice"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 1/1 elems differ at [0]: eager [8] vs compiled [1]",
+  "call1.out[2]: 1/1 elems differ at [0]: eager [6] vs compiled [2]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    t1.add_(t1.flip(0))\n    v1 = t0.detach()\n    v2 = ta[:3, :, :]\n    v3 = ta[2:3, 2:, 1:2:3]\n    v2.abs_()\n    v4 = v2 + 2\n    v5 = v4.contiguous()\n    return (ta, ta, v3, t0, ta, lst, dct)\n"
+}

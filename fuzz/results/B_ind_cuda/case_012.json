@@ -1,0 +1,39 @@
+{
+ "id": 12,
+ "iter": 537,
+ "seed": 21000600,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "inplace",
+  "scatter_fn",
+  "setitem",
+  "side_effect"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[4]['key3']: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [2.0, -8.0, -1.0, -2.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg4['key3']: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [2.0, -8.0, -1.0, -2.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[4]['key3']: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [8.0, -8.0, -3.0, 3.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg4['key3']: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [8.0, -8.0, -3.0, 3.0, 6.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = torch.slice_scatter(t1, t0[4:9:1], dim=0, start=4, end=9, step=1)\n    v2 = t0 + v1\n    dct['key3'] = v1\n    t1.zero_()\n    v4 = torch.minimum(t1, v2)\n    idx5 = torch.tensor([2, 15, 9], device=v4.device)\n    v4[idx5] += 5\n    return (t0, v2, t0, lst, dct)\n"
+}

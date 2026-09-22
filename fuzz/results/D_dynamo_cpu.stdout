@@ -1,0 +1,557 @@
+torch 2.14.0+cu130 | backend eager | device cpu | seed 31 | dtype mix | start 2026-09-22 09:31:47
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break from `Tensor.item()`, consider setting:
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] or:
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] to include these operations in the captured graph.
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] Graph break: from user code at:
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0]   File "<aliasfuzz>", line 8, in fn
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+W0922 09:31:49.220000 24928 Lib\site-packages\torch\_dynamo\variables\tensor.py:1841] [0/0] 
+progress iter=25 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 25} elapsed=2s last=0.0s
+progress iter=50 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 50} elapsed=4s last=0.1s
+progress iter=75 {'invalid': 0, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 75} elapsed=6s last=0.0s
+progress iter=100 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 99} elapsed=7s last=0.0s
+progress iter=125 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 124} elapsed=8s last=0.1s
+progress iter=150 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 149} elapsed=10s last=0.0s
+progress iter=175 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 174} elapsed=11s last=0.0s
+progress iter=200 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 199} elapsed=12s last=0.0s
+progress iter=225 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 224} elapsed=14s last=0.1s
+progress iter=250 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 249} elapsed=15s last=0.0s
+progress iter=275 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 274} elapsed=17s last=0.1s
+progress iter=300 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 299} elapsed=18s last=0.0s
+progress iter=325 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 324} elapsed=20s last=0.1s
+progress iter=350 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 349} elapsed=21s last=0.0s
+progress iter=375 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 374} elapsed=22s last=0.0s
+progress iter=400 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 399} elapsed=23s last=0.1s
+progress iter=425 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 424} elapsed=25s last=0.0s
+progress iter=450 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 449} elapsed=26s last=0.0s
+progress iter=475 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 474} elapsed=27s last=0.0s
+progress iter=500 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 499} elapsed=28s last=0.1s
+progress iter=525 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 524} elapsed=29s last=0.0s
+progress iter=550 {'invalid': 1, 'compile_error': 0, 'value_diff': 0, 'alias_diff': 0, 'pass': 549} elapsed=30s last=0.1s
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:32:17.931000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:32:17.934000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=575 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 573} elapsed=32s last=0.1s
+progress iter=600 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 598} elapsed=33s last=0.0s
+progress iter=625 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 623} elapsed=34s last=0.0s
+progress iter=650 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 648} elapsed=35s last=0.0s
+progress iter=675 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 673} elapsed=37s last=0.1s
+progress iter=700 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 698} elapsed=38s last=0.0s
+progress iter=725 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 723} elapsed=39s last=0.0s
+progress iter=750 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 748} elapsed=40s last=0.0s
+progress iter=775 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 773} elapsed=41s last=0.0s
+progress iter=800 {'invalid': 1, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 798} elapsed=42s last=0.0s
+progress iter=825 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 822} elapsed=44s last=0.0s
+progress iter=850 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 847} elapsed=45s last=0.0s
+progress iter=875 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 872} elapsed=46s last=0.0s
+progress iter=900 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 897} elapsed=47s last=0.0s
+progress iter=925 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 922} elapsed=48s last=0.0s
+progress iter=950 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 947} elapsed=49s last=0.0s
+progress iter=975 {'invalid': 2, 'compile_error': 1, 'value_diff': 0, 'alias_diff': 0, 'pass': 972} elapsed=50s last=0.0s
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:32:38.683000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=1000 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 996} elapsed=52s last=0.1s
+progress iter=1025 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1021} elapsed=53s last=0.1s
+progress iter=1050 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1046} elapsed=54s last=0.0s
+progress iter=1075 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1071} elapsed=56s last=0.0s
+progress iter=1100 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1096} elapsed=57s last=0.1s
+progress iter=1125 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1121} elapsed=59s last=0.1s
+progress iter=1150 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1146} elapsed=60s last=0.1s
+progress iter=1175 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1171} elapsed=61s last=0.1s
+progress iter=1200 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1196} elapsed=62s last=0.0s
+progress iter=1225 {'invalid': 2, 'compile_error': 2, 'value_diff': 0, 'alias_diff': 0, 'pass': 1221} elapsed=64s last=0.0s
+progress iter=1250 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1245} elapsed=65s last=0.1s
+progress iter=1275 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1270} elapsed=66s last=0.2s
+progress iter=1300 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1295} elapsed=67s last=0.0s
+progress iter=1325 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1320} elapsed=68s last=0.0s
+progress iter=1350 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1345} elapsed=70s last=0.0s
+progress iter=1375 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1370} elapsed=71s last=0.1s
+progress iter=1400 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1395} elapsed=72s last=0.0s
+progress iter=1425 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1420} elapsed=74s last=0.0s
+progress iter=1450 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1445} elapsed=75s last=0.0s
+progress iter=1475 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1470} elapsed=76s last=0.1s
+progress iter=1500 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1495} elapsed=77s last=0.0s
+progress iter=1525 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1520} elapsed=79s last=0.1s
+progress iter=1550 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1545} elapsed=80s last=0.0s
+progress iter=1575 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1570} elapsed=81s last=0.0s
+progress iter=1600 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1595} elapsed=82s last=0.1s
+progress iter=1625 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1620} elapsed=83s last=0.0s
+progress iter=1650 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1645} elapsed=85s last=0.0s
+progress iter=1675 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1670} elapsed=86s last=0.2s
+progress iter=1700 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1695} elapsed=87s last=0.0s
+progress iter=1725 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1720} elapsed=89s last=0.1s
+progress iter=1750 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1745} elapsed=90s last=0.0s
+progress iter=1775 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1770} elapsed=91s last=0.0s
+progress iter=1800 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1795} elapsed=93s last=0.1s
+progress iter=1825 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1820} elapsed=94s last=0.1s
+progress iter=1850 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1845} elapsed=96s last=0.1s
+progress iter=1875 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1870} elapsed=97s last=0.0s
+progress iter=1900 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1895} elapsed=98s last=0.0s
+progress iter=1925 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1920} elapsed=100s last=0.0s
+progress iter=1950 {'invalid': 2, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1945} elapsed=101s last=0.0s
+progress iter=1975 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1969} elapsed=103s last=0.0s
+progress iter=2000 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 1994} elapsed=104s last=0.0s
+progress iter=2025 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2019} elapsed=106s last=0.0s
+progress iter=2050 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2044} elapsed=107s last=0.0s
+progress iter=2075 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2069} elapsed=108s last=0.0s
+progress iter=2100 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2094} elapsed=109s last=0.1s
+progress iter=2125 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2119} elapsed=111s last=0.1s
+progress iter=2150 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2144} elapsed=113s last=0.0s
+progress iter=2175 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2169} elapsed=114s last=0.1s
+progress iter=2200 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2194} elapsed=115s last=0.0s
+progress iter=2225 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2219} elapsed=116s last=0.0s
+progress iter=2250 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2244} elapsed=117s last=0.0s
+progress iter=2275 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2269} elapsed=119s last=0.1s
+progress iter=2300 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2294} elapsed=121s last=0.1s
+progress iter=2325 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2319} elapsed=122s last=0.1s
+progress iter=2350 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2344} elapsed=123s last=0.1s
+progress iter=2375 {'invalid': 3, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2369} elapsed=125s last=0.0s
+progress iter=2400 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2393} elapsed=126s last=0.0s
+progress iter=2425 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2418} elapsed=127s last=0.1s
+progress iter=2450 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2443} elapsed=128s last=0.0s
+progress iter=2475 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2468} elapsed=129s last=0.0s
+progress iter=2500 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2493} elapsed=131s last=0.1s
+progress iter=2525 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2518} elapsed=133s last=0.1s
+progress iter=2550 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2543} elapsed=134s last=0.0s
+progress iter=2575 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2568} elapsed=135s last=0.1s
+progress iter=2600 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2593} elapsed=137s last=0.0s
+progress iter=2625 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2618} elapsed=138s last=0.0s
+progress iter=2650 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2643} elapsed=139s last=0.0s
+progress iter=2675 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2668} elapsed=141s last=0.1s
+progress iter=2700 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2693} elapsed=143s last=0.1s
+progress iter=2725 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2718} elapsed=144s last=0.1s
+progress iter=2750 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2743} elapsed=145s last=0.1s
+progress iter=2775 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2768} elapsed=147s last=0.1s
+progress iter=2800 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2793} elapsed=148s last=0.0s
+progress iter=2825 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2818} elapsed=149s last=0.1s
+progress iter=2850 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2843} elapsed=150s last=0.1s
+progress iter=2875 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2868} elapsed=152s last=0.0s
+progress iter=2900 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2893} elapsed=154s last=0.1s
+progress iter=2925 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2918} elapsed=155s last=0.1s
+progress iter=2950 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2943} elapsed=157s last=0.0s
+progress iter=2975 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2968} elapsed=158s last=0.1s
+progress iter=3000 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 2993} elapsed=159s last=0.0s
+progress iter=3025 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3018} elapsed=161s last=0.0s
+progress iter=3050 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3043} elapsed=162s last=0.0s
+progress iter=3075 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3068} elapsed=163s last=0.0s
+progress iter=3100 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3093} elapsed=165s last=0.0s
+progress iter=3125 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3118} elapsed=167s last=0.0s
+progress iter=3150 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3143} elapsed=168s last=0.0s
+progress iter=3175 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3168} elapsed=169s last=0.1s
+progress iter=3200 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3193} elapsed=171s last=0.0s
+progress iter=3225 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3218} elapsed=172s last=0.1s
+progress iter=3250 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3243} elapsed=173s last=0.1s
+progress iter=3275 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3268} elapsed=174s last=0.1s
+progress iter=3300 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3293} elapsed=175s last=0.1s
+progress iter=3325 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3318} elapsed=177s last=0.2s
+progress iter=3350 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3343} elapsed=178s last=0.0s
+progress iter=3375 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3368} elapsed=181s last=0.1s
+progress iter=3400 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3393} elapsed=182s last=0.1s
+progress iter=3425 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3418} elapsed=183s last=0.1s
+progress iter=3450 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3443} elapsed=185s last=0.0s
+progress iter=3475 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3468} elapsed=186s last=0.1s
+progress iter=3500 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3493} elapsed=188s last=0.1s
+progress iter=3525 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3518} elapsed=189s last=0.2s
+progress iter=3550 {'invalid': 4, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3543} elapsed=190s last=0.1s
+progress iter=3575 {'invalid': 5, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3567} elapsed=192s last=0.1s
+progress iter=3600 {'invalid': 5, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3592} elapsed=193s last=0.0s
+progress iter=3625 {'invalid': 6, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3616} elapsed=195s last=0.1s
+progress iter=3650 {'invalid': 6, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3641} elapsed=196s last=0.1s
+progress iter=3675 {'invalid': 6, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3666} elapsed=197s last=0.1s
+progress iter=3700 {'invalid': 7, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3690} elapsed=199s last=0.0s
+progress iter=3725 {'invalid': 7, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3715} elapsed=200s last=0.1s
+progress iter=3750 {'invalid': 7, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3740} elapsed=202s last=0.1s
+progress iter=3775 {'invalid': 7, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3765} elapsed=203s last=0.1s
+progress iter=3800 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3788} elapsed=204s last=0.0s
+progress iter=3825 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3813} elapsed=205s last=0.0s
+progress iter=3850 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3838} elapsed=206s last=0.0s
+progress iter=3875 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3863} elapsed=207s last=0.1s
+progress iter=3900 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3888} elapsed=209s last=1.0s
+progress iter=3925 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3913} elapsed=211s last=0.0s
+progress iter=3950 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3938} elapsed=212s last=0.0s
+progress iter=3975 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3963} elapsed=213s last=0.0s
+progress iter=4000 {'invalid': 9, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 3988} elapsed=215s last=0.1s
+progress iter=4025 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4012} elapsed=216s last=0.0s
+progress iter=4050 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4037} elapsed=217s last=0.2s
+progress iter=4075 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4062} elapsed=219s last=0.0s
+progress iter=4100 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4087} elapsed=220s last=0.0s
+progress iter=4125 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4112} elapsed=221s last=0.0s
+progress iter=4150 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4137} elapsed=222s last=0.0s
+progress iter=4175 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4162} elapsed=223s last=0.0s
+progress iter=4200 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4187} elapsed=225s last=0.1s
+progress iter=4225 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4212} elapsed=227s last=0.0s
+progress iter=4250 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4237} elapsed=228s last=0.0s
+progress iter=4275 {'invalid': 10, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4262} elapsed=229s last=0.0s
+progress iter=4300 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4286} elapsed=230s last=0.1s
+progress iter=4325 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4311} elapsed=231s last=0.0s
+progress iter=4350 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4336} elapsed=233s last=0.0s
+progress iter=4375 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4361} elapsed=234s last=0.0s
+progress iter=4400 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4386} elapsed=235s last=0.0s
+progress iter=4425 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4411} elapsed=237s last=0.1s
+progress iter=4450 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4436} elapsed=238s last=0.1s
+progress iter=4475 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4461} elapsed=239s last=0.0s
+progress iter=4500 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4486} elapsed=241s last=0.1s
+progress iter=4525 {'invalid': 11, 'compile_error': 3, 'value_diff': 0, 'alias_diff': 0, 'pass': 4511} elapsed=243s last=0.1s
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:35:50.360000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=4550 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4535} elapsed=244s last=0.2s
+progress iter=4575 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4560} elapsed=245s last=0.1s
+progress iter=4600 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4585} elapsed=246s last=0.0s
+progress iter=4625 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4610} elapsed=247s last=0.0s
+progress iter=4650 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4635} elapsed=249s last=0.0s
+progress iter=4675 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4660} elapsed=250s last=0.1s
+progress iter=4700 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4685} elapsed=252s last=0.0s
+progress iter=4725 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4710} elapsed=253s last=0.1s
+progress iter=4750 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4735} elapsed=255s last=0.1s
+progress iter=4775 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4760} elapsed=256s last=0.1s
+progress iter=4800 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4785} elapsed=257s last=0.0s
+progress iter=4825 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4810} elapsed=259s last=0.0s
+progress iter=4850 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4835} elapsed=261s last=0.0s
+progress iter=4875 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4860} elapsed=262s last=0.0s
+progress iter=4900 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4885} elapsed=263s last=0.1s
+progress iter=4925 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4910} elapsed=265s last=0.0s
+progress iter=4950 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4935} elapsed=266s last=0.0s
+progress iter=4975 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4960} elapsed=267s last=0.2s
+progress iter=5000 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 4985} elapsed=268s last=0.0s
+progress iter=5025 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5010} elapsed=270s last=0.1s
+progress iter=5050 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5035} elapsed=271s last=0.0s
+progress iter=5075 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5060} elapsed=273s last=0.2s
+progress iter=5100 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5085} elapsed=274s last=0.0s
+progress iter=5125 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5110} elapsed=275s last=0.0s
+progress iter=5150 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5135} elapsed=277s last=0.1s
+progress iter=5175 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5160} elapsed=279s last=0.1s
+progress iter=5200 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5185} elapsed=281s last=0.1s
+progress iter=5225 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5210} elapsed=282s last=0.1s
+progress iter=5250 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5235} elapsed=283s last=0.0s
+progress iter=5275 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5260} elapsed=285s last=0.0s
+progress iter=5300 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5285} elapsed=286s last=0.1s
+progress iter=5325 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5310} elapsed=287s last=0.0s
+progress iter=5350 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5335} elapsed=288s last=0.0s
+progress iter=5375 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5360} elapsed=289s last=0.0s
+progress iter=5400 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5385} elapsed=290s last=0.0s
+progress iter=5425 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5410} elapsed=292s last=0.0s
+progress iter=5450 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5435} elapsed=293s last=0.0s
+progress iter=5475 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5460} elapsed=294s last=0.0s
+progress iter=5500 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5485} elapsed=295s last=0.0s
+progress iter=5525 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5510} elapsed=296s last=0.0s
+progress iter=5550 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5535} elapsed=298s last=0.1s
+progress iter=5575 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5560} elapsed=300s last=0.1s
+progress iter=5600 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5585} elapsed=301s last=0.0s
+progress iter=5625 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5610} elapsed=302s last=0.1s
+progress iter=5650 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5635} elapsed=304s last=0.0s
+progress iter=5675 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5660} elapsed=305s last=0.0s
+progress iter=5700 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5685} elapsed=307s last=0.1s
+progress iter=5725 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5710} elapsed=308s last=0.0s
+progress iter=5750 {'invalid': 11, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5735} elapsed=309s last=0.1s
+progress iter=5775 {'invalid': 12, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5759} elapsed=310s last=0.1s
+progress iter=5800 {'invalid': 12, 'compile_error': 4, 'value_diff': 0, 'alias_diff': 0, 'pass': 5784} elapsed=311s last=0.0s
+progress iter=5825 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5808} elapsed=312s last=0.0s
+progress iter=5850 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5833} elapsed=314s last=0.0s
+progress iter=5875 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5858} elapsed=315s last=0.0s
+progress iter=5900 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5883} elapsed=316s last=0.0s
+progress iter=5925 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5908} elapsed=319s last=0.0s
+progress iter=5950 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5933} elapsed=321s last=0.1s
+progress iter=5975 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5958} elapsed=322s last=0.0s
+progress iter=6000 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 5983} elapsed=323s last=0.1s
+progress iter=6025 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6008} elapsed=325s last=0.0s
+progress iter=6050 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6033} elapsed=326s last=0.0s
+progress iter=6075 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6058} elapsed=327s last=0.1s
+progress iter=6100 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6083} elapsed=328s last=0.0s
+progress iter=6125 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6108} elapsed=329s last=0.1s
+progress iter=6150 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6133} elapsed=331s last=0.1s
+progress iter=6175 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6158} elapsed=332s last=0.0s
+progress iter=6200 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6183} elapsed=334s last=0.1s
+progress iter=6225 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6208} elapsed=334s last=0.0s
+progress iter=6250 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6233} elapsed=336s last=0.0s
+progress iter=6275 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6258} elapsed=337s last=0.0s
+progress iter=6300 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6283} elapsed=338s last=0.1s
+progress iter=6325 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6308} elapsed=340s last=0.0s
+progress iter=6350 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6333} elapsed=341s last=0.0s
+progress iter=6375 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6358} elapsed=342s last=0.0s
+progress iter=6400 {'invalid': 12, 'compile_error': 5, 'value_diff': 0, 'alias_diff': 0, 'pass': 6383} elapsed=344s last=0.0s
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:37:32.509000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:37:32.510000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=6425 {'invalid': 12, 'compile_error': 6, 'value_diff': 0, 'alias_diff': 0, 'pass': 6407} elapsed=345s last=0.1s
+progress iter=6450 {'invalid': 12, 'compile_error': 6, 'value_diff': 0, 'alias_diff': 0, 'pass': 6432} elapsed=346s last=0.2s
+progress iter=6475 {'invalid': 12, 'compile_error': 6, 'value_diff': 0, 'alias_diff': 0, 'pass': 6457} elapsed=347s last=0.0s
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:37:35.479000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:37:35.480000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=6500 {'invalid': 12, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6481} elapsed=349s last=0.0s
+progress iter=6525 {'invalid': 12, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6506} elapsed=350s last=0.1s
+progress iter=6550 {'invalid': 12, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6531} elapsed=351s last=0.0s
+progress iter=6575 {'invalid': 13, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6555} elapsed=352s last=0.0s
+progress iter=6600 {'invalid': 13, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6580} elapsed=354s last=0.1s
+progress iter=6625 {'invalid': 13, 'compile_error': 7, 'value_diff': 0, 'alias_diff': 0, 'pass': 6605} elapsed=355s last=0.1s
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Error while creating guard:
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Name: ''
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Source: shape_env
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Create Function: SHAPE_ENV
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guard Types: None
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Code List: None
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Object Weakref: None
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     Guarded Class Weakref: None
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] Traceback (most recent call last):
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_guards.py", line 374, in create
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return self.create_fn(builder, self)
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3484, in SHAPE_ENV
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     python_code_parts, verbose_code_parts = _get_code_parts(
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                             ^^^^^^^^^^^^^^^^
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 3457, in _get_code_parts
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     return output_graph.shape_env.produce_guards_verbose(
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6558, in produce_guards_verbose
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]     track_symint(property_source, ss, constraint_size[i])
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0]                                       ~~~~~~~~~~~~~~~^^^
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:376] [0/0] IndexError: list index out of range
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0] Created at:
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 925, in trace_frame
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     tracer = InstructionTranslator(
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 5589, in __init__
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     output=OutputGraph(
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 802, in __init__
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.init_ambient_guards()
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]   File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\output_graph.py", line 1173, in init_ambient_guards
+E0922 09:37:43.427000 24928 Lib\site-packages\torch\_guards.py:378] [0/0]     self.guards.add(ShapeEnvSource().make_guard(GuardBuilder.SHAPE_ENV))
+progress iter=6650 {'invalid': 13, 'compile_error': 8, 'value_diff': 0, 'alias_diff': 0, 'pass': 6629} elapsed=356s last=0.0s
+progress iter=6675 {'invalid': 13, 'compile_error': 8, 'value_diff': 0, 'alias_diff': 0, 'pass': 6654} elapsed=357s last=0.0s
+progress iter=6700 {'invalid': 13, 'compile_error': 8, 'value_diff': 0, 'alias_diff': 0, 'pass': 6679} elapsed=358s last=0.0s
+progress iter=6725 {'invalid': 13, 'compile_error': 8, 'value_diff': 0, 'alias_diff': 0, 'pass': 6704} elapsed=360s last=0.0s
+progress iter=6750 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6728} elapsed=363s last=1.7s
+progress iter=6775 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6753} elapsed=364s last=0.1s
+progress iter=6800 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6778} elapsed=365s last=0.1s
+progress iter=6825 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6803} elapsed=367s last=0.0s
+progress iter=6850 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6828} elapsed=368s last=0.0s
+progress iter=6875 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6853} elapsed=369s last=0.1s
+progress iter=6900 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6878} elapsed=370s last=0.1s
+progress iter=6925 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6903} elapsed=372s last=0.1s
+progress iter=6950 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6928} elapsed=373s last=0.0s
+progress iter=6975 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6953} elapsed=374s last=0.0s
+progress iter=7000 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 6978} elapsed=375s last=0.0s
+progress iter=7025 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7003} elapsed=376s last=0.0s
+progress iter=7050 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7028} elapsed=378s last=0.0s
+progress iter=7075 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7053} elapsed=379s last=0.1s
+progress iter=7100 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7078} elapsed=380s last=0.0s
+progress iter=7125 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7103} elapsed=381s last=0.0s
+progress iter=7150 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7128} elapsed=383s last=0.0s
+progress iter=7175 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7153} elapsed=384s last=0.0s
+progress iter=7200 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7178} elapsed=387s last=0.1s
+progress iter=7225 {'invalid': 13, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7203} elapsed=388s last=0.1s
+progress iter=7250 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7227} elapsed=389s last=0.1s
+progress iter=7275 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7252} elapsed=391s last=0.0s
+progress iter=7300 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7277} elapsed=392s last=0.0s
+progress iter=7325 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7302} elapsed=393s last=0.1s
+progress iter=7350 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7327} elapsed=394s last=0.0s
+progress iter=7375 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7352} elapsed=396s last=0.1s
+progress iter=7400 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7377} elapsed=397s last=0.1s
+progress iter=7425 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7402} elapsed=399s last=0.1s
+progress iter=7450 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7427} elapsed=400s last=0.0s
+progress iter=7475 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7452} elapsed=402s last=0.0s
+progress iter=7500 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7477} elapsed=403s last=0.0s
+progress iter=7525 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7502} elapsed=404s last=0.0s
+progress iter=7550 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7527} elapsed=406s last=0.0s
+progress iter=7575 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7552} elapsed=407s last=0.0s
+progress iter=7600 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7577} elapsed=409s last=0.1s
+progress iter=7625 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7602} elapsed=410s last=0.0s
+progress iter=7650 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7627} elapsed=413s last=0.2s
+progress iter=7675 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7652} elapsed=415s last=0.0s
+progress iter=7700 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7677} elapsed=416s last=0.1s
+progress iter=7725 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7702} elapsed=418s last=0.1s
+progress iter=7750 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7727} elapsed=419s last=0.0s
+progress iter=7775 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7752} elapsed=421s last=0.0s
+progress iter=7800 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7777} elapsed=422s last=0.0s
+progress iter=7825 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7802} elapsed=423s last=0.0s
+progress iter=7850 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7827} elapsed=424s last=0.0s
+progress iter=7875 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7852} elapsed=425s last=0.0s
+progress iter=7900 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7877} elapsed=426s last=0.0s
+progress iter=7925 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7902} elapsed=428s last=0.0s
+progress iter=7950 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7927} elapsed=429s last=0.1s
+progress iter=7975 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7952} elapsed=430s last=0.0s
+progress iter=8000 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 7977} elapsed=431s last=0.0s
+progress iter=8025 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8002} elapsed=432s last=0.0s
+progress iter=8050 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8027} elapsed=434s last=0.0s
+progress iter=8075 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8052} elapsed=435s last=0.0s
+progress iter=8100 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8077} elapsed=436s last=0.0s
+progress iter=8125 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8102} elapsed=437s last=0.0s
+progress iter=8150 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8127} elapsed=438s last=0.1s
+progress iter=8175 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8152} elapsed=441s last=0.0s
+progress iter=8200 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8177} elapsed=442s last=0.1s
+progress iter=8225 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8202} elapsed=443s last=0.0s
+progress iter=8250 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8227} elapsed=445s last=0.1s
+progress iter=8275 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8252} elapsed=446s last=0.0s
+progress iter=8300 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8277} elapsed=447s last=0.0s
+progress iter=8325 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8302} elapsed=449s last=0.0s
+progress iter=8350 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8327} elapsed=450s last=0.0s
+progress iter=8375 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8352} elapsed=451s last=0.0s
+progress iter=8400 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8377} elapsed=452s last=0.0s
+progress iter=8425 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8402} elapsed=453s last=0.0s
+progress iter=8450 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8427} elapsed=455s last=0.0s
+progress iter=8475 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8452} elapsed=456s last=0.0s
+progress iter=8500 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8477} elapsed=457s last=0.1s
+progress iter=8525 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8502} elapsed=458s last=0.0s
+progress iter=8550 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8527} elapsed=459s last=0.0s
+progress iter=8575 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8552} elapsed=460s last=0.0s
+progress iter=8600 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8577} elapsed=461s last=0.1s
+progress iter=8625 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8602} elapsed=463s last=0.0s
+progress iter=8650 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8627} elapsed=464s last=0.1s
+progress iter=8675 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8652} elapsed=465s last=0.0s
+progress iter=8700 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8677} elapsed=466s last=0.1s
+progress iter=8725 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8702} elapsed=467s last=0.0s
+progress iter=8750 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8727} elapsed=471s last=0.1s
+progress iter=8775 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8752} elapsed=472s last=0.1s
+progress iter=8800 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8777} elapsed=473s last=0.0s
+progress iter=8825 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8802} elapsed=474s last=0.1s
+progress iter=8850 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8827} elapsed=475s last=0.1s
+progress iter=8875 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8852} elapsed=476s last=0.1s
+progress iter=8900 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8877} elapsed=477s last=0.0s
+progress iter=8925 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8902} elapsed=479s last=0.1s
+progress iter=8950 {'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8927} elapsed=480s last=0.0s
+DONE iterations=8951 stats={'invalid': 14, 'compile_error': 9, 'value_diff': 0, 'alias_diff': 0, 'pass': 8928} cases=0 elapsed=480s
+summary written

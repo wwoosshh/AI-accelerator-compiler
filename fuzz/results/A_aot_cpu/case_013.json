@@ -1,0 +1,47 @@
+{
+ "id": 13,
+ "iter": 1487,
+ "seed": 11001520,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "setitem",
+  "view_slice",
+  "view_squeeze",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg1: 6/24 elems differ at [3, 7, 11, 15, 19]: eager [-1, -1, -2, 1, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 6/24 elems differ at [3, 7, 11, 15, 19]: eager [4, -7, -3, 1, 1] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.unfold(2, 3, 4)\n    t1[-1] = 1\n    v2 = t2.sum(1, keepdim=True)\n    v3 = t0[:, :-4:2]\n    v4 = v2.unsqueeze(0)\n    v3[1] = 3\n    v5 = v1.transpose(1, 2)\n    v5[1] = -4\n    return (v1, v3, t2, v1, lst, dct)\n"
+}

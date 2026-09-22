@@ -1,0 +1,42 @@
+def fn(t0, t1, k, lst, dct):
+    v1 = t1[:3, 1:3:3, -1]
+    v2 = t1.view(torch.int32)
+    v1[v1 > -1] = -4
+    v1.transpose_(0, 1)
+    t1.transpose_(1, 2)
+    t1[3:4:2, 1:2, 1:] += 2
+    v3 = v1.unfold(1, 3, 1)
+    v4 = t0.select(1, 1)
+    return (v1, v3, v1, v4, v1, lst, dct)
+
+# dynamic=True aliased=None
+
+RuntimeError: maximum size for tensor at dimension 1 is 2 but size is 3
+Traceback (most recent call last):
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 751, in evaluate
+    try:
+         
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 657, in run_world
+    args = make_args(prog, device, seed * 7919 + c)
+          ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1261, in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "<aliasfuzz>", line 6, in fn
+  File "<aliasfuzz>", line 6, in torch_dynamo_resume_in_fn_at_6
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1289, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(synthetic_base_wrapper)", line 11, in _synthetic_base_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1189, in runtime_wrapper
+    result = _codegen_runtime_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(runtime_wrapper_orchestration)", line 20, in _runtime_wrapper
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(output_alias_wrapper)", line 3, in _alias_fn
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_functorch\_aot_autograd\functional_utils.py", line 343, in gen_alias_from_base
+    out = _functionalization.apply_view_meta_sequence(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: maximum size for tensor at dimension 1 is 2 but size is 3

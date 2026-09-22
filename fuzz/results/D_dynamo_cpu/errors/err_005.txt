@@ -1,0 +1,47 @@
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t1.contiguous()
+    v2 = v1.view(torch.int32)
+    lst.append(v2)
+    lst.append(v2.shape[2] + k)
+    v3 = torch.select_scatter(t1, t0.select(1, 2), 1, 2)
+    idx4 = torch.tensor([0, 1], device=v1.device)
+    v1[idx4] += 0
+    v2.add_(-2)
+    v1.transpose_(2, 0)
+    return (v3, t0, v1, v3, t1, lst, dct)
+
+# dynamic=True aliased=None
+
+AssertionError: Guard failed on the same frame it was created. This is a bug - please create an issue.Guard fail reason: 0/0: t1.stride()[1] == t1.size()[0]  # (unknown source t1.stride()[1], please file a bug)
+
+ in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2649, in __call__
+    result = self._torchdynamo_orig_backend(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2333, in __call__
+    result = self._inner_convert(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 778, in __call__
+    result = _compile(
+             ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 2116, in _compile
+    guarded_code, tracer_output = compile_inner(code, one_graph, hooks)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_utils_internal.py", line 114, in wrapper_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1701, in compile_inner
+    result = _compile_inner(code, one_graph, hooks)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1917, in _compile_inner
+    check_fn = dynamo_output.build_guards(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1013, in build_guards
+    return CheckFunctionManager(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2bug\Lib\site-packages\torch\_dynamo\guards.py", line 4717, in __init__
+    raise AssertionError(
+AssertionError: Guard failed on the same frame it was created. This is a bug - please create an issue.Guard fail reason: 0/0: t1.stride()[1] == t1.size()[0]  # (unknown source t1.stride()[1], please file a bug)
+

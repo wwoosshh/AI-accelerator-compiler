@@ -1,0 +1,41 @@
+{
+ "id": 20,
+ "iter": 2305,
+ "seed": 11002338,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "view_reshape",
+  "view_slice",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[1]: 11/17 elems differ at [0, 2, 4, 6, 7]: eager [-3.0, -2.0, -3.0, -2.0, -3.0] vs compiled [-1.0, -3.0, -2.0, -3.0, -2.0]",
+  "call1.out[1]: 10/17 elems differ at [0, 2, 3, 4, 6]: eager [-3.0, -2.0, -3.0, -2.0, -3.0] vs compiled [-2.0, -3.0, -2.0, -3.0, -2.0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1.view((24,))\n    ta.clamp_(-4, 2)\n    v2 = t1.permute(1, 2, 0)\n    v3 = ta[4:21]\n    v4 = t0.reshape((2, 3, 4))\n    t0.clamp_(-3, 1)\n    v5 = v3.unsqueeze(1)\n    v6 = t1[1:-1:2, 2, :]\n    t0.masked_fill_(t0 > -1, -2)\n    return (v6, v3, t1, lst, dct)\n"
+}

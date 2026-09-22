@@ -1,0 +1,44 @@
+{
+ "id": 45,
+ "iter": 4762,
+ "seed": 11004795,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_slice",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 12/24 elems differ at [1, 4, 7, 8, 9]: eager [3, 3, 3, 0, 0] vs compiled [0, 0, 0, 3, 3]",
+  "call1.out[1]: 12/24 elems differ at [1, 4, 7, 8, 9]: eager [3, 3, 3, 0, 0] vs compiled [0, 0, 0, 3, 3]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    t0.sub_(1)\n    ta[:-1, :] = ta[1:, :].clone()\n    v1 = ta.unsqueeze(1)\n    v1[:, :, :] += 3\n    v2 = t0[:, 3:4:3]\n    v3 = v1.reshape(v1.shape)\n    idx4 = torch.tensor([1], device=t0.device)\n    t0.index_fill_(0, idx4, 3)\n    idx5 = torch.tensor([0, 2], device=v3.device)\n    v3.index_fill_(2, idx5, 0)\n    return (ta, v3, t0, lst, dct)\n"
+}

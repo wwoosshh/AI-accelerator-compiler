@@ -1,0 +1,41 @@
+{
+ "id": 56,
+ "iter": 6487,
+ "seed": 11006520,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "setitem",
+  "view_slice"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 4,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 1/1 elems differ at [0]: eager [-3] vs compiled [7]",
+  "call0.out[3]: 1/1 elems differ at [0]: eager [-3] vs compiled [7]",
+  "call1.out[2]: 1/1 elems differ at [0]: eager [2] vs compiled [-7]",
+  "call1.out[3]: 1/1 elems differ at [0]: eager [2] vs compiled [-7]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    t1.add_(0)\n    v1 = ta[22::3]\n    t0[1:] = t0[:-1].clone()\n    t1.add_(t1)\n    return (ta, t1, v1, v1, lst, dct)\n"
+}

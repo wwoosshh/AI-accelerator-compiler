@@ -1,0 +1,45 @@
+{
+ "id": 60,
+ "iter": 2657,
+ "seed": 21002720,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_arith",
+  "scatter_fn",
+  "setitem",
+  "view_diagonal",
+  "view_slice",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    24
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4997.0, 4999.0, 5003.0, 5002.0, 5007.0] vs compiled [7997.0, 7999.0, 8003.0, 8002.0, 8007.0]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2997.0, 2999.0, 3003.0, 3002.0, 3007.0] vs compiled [7997.0, 7999.0, 8003.0, 8002.0, 8007.0]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4997.0, 4999.0, 5003.0, 5002.0, 5007.0] vs compiled [7997.0, 7999.0, 8003.0, 8002.0, 8007.0]",
+  "probe.call0.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2997.0, 2999.0, 3003.0, 3002.0, 3007.0] vs compiled [7997.0, 7999.0, 8003.0, 8002.0, 8007.0]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4996.0, 4992.0, 4998.0, 4999.0, 4996.0] vs compiled [7996.0, 7992.0, 7998.0, 7999.0, 7996.0]",
+  "probe.call1.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2996.0, 2992.0, 2998.0, 2999.0, 2996.0] vs compiled [7996.0, 7992.0, 7998.0, 7999.0, 7996.0]",
+  "probe.call1.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [4996.0, 4992.0, 4998.0, 4999.0, 4996.0] vs compiled [7996.0, 7992.0, 7998.0, 7999.0, 7996.0]",
+  "probe.call1.arg0: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [2996.0, 2992.0, 2998.0, 2999.0, 2996.0] vs compiled [7996.0, 7992.0, 7998.0, 7999.0, 7996.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t0[8] = 4\n    v1 = t1.unsqueeze(1)\n    v2 = v1.diagonal()\n    v3 = t0.unsqueeze(1)\n    v4 = t0.clone()\n    v5 = v4[:]\n    v6 = torch.select_scatter(t1, v5.select(0, 9), 0, 9)\n    idx7 = torch.tensor([16], device=v1.device)\n    v1.index_copy_(0, idx7, v3.narrow(0, 0, 1))\n    return (v5, v6, t0, v5, lst, dct)\n"
+}

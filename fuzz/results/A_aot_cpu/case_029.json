@@ -1,0 +1,40 @@
+{
+ "id": 29,
+ "iter": 2974,
+ "seed": 11003007,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "setitem",
+  "view_reshape",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg0: 3/24 elems differ at [7, 15, 23]: eager [1, 1, 1] vs compiled [0, 0, 0]",
+  "call1.arg0: 3/24 elems differ at [7, 15, 23]: eager [2, 2, 2] vs compiled [0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    idx1 = torch.tensor([2, 1, 0], device=t0.device)\n    t0.index_fill_(0, idx1, k)\n    v2 = t0.unfold(1, 7, 8)\n    v2[1:, :, :] = v2[:-1, :, :].clone()\n    v3 = v2.flatten()\n    v4 = v3[:]\n    return (v4, v4, v4, lst, dct)\n"
+}

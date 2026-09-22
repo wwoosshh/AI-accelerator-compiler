@@ -1,0 +1,37 @@
+{
+ "id": 7,
+ "iter": 428,
+ "seed": 21000491,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "scatter_fn"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 7/24 elems differ at [1, 2, 3, 4, 5]: eager [0, 6, -7, -8, -6] vs compiled [-2, 4, -1, -12, -11]",
+  "call1.out[2]: 5/24 elems differ at [1, 4, 5, 6, 8]: eager [1, 4, -5, -2, -3] vs compiled [2, 0, -15, 4, -11]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.view_as(t0)\n    v2 = torch.select_scatter(t0, v1.select(0, 10), 0, 10)\n    v1.copy_(v2)\n    idx3 = torch.tensor([20, 19], device=t0.device)\n    t0.scatter_add_(0, (v2.abs() % 24).long(), v2)\n    return (t1, t1, v2, t0, t1, lst, dct)\n"
+}

@@ -1,0 +1,47 @@
+{
+ "id": 9,
+ "iter": 508,
+ "seed": 21000571,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "scatter_fn",
+  "setitem",
+  "view_reshape"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 20/24 elems differ at [0, 1, 2, 3, 4]: eager [-6.0, -8.0, -3.0, 4.0, -3.0] vs compiled [0.0, 1.0, 1.0, 0.0, -2.0]",
+  "call1.out[0]: 22/24 elems differ at [0, 1, 2, 3, 4]: eager [7.0, -2.0, 3.0, -3.0, -7.0] vs compiled [1.0, 4.0, 4.0, 1.0, -15.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t0.contiguous()\n    v2 = v1.view_as(v1)\n    v3 = torch.slice_scatter(v2, t1[:, :, 1:4:1], dim=2, start=1, end=4, step=1)\n    v4 = v2.flatten()\n    v1.add_(v1.flip(2))\n    v5 = v3.view((24,))\n    v4[17:19] = v5[17:19]\n    return (v3, t0, v1, t2, lst, dct)\n"
+}

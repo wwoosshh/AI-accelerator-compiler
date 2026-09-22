@@ -1,0 +1,40 @@
+{
+ "id": 59,
+ "iter": 6812,
+ "seed": 11006845,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "view_slice",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 1/1 elems differ at [0]: eager [5] vs compiled [10]",
+  "call1.out[2]: 1/1 elems differ at [0]: eager [5] vs compiled [8]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = ta[1::2, :]\n    v2 = t0[:, 1:5]\n    v3 = v1[-1, 1:-2:3]\n    ta.add_(2)\n    ta.add_(ta)\n    v3.fill_(5)\n    v4 = v1.transpose(0, 1)\n    v4.add_(0)\n    v5 = v4.to(v4.dtype)\n    v6 = v2[:]\n    return (t1, v2, v3, v2, t0, t1, lst, dct)\n"
+}

@@ -1,0 +1,41 @@
+{
+ "id": 30,
+ "iter": 1395,
+ "seed": 21001458,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "setitem",
+  "view_dtype",
+  "view_squeeze"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 12/24 elems differ at [2, 3, 4, 8, 9]: eager [12884901880, 17179869202, 17179869202, 17179869198, 17179869190] vs compiled [17179869192, 17179869192, 17179869192, 17179869192, 17179869192]",
+  "call1.out[1]: 10/24 elems differ at [2, 3, 8, 9, 10]: eager [12884901884, 12884901876, 8589934594, 12884901886, 8589934592] vs compiled [17179869192, 17179869192, 17179869192, 17179869192, 17179869192]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t0.unsqueeze(2)\n    v2 = t0.view(torch.int32)\n    v3 = v2 * 2\n    idx4 = torch.tensor([0, 1], device=t1.device)\n    t1.index_fill_(2, idx4, 0)\n    v3.sub_(-4)\n    v1[:, 2:5, :] = 2\n    v5 = t1.unsqueeze(3)\n    v6 = v3.view(torch.int64)\n    return (t1, v6, lst, dct)\n"
+}

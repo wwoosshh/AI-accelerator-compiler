@@ -1,0 +1,42 @@
+{
+ "id": 6,
+ "iter": 799,
+ "seed": 11000832,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_alias",
+  "scatter_fn",
+  "side_effect"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.transpose(0, 1)"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [4, 6, 3, -5, 1] vs compiled [2, 1, 0, 6, -14]",
+  "call1.out[3]: 12/24 elems differ at [6, 7, 8, 9, 10]: eager [6, 2, 6, -6, 2] vs compiled [-10, 7, 4, 3, 6]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t0[:]\n    v2 = ta.detach()\n    dct['key3'] = v1\n    v4 = torch.select_scatter(t0, v2.select(1, 0), 1, 0)\n    idx5 = torch.tensor([1], device=v1.device)\n    v1.scatter_add_(1, (v4.abs() % 2).long(), v4)\n    return (v4, v1, t0, v2, lst, dct)\n"
+}

@@ -1,0 +1,49 @@
+{
+ "id": 15,
+ "iter": 740,
+ "seed": 21000803,
+ "status": "alias_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "noop_arith",
+  "scatter_fn",
+  "setitem",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [1, -6, -5, -2, -7] vs compiled [3001, 2994, 2995, 2998, 2993]",
+  "probe.call1.arg2: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [-2, -5, -7, 1, 4] vs compiled [2998, 2995, 2993, 3001, 3004]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    t1.neg_()\n    v1 = t2.to(t2.dtype)\n    v2 = torch.select_scatter(t2, v1.select(0, 3), 0, 3)\n    v3 = v2.transpose(1, 2)\n    idx4 = torch.tensor([2], device=v2.device)\n    v2.index_add_(0, idx4, t2.narrow(0, 0, 1))\n    idx5 = torch.tensor([1], device=v1.device)\n    v1[idx5] = 1\n    v6 = v1.clone()\n    return (v3, t1, v6, t1, v3, lst, dct)\n"
+}
