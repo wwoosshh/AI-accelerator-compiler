@@ -30,6 +30,15 @@ gh issue create --repo pytorch/pytorch --title "[inductor] y = x.view(torch.int3
 gh issue create --repo pytorch/pytorch --title "[inductor][dynamic shapes] index_add_ through a flat reshape alias of an input is dropped when the input was assigned to earlier (dynamic=True only)" --body-file ISSUE_J_inductor_dynamic_index_add.md
 ```
 
+L (2026-09-22 추가; 최종 본문은 `ISSUE_L_final_body.md`(collect_env 첨부) / `PR_6_final_body.md`, PR 본문의 `Fixes #<L issue number>` 를 이슈 번호로 바꾼 뒤 PR):
+
+```bash
+cd fuzz/upstream
+gh issue create --repo pytorch/pytorch --title "$(cat ISSUE_L_final_title.txt)" --body-file ISSUE_L_final_body.md
+gh pr create --repo pytorch/pytorch --base main --head wwoosshh:fix/inductor-noop-copy-of-mutated-input --title "[inductor] remove_noop_ops: keep a copy of an input that is mutated before the copy's user runs" --body-file PR_6_final_body.md
+gh pr comment <PR번호> --repo pytorch/pytorch --body '@pytorchbot label "release notes: inductor"'
+```
+
 2. PR 본문의 `Fixes #TBD` 를 위에서 받은 이슈 번호로 바꾼 뒤 PR:
 
 ```bash

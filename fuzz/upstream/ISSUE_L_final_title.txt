@@ -1,0 +1,1 @@
+[inductor] `dst[:] = src[:]; src.add_(1)` copies the *updated* `src` into `dst` (remove_noop_ops replaces a copy of an input by the input itself, which is mutated before the copy's user runs)
