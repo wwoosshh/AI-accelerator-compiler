@@ -1,0 +1,51 @@
+{
+ "id": 19,
+ "iter": 1478,
+ "seed": 51001631,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "setitem",
+  "view_dtype",
+  "view_slice",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: 2/2 elems differ at [0, 1]: eager [-1, 7] vs compiled [0, 0]",
+  "call0.arg2: 19/24 elems differ at [1, 2, 4, 5, 6]: eager [5, -8, -5, 2, 2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 2/2 elems differ at [0, 1]: eager [-7, -7] vs compiled [0, 0]",
+  "call1.arg2: 18/24 elems differ at [1, 2, 3, 4, 5]: eager [5, -6, -3, -2, -2] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t2.view(torch.int32)\n    v2 = t2.unfold(1, 1, 8)\n    idx3 = torch.tensor([0, 2, 1], device=t1.device)\n    t1.index_fill_(1, idx3, -3)\n    v4 = t2[:, 9:10:2]\n    v5 = v2.squeeze(2)\n    idx6 = torch.tensor([1], device=v5.device)\n    v5[idx6] = 0\n    return (t0, v2, v4, t0, lst, dct)\n"
+}

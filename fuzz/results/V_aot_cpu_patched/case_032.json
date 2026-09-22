@@ -1,0 +1,56 @@
+{
+ "id": 32,
+ "iter": 3644,
+ "seed": 41003767,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "side_effect",
+  "view_select",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    24
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 2/6 elems differ at [2, 5]: eager [7, 6] vs compiled [0, 0]",
+  "call0.out[1]: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [6, -8, 7, 5, 7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 2/6 elems differ at [2, 5]: eager [7, 6] vs compiled [0, 0]",
+  "call0.arg2: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [6, -8, 7, 5, 7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 2/6 elems differ at [2, 5]: eager [6, -8] vs compiled [0, 0]",
+  "call1.out[1]: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [-7, 5, 6, 5, -3] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 2/6 elems differ at [2, 5]: eager [6, -8] vs compiled [0, 0]",
+  "call1.arg2: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [-7, 5, 6, 5, -3] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    idx1 = torch.tensor([1], device=t1.device)\n    t1.index_copy_(2, idx1, t2.narrow(2, 0, 1))\n    t1.sub_(t2)\n    v2 = t0.reshape(t0.shape)\n    v3 = t1.cumsum(1)\n    v4 = t2.unfold(1, 2, 3)\n    v5 = t2.select(2, 2)\n    lst.append(v2.numel())\n    v4[v4 > -2] = 5\n    return (v5, t2, t1, v5, lst, dct)\n"
+}

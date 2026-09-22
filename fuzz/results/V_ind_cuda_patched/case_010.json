@@ -1,0 +1,47 @@
+{
+ "id": 10,
+ "iter": 699,
+ "seed": 51000852,
+ "status": "alias_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "setitem",
+  "side_effect",
+  "view_reshape",
+  "view_squeeze",
+  "view_transpose"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "probe.call0.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9999, 9999, 9999, 9999, 9999] vs compiled [5999, 5999, 5999, 5999, 5999]",
+  "probe.call0.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9999, 9999, 9999, 9999, 9999] vs compiled [5999, 5999, 5999, 5999, 5999]",
+  "probe.call0.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9999, 9999, 9999, 9999, 9999] vs compiled [5999, 5999, 5999, 5999, 5999]",
+  "probe.call0.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9999, 9999, 9999, 9999, 9999] vs compiled [3999, 3999, 3999, 3999, 3999]",
+  "probe.call1.out[0]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9998, 9998, 9998, 9998, 9998] vs compiled [5998, 5998, 5998, 5998, 5998]",
+  "probe.call1.out[1]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9998, 9998, 9998, 9998, 9998] vs compiled [5998, 5998, 5998, 5998, 5998]",
+  "probe.call1.out[2]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9998, 9998, 9998, 9998, 9998] vs compiled [5998, 5998, 5998, 5998, 5998]",
+  "probe.call1.out[3]: 24/24 elems differ at [0, 1, 2, 3, 4]: eager [9998, 9998, 9998, 9998, 9998] vs compiled [3998, 3998, 3998, 3998, 3998]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    dct['n'] = dct.get('n', 0) + 1\n    v1 = t1.abs()\n    v2 = t0.neg()\n    v2.copy_(t0)\n    v3 = v1.view((4, 6))\n    v3[0] = k\n    v1.abs_()\n    v1.neg_()\n    v4 = v1.unsqueeze(3)\n    v5 = v2.t()\n    return (v3, v3, v3, v4, t1, lst, dct)\n"
+}

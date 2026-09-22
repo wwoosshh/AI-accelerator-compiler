@@ -1,0 +1,47 @@
+{
+ "id": 1,
+ "iter": 13,
+ "seed": 41000136,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "setitem",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg2: 15/24 elems differ at [5, 6, 7, 8, 9]: eager [-4, 5, 6, -3, -6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg2: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [-1, -3, -2, -3, 8] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    t0.copy_(t1)\n    v1 = torch.ops.aten.alias(t0)\n    v2 = t2.unfold(0, 1, 3)\n    v3 = t1.transpose(0, 1)\n    v3.fill_(-3)\n    v2[1:, :, :] = v2[:-1, :, :].clone()\n    v4 = v2.abs()\n    v1.transpose_(0, 1)\n    v5 = t1[:]\n    return (v3, t0, lst, dct)\n"
+}

@@ -1,0 +1,43 @@
+{
+ "id": 23,
+ "iter": 2609,
+ "seed": 41002732,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "setitem",
+  "view_reshape",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [-6.0, -2.0, -2.0, 1.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg1: 11/24 elems differ at [2, 3, 6, 7, 10]: eager [-6.0, -2.0, -2.0, 1.0, -4.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[0]: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [8.0, 4.0, 4.0, 5.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 12/24 elems differ at [2, 3, 6, 7, 10]: eager [8.0, 4.0, 4.0, 5.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.unfold(1, 2, 4)\n    v2 = t1.reshape((24,))\n    v1[v1 > 1] = 2\n    v1.add_(v1)\n    v3 = t1.t()\n    v4 = t0.permute(2, 0, 1)\n    v4[1:, :, :] = v4[:-1, :, :].clone()\n    v2.unsqueeze_(0)\n    v5 = v1.contiguous()\n    t0[::2, :, :] = 3\n    return (t1, v4, t0, lst, dct)\n"
+}

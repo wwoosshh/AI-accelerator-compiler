@@ -1,0 +1,56 @@
+{
+ "id": 16,
+ "iter": 1604,
+ "seed": 41001727,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "setitem",
+  "view_expand",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.out[0]: 15/24 elems differ at [4, 6, 7, 8, 9]: eager [-4.0, -9.0, 0.0, -6.0, 0.0] vs compiled [-3.0, -3.0, -3.0, -3.0, -3.0]",
+  "call0.out[1]: 30/48 elems differ at [4, 6, 7, 8, 9]: eager [-1.0, -6.0, 3.0, -3.0, 3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.out[2]: 15/24 elems differ at [4, 6, 7, 8, 9]: eager [-1.0, -6.0, 3.0, -3.0, 3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.out[3]: 30/48 elems differ at [4, 6, 7, 8, 9]: eager [-1.0, -6.0, 3.0, -3.0, 3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call0.arg1: 15/24 elems differ at [4, 6, 7, 8, 9]: eager [-1.0, -6.0, 3.0, -3.0, 3.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[0]: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [-4.0, -1.0, -8.0, 4.0, -5.0] vs compiled [-3.0, -3.0, -3.0, -3.0, -3.0]",
+  "call1.out[1]: 32/48 elems differ at [4, 5, 6, 7, 8]: eager [-1.0, 2.0, -5.0, 7.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[2]: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [-1.0, 2.0, -5.0, 7.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.out[3]: 32/48 elems differ at [4, 5, 6, 7, 8]: eager [-1.0, 2.0, -5.0, 7.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 16/24 elems differ at [4, 5, 6, 7, 8]: eager [-1.0, 2.0, -5.0, 7.0, -2.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.unfold(1, 1, 3)\n    v1.add_(v1)\n    v2 = t1 + -3\n    t0[t0 > 2] = 3\n    v3 = t1.unsqueeze(2)\n    v4 = v3.unsqueeze(0).expand(2, 2, 3, 1, 4)\n    return (v2, v4, t1, v4, t0, lst, dct)\n"
+}

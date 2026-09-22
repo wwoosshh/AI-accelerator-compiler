@@ -1,0 +1,42 @@
+def fn(t0, t1, t2, ta, k, lst, dct):
+    t0.mul_(-1)
+    v1 = t0[21:-2]
+    idx2 = torch.tensor([16, 7, 4], device=t0.device)
+    t0.index_fill_(0, idx2, 2)
+    t1.masked_fill_(t1 > 0, -4)
+    v3 = t2.t()
+    v4 = t0.unfold(0, 10, 2)
+    ta.masked_fill_(ta > 0, 1)
+    v5 = ta.view((4, 6))
+    t1[0:2:2, :] += -5
+    return (v3, v3, lst, dct)
+
+# dynamic=True aliased=('ta', 't0.view(-1)')
+
+BackendCompilerFailed: backend='aot_eager' raised:
+RuntimeError: Cannot call numel() on tensor with symbolic sizes/strides
+Exception raised from throw_cannot_call_with_symbolic at C:\actions-runner\_work\pytorch\pytorch\c10\core\TensorImpl.cpp:336 (most recent call first):
+00007FFCC6CC671D00007FFCC6CC6670 c10.dll!c10::Error::Error [<unknown file> @ <unknown line number>]
+00007FFCC6CC68C500007FFCC6CC6850 c10.dll!c10::ErrorAlwaysShowCppStacktrace::ErrorAlwaysShowCppStacktrace [<unknown file> @ <unknown line number>]
+00007FFCC6CB1FE300007FFCC6CB1F60 c10.dll!c10::TensorImpl::throw_cannot_call_with_symbolic [<unknown fil
+312.dll!PyObject_FastCallDictTstate [<unknown file> @ <unknown line number>]
+00007FFC5C42319B00007FFC5C42311C python312.dll!PyObject_Call_Prepend [<unknown file> @ <unknown line number>]
+00007FFC5C4230C600007FFC5C422DF0 python312.dll!PyDictProxy_New [<unknown file> @ <unknown line number>]
+00007FFC5C3827A600007FFC5C3826F0 python312.dll!PyObject_Call [<unknown file> @ <unknown line number>]
+00007FFC5C3FB06900007FFC5C3FAE14 python312.dll!PyNumber_InPlaceAdd [<unknown file> @ <unknown line number>]
+00007FFC5C35201800007FFC5C351990 python312.dll!PyObject_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C3519C500007FFC5C351990 python312.dll!PyObject_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C352EA500007FFC5C352610 python312.dll!PyEval_EvalFrameDefault [<unknown file> @ <unknown line number>]
+00007FFC5C35109900007FFC5C350EC0 python312.dll!PyFunction_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C383E8B00007FFC5C383E18 python312.dll!PyObject_FastCallDictTstate [<unknown file> @ <unknown line number>]
+00007FFC5C42319B00007FFC5C42311C python312.dll!PyObject_Call_Prepend [<unknown file> @ <unknown line number>]
+00007FFC5C4230C600007FFC5C422DF0 python312.dll!PyDictProxy_New [<unknown file> @ <unknown line number>]
+00007FFC5C35201800007FFC5C351990 python312.dll!PyObject_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C3519C500007FFC5C351990 python312.dll!PyObject_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C352EA500007FFC5C352610 python312.dll!PyEval_EvalFrameDefault [<unknown file> @ <unknown line number>]
+00007FFC5C35109900007FFC5C350EC0 python312.dll!PyFunction_Vectorcall [<unknown file> @ <unknown line number>]
+00007FFC5C351A5F00007FFC5C351990 python312.dll!PyObject_Vectorcall [<unknown file> @ <unknown line number>]
+
+
+Set TORCHDYNAMO_VERBOSE=1 for the full Dynamo stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

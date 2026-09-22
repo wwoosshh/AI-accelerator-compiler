@@ -1,0 +1,50 @@
+{
+ "id": 45,
+ "iter": 4741,
+ "seed": 41004864,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "setitem",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 8,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    12
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[4]: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [5, -7, -1, -5, -8] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [5, -7, -1, -5, -8] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[4]: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [2, -1, 8, -7, -6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 8/24 elems differ at [8, 9, 10, 11, 20]: eager [2, -1, 8, -7, -6] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    idx1 = torch.tensor([0, 1], device=t0.device)\n    t0.index_fill_(1, idx1, k)\n    v2 = t1.unfold(1, 1, 3)\n    t2[t2 > -2] = k\n    v2.clamp_(-4, 3)\n    t1[0::2, :, :] = k\n    v2.transpose_(3, 1)\n    v3 = v2[:]\n    return (v3, v3, v3, t2, t1, lst, dct)\n"
+}

@@ -1,0 +1,58 @@
+def fn(t0, t1, t2, k, lst, dct):
+    v1 = t2.unsqueeze(1)
+    v2 = t2.transpose(0, 2)
+    v3 = v2.unfold(2, 1, 2)
+    v3.fill_(-1)
+    idx4 = torch.tensor([2, 1], device=v3.device)
+    v3.index_fill_(0, idx4, 0)
+    v5 = t2.view(torch.int32)
+    lst.append(v2)
+    v6 = v5.neg()
+    v2.clamp_(0, 1)
+    return (v6, v6, v5, t2, lst, dct)
+
+# dynamic=True aliased=None
+
+BackendCompilerFailed: backend='aot_eager' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 6
+
+While executing %v6 : [num_users=1] = call_method[target=neg](args = (%v5,), kwargs = {})
+Original traceback:
+  File "<aliasfuzz>", line 10, in fn
+
+Use tlparse to see full graph. (https://github.com/pytorch/tlparse?tab=readme-ov-file#tlparse-parse-structured-pt2-logs)
+
+Set TORCHDYNAMO_VERBOSE=1 for the full Dynamo stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+e-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\utils\_stats.py", line 29, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1719, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 2530, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 1870, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_subclasses\fake_tensor.py", line 3251, in _dispatch_impl
+    r = func(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_ops.py", line 916, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+torch._dynamo.exc.BackendCompilerFailed: backend='aot_eager' raised:
+RuntimeError: self.stride(-1) must be 1 to view Long as Int (different element sizes), but got 6
+
+While executing %v6 : [num_users=1] = call_method[target=neg](args = (%v5,), kwargs = {})
+Original traceback:
+  File "<aliasfuzz>", line 10, in fn
+
+Use tlparse to see full graph. (https://github.com/pytorch/tlparse?tab=readme-ov-file#tlparse-parse-structured-pt2-logs)
+
+Set TORCHDYNAMO_VERBOSE=1 for the full Dynamo stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+

@@ -1,0 +1,46 @@
+{
+ "id": 51,
+ "iter": 5811,
+ "seed": 41005934,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "inplace_meta",
+  "noop_alias",
+  "scatter_fn",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg0: 8/24 elems differ at [4, 5, 10, 11, 16]: eager [5, 7, -1, 8, 7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 7/24 elems differ at [4, 5, 10, 11, 16]: eager [2, 1, -2, -3, 5] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.to(t1.dtype)\n    v2 = t0.unfold(1, 4, 4)\n    v2.add_(4)\n    t1.sub_(k)\n    v3 = torch.slice_scatter(v1, t1[:, :, 5:6:1], dim=2, start=5, end=6, step=1)\n    v2.unsqueeze_(3)\n    return (v1, v1, v1, v1, lst, dct)\n"
+}

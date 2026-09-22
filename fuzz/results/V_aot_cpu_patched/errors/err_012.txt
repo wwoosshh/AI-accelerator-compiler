@@ -1,0 +1,41 @@
+def fn(t0, t1, ta, k, lst, dct):
+    idx1 = torch.tensor([2], device=t1.device)
+    t1.index_fill_(0, idx1, k)
+    v2 = ta.clamp(-2, 1)
+    v3 = t0.unfold(0, 15, 3)
+    v4 = t1.reshape(t1.shape)
+    v5 = v4.view((2, 2, 6))
+    v6 = v5.view(torch.int32)
+    idx7 = torch.tensor([3], device=v2.device)
+    v2.index_add_(0, idx7, ta.narrow(0, 0, 1))
+    return (v6, t1, t0, lst, dct)
+
+# dynamic=True aliased=('ta', 't0[1:]')
+
+RuntimeError: setStorage: sizes [2, 2, 12], strides [24, 12, 1], storage offset 0, and itemsize 8 requiring a storage size of 384 are out of bounds for storage of size 192
+Traceback (most recent call last):
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 752, in evaluate
+    C = run_world(prog, device, seed, backend, calls)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\Desktop\프로젝트\ai가속기컴파일러\fuzz\aliasfuzz.py", line 658, in run_world
+    out = fn(*args)
+          ^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1261, in compile_wrapper
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "<aliasfuzz>", line 1, in fn
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\eval_frame.py", line 1548, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_functorch\aot_autograd.py", line 1289, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_functorch\_aot_autograd\runtime_wrappers.py", line 1202, in runtime_wrapper
+    result = _codegen_runtime_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(runtime_wrapper_orchestration)", line 20, in _runtime_wrapper
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_functorch\_aot_autograd\codegen.py:codegen(output_alias_wrapper)", line 3, in _alias_fn
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_functorch\_aot_autograd\functional_utils.py", line 412, in gen_alias_from_base
+    aliased_out = aliased_base_tensor.as_strided(size, stride, storage_offset)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: setStorage: sizes [2, 2, 12], strides [24, 12, 1], storage offset 0, and itemsize 8 requiring a storage size of 384 are out of bounds for storage of size 192

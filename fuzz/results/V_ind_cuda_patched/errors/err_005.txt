@@ -1,0 +1,43 @@
+def fn(t0, t1, t2, k, lst, dct):
+    idx1 = torch.tensor([16, 19, 23], device=t2.device)
+    t2.index_fill_(0, idx1, -4)
+    t2.clamp_(-4, 3)
+    v2 = t0.flatten()
+    v2.unsqueeze_(0)
+    return (v2, v2, t1, t0, lst, dct)
+
+# dynamic=None aliased=None
+
+IndexError: list index out of range
+
+ line 1744, in compile_inner
+    result = _compile_inner(code, one_graph, hooks)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1964, in _compile_inner
+    check_fn = dynamo_output.build_guards(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1031, in build_guards
+    return self._build_guards(
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\convert_frame.py", line 1054, in _build_guards
+    return CheckFunctionManager(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\guards.py", line 5036, in __init__
+    builder, guard_manager = self.build_guards(
+                             ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\guards.py", line 5364, in build_guards
+    guard.create(builder)
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_guards.py", line 377, in create
+    return self.create_fn(builder, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\guards.py", line 3575, in SHAPE_ENV
+    python_code_parts, verbose_code_parts = _get_code_parts(
+                                            ^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\_dynamo\guards.py", line 3548, in _get_code_parts
+    return output_graph.shape_env.produce_guards_verbose(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\s0105\venvs\pt2nightly_cu\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6663, in produce_guards_verbose
+    track_symint(property_source, ss, constraint_size[i])
+                                      ~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+

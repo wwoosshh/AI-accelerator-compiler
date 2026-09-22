@@ -1,0 +1,50 @@
+{
+ "id": 9,
+ "iter": 608,
+ "seed": 51000761,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.arg1: 8/24 elems differ at [2, 3, 8, 9, 14]: eager [-3.0, 6.0, 3.0, 3.0, 7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg1: 7/24 elems differ at [3, 8, 9, 14, 15]: eager [8.0, 3.0, 3.0, 1.0, -7.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1.unfold(1, 1, 2)\n    idx2 = torch.tensor([2, 1], device=t2.device)\n    t2.index_add_(1, idx2, t1.narrow(1, 0, 2))\n    v3 = t0.cumsum(0)\n    v4 = t2.view_as(t2)\n    t1[1] = 3\n    v1.sub_(-5)\n    return (t2, v3, t2, t2, lst, dct)\n"
+}

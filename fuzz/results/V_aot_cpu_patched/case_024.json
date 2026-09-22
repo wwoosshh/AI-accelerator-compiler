@@ -1,0 +1,45 @@
+{
+ "id": 24,
+ "iter": 2616,
+ "seed": 41002739,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "view_slice",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    4,
+    6
+   ]
+  ]
+ ],
+ "dtype": "f64",
+ "diffs": [
+  "call0.arg2: 5/24 elems differ at [18, 19, 20, 22, 23]: eager [12.0, 2.0, -14.0, 6.0, -10.0] vs compiled [0.0, 0.0, 0.0, 0.0, 0.0]",
+  "call1.arg2: 4/24 elems differ at [18, 19, 20, 23]: eager [8.0, -2.0, 2.0, 16.0] vs compiled [0.0, 0.0, 0.0, 0.0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t2.unfold(0, 3, 4)\n    v2 = v1.transpose(0, 1)\n    t2.add_(t2)\n    v3 = t1[1:2, 8:12]\n    v1.masked_fill_(v1 > 2, k)\n    v3.masked_fill_(v3 > 1, k)\n    return (t0, t1, t0, lst, dct)\n"
+}

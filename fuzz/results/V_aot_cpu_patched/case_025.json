@@ -1,0 +1,54 @@
+{
+ "id": 25,
+ "iter": 2681,
+ "seed": 41002804,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace",
+  "side_effect",
+  "view_select",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0[1:]"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[5]['key2']: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, 8, 2, 6, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg2: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, 8, 2, 6, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg6['key2']: 11/24 elems differ at [12, 14, 15, 16, 17]: eager [5, 8, 2, 6, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[5]['key2']: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [5, 2, 2, -7, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg2: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [5, 2, 2, -7, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg6['key2']: 11/24 elems differ at [12, 13, 15, 16, 17]: eager [5, 2, 2, -7, -7] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t1.neg()\n    dct['key2'] = t2\n    v3 = t2.narrow(1, 2, 1)\n    v4 = t2.unfold(0, 1, 2)\n    v4.fill_(4)\n    v4.mul_(0)\n    return (t1, t0, ta, t1, lst, dct)\n"
+}

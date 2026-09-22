@@ -1,0 +1,43 @@
+{
+ "id": 8,
+ "iter": 576,
+ "seed": 51000729,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "functional",
+  "index_inplace",
+  "inplace_meta",
+  "noop_alias",
+  "setitem",
+  "view_reshape"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.view(-1)"
+ ],
+ "n_stmts": 7,
+ "inputs": [
+  [
+   "t0",
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   "t1",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[2]: shape (24, 1) vs (24,)",
+  "call1.out[2]: shape (24, 1) vs (24,)"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    idx1 = torch.tensor([2], device=t0.device)\n    t0.index_copy_(0, idx1, t1.narrow(0, 0, 1))\n    t0[t1 > -1] = k\n    v2 = t0.cumsum(1)\n    v3 = ta.contiguous()\n    v4 = v3.reshape((6, 4))\n    ta.unsqueeze_(1)\n    return (v2, v2, v3, t0, v2, lst, dct)\n"
+}

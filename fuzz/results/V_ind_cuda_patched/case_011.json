@@ -1,0 +1,53 @@
+{
+ "id": 11,
+ "iter": 705,
+ "seed": 51000858,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "noop_alias",
+  "setitem",
+  "view_reshape"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0.view(-1)"
+ ],
+ "n_stmts": 6,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    3,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    3,
+    8
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call1.out[0]: 1/24 elems differ at [5]: eager [1] vs compiled [5]",
+  "call1.out[1]: 1/24 elems differ at [5]: eager [1] vs compiled [5]",
+  "call1.out[2]: 1/24 elems differ at [5]: eager [1] vs compiled [5]",
+  "call1.out[3]: 1/24 elems differ at [5]: eager [1] vs compiled [5]",
+  "call1.arg2: 1/24 elems differ at [5]: eager [1] vs compiled [5]"
+ ],
+ "source": "def fn(t0, t1, t2, ta, k, lst, dct):\n    v1 = t2.reshape(t2.shape)\n    v2 = v1.reshape((24,))\n    t2[:1, :8] = 5\n    v3 = v2[...]\n    idx4 = torch.tensor([5], device=v2.device)\n    v2.index_add_(0, idx4, ta.narrow(0, 0, 1))\n    return (t2, v1, v2, t2, lst, dct)\n"
+}

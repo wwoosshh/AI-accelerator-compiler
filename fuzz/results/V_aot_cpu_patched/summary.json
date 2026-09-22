@@ -1,0 +1,15 @@
+{
+ "torch": "2.15.0.dev20260921+cu130",
+ "backend": "aot_eager",
+ "device": "cpu",
+ "iterations": 6342,
+ "stats": {
+  "invalid": 14,
+  "compile_error": 68,
+  "value_diff": 56,
+  "alias_diff": 0,
+  "pass": 6204
+ },
+ "n_cases": 56,
+ "elapsed_s": 600.0187237262726
+}

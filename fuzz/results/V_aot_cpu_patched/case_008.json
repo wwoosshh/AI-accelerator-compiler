@@ -1,0 +1,44 @@
+{
+ "id": 8,
+ "iter": 1126,
+ "seed": 41001249,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "setitem",
+  "view_squeeze",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 4,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    3,
+    2
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 6/24 elems differ at [4, 10, 11, 16, 17]: eager [-5, -2, -6, -3, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[2]: 6/24 elems differ at [4, 10, 11, 16, 17]: eager [-5, -2, -6, -3, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[3]: 6/24 elems differ at [4, 10, 11, 16, 17]: eager [-5, -2, -6, -3, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg0: 6/24 elems differ at [4, 10, 11, 16, 17]: eager [-5, -2, -6, -3, 1] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [5, 8, -3, 4, 6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[2]: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [5, 8, -3, 4, 6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[3]: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [5, 8, -3, 4, 6] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 7/24 elems differ at [4, 5, 10, 16, 17]: eager [5, 8, -3, 4, 6] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    v1 = t1.unsqueeze(3)\n    v2 = t0.unfold(1, 4, 4)\n    v2.clamp_(-3, 1)\n    t1[-2] = 0\n    return (t0, v1, t0, t0, lst, dct)\n"
+}

@@ -1,0 +1,49 @@
+{
+ "id": 48,
+ "iter": 5024,
+ "seed": 41005147,
+ "status": "value_diff",
+ "kinds": [
+  "functional",
+  "inplace_meta",
+  "setitem",
+  "view_reshape",
+  "view_select",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": [
+  "ta",
+  "t0"
+ ],
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   "t1",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[0]: 19/24 elems differ at [4, 5, 6, 7, 8]: eager [2, -7, -6, 8, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.out[1]: 19/24 elems differ at [4, 5, 6, 7, 8]: eager [2, -7, -6, 8, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg0: 19/24 elems differ at [4, 5, 6, 7, 8]: eager [2, -7, -6, 8, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg2: 19/24 elems differ at [4, 5, 6, 7, 8]: eager [2, -7, -6, 8, -7] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[0]: 20/24 elems differ at [4, 5, 6, 7, 8]: eager [4, 2, -7, 5, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[1]: 20/24 elems differ at [4, 5, 6, 7, 8]: eager [4, 2, -7, 5, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg0: 20/24 elems differ at [4, 5, 6, 7, 8]: eager [4, 2, -7, 5, -4] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg2: 20/24 elems differ at [4, 5, 6, 7, 8]: eager [4, 2, -7, 5, -4] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, ta, k, lst, dct):\n    v1 = t1.view((4, 6))\n    v2 = ta.view((2, 12))\n    t1.unsqueeze_(2)\n    v3 = ta[:, :]\n    v4 = ta.unfold(0, 1, 6)\n    v4[:, :, :] += -3\n    v5 = v4.narrow(0, 0, 1)\n    v6 = torch.minimum(v4, v5)\n    v7 = ta.view((4, 6))\n    return (v7, t0, v6, t1, lst, dct)\n"
+}

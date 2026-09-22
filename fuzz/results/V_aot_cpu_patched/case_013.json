@@ -1,0 +1,50 @@
+{
+ "id": 13,
+ "iter": 1525,
+ "seed": 41001648,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "index_inplace",
+  "side_effect",
+  "view_dtype",
+  "view_reshape",
+  "view_slice",
+  "view_transpose",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 9,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    3,
+    2
+   ]
+  ],
+  [
+   "t1",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t2",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.arg2: 11/24 elems differ at [12, 13, 14, 16, 17]: eager [1, -5, 1, 4, 5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg2: 9/24 elems differ at [12, 13, 14, 16, 17]: eager [5, -1, 8, -3, 2] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t2.unfold(0, 1, 2)\n    lst.append(t0)\n    v2 = t1.transpose(1, 0)\n    v3 = v1.flatten()\n    idx4 = torch.tensor([7, 6, 4], device=v3.device)\n    v3.index_fill_(0, idx4, -4)\n    v5 = v1[-1, 0:-2, 2, :]\n    v6 = v3[9::2]\n    v7 = t1.view(torch.int32)\n    return (v7, v7, v3, t0, v7, lst, dct)\n"
+}

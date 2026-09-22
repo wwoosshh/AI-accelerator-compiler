@@ -1,0 +1,48 @@
+{
+ "id": 28,
+ "iter": 3296,
+ "seed": 41003419,
+ "status": "value_diff",
+ "kinds": [
+  "aux",
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_unfold"
+ ],
+ "dynamic": null,
+ "aliased": null,
+ "n_stmts": 5,
+ "inputs": [
+  [
+   "t0",
+   [
+    2,
+    2,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    12
+   ]
+  ],
+  [
+   "t2",
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 9/24 elems differ at [14, 15, 16, 18, 19]: eager [-7, -5, -7, 4, 5] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 9/24 elems differ at [14, 15, 16, 18, 19]: eager [-7, -5, -7, 4, 5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[1]: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-2, 7, 7, 5, -5] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 12/24 elems differ at [12, 13, 14, 15, 16]: eager [-2, 7, 7, 5, -5] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, t2, k, lst, dct):\n    v1 = t1[:]\n    v2 = t1.unfold(0, 1, 2)\n    v2.fill_(k)\n    idx3 = torch.tensor([0], device=v2.device)\n    v2[idx3] += k\n    return (t2, v1, v2, t0, lst, dct)\n"
+}

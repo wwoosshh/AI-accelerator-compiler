@@ -222,9 +222,14 @@ Inductor 스모크 75초에서 별칭 프로브가 6번 검출. 9월 21일에 �
 |---|---|---|---|
 | H1·H2·H3 | `torch/_inductor/fx_passes/reinplace.py` `can_inplace` | 입력에 되쓰는 `copy_`가 이 연산의 결과를 되쓰는 것이 아니고 결과가 그 뒤에도 관측되면 입력 버퍼에 reinplace 금지 | 재현 전부 통과, 새 회귀 테스트(패치 전 실패·후 통과), 기존 테스트 회귀 없음, 정상 패턴 추가 할당 없음 |
 | B | `torch/_functorch/_aot_autograd/input_output_analysis.py` `create_synthetic_base_metadata` | 병합된 입력의 출력 별칭은 원래 입력 기준 ViewMeta 를 버리고 출력 메타데이터로 `as_strided` 재생성 | 변형 7종·크래시 변형 통과, 새 회귀 테스트(패치 전 실패·후 통과) |
-| A | `aten/src/ATen/FunctionalInverses.cpp` `unfold_inverse` | `size <= step`이면 `as_strided_scatter`로 되쓰기 | C++ 컴파일 불가(MSVC 없음) → 공식만 Python 613 케이스로 검증 |
-| G, I, F, C | 미착수 | 조사 메모는 `fuzz/patches/README.md` | |
+| F | `torch/_dynamo/variables/tensor.py` `call_method` | 자기 자신을 반환하는 무연산 결과는 같은 VariableTracker 로 유지 | 재현 9종 통과, 새 회귀 테스트(패치 전 IndexError·후 통과), Dynamo 표적 테스트 81 통과 |
+| I | `torch/_inductor/graph.py` `mark_buffer_mutated` | 별칭 버퍼의 소비자도 변이 전에 실체화 | 변형 8종·퍼저 사례 통과, 새 회귀 테스트 통과, Inductor 표적 테스트 51 통과 |
+| A | `aten/src/ATen/FunctionalInverses.cpp` `unfold_inverse` | `size <= step`이면 `as_strided_scatter`로 되쓰기 | 공식 Python 613 케이스 검증. C++ 검증은 Docker(Linux) 에서 CPU 전용 PyTorch 빌드로 진행 중(결과는 `fuzz/patches/README.md` 참조) |
+| G | 원인 확정, 미수정 | 심볼릭 ViewMeta 폐기 + 폴백이 갱신 base 의 전치 stride 사용. 설계 결정 필요 | |
+| C, C2, J | 미수정 | C2(동적 형상 별칭 전용), J(동적 형상 reshape 별칭 in-place 2회차 미반영)는 회귀 퍼징에서 새로 발견된 기존 버그 | |
 | D | 불필요 | 나이틀리에서 이미 수정 | |
+
+**수정 효과의 실측 검증**: 패치를 적용한 나이틀리 빌드에 퍼저를 다시 돌렸다. aot_eager 6,342개 프로그램에서 B 계열 0건(수정 전 78건 중 15건), Inductor 1,525개에서 H·D 계열 0건(수정 전 60건 중 14건). 남은 불일치는 A(C++ 미적용)와 새 발견 J·C2 뿐이었다.
 
 ---
 

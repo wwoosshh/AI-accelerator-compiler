@@ -1,0 +1,41 @@
+{
+ "id": 20,
+ "iter": 2215,
+ "seed": 41002338,
+ "status": "value_diff",
+ "kinds": [
+  "inplace",
+  "noop_alias",
+  "setitem",
+  "view_slice",
+  "view_unfold"
+ ],
+ "dynamic": true,
+ "aliased": null,
+ "n_stmts": 10,
+ "inputs": [
+  [
+   "t0",
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   "t1",
+   [
+    2,
+    3,
+    4
+   ]
+  ]
+ ],
+ "dtype": "i64",
+ "diffs": [
+  "call0.out[1]: 21/24 elems differ at [1, 2, 3, 5, 6]: eager [-2, -2, -2, -2, -2] vs compiled [0, 0, 0, 0, 0]",
+  "call0.arg1: 21/24 elems differ at [1, 2, 3, 5, 6]: eager [-2, -2, -2, -2, -2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.out[1]: 21/24 elems differ at [1, 2, 3, 5, 6]: eager [-2, -2, -2, -2, -2] vs compiled [0, 0, 0, 0, 0]",
+  "call1.arg1: 21/24 elems differ at [1, 2, 3, 5, 6]: eager [-2, -2, -2, -2, -2] vs compiled [0, 0, 0, 0, 0]"
+ ],
+ "source": "def fn(t0, t1, k, lst, dct):\n    t1[-2] = 2\n    t0[-2] = 4\n    t1.neg_()\n    t1[-1] = 1\n    v1 = t0[-3, :]\n    t1[1:, :, :] = t1[:-1, :, :].clone()\n    v2 = t1.to(t1.dtype)\n    v3 = t1.unfold(0, 1, 2)\n    v4 = v3.unfold(2, 1, 4)\n    v4.fill_(0)\n    return (t0, t1, t0, t0, lst, dct)\n"
+}
