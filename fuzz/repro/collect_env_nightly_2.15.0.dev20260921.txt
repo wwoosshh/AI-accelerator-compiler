@@ -1,0 +1,46 @@
+<frozen runpy>:128: RuntimeWarning: 'torch.utils.collect_env' found in sys.modules after import of package 'torch.utils', but prior to execution of 'torch.utils.collect_env'; this may result in unpredictable behaviour
+Collecting environment information...
+PyTorch version: 2.15.0.dev20260921+cu130
+Is debug build: False
+CUDA used to build PyTorch: 13.0
+ROCm SDK used to build PyTorch: N/A
+HIP used to build PyTorch: N/A
+
+OS: Microsoft Windows 11 Home (10.0.26200 64∫Ò∆Æ)
+GCC version: Could not collect
+Clang version: Could not collect
+CMake version: Could not collect
+Libc version: N/A
+
+Python version: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)] (64-bit runtime)
+Python platform: Windows-11-10.0.26200-SP0
+Is CUDA available: True
+CUDA runtime version: Could not collect
+CUDA_MODULE_LOADING set to: 
+GPU models and configuration: GPU 0: NVIDIA GeForce RTX 4070 Ti
+Nvidia driver version: Could not collect
+cuDNN version: Could not collect
+Is XPU available: False
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: False
+Caching allocator config: N/A
+
+CPU:
+Name: Intel(R) Core(TM) i7-14700K
+Manufacturer: GenuineIntel
+Family: 198
+Architecture: 9
+ProcessorType: 3
+DeviceID: CPU0
+CurrentClockSpeed: 3400
+MaxClockSpeed: 3400
+L2CacheSize: 28672
+L2CacheSpeed: None
+Revision: None
+
+Versions of relevant libraries:
+[pip3] numpy==2.5.3
+[pip3] torch==2.15.0.dev20260921+cu130
+[pip3] triton-windows==3.8.0.post28
+[conda] Could not collect
