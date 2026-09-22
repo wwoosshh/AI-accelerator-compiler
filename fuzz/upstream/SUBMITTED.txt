@@ -4,3 +4,9 @@ PR1=https://github.com/pytorch/pytorch/pull/198096
 PR2=https://github.com/pytorch/pytorch/pull/198097
 CLA: signed by wwoosshh 2026-09-22; EasyCLA pass on #198096 (a6b7f1c) and #198097 (071d293)
 Status: workflows awaiting maintainer approval; no human review yet
+F_ISSUE=https://github.com/pytorch/pytorch/issues/198100
+I_ISSUE=https://github.com/pytorch/pytorch/issues/198101
+A_ISSUE=https://github.com/pytorch/pytorch/issues/198102
+PR3=https://github.com/pytorch/pytorch/pull/198103
+PR4=https://github.com/pytorch/pytorch/pull/198104
+PR5=https://github.com/pytorch/pytorch/pull/198105
