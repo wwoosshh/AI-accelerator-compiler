@@ -17,3 +17,16 @@ PR5=https://github.com/pytorch/pytorch/pull/198105
   상태: EasyCLA pass, workflows awaiting approval, 라벨 module: inductor / ciflow/inductor / ciflow/torchtitan 자동 적용,
         `@pytorchbot label "release notes: inductor"` 댓글 게시. 사용자가 PowerShell 스크립트로 직접 생성(자동 모드가 gh 생성 명령 차단),
         PowerShell 의 Get-Content 인코딩으로 PR 본문 footer 가 깨져 UTF-8 본문으로 `gh pr edit` 재업로드.
+
+[2026-09-23 상태 점검]
+  이슈 6건 모두 frgossen 이 triaged 처리(#198100 F 는 봇 분류만), 사람 댓글 없음.
+  PR 리뷰어 지정(drisspg): H #198096·I #198104·L #198132 -> eellison, F #198103 -> guilhermeleobas, B #198097 -> CODEOWNERS(bdhirsh, aorenste, ezyang, Chillee). A #198105 는 triaged·리뷰어·CI 모두 없음.
+  CI: B #198097 216 pass / 2 fail(inductor_aoti_fallback unstable, Dr.CI "You can merge normally! (2 Unrelated Failures)").
+      F #198103 Dr.CI "18 New Failures": 4개 테스트, 로컬 나이틀리에서 패치 0004 유무로 원인 확정
+        - dynamo/test_subclasses.py::test_subclass_override_shape_and_to  (AssertionError: source must be None for ValueMutationNew/AttributeMutationNew)
+        - dynamo/test_autograd_function.py::test_assert_is_contiguous_on_grad_output_directly  (기대 그래프 문자열 변경)
+        - test_mkldnn.py::test_0_dimension_tensor, test_ao_sparsity.py::test_q_prep_fx_s_prep_ref_conv  (dynamo_wrapped 샤드에서만; mkldnn to_dense / quantized dequantize 의 fake 결과가 입력과 같은 객체라 self 반환이 잘못됨)
+      H·I·L·A: 워크플로 승인 대기(체크 4개뿐).
+  F 자동 리뷰(guilhermeleobas 가 @claude 호출): Request Changes. inplace-view 검사를 self.source 대신 "fake 텐서가 그래프 입력의 fake 와 동일한가" 로 바꾸라는 제안.
+      로컬 확인: 0004 적용 후에도 x.mul_(1).unsqueeze_(0), x.type(torch.FloatTensor).unsqueeze_(0) 는 여전히 IndexError(리뷰 지적 사실).
+  정리 필요: Git Bash 경로 변환으로 '/easycla' 가 'C:/Program Files/Git/easycla' 로 게시된 댓글 3개(#198096 id 5770453278, #198097 id 5770453472·5770513784).
